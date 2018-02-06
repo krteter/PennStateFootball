@@ -1,0 +1,353 @@
+package com.example.eagle.myfirstapp;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.util.SortedList;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.tweetui.SearchTimeline;
+import com.twitter.sdk.android.tweetui.TweetTimelineRecyclerViewAdapter;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+
+import static com.twitter.sdk.android.tweetui.SearchTimeline.ResultType.RECENT;
+
+public class MainActivity extends AppCompatActivity {
+
+    public static final String EXTRA_MESSAGE = "com.example.eagle.myfirstapp.MESSAGE";
+    ArrayList<Tweet> tweets;
+    ListView twitterFeed;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowHomeEnabled(false);
+        }
+        setContentView(R.layout.activity_main);
+        //tweets = new ArrayList<>();
+        //twitterFeed = (ListView) findViewById(R.id.twitter);
+        twitterSettings();
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final SearchTimeline searchTimeline = new SearchTimeline.Builder()
+                .query("#weare")
+                .resultType(RECENT)
+                .languageCode("en")
+                .maxItemsPerRequest(50)
+                .build();
+
+        final TweetTimelineRecyclerViewAdapter adapter =
+                new TweetTimelineRecyclerViewAdapter.Builder(this)
+                        .setTimeline(searchTimeline)
+                        .setViewStyle(R.style.tw__TweetLightWithActionsStyle)
+                        .build();
+
+        recyclerView.setAdapter(adapter);
+        //Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.players_array, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner.setAdapter(adapter);
+
+        Spinner searchSpinner = (SearchableSpinner) findViewById(R.id.searchableSpinner);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.players_array, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        searchSpinner.setAdapter(adapter2);
+
+//        Uri uri = Uri.parse("https://www.espn.com");
+//        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//        startActivity(intent);
+        WebView scoreView = (WebView) findViewById(R.id.score);
+
+//        scoreView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return false;
+//            }
+//        });
+
+        scoreView = loadArticleWithHTML(scoreView, "http://www.espn.com/college-football/game?gameId=400953407");
+
+
+        Tweet tweet = new Tweet();
+        tweet.author = "dbradby";
+        tweet.content = "Android in space";
+        ArrayList<Tweet> items = new ArrayList<>();
+        items.add(tweet);
+
+        final Handler handler = new Handler();
+        handler.postDelayed( new Runnable() {
+
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+                handler.postDelayed( this, 60 * 100 );
+            }
+        }, 60 * 100 );
+
+
+
+    }
+
+    private class TweetListAdapter extends ArrayAdapter<Tweet> {
+
+        private ArrayList<Tweet> tweets;
+
+        public TweetListAdapter(Context context,
+                                int textViewResourceId,
+                                ArrayList<Tweet> items) {
+            super(context, textViewResourceId, items);
+            this.tweets = items;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v = convertView;
+            if (v == null) {
+                LayoutInflater vi = (LayoutInflater) getSystemService
+                        (Context.LAYOUT_INFLATER_SERVICE);
+                v = vi.inflate(R.layout.list_item, null);
+            }
+            Tweet o = tweets.get(position);
+            TextView tt = (TextView) v.findViewById(R.id.toptext);
+            TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+            tt.setText(o.content);
+            bt.setText(o.author);
+
+            return v;
+        }
+    }
+
+    private class MyTask extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog progressDialog;
+
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(MainActivity.this,
+                    "", "Loading. Please wait...", true);
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            StringBuilder result;
+            String traffic;
+            try {
+                URL url = new URL("http://search.twitter.com/search.json?q=android");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    InputStream in = urlConnection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    result = new StringBuilder();
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    System.out.println(result.toString());
+                } finally {
+                    urlConnection.disconnect();
+                }
+                traffic = result.toString();
+                JSONObject root = new JSONObject(traffic);
+                JSONArray sessions = root.getJSONArray("results");
+                for (int i = 0; i < sessions.length(); i++) {
+                    JSONObject session = sessions.getJSONObject(i);
+
+                    Tweet tweet = new Tweet();
+                    tweet.content = session.getString("text");
+                    tweet.author = session.getString("from_user");
+                    tweets.add(tweet);
+                }
+
+
+            } catch (Exception e) {
+                Log.e("TwitterFeedActivity", "Error loading JSON", e);
+            }
+            return null;
+
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            progressDialog.dismiss();
+            TweetListAdapter adapter = new TweetListAdapter(MainActivity.this, R.layout.list_item, tweets);
+            twitterFeed.setAdapter(adapter);
+        }
+
+    }
+
+    private ArrayList<Tweet> loadTweets(){
+        ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+        StringBuilder result;
+        String traffic;
+        try {
+            URL url = new URL("http://search.twitter.com/search.json?q=android");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                result = new StringBuilder();
+                String line;
+                while((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                System.out.println(result.toString());
+            } finally {
+                urlConnection.disconnect();
+            }
+            traffic = result.toString();
+            JSONObject root = new JSONObject(traffic);
+            JSONArray sessions = root.getJSONArray("results");
+            for (int i = 0; i < sessions.length(); i++) {
+                JSONObject session = sessions.getJSONObject(i);
+
+                Tweet tweet = new Tweet();
+                tweet.content = session.getString("text");
+                tweet.author = session.getString("from_user");
+                tweets.add(tweet);
+            }
+
+
+        } catch (Exception e) {
+            Log.e("TwitterFeedActivity", "Error loading JSON", e);
+        }
+        return tweets;
+    }
+
+    public void twitterSettings() {
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig("69DQdPvugu3HhisReBx05ve0u", "gaXD6zzQrXK06k8xVtbHwqkaUcDDFE7lLOcYlacOS0b0lDWwJO"))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+    }
+
+    public Elements getHTTPStuff () {
+        try {
+            Document doc = Jsoup.connect("http://www.espn.com/college-football/boxscore?gameId=400869261").get();
+            Elements loserScore = doc.select("header.game-strip game-package college-football post home-winner");
+            return loserScore;
+        } catch (IOException e){
+            return null;
+        }
+
+    }
+
+    public WebView loadArticleWithHTML (final WebView webView, final String url){
+        Thread downloadThread = new Thread() {
+            Document doc;
+            Element header;
+            public void run() {
+                try {
+                    Connection.Response response = Jsoup.connect(url)
+                            .ignoreContentType(true)
+                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36")
+                            .referrer("http://www.google.com")
+                            .timeout(12000)
+                            .followRedirects(true)
+                            .execute();
+
+                    doc = response.parse();
+                    header = doc.head();
+                    Log.d("wtf", "Something wrong below.");
+                    //Log.d("Header Output: ", header.toString());
+                    //Element body = doc.body().removeClass("#header-wrapper");
+                    Element body = doc.body();
+                    Log.d("Document body: ", body.toString());
+                    //body.getElementById("header-wrapper").remove();
+                    //Elements goodClass = body.getElementsByClass("game-strip game-package college-football post home-winner");
+                    //String classSize = Integer.toString(goodClass.size());
+                    //Log.d("Good Class count: ", classSize);
+                    //body = body.getElementById("custom-nav");
+                    //Log.d("wtf", "Haha");
+                    //Log.d("Final Document body: ", body.toString());
+                    //Log.d("Header Final: ", header.toString());
+                    header.appendChild(body);
+
+                } catch (java.io.IOException e){
+                    e.printStackTrace();
+                }
+                if (header == null) {
+                    Log.e("error", "There is a problem with the selection");
+                } else {
+                    // post a new Runnable from a Handler in order to run the WebView loading code from the UI thread
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Log.d("Loading Data:", header.html().toString());
+                            webView.loadData(header.html(), "text/html", "UTF-8");
+                        }
+                    });
+                }
+            }
+        };
+
+        webView.setWebViewClient(new WebViewClient() {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Toast.makeText(getApplicationContext(), description, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        downloadThread.start();
+        return webView;
+    }
+
+/*    public void sendMessage(View view){
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void addItemsOnSpinner2(){
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        List<String> list = new ArrayList<String>();
+        list.add("List 1");
+        list.add("List 2");
+        list.add("List 3");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(dataAdapter);
+
+    }*/
+}
