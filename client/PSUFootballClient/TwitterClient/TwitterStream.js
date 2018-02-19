@@ -1,5 +1,5 @@
 import React from 'react';
-import { WebView, Text } from 'react-native';
+import { WebView, View, StyleSheet } from 'react-native';
 
 export default class TwitterStream extends React.Component {
     render() {
@@ -7,10 +7,25 @@ export default class TwitterStream extends React.Component {
         let source = js + '<a class="twitter-timeline" href="https://twitter.com/PennStateFball?ref_src=twsrc%5Etfw">Tweets by PennStateFball</a>';
 
         return (
-            <WebView
-                source={{html: source}}
-                javaScriptEnabled={true}
-            />
+            <View
+                style={styles.container}
+            >
+                <WebView
+                    style={styles.container}
+                    source={{html: source}}
+                    javaScriptEnabled={true}
+                />
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    button: {
+        marginTop: 5,
+        marginBottom: 5,
+    }
+});

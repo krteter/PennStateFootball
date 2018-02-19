@@ -1,16 +1,35 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import TwitterStream from "./TwitterClient/TwitterStream";
+import HomeScreen from "./Navigation/HomeScreen";
+import {StackNavigator} from "react-navigation";
+import TestScreen from "./TwitterClient/TestScreen";
+
 
 export default class App extends React.Component {
   render() {
     return (
-
-        <TwitterStream/>
-
+        <RootStack/>
     );
   }
 }
+
+const RootStack = StackNavigator(
+    {
+        Home: {
+            screen: HomeScreen,
+        },
+        Twitter: {
+            screen: TwitterStream,
+        },
+        Test: {
+            screen: TestScreen,
+        },
+    },
+    {
+        initialRouteName: 'Home',
+    }
+);
 
 const styles = StyleSheet.create({
   container: {
