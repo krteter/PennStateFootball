@@ -1,3 +1,9 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+
+ */
+
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import TwitterStream from "./UIScreens/TwitterStream";
@@ -5,6 +11,8 @@ import HomeScreen from "./UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
 import TestScreen from "./UIScreens/TestScreen";
 import ExampleAPICall from "./UIScreens/ExampleHTMLFetch";
+import RosterScreen from "./UIScreens/RosterScreen";
+
 
 
 export default class App extends React.Component {
@@ -14,6 +22,7 @@ export default class App extends React.Component {
         );
     }
 }
+
 
 const RootStack = StackNavigator(
     {
@@ -28,6 +37,9 @@ const RootStack = StackNavigator(
         },
         APIcall: {
             screen: ExampleAPICall,
+        },
+        Roster: {
+            screen: RosterScreen,
         },
     },
     {
