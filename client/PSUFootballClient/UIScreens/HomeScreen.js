@@ -6,7 +6,7 @@ export default class HomeScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('./img/psuFootballPlayer.png')}
+                <ImageBackground source={require('./Images/psuFootballPlayer.png')}
                        resizeMode='cover'
                        style={styles.backdrop}>
                     <Text
@@ -34,10 +34,22 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.button}>
                         <Button
+                            title="Roster Alphabet List"
+                            onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
                             title="PSU Team Roster"
                             onPress={() => this.props.navigation.navigate('Roster')}
                         />
                     </View>
+                    <View style={styles.button}>
+                    <Button
+                        title="Html Roster"
+                        onPress={() => this.props.navigation.navigate('HtmlRoster')}
+                    />
+                </View>
                 </ImageBackground>
             </View>
         );
