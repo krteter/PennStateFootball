@@ -3,9 +3,7 @@ import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-nati
 import PlayerText from "./PlayerText";
 
 
-
-//import {Upload} from "./../WorkerInterfaces/RosterDataWorker";
-//import {AlertMe} from "./../WorkerInterfaces/RosterDataWorker";
+import {FetchRoster} from "./../../WorkerInterfaces/PlayerRosterFetch";
 
 
 
@@ -37,6 +35,9 @@ export default class RosterSectionList extends Component<{}> {
 
 
     render() {
+
+
+        FetchRoster();
 
 
 
