@@ -3,7 +3,7 @@ import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-nati
 import PlayerText from "./PlayerText";
 
 
-import {FetchRoster} from "./../../WorkerInterfaces/PlayerRosterFetch";
+//import {FetchRoster} from "./../../WorkerInterfaces/PlayerRosterFetch";
 
 
 
@@ -37,7 +37,7 @@ export default class RosterSectionList extends Component<{}> {
     render() {
 
 
-        FetchRoster();
+        //FetchRoster();
 
 
 
@@ -69,7 +69,7 @@ export default class RosterSectionList extends Component<{}> {
         var names_w = [''] ;
         var names_x = [''] ;
         var names_y = [''] ;
-        var names_z = ['Rastaman Ziggy'] ;
+        var names_z = ['Marley Ziggy'] ;
 
 
 
@@ -127,7 +127,7 @@ export default class RosterSectionList extends Component<{}> {
                     keyExtractor={ (item, index) => index }
                 />
 
-                <PlayerText/>
+
 
             </View>
 
