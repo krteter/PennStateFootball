@@ -12,9 +12,33 @@ function getHTMLDataFromURL(urlOfData) {
     return fetch(urlOfData)
         .then(response => response.text());    // get the response and extract the body text
 
+
+
+//    try {
+//        const req
+//        let response = await fetch(urlOfData);
+//        let responseText = await response.text();
+//        return responseText;
+//
+//    } catch (error) {
+//        console.error(error);
+//    }
+
+
+
+
+
 }
 
 
+const requestAnimeAwait = async (theUrl) => {
+
+    const response = await fetch(theUrl)
+    const urlText = await response.text();
+    //console.log("async/await based");
+    //console.log(urlText);
+    return urlText;
+}
 
 
 //
@@ -27,7 +51,9 @@ export const FetchRoster = ()=> {
 
     //  Get the text of the roster team URL page
     let rosterUrl = 'http://www.gopsusports.com/sports/m-footbl/mtt/psu-m-footbl-mtt.html';
-    let rosterText = getHTMLDataFromURL(rosterUrl);
+    //let rosterText = getHTMLDataFromURL(rosterUrl);
+
+    let rosterText = requestAnimeAwait(rosterUrl);
 
 
     // create a HTMLDocument, which also is a Document.
