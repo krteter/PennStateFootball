@@ -3,7 +3,7 @@ import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-nati
 import PlayerText from "./PlayerText";
 
 
-//import {FetchRoster} from "./../../WorkerInterfaces/PlayerRosterFetch";
+import {FetchRoster} from "./../../WorkerInterfaces/PlayerRosterFetch";
 
 
 
@@ -37,7 +37,7 @@ export default class RosterSectionList extends Component<{}> {
     render() {
 
 
-        //FetchRoster();
+        FetchRoster();
 
 
 
