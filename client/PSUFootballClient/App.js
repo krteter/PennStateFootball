@@ -12,8 +12,7 @@ import {StackNavigator} from "react-navigation";
 import TestScreen from "./UIScreens/TestScreen";
 import ExampleAPICall from "./UIScreens/ExampleHTMLFetch";
 import RosterScreen from "./UIScreens/RosterScreen";
-
-
+import Roster from "./CustomComponents/Roster";
 
 export default class App extends React.Component {
     render() {
@@ -22,7 +21,6 @@ export default class App extends React.Component {
         );
     }
 }
-
 
 const RootStack = StackNavigator(
     {
@@ -41,6 +39,9 @@ const RootStack = StackNavigator(
         Roster: {
             screen: RosterScreen,
         },
+        DBTest: {
+            screen: Roster,
+        }
     },
     {
         initialRouteName: 'Home',

@@ -38,6 +38,12 @@ export default class HomeScreen extends React.Component {
                             onPress={() => this.props.navigation.navigate('Roster')}
                         />
                     </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="DB Test"
+                            onPress={() => this.props.navigation.navigate('DBTest')}
+                        />
+                    </View>
                 </ImageBackground>
             </View>
         );
