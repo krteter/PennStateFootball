@@ -5,6 +5,7 @@ export default class RosterRow extends React.Component{
     constructor() {
         super();
         this.state = {
+            id: null,
             name: '',
             position: '',
             description: ''
@@ -13,6 +14,7 @@ export default class RosterRow extends React.Component{
 
     componentWillMount() {
         this.setState({
+            id: this.props.id,
             name: this.props.name,
             position: this.props.position,
             description: this.props.description
@@ -22,6 +24,7 @@ export default class RosterRow extends React.Component{
     render() {
         return (
             <View>
+                <Text>{this.state.id}</Text>
                 <Text>{this.state.name}</Text>
                 <Text>{this.state.position}</Text>
                 <Text>{this.state.description}</Text>

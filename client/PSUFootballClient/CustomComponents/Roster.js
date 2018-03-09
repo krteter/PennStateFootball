@@ -40,6 +40,7 @@ export default class Roster extends React.Component {
             let rosterTable = this.state.players.map((player) => {
                 return (
                     <RosterRow
+                        id={player.id}
                         key={player.id}
                         name={player.name}
                         position={player.position}
@@ -49,7 +50,6 @@ export default class Roster extends React.Component {
             });
             return (
                 <View>
-                    <Text>RosterHere</Text>
                     {rosterTable}
                 </View>
             )
