@@ -13,6 +13,7 @@ import TestScreen from "./UIScreens/TestScreen";
 import ExampleAPICall from "./UIScreens/ExampleHTMLFetch";
 import RosterScreen from "./UIScreens/RosterScreen";
 import Roster from "./CustomComponents/Roster";
+import TimerExampleScreen from "./UIScreens/TimerExampleScreen";
 
 export default class App extends React.Component {
     render() {
@@ -41,7 +42,10 @@ const RootStack = StackNavigator(
         },
         DBTest: {
             screen: Roster,
-        }
+        },
+        TimerExample: {
+            screen: TimerExampleScreen,
+        },
     },
     {
         initialRouteName: 'Home',
@@ -52,7 +56,7 @@ const RootStack = StackNavigator(
 );
 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',

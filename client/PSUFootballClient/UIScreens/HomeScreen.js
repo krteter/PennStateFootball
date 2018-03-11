@@ -1,8 +1,14 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
-
 export default class HomeScreen extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            showMsg: false
+        };
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -42,6 +48,12 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="DB Test"
                             onPress={() => this.props.navigation.navigate('DBTest')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="TimerExampleScreen"
+                            onPress={() => this.props.navigation.navigate('TimerExample')}
                         />
                     </View>
                 </ImageBackground>
