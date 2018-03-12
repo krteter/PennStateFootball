@@ -9,36 +9,87 @@ import {DOMParser} from 'react-native-html-parser';
 //
 function getHTMLDataFromURL(urlOfData) {
 
-    return fetch(urlOfData)
-        .then(response => response.text());    // get the response and extract the body text
+
+    // get the response and extract the body text
+    fetch(urlOfData)
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(theText) {
+
+            //  This happens asynchronously when the page is returned in the
+            //  response.  The fetch doesn't block waiting for the response.
+            //  The response returns html text with carriage returns and line
+            //  feeds.  Remove them for easier processing.
+            var newNoSpaces = theText.replace(/\n|\r\n|\r/g, '');   // remove carriage returns
 
 
-
-//    try {
-//        const req
-//        let response = await fetch(urlOfData);
-//        let responseText = await response.text();
-//        return responseText;
-//
-//    } catch (error) {
-//        console.error(error);
-//    }
+            //  Cut out roster data html data part out of
+            //  the whole html page
+            var rosterWrapStartIndex = newNoSpaces.indexOf("table id=sortable_roster");
+            var rosterWrapEndIndex = newNoSpaces.indexOf("--roster-wrap--");
+            var rosterText = newNoSpaces.slice(rosterWrapStartIndex, rosterWrapEndIndex);
+            rosterWrapEndIndex = rosterText.indexOf("/tr></table");
+            rosterText = rosterText.slice(0, rosterWrapEndIndex);
 
 
+            var parsedText = rosterText;
+            var keepParsingFlag = true;
+
+            //  Loop thru the html roster data to pull out
+            //  the respective fields needed for the players
+            //  on the roster.
+            while (keepParsingFlag) {
 
 
+                //  Get the next respective row of player data
+                var playerRowBegin = parsedText.indexOf("player-row");
+                if (playerRowBegin !== -1) {
 
-}
+                    parsedText = parsedText.slice(playerRowBegin, parsedText.length);
+
+                    //  Get the player's roster number
+                    var dataOffset = 9;
+                    var rosterNumberBegin = parsedText.indexOf("#000000") + dataOffset;
+                    parsedText = parsedText.slice(rosterNumberBegin, parsedText.length);
+                    var rosterNumberEnd = parsedText.indexOf("<");
+                    var rosterNumber = parsedText.slice(0, rosterNumberEnd);
+
+                    //  Get the Url of the player's bio data
+                    dataOffset = 8;
+                    var bioUrlBegin = parsedText.indexOf("a href=") + dataOffset;
+                    parsedText = parsedText.slice(bioUrlBegin, parsedText.length);
+                    var bioUrlEnd = parsedText.indexOf(">");
+                    var bioUrl = parsedText.slice(0, bioUrlEnd - 1);
+
+                    //  Get the player's name
+                    dataOffset = 9;
+                    var playerNameBegin = parsedText.indexOf("#000000") + dataOffset;
+                    parsedText = parsedText.slice(playerNameBegin, parsedText.length);
+                    var playerNameEnd = parsedText.indexOf("<");
+                    var playerName = parsedText.slice(0, playerNameEnd);
+
+                    //  Get the player's position
+                    dataOffset = 9;
+                    var playerPositionBegin = parsedText.indexOf("#000000") + dataOffset;
+                    parsedText = parsedText.slice(playerPositionBegin, parsedText.length);
+                    var playerPositionEnd = parsedText.indexOf("<");
+                    var playerPosition = parsedText.slice(0, playerPositionEnd);
+
+                    console.log(rosterNumber + "  " + playerName + "  " + playerPosition + "  " + bioUrl);
+
+                } else {
+                    keepParsingFlag = false;
+                }
+
+            }  // end while keepParsingFlag
+
+            var smitty = 999;
+
+        });
 
 
-const requestAnimeAwait = async (theUrl) => {
-
-    const response = await fetch(theUrl)
-    const urlText = await response.text();
-    //console.log("async/await based");
-    //console.log(urlText);
-    return urlText;
-}
+}  // end getHTMLDataFromURL()
 
 
 //
@@ -51,28 +102,9 @@ export const FetchRoster = ()=> {
 
     //  Get the text of the roster team URL page
     let rosterUrl = 'http://www.gopsusports.com/sports/m-footbl/mtt/psu-m-footbl-mtt.html';
-    //let rosterText = getHTMLDataFromURL(rosterUrl);
 
-    let rosterText = requestAnimeAwait(rosterUrl);
+    getHTMLDataFromURL(rosterUrl);
 
-
-    // create a HTMLDocument, which also is a Document.
-    const parser = new DOMParser();
-    var doc = parser.parseFromString(rosterText.toString(), "application/html");
-
-    //  Get the table tag <table> by its ID
-    var table = doc.getElementsByTagName("sortable_roster");
-
-    //  Get the table body tag <tbody>
-
-    //  Get the player table row tag <tr>
-
-
-
-    //console.log(rosterText);
-    //alert(table);
-//    console.log(doc.getElementsByTagName('player-row'));
-    //console.log(doc.getElementById('player-row'));
 
 
 
