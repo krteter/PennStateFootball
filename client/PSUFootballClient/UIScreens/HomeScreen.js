@@ -28,12 +28,6 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.button}>
                         <Button
-                            title="Test Screen"
-                            onPress={() => this.props.navigation.navigate('Test')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
                             title="API call"
                             onPress={() => this.props.navigation.navigate('APIcall')}
                         />
