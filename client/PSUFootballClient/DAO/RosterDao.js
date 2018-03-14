@@ -1,6 +1,10 @@
 import {SQLite} from "expo";
 import Player from "../Domain/Player";
 
+
+// smitty - Add for Android Studio emulator
+//let SQLite = require('react-native-sqlite-storage');
+
 let db = SQLite.openDatabase('football.db');
 
 export default class RosterDao {

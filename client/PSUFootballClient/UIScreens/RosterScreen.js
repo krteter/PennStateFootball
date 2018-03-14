@@ -18,7 +18,6 @@ export default class RosterScreen extends React.Component {
 
     getHTMLDataFromURL() {
 
-//        let myUrl = 'https://www.google.com/';
         let myUrl = 'http://www.gopsusports.com/sports/m-footbl/mtt/psu-m-footbl-mtt.html';
 
         return fetch(myUrl)

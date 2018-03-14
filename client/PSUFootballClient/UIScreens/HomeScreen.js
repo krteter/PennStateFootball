@@ -1,6 +1,13 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
+import {scrapeTeamRosterData} from "./../DataScrapers/TeamRosterScraper";
+import {scrapePlayerBioData} from "./../DataScrapers/PlayerBioScraper";
+
+
+
+
+
 export default class HomeScreen extends React.Component {
     constructor(){
         super();
@@ -10,6 +17,16 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
+
+        //  Scrape the player roster data from an
+        //  external webpage and load it into our database.
+        scrapeTeamRosterData();
+
+        //  Scrape each player's bio data from an
+        //  external webpage and load it into our database.
+        scrapePlayerBioData();
+
+
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('./img/psuFootballPlayer.png')}
@@ -24,12 +41,6 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="Twitter Feed"
                             onPress={() => this.props.navigation.navigate('Twitter')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Test Screen"
-                            onPress={() => this.props.navigation.navigate('Test')}
                         />
                     </View>
                     <View style={styles.button}>

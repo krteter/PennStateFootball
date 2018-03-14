@@ -9,7 +9,6 @@ import {StyleSheet} from 'react-native';
 import TwitterStream from "./UIScreens/TwitterStream";
 import HomeScreen from "./UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
-import TestScreen from "./UIScreens/TestScreen";
 import ExampleAPICall from "./UIScreens/ExampleHTMLFetch";
 import RosterScreen from "./UIScreens/RosterScreen";
 import Roster from "./CustomComponents/Roster";
@@ -30,9 +29,6 @@ const RootStack = StackNavigator(
         },
         Twitter: {
             screen: TwitterStream,
-        },
-        Test: {
-            screen: TestScreen,
         },
         APIcall: {
             screen: ExampleAPICall,
