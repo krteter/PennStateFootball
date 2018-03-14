@@ -6,13 +6,13 @@
 
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import TwitterStream from "./UIScreens/TwitterStream";
-import HomeScreen from "./UIScreens/HomeScreen";
+import TwitterStream from "./PsuAppCode/UIScreens/TwitterStream";
+import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
-import ExampleAPICall from "./UIScreens/ExampleHTMLFetch";
-import RosterScreen from "./UIScreens/RosterScreen";
-import Roster from "./CustomComponents/Roster";
-import TimerExampleScreen from "./UIScreens/TimerExampleScreen";
+import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
+import RosterScreen from "./PsuAppCode/UIScreens/RosterScreen";
+import Roster from "./PsuAppCode/CustomComponents/Roster";
+import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 
 export default class App extends React.Component {
     render() {
