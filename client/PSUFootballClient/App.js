@@ -10,7 +10,8 @@ import TwitterStream from "./PsuAppCode/UIScreens/TwitterStream";
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
 import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
-import RosterScreen from "./PsuAppCode/UIScreens/RosterScreen";
+import RosterScreen from "./PsuAppCode/UIScreens/RosterScreens/RosterScreen";
+import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 
@@ -41,6 +42,9 @@ const RootStack = StackNavigator(
         },
         TimerExample: {
             screen: TimerExampleScreen,
+        },
+        AlphabetRosterList: {
+            screen: RosterSectionList,
         },
     },
     {

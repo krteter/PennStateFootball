@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, WebView, View} from 'react-native';
+import {StyleSheet, WebView, View} from 'react-native';
 
 
 export default class RosterScreen extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -40,9 +41,8 @@ export default class RosterScreen extends React.Component {
 
     render() {
         return (
-            <View
-                style={styles.container}
-            >
+            <View style={styles.container}>
+                <Text>THIS IS FOR EXAMPLE:  Display a Webpage contents</Text>
                 <WebView
                     style={styles.container}
                     source={{html: this.state.fetchData.toString()}}

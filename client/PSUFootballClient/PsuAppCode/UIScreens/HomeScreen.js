@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component {
 
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('./img/psuFootballPlayer.png')}
+                <ImageBackground source={require('./Images/psuFootballPlayer.png')}
                        resizeMode='cover'
                        style={styles.backdrop}>
                     <Text
@@ -51,7 +51,7 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.button}>
                         <Button
-                            title="PSU Team Roster"
+                            title="Display Roster Webpage"
                             onPress={() => this.props.navigation.navigate('Roster')}
                         />
                     </View>
@@ -65,6 +65,12 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="TimerExampleScreen"
                             onPress={() => this.props.navigation.navigate('TimerExample')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Team Roster List"
+                            onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
                         />
                     </View>
                 </ImageBackground>
