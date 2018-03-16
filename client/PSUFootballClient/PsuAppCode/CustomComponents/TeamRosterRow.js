@@ -12,7 +12,6 @@ export default class TeamRosterRow extends React.Component{
             name: '',
             jerseyNum: '',
             position: '',
-            bioUrl: '',
             imageUrl: '',
             classyear: '',
             hometown: '',
@@ -30,7 +29,6 @@ export default class TeamRosterRow extends React.Component{
             name: this.props.name,
             jerseyNum: this.props.jerseyNum,
             position: this.props.position,
-            bioUrl: this.props.bioUrl,
             imageUrl: this.props.imageUrl,
             classyear: this.props.classyear,
             hometown: this.props.hometown,
@@ -47,16 +45,16 @@ export default class TeamRosterRow extends React.Component{
             <View>
                 <Text>{this.state.id}</Text>
                 <Text>{this.state.name}</Text>
-                <Text>{this.state.jerseyNum}</Text>
-                <Text>{this.state.position}</Text>
-                <Text>{this.state.bioUrl}</Text>
-                <Text>{this.state.imageUrl}</Text>
-                <Text>{this.state.classyear}</Text>
-                <Text>{this.state.hometown}</Text>
-                <Text>{this.state.heightWeight}</Text>
-                <Text>{this.state.highschool}</Text>
-                <Text>{this.state.experience}</Text>
-                <Text>{this.state.major}</Text>
+                <Text>     {this.state.jerseyNum}</Text>
+                <Text>     {this.state.position}</Text>
+                <Text>     {this.state.imageUrl}</Text>
+                <Text>     {this.state.classyear}</Text>
+                <Text>     {this.state.hometown}</Text>
+                <Text>     {this.state.heightWeight}</Text>
+                <Text>     {this.state.highschool}</Text>
+                <Text>     {this.state.experience}</Text>
+                <Text>     {this.state.major}</Text>
+                <Text>         --  --  -- </Text>
             </View>
         )
     }

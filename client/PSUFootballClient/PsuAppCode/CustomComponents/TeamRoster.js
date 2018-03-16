@@ -57,7 +57,6 @@ export default class TeamRoster extends React.Component {
                         name={teamplayer.name}
                         jerseyNum={teamplayer.jerseyNum}
                         position={teamplayer.position}
-                        bioUrl={teamplayer.bioUrl}
                         imageUrl={teamplayer.imageUrl}
                         classyear={teamplayer.classyear}
                         hometown={teamplayer.hometown}
@@ -76,4 +75,5 @@ export default class TeamRoster extends React.Component {
             )
         }
     }
-}
+
+}  // end class TeamRoster

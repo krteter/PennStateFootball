@@ -1,4 +1,5 @@
 import {getPlayerBioDataFromURL} from "./PlayerBioScraper";
+import TeamRosterDao from "../DAO/TeamRosterDao";
 
 
 
@@ -8,6 +9,11 @@ import {getPlayerBioDataFromURL} from "./PlayerBioScraper";
 //  website holds the data in a HTML tagged Table.
 //
 export const scrapeTeamRosterData = () => {
+
+
+    //  Create our Team Roster database to hold our players
+    //  and their respective information.
+    //TeamRosterDao.createTeamRosterDatabase();
 
 
     //  Get the text of the roster team URL page,

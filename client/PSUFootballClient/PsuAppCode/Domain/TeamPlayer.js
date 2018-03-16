@@ -5,19 +5,18 @@
 //
 export default class TeamPlayer {
 
-    constructor(name, jerseyNum, position, bioUrl, imageUrl, year, hometown, heightWeight, highschool, experience, major) {
+    constructor(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) {
 
         this.name = name;
-        this.position = jerseyNum;
-        this.description = position;
-        this.position = bioUrl;
-        this.description = imageUrl;
-        this.position = year;
-        this.description = hometown;
-        this.position = heightWeight;
-        this.description = highschool;
-        this.position = experience;
-        this.description = major;
+        this.jerseyNum = jerseyNum;
+        this.position = position;
+        this.imageUrl = imageUrl;
+        this.classyear = classyear;
+        this.hometown = hometown;
+        this.heightWeight = heightWeight;
+        this.highschool = highschool;
+        this.experience = experience;
+        this.major = major;
     }
 
 }  // end class TeamPlayer
