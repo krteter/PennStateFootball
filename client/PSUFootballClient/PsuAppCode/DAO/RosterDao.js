@@ -51,6 +51,7 @@ export default class RosterDao {
     };
 
     static addPlayers(rows) {
+        console.debug('RosterDao.addPlayers()');
         db.transaction(tx => {
             rows.forEach(player => {
                 tx.executeSql(
@@ -58,6 +59,7 @@ export default class RosterDao {
                 );
             });
         });
+        console.debug('leaving...addPlayers()');
     };
 
     static getPlayers(setResultsFunction) {
@@ -68,6 +70,6 @@ export default class RosterDao {
                 });
             }
         );
-        console.debug('leaving...')
+        console.debug('leaving...getPlayers()');
     }
 }

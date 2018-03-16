@@ -1,9 +1,7 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
-import {scrapeTeamRosterData} from "./../DataScrapers/TeamRosterScraper";
-import {scrapePlayerBioData} from "./../DataScrapers/PlayerBioScraper";
-
+import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 
 
 
@@ -19,12 +17,9 @@ export default class HomeScreen extends React.Component {
     render() {
 
         //  Scrape the player roster data from an
-        //  external webpage and load it into our database.
+        //  external web page and load it into our database.
         scrapeTeamRosterData();
 
-        //  Scrape each player's bio data from an
-        //  external webpage and load it into our database.
-        scrapePlayerBioData();
 
 
         return (
@@ -52,7 +47,7 @@ export default class HomeScreen extends React.Component {
                     <View style={styles.button}>
                         <Button
                             title="Display Roster Webpage"
-                            onPress={() => this.props.navigation.navigate('Roster')}
+                            onPress={() => this.props.navigation.navigate('RosterWeb')}
                         />
                     </View>
                     <View style={styles.button}>
@@ -61,6 +56,12 @@ export default class HomeScreen extends React.Component {
                             onPress={() => this.props.navigation.navigate('DBTest')}
                         />
                     </View>
+                    <View style={styles.button}>
+                    <Button
+                        title="DB RosterTest"
+                        onPress={() => this.props.navigation.navigate('DBRosterTest')}
+                    />
+                </View>
                     <View style={styles.button}>
                         <Button
                             title="TimerExampleScreen"

@@ -13,6 +13,7 @@ import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
 import RosterScreen from "./PsuAppCode/UIScreens/RosterScreens/RosterScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import Roster from "./PsuAppCode/CustomComponents/Roster";
+import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 
 export default class App extends React.Component {
@@ -34,11 +35,14 @@ const RootStack = StackNavigator(
         APIcall: {
             screen: ExampleAPICall,
         },
-        Roster: {
+        RosterWeb: {
             screen: RosterScreen,
         },
         DBTest: {
             screen: Roster,
+        },
+        DBRosterTest: {
+            screen: TeamRoster,
         },
         TimerExample: {
             screen: TimerExampleScreen,
