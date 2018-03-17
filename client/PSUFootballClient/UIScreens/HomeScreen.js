@@ -10,9 +10,10 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
+        let backgroundImg = '../img/psuFootballPlayer.png';
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('./img/psuFootballPlayer.png')}
+                <ImageBackground source={{ uri: backgroundImg}}
                        resizeMode='cover'
                        style={styles.backdrop}>
                     <Text
