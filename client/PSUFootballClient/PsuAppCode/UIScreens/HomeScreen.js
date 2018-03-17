@@ -57,11 +57,11 @@ export default class HomeScreen extends React.Component {
                         />
                     </View>
                     <View style={styles.button}>
-                    <Button
-                        title="DB RosterTest"
-                        onPress={() => this.props.navigation.navigate('DBRosterTest')}
-                    />
-                </View>
+                        <Button
+                            title="DB RosterTest"
+                            onPress={() => this.props.navigation.navigate('DBRosterTest')}
+                        />
+                    </View>
                     <View style={styles.button}>
                         <Button
                             title="TimerExampleScreen"
@@ -72,6 +72,12 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="Team Roster List"
                             onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Player Page"
+                            onPress={() => this.props.navigation.navigate('PlayerData')}
                         />
                     </View>
                 </ImageBackground>

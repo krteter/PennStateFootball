@@ -15,6 +15,10 @@ import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectio
 import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
+import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
+
+
+
 
 export default class App extends React.Component {
     render() {
@@ -23,6 +27,7 @@ export default class App extends React.Component {
         );
     }
 }
+
 
 const RootStack = StackNavigator(
     {
@@ -35,9 +40,9 @@ const RootStack = StackNavigator(
         APIcall: {
             screen: ExampleAPICall,
         },
-        RosterWeb: {
-            screen: RosterScreen,
-        },
+ //       RosterWeb: {
+ //           screen: RosterScreen,
+ //       },
         DBTest: {
             screen: Roster,
         },
@@ -49,6 +54,9 @@ const RootStack = StackNavigator(
         },
         AlphabetRosterList: {
             screen: RosterSectionList,
+        },
+        PlayerData: {
+            screen: PlayerBio,
         },
     },
     {
