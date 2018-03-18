@@ -1,7 +1,7 @@
 import React from 'react';
 import timer from 'react-native-timer';
 import {Button, Text, View} from "react-native";
-import styles from './../App.js'
+import styles from './../../App.js'
 
 export default class TimerExampleScreen extends React.Component {
     constructor() {

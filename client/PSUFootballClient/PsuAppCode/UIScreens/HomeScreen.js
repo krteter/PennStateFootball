@@ -1,6 +1,11 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
+import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
+
+
+
+
 export default class HomeScreen extends React.Component {
     constructor(){
         super();
@@ -10,10 +15,14 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
-        let backgroundImg = '../img/psuFootballPlayer.png';
+        //  Scrape the player roster data from an
+        //  external web page and load it into our database.
+        scrapeTeamRosterData();
+
+        let backgroundImg = '../../Images/psuFootballPlayer.png';
         return (
-            <View style={styles.container}>
-                <ImageBackground source={{ uri: backgroundImg}}
+                <View style={styles.container}>
+                    <ImageBackground source={{ uri: backgroundImg}}
                        resizeMode='cover'
                        style={styles.backdrop}>
                     <Text
@@ -35,8 +44,8 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.button}>
                         <Button
-                            title="PSU Team Roster"
-                            onPress={() => this.props.navigation.navigate('Roster')}
+                            title="Display Roster Webpage"
+                            onPress={() => this.props.navigation.navigate('RosterWeb')}
                         />
                     </View>
                     <View style={styles.button}>
@@ -47,8 +56,26 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.button}>
                         <Button
+                            title="DB RosterTest"
+                            onPress={() => this.props.navigation.navigate('DBRosterTest')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
                             title="TimerExampleScreen"
                             onPress={() => this.props.navigation.navigate('TimerExample')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Team Roster List"
+                            onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Player Page"
+                            onPress={() => this.props.navigation.navigate('PlayerData')}
                         />
                     </View>
                 </ImageBackground>

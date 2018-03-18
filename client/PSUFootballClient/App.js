@@ -6,13 +6,16 @@
 
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import TwitterStream from "./UIScreens/TwitterStream";
-import HomeScreen from "./UIScreens/HomeScreen";
+import TwitterStream from "./PsuAppCode/UIScreens/TwitterStream";
+import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
-import ExampleAPICall from "./UIScreens/ExampleHTMLFetch";
-import RosterScreen from "./UIScreens/RosterScreen";
-import Roster from "./CustomComponents/Roster";
-import TimerExampleScreen from "./UIScreens/TimerExampleScreen";
+import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
+import RosterScreen from "./PsuAppCode/UIScreens/RosterScreens/RosterScreen";
+import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
+import Roster from "./PsuAppCode/CustomComponents/Roster";
+import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
+import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
+import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 
 export default class App extends React.Component {
     render() {
@@ -21,6 +24,7 @@ export default class App extends React.Component {
         );
     }
 }
+
 
 const RootStack = StackNavigator(
     {
@@ -33,14 +37,23 @@ const RootStack = StackNavigator(
         APIcall: {
             screen: ExampleAPICall,
         },
-        Roster: {
-            screen: RosterScreen,
-        },
+ //       RosterWeb: {
+ //           screen: RosterScreen,
+ //       },
         DBTest: {
             screen: Roster,
         },
+        DBRosterTest: {
+            screen: TeamRoster,
+        },
         TimerExample: {
             screen: TimerExampleScreen,
+        },
+        AlphabetRosterList: {
+            screen: RosterSectionList,
+        },
+        PlayerData: {
+            screen: PlayerBio,
         },
     },
     {

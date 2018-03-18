@@ -1,7 +1,12 @@
 import {SQLite} from "expo";
 import Player from "../Domain/Player";
 
+
+// smitty - Add for Android Studio emulator
+//let SQLite = require('react-native-sqlite-storage');
+
 let db = SQLite.openDatabase('football.db');
+
 
 export default class RosterDao {
 
@@ -46,6 +51,7 @@ export default class RosterDao {
     };
 
     static addPlayers(rows) {
+        console.debug('RosterDao.addPlayers()');
         db.transaction(tx => {
             rows.forEach(player => {
                 tx.executeSql(
@@ -53,6 +59,7 @@ export default class RosterDao {
                 );
             });
         });
+        console.debug('leaving...addPlayers()');
     };
 
     static getPlayers(setResultsFunction) {
@@ -63,6 +70,6 @@ export default class RosterDao {
                 });
             }
         );
-        console.debug('leaving...')
+        console.debug('leaving...getPlayers()');
     }
 }
