@@ -64,7 +64,7 @@ export default class TeamRosterDao {
         //TODO remove this before prod we'll use some other process to load data into the db, but this will make sure something exists for testing now
         let teamplayer1 = new TeamPlayer('Tiger Woods', '44', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg', 'Senior', 'Jupiter, FL', '6-2/186', 'Stanford', 'SR', 'Presidents Cup Captain');
         teamplayer1.id = 4;
-        let teamplayer2 = new TeamPlayer('Phil Mickelson', '47', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
+        let teamplayer2 = new TeamPlayer('Phil Mickelson', '47', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565875.jpeg', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
         teamplayer2.id = 5;
         let teamplayers = [teamplayer1, teamplayer2];
 
@@ -144,8 +144,10 @@ export default class TeamRosterDao {
 
     //
     //  Method to GET players from our Player_Table in our database
+    //   - the requested player
+    //   - the function to call with the player's info as input argument
     //
-    static getSinglePlayer(playerName) {
+    static getSinglePlayer(playerName, theResultFunction) {
 
         console.debug('TRDao.getPlayers()');
 
@@ -154,6 +156,17 @@ export default class TeamRosterDao {
                 tx.executeSql('SELECT * FROM Player_Table WHERE name=', playerName);
             }
         );
+
+
+//        let player = new TeamPlayer('Arnold Palmer', '83', 'GF',
+//                                    'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg',
+//                                    'Senior', 'Latrobe, PA', '5-10/186', 'Wake Forest', 'SR', '4 Time Masters Champion');
+
+        let theTeamPlayer =  new TeamPlayer('Rory McIlroy', '29', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12570608.jpeg', 'Junior', 'Dublin Ireland', '6-0/195', 'European Tour', 'Fr', 'Arnold Palmer Invitational Champion');
+
+        //  call the function with the respective 'Player' object & data
+        theResultFunction(theTeamPlayer);
+
         console.debug('leaving.... getSinglePlayer()');
     };
 

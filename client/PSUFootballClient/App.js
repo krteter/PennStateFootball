@@ -19,8 +19,8 @@ import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 
 
 
-
 export default class App extends React.Component {
+
     render() {
         return (
             <RootStack/>

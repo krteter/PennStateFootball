@@ -1,74 +1,124 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-native';
+import TeamRosterDao from "../../DAO/TeamRosterDao";
 
 
-
-
-
+//
+//  Class for a UI to display an alphabetical  list of all team
+//  player's loaded from the team roster database table (Player_Table).
+//
 export default class RosterSectionList extends Component<{}> {
 
     constructor(props) {
+
         super(props);
+
+        this.state = {
+            teamplayers: {},
+            names_a: ['Johnny Appleseed', 'Joe Arcangelo'] ,
+            names_b: ['Damion Barber', 'Ryan Bates', 'Will Blair', 'Corey Bolds', 'Nick Bowers', 'Ellis Brooks', 'Cam Brown', 'DJ Brown', 'Journey Brown', 'Torrence Brown', 'Ryan Buchholz', 'Jabari Butler'] ,
+            names_c: ['Mr. Clean', 'Joe Calcagno', 'Tariq Castro-Fields', 'Max Chizmar', 'Sean Clifford', 'Jake Cooper', 'Mike Curry'] ,
+            names_d: [''] ,
+            names_e: [''] ,
+            names_f: [''] ,
+            names_g: [''] ,
+            names_h: [''] ,
+            names_i: [] ,
+            names_j: [] ,
+            names_k: [] ,
+            names_l: [] ,
+            names_m: ['Phil Mickelson'] ,
+            names_n: ['Danny Noonan'] ,
+            names_o: [''] ,
+            names_p: [''] ,
+            names_q: [''] ,
+            names_r: [''] ,
+            names_s: ['Ken Smith', 'Judge Smails'] ,
+            names_t: [''] ,
+            names_u: [''] ,
+            names_v: [''] ,
+            names_w: [''] ,
+            names_x: ['Tiger Woods'] ,
+            names_y: [''] ,
+            names_z: ['Marley Bob Ziggy']
+        };
+        this.addContentsToListArrays = this.addContentsToListArrays.bind(this);
+
+    }  // end constructor
+
+
+
+//    componentDidMount() {
+//    }
+
+    componentWillMount() {
+
+        //let playerRosterSize = TeamRosterDao.getRosterSize();
+
+        //  Add the players to our scroll list from our database
+        //  table - Player_Table
+        let that = this;
+        TeamRosterDao.getPlayers( that.addContentsToListArrays );
+
+
+
+    }  // end componentWillMount()
+
+
+
+    addContentsToListArrays(rows) {
+
+        if (rows !== undefined) {
+            this.setState({
+                teamplayers: rows
+            });
+
+            this.state.teamplayers.forEach(player =>
+                {
+                    this.state.names_g.push(player.name);
+                }
+            );
+
+        } else {
+            this.state.names_j.push('Pushing Jimmy');
+            this.state.names_j.push('Pushing Johnny');
+        }
+
+        this.state.names_j.push('Pushing Peter Paul');
+
+
+    }  // end addContentsToListArrays()
+
+
+
+
+
+    //  Function to pass to the database to be called with the
+    //  respective player returned from the db 'get' player
+    //  sql call.  A 'TeamPlayer' object is the argument
+    getTeamPlayerResultsFunction(dbPulledPlayer) {
+
+        if (dbPulledPlayer !== undefined) {
+            //this.state.myPlayer = dbPulledPlayer;  // set the returned player to our local instance
+            Alert.alert(dbPulledPlayer.name);
+        } else {
+            Alert.alert('Database Player Pull Failed!!');
+        }
     }
 
-    //componentWillMount() {
-//
-       // AlertMe('sSmittyAlert');
-        //Upload();
-//
-    //}
 
-    //addContentsToListArrays() {
-    //
-    //    import names_a.push('Ken');
-    //    this.names_a.push('Kenny');
-    //    this.names_a.push('Smitty');
-    //}
+    //  Function called when the respective list item is
+    //  clicked on
+    getSectionListItem = (requestedPlayer)=> {
 
+        //  Get the requested player's data from the database
+        let that = this;
+        TeamRosterDao.getSinglePlayer(requestedPlayer, that.getTeamPlayerResultsFunction);
 
-    GetSectionListItem = (item)=> {
-        Alert.alert(item)
     }
 
 
     render() {
-
-
-        //  Pull data from our database to populate
-        //  our roster list here.
-        //  rosterListToUse = myDatabase.getRosterData();
-
-
-        var appleVar = 'Mark Allen';
-
-        let names_a = ['Johnny Appleseed', appleVar, 'Joe Arcangelo'] ;
-        var names_b = ['Damion Barber', 'Ryan Bates', 'Will Blair', 'Corey Bolds', 'Nick Bowers', 'Ellis Brooks',
-                       'Cam Brown', 'DJ Brown', 'Journey Brown', 'Torrence Brown', 'Ryan Buchholz', 'Jabari Butler'] ;
-        var names_c = ['Joe Calcagno', 'Tariq Castro-Fields', 'Max Chizmar', 'Sean Clifford', 'Jake Cooper', 'Mike Curry'] ;
-        var names_d = [''] ;
-        var names_e = [''] ;
-        var names_f = [''] ;
-        var names_g = [''] ;
-        var names_h = [''] ;
-        var names_i = [] ;
-        var names_j = [] ;
-        var names_k = [] ;
-        var names_l = [] ;
-        var names_m = ['Phil Mickelson'] ;
-        var names_n = ['Danny Noonan'] ;
-        var names_o = [''] ;
-        var names_p = [''] ;
-        var names_q = [''] ;
-        var names_r = [''] ;
-        var names_s = ['Ken Smith', 'Judge Smails'] ;
-        var names_t = [''] ;
-        var names_u = [''] ;
-        var names_v = [''] ;
-        var names_w = [''] ;
-        var names_x = ['Tiger Woods'] ;
-        var names_y = [''] ;
-        var names_z = ['Marley Ziggy'] ;
-
 
 
 
@@ -81,32 +131,32 @@ export default class RosterSectionList extends Component<{}> {
                 <SectionList
 
                     sections={[
-                        { title: 'A', data: names_a },
-                        { title: 'B', data: names_b },
-                        { title: 'C', data: names_c },
-                        { title: 'D', data: names_d },
-                        { title: 'E', data: names_e },
-                        { title: 'F', data: names_f },
-                        { title: 'G', data: names_g },
-                        { title: 'H', data: names_h },
-                        { title: 'I', data: names_i },
-                        { title: 'J', data: names_j },
-                        { title: 'K', data: names_k },
-                        { title: 'L', data: names_l },
-                        { title: 'M', data: names_m },
-                        { title: 'N', data: names_n },
-                        { title: 'O', data: names_o },
-                        { title: 'P', data: names_p },
-                        { title: 'Q', data: names_q },
-                        { title: 'R', data: names_r },
-                        { title: 'S', data: names_s },
-                        { title: 'T', data: names_t },
-                        { title: 'U', data: names_u },
-                        { title: 'V', data: names_v },
-                        { title: 'W', data: names_w },
-                        { title: 'X', data: names_x },
-                        { title: 'Y', data: names_y },
-                        { title: 'Z', data: names_z },
+                        { title: 'A', data: this.state.names_a },
+                        { title: 'B', data: this.state.names_b },
+                        { title: 'C', data: this.state.names_c },
+                        { title: 'D', data: this.state.names_d },
+                        { title: 'E', data: this.state.names_e },
+                        { title: 'F', data: this.state.names_f },
+                        { title: 'G', data: this.state.names_g },
+                        { title: 'H', data: this.state.names_h },
+                        { title: 'I', data: this.state.names_i },
+                        { title: 'J', data: this.state.names_j },
+                        { title: 'K', data: this.state.names_k },
+                        { title: 'L', data: this.state.names_l },
+                        { title: 'M', data: this.state.names_m },
+                        { title: 'N', data: this.state.names_n },
+                        { title: 'O', data: this.state.names_o },
+                        { title: 'P', data: this.state.names_p },
+                        { title: 'Q', data: this.state.names_q },
+                        { title: 'R', data: this.state.names_r },
+                        { title: 'S', data: this.state.names_s },
+                        { title: 'T', data: this.state.names_t },
+                        { title: 'U', data: this.state.names_u },
+                        { title: 'V', data: this.state.names_v },
+                        { title: 'W', data: this.state.names_w },
+                        { title: 'X', data: this.state.names_x },
+                        { title: 'Y', data: this.state.names_y },
+                        { title: 'Z', data: this.state.names_z },
                     ]}
 
 
@@ -121,7 +171,7 @@ export default class RosterSectionList extends Component<{}> {
 
                     renderItem={ ({item}) =>
                         <Text style={styles.SectionListItemStyle}
-                              onPress={this.GetSectionListItem.bind(this, item)}> { item }
+                              onPress={this.getSectionListItem.bind(this, item)}> { item }
                         </Text> }
                     keyExtractor={ (item, index) => index }
                 />

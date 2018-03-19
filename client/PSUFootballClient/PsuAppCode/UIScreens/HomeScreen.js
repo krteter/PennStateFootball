@@ -15,16 +15,14 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
-
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
         scrapeTeamRosterData();
 
-
-
+        let backgroundImg = './../../Images/psuFootballPlayer.png';
         return (
-            <View style={styles.container}>
-                <ImageBackground source={require('./Images/psuFootballPlayer.png')}
+                <View style={styles.container}>
+                    <ImageBackground source={{ uri: backgroundImg}}
                        resizeMode='cover'
                        style={styles.backdrop}>
                     <Text

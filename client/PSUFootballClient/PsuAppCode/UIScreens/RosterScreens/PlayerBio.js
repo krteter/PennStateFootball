@@ -1,27 +1,45 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ImageBackground} from 'react-native';
+import {StyleSheet, Text, View, Image, ImageBackground, Alert} from 'react-native';
 
-
-import TeamPlayer from "./../../Domain/TeamPlayer";
 import TeamRosterDao from "../../DAO/TeamRosterDao";
+
 
 
 
 //
 //  Class for a UI to display a player's
-//  biographical data.
+//  biographical data & picture/headshot
 //
 export default class PlayerBio extends React.Component {
 
+    constructor(requestedPlayer) {
+        super();
+        this.state = {
+            requestedPlayer: 'Jack Nicklaus',
+            myPlayer: {}
+        };
+        this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
+    }
+
+
+    //  Function to pass to the database to be called with the
+    //  respective player returned from the db 'get' player
+    //  sql call
+    getTeamPlayerResultsFunction(dbPulledPlayer) {
+
+        if (dbPulledPlayer !== undefined) {
+            this.state.myPlayer = dbPulledPlayer;  // set the returned player to our local instance
+        } else {
+            Alert.alert('Database Player Pull Failed!!');
+        }
+    }
 
 
     render() {
 
-        let player = new TeamPlayer('Arnold Palmer', '83', 'GF',
-                                    'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg',
-                                    'Senior', 'Latrobe, PA', '5-10/186', 'Wake Forest', 'SR', '4 Time Masters Champion');
-
-        //TeamRosterDao.getSinglePlayer();
+        //  Get the requested player's data from the database
+        let that = this;
+        TeamRosterDao.getSinglePlayer(this.state.requestedPlayer, that.getTeamPlayerResultsFunction);
 
 
         return (
@@ -29,18 +47,17 @@ export default class PlayerBio extends React.Component {
 
                 <Image
                     style={styles.imagestyle}
-                    source={{uri: 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12571374.jpeg'}}
+                    source={{uri: this.state.myPlayer.imageUrl}}
                 />
-
-                <Text style={styles.nametext}>#{player.jerseyNum}   {player.name} </Text>
+                <Text style={styles.nametext}>#{this.state.myPlayer.jerseyNum}   {this.state.myPlayer.name} </Text>
                 <Text style={styles.playertext}>  </Text>
-                <Text style={styles.playertext}>Position: {player.position}</Text>
-                <Text style={styles.playertext}>Class: {player.classyear}</Text>
-                <Text style={styles.playertext}>Height/Weight: {player.heightWeight}</Text>
-                <Text style={styles.playertext}>Hometown: {player.hometown}</Text>
-                <Text style={styles.playertext}>Experience: {player.experience}</Text>
+                <Text style={styles.playertext}>Position: {this.state.myPlayer.position}</Text>
+                <Text style={styles.playertext}>Class: {this.state.myPlayer.classyear}</Text>
+                <Text style={styles.playertext}>Height/Weight: {this.state.myPlayer.heightWeight}</Text>
+                <Text style={styles.playertext}>Hometown: {this.state.myPlayer.hometown}</Text>
+                <Text style={styles.playertext}>Experience: {this.state.myPlayer.experience}</Text>
                 <Text style={styles.playertext}>Major:
-                    <Text style={styles.majortext}> {player.major}</Text>
+                    <Text style={styles.majortext}> {this.state.myPlayer.major}</Text>
                 </Text>
             </View>
         );
@@ -63,8 +80,8 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 10,
         justifyContent: 'center',
-        width: 175,
-        height: 175,
+        width: (105 * 1.25),
+        height: (145 * 1.25),
     },
     nametext: {
         color: '#000000',
