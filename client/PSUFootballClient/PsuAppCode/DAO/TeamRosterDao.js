@@ -28,7 +28,7 @@ export default class TeamRosterDao {
         //          major
         team_db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS Player_Table (id INTEGER PRIMARY KEY NOT NULL UNIQUE, name TEXT, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT);'
+                'CREATE TABLE IF NOT EXISTS Player_Table (name TEXT PRIMARY KEY NOT NULL UNIQUE, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT);'
             );
         });
 
@@ -55,7 +55,7 @@ export default class TeamRosterDao {
         //          major
         team_db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS Player_Table (id INTEGER PRIMARY KEY NOT NULL UNIQUE, name TEXT, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT);'
+                'CREATE TABLE IF NOT EXISTS Player_Table (name TEXT PRIMARY KEY NOT NULL UNIQUE, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT);'
             );
         });
 
@@ -64,7 +64,7 @@ export default class TeamRosterDao {
         //TODO remove this before prod we'll use some other process to load data into the db, but this will make sure something exists for testing now
         let teamplayer1 = new TeamPlayer('Tiger Woods', '44', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg', 'Senior', 'Jupiter, FL', '6-2/186', 'Stanford', 'SR', 'Presidents Cup Captain');
         teamplayer1.id = 4;
-        let teamplayer2 = new TeamPlayer('Phil Mickelson', '47', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565875.jpeg', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
+        let teamplayer2 = new TeamPlayer('Phil Mickelson', '47', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_01810.png', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
         teamplayer2.id = 5;
         let teamplayers = [teamplayer1, teamplayer2];
 
@@ -74,8 +74,8 @@ export default class TeamRosterDao {
             {
                 team_db.transaction(tx => {
                     tx.executeSql(
-                        'INSERT OR IGNORE INTO Player_Table(id, name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        [player.id, player.name, player.jerseyNum, player.position, player.imageUrl, player.classyear, player.hometown, player.heightWeight, player.highschool, player.experience, player.major]
+                        'INSERT OR IGNORE INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                        [player.name, player.jerseyNum, player.position, player.imageUrl, player.classyear, player.hometown, player.heightWeight, player.highschool, player.experience, player.major]
                     )
                 })
             }
@@ -115,12 +115,12 @@ export default class TeamRosterDao {
         console.debug('TRDao.addSinglePlayer()');
 
         //  Add a single player row to the database
-        team_db.transaction(tx => {
-            tx.executeSql(
-                'insert into Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major]
-            );
-        });
+ //       team_db.transaction(tx => {
+ //           tx.executeSql(
+ //               'insert into Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+ //               [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major]
+ //           );
+ //       });
         console.debug('leaving.... addSinglePlayer()');
     };
 
@@ -162,7 +162,7 @@ export default class TeamRosterDao {
 //                                    'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg',
 //                                    'Senior', 'Latrobe, PA', '5-10/186', 'Wake Forest', 'SR', '4 Time Masters Champion');
 
-        let theTeamPlayer =  new TeamPlayer('Rory McIlroy', '29', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12570608.jpeg', 'Junior', 'Dublin Ireland', '6-0/195', 'European Tour', 'Fr', 'Arnold Palmer Invitational Champion');
+        let theTeamPlayer =  new TeamPlayer('Rory McIlroy', '29', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_28237.png', 'Junior', 'Dublin Ireland', '6-0/195', 'European Tour', 'Fr', 'Arnold Palmer Invitational Champion');
 
         //  call the function with the respective 'Player' object & data
         theResultFunction(theTeamPlayer);

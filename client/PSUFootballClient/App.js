@@ -40,9 +40,9 @@ const RootStack = StackNavigator(
         APIcall: {
             screen: ExampleAPICall,
         },
- //       RosterWeb: {
- //           screen: RosterScreen,
- //       },
+        RosterWeb: {
+            screen: RosterScreen,
+        },
         DBTest: {
             screen: Roster,
         },

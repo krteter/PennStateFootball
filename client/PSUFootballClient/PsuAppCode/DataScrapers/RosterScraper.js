@@ -13,7 +13,7 @@ export const scrapeTeamRosterData = () => {
 
     //  Create our Team Roster database to hold our players
     //  and their respective information.
-    //TeamRosterDao.createTeamRosterDatabase();
+    TeamRosterDao.createTeamRosterDatabase();
 
 
     //  Get the text of the roster team URL page,

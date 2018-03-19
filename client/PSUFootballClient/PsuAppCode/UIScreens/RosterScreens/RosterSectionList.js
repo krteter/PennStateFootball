@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-native';
+
 import TeamRosterDao from "../../DAO/TeamRosterDao";
+import {scrapeTeamRosterData} from "./../../DataScrapers/RosterScraper";
+
 
 
 //
@@ -53,6 +56,8 @@ export default class RosterSectionList extends Component<{}> {
 
     componentWillMount() {
 
+
+
         //let playerRosterSize = TeamRosterDao.getRosterSize();
 
         //  Add the players to our scroll list from our database
@@ -60,12 +65,14 @@ export default class RosterSectionList extends Component<{}> {
         let that = this;
         TeamRosterDao.getPlayers( that.addContentsToListArrays );
 
-
-
     }  // end componentWillMount()
 
 
 
+    //
+    //  Method to add player names gathered from our
+    //  database's Plater_Table to our UI list of roster
+    //  players
     addContentsToListArrays(rows) {
 
         if (rows !== undefined) {
@@ -85,7 +92,6 @@ export default class RosterSectionList extends Component<{}> {
         }
 
         this.state.names_j.push('Pushing Peter Paul');
-
 
     }  // end addContentsToListArrays()
 
