@@ -188,7 +188,7 @@ export default class RosterSectionList extends Component<{}> {
 
         );
     }
-}
+}  // end class RosterSectionList
 
 
 const styles = StyleSheet.create({
