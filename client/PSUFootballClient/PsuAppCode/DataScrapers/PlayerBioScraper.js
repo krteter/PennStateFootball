@@ -150,7 +150,7 @@ export const getPlayerBioDataFromURL = (urlOfBioData) => {
                                           playerHighSchool, playerExperience, playerMajor);
 
 
-            console.log(playerName + " " + playerNum + " " + playerPosition  + " " + playerClassYear + "  " + playerHometown + "  " + playerHighSchool + "  " + playerHeightWeight + "  " + playerExperience + "  " + playerMajor);
+            //console.log(playerName + " " + playerNum + " " + playerPosition  + " " + playerClassYear + "  " + playerHometown + "  " + playerHighSchool + "  " + playerHeightWeight + "  " + playerExperience + "  " + playerMajor);
 
             //  Use for debug breakpoint
             //let temp = 999;

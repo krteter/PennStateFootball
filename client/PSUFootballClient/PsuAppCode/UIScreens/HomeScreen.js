@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
+import TeamRosterDao from "../DAO/TeamRosterDao";
 
 
 
@@ -14,11 +15,23 @@ export default class HomeScreen extends React.Component {
         };
     }
 
-    render() {
+
+    componentWillMount () {
+
+
+        //  Create our Team Roster database to hold our players
+        //  and their respective information.
+        TeamRosterDao.createTeamRosterDatabase();
 
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
         scrapeTeamRosterData();
+
+    }
+
+
+    render() {
+
 
 
         let backgroundImg = './../../Images/psuFootballPlayer.png';

@@ -12,14 +12,37 @@ import TeamRosterDao from "../../DAO/TeamRosterDao";
 //
 export default class PlayerBio extends React.Component {
 
+
     constructor(requestedPlayer) {
         super();
         this.state = {
-            requestedPlayer: 'Jack Nicklaus',
+            requestedPlayer: 'Phil Mickelson',
             myPlayer: {}
         };
         this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
     }
+
+
+    componentWillMount() {
+
+        //this.setState({
+        //    id: this.props.id,
+        //    name: this.props.name,
+        //    position: this.props.position,
+        //    description: this.props.description
+        //})
+
+        //  Get the requested player's data from the database
+        let that = this;
+        // Note:  you may want to call the get player function during the componentWillMount() lifecycle method not
+        //  doing so won't break anything, but the getTeamPlayerResultsFunction sets state which can force a re-render
+        //  here - it won't force a re-render in componentWillMount() as that part of the lifecycle happens just before
+        //  render is called  (KT)  see https://reactjs.org/docs/react-component.html#componentwillmount
+        TeamRosterDao.getSinglePlayer(this.state.requestedPlayer, that.getTeamPlayerResultsFunction);
+
+        console.debug('leaving........... PalyerBio.willMount()');
+
+    }  // end componentWillMount()
 
 
     //  Function to pass to the database to be called with the
@@ -36,11 +59,6 @@ export default class PlayerBio extends React.Component {
 
 
     render() {
-
-        //  Get the requested player's data from the database
-        let that = this;
-        TeamRosterDao.getSinglePlayer(this.state.requestedPlayer, that.getTeamPlayerResultsFunction);
-
 
         return (
             <View style={styles.playercontainer}>
