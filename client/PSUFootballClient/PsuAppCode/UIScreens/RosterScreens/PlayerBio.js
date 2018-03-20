@@ -39,6 +39,10 @@ export default class PlayerBio extends React.Component {
 
         //  Get the requested player's data from the database
         let that = this;
+        // Note:  you may want to call the get player function during the componentWillMount() lifecycle method not
+        //  doing so won't break anything, but the getTeamPlayerResultsFunction sets state which can force a re-render
+        //  here - it won't force a re-render in componentWillMount() as that part of the lifecycle happens just before
+        //  render is called  (KT)  see https://reactjs.org/docs/react-component.html#componentwillmount
         TeamRosterDao.getSinglePlayer(this.state.requestedPlayer, that.getTeamPlayerResultsFunction);
 
 

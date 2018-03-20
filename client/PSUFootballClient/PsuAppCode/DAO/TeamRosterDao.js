@@ -133,6 +133,7 @@ export default class TeamRosterDao {
         console.debug('TRDao.getPlayers()');
 
         team_db.transaction(tx => {
+            // tx.executeSql('SQL QUERY HERE where name = ?', [AnyParametersToMatchThe?], functionToReturnTheResultSetTo);
                 tx.executeSql('SELECT * FROM Player_Table', [], (_, {rows: {_array} }) => {
                     setResultsFunction(_array)
                 });
@@ -153,7 +154,9 @@ export default class TeamRosterDao {
 
         //  TODO:  Need some help here figuring out how to query and return data
         team_db.transaction(tx => {
-                tx.executeSql('SELECT * FROM Player_Table WHERE name=', playerName);
+                tx.executeSql('SELECT * FROM Player_Table WHERE name=?', [playerName], (_, {rows: {_array}}) => {
+                    theResultFunction(_array[0])
+                });
             }
         );
 
