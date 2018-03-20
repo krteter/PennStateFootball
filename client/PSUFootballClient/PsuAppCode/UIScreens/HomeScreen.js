@@ -23,13 +23,11 @@ export default class HomeScreen extends React.Component {
 
         let backgroundImg = './../../Images/psuFootballPlayer.png';
         return (
-                <View style={styles.container}>
-                    <ImageBackground source={{ uri: backgroundImg}}
-                       resizeMode='cover'
-                       style={styles.backdrop}>
-                    <Text
-                        style={styles.header}
-                    >
+            <View style={styles.container}>
+                <ImageBackground source={{ uri: backgroundImg}}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
+                    <Text style={styles.header}>
                         Main Menu
                     </Text>
                     <View style={styles.button}>
@@ -78,6 +76,12 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="Player Page"
                             onPress={() => this.props.navigation.navigate('PlayerData')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Gameday Weather"
+                            onPress={() => this.props.navigation.navigate('GameDayWeather')}
                         />
                     </View>
                 </ImageBackground>
