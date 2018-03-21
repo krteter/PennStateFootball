@@ -91,7 +91,7 @@ export default class WeatherScreen extends React.Component {
             forecast_6: 'Rainy Rain',
 
         };
-
+        this.getForecastData = this.getForecastData.bind(this);
 
     }  // end constructor
 
@@ -100,7 +100,42 @@ export default class WeatherScreen extends React.Component {
 //    componentDidMount() {
 //    }
 
+
+    getForecastData(url) {
+
+
+        fetch(url)
+            .then(response => response.json())
+            .then(jsonString => {
+
+                this.setState({
+                    month_name_abr1: jsonString.JSON.parse('mon_abbrev'),
+                    weekday_name_abbrev1: jsonString.JSON.parse('weekday_name_abbrev'),
+                    mday1: jsonString.JSON.parse('mday'),
+                    hour_time1: jsonString.JSON.parse('civil'),
+                    temp_1: jsonString.JSON.parse('english'),
+                    icon1_url: jsonString.JSON.parse('icon_url'),
+                    wind_speed1: jsonString.JSON.parse('english'),
+                    wind_direction1: jsonString.JSON.parse('dir'),
+                    forecast_1: jsonString.JSON.parse('wx')
+                });
+
+            });
+
+    }
+
+
+
+
+
     componentWillMount() {
+
+        //  Get the 6 hour forecast
+        let forecastUrl = 'http://api.wunderground.com/api/0c830f11d869563e/hourly/q/CA/San_Francisco.json';
+        this.setState({
+            this.getForecastData(forecastUrl);
+    });
+
     }
 
 
