@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import GameDayForecast from "../../Domain/GameDayForecast";
 
 
 //
 //  Class that will return the animated radar gif
 //  from weather service for State College, PA
 //  (Penn State University)
+//
 export default class WeatherScreen extends React.Component {
 
 
@@ -13,84 +15,21 @@ export default class WeatherScreen extends React.Component {
 
         super(props);
 
+        //  Create an array of hourly game day forecast
+        const hourly_forecast = [];
+        const numHours = 6;
+
+        for (let i = 0; i < numHours; i++) {
+            let gameday_forecast = new GameDayForecast();
+            hourly_forecast.push( {gameday_forecast} );
+        }
+
+
+        //  State stuff to re-render
         this.state = {
-            month_name_abr0: 'Dec',
-            weekday_name_abbrev0: 'Tue',
-            mday0: '12',
-            hour_time0: '05:00 PM',
-            temp_0: '67',  // F
-            icon0_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed0: '11',     // mph
-            wind_direction0: 'NNE',
-            forecast_0: 'Snow Showers',
-
-            month_name_abr1: 'Mth',
-            weekday_name_abbrev1: 'MWF',
-            mday1: '01',
-            hour_time1: '11:11 PM',
-            weekday_name1: 'Wrk',
-            temp_1: '01',  // F
-            icon1_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed1: '11',     // mph
-            wind_direction1: 'NNN',
-            forecast_1: 'Rainy Rain',
-
-            month_name_abr2: 'Mth',
-            weekday_name_abbrev2: 'MWF',
-            mday2: '02',
-            hour_time2: '22:22 PM',
-            weekday_name2: 'Wrk',
-            temp_2: '02',  // F
-            icon2_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed2: '22',     // mph
-            wind_direction2: 'NNN',
-            forecast_2: 'Rainy Rain',
-
-            month_name_abr3: 'Mth',
-            weekday_name_abbrev3: 'MWF',
-            mday3: '03',
-            hour_time3: '33:33 PM',
-            weekday_name3: 'Wrk',
-            temp_3: '03',  // F
-            icon3_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed3: '33',     // mph
-            wind_direction3: 'NNN',
-            forecast_3: 'Rainy Rain',
-
-            month_name_abr4: 'Mth',
-            weekday_name_abbrev4: 'MWF',
-            mday4: '04',
-            hour_time4: '44:44 PM',
-            weekday_name4: 'Wrk',
-            temp_4: '04',  // F
-            icon4_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed4: '44',     // mph
-            wind_direction4: 'NNN',
-            forecast_4: 'Rainy Rain',
-
-            month_name_abr5: 'Mth',
-            weekday_name_abbrev5: 'MWF',
-            mday5: '05',
-            hour_time5: '55:55 PM',
-            weekday_name5: 'Wrk',
-            temp_5: '05',  // F
-            icon5_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed5: '55',     // mph
-            wind_direction5: 'NNN',
-            forecast_5: 'Rainy Rain',
-
-            month_name_abr6: 'Mth',
-            weekday_name_abbrev6: 'MWF',
-            mday6: '06',
-            hour_time6: '66:66 PM',
-            weekday_name6: 'Wrk',
-            temp_6: '06',  // F
-            icon6_url: 'http://icons.wxug.com/i/c/k/snow.gif',
-            wind_speed6: '66',     // mph
-            wind_direction6: 'NNN',
-            forecast_6: 'Rainy Rain',
-
+            hourly_forecast,
         };
+
         this.getForecastData = this.getForecastData.bind(this);
 
     }  // end constructor
@@ -108,41 +47,53 @@ export default class WeatherScreen extends React.Component {
             .then(response => response.json())
             .then(jsonString => {
 
+                //  Make copy of class to make modifications to it to be re-rendered
+                //  Dont know if there is a more elegant way of updating each field
+                //  of this class, but for now.. "getter done"!
+                let newHourlyForecast = JSON.parse(JSON.stringify(this.state.hourly_forecast));   // make copy of class
+
+                for (let i=0; i < newHourlyForecast.length; i++) {
+
+                    //  Update class contents
+                    newHourlyForecast[i].weekday_name      = jsonString.hourly_forecast[i].FCTTIME.weekday_name_abbrev;
+                    newHourlyForecast[i].month_name_abr    = jsonString.hourly_forecast[i].FCTTIME.mon_abbrev;
+                    newHourlyForecast[i].mday              = jsonString.hourly_forecast[i].FCTTIME.mday_padded;
+                    newHourlyForecast[i].hour_time         = jsonString.hourly_forecast[i].FCTTIME.civil;
+                    newHourlyForecast[i].temp              = jsonString.hourly_forecast[i].temp.english;
+                    newHourlyForecast[i].icon_url          = jsonString.hourly_forecast[i].icon_url;
+                    newHourlyForecast[i].wind_speed        = jsonString.hourly_forecast[i].wspd.english;
+                    newHourlyForecast[i].wind_direction    = jsonString.hourly_forecast[i].wdir.dir;
+                    newHourlyForecast[i].forecast          = jsonString.hourly_forecast[i].wx;
+                }
+
+                //  set the state and re-render/update
+                //  w/new values
                 this.setState({
-                    month_name_abr1: jsonString.JSON.parse('mon_abbrev'),
-                    weekday_name_abbrev1: jsonString.JSON.parse('weekday_name_abbrev'),
-                    mday1: jsonString.JSON.parse('mday'),
-                    hour_time1: jsonString.JSON.parse('civil'),
-                    temp_1: jsonString.JSON.parse('english'),
-                    icon1_url: jsonString.JSON.parse('icon_url'),
-                    wind_speed1: jsonString.JSON.parse('english'),
-                    wind_direction1: jsonString.JSON.parse('dir'),
-                    forecast_1: jsonString.JSON.parse('wx')
+                    hourly_forecast: newHourlyForecast,
                 });
 
             });
 
-    }
-
-
-
+    }  // end getForecastData()
 
 
     componentWillMount() {
 
         //  Get the 6 hour forecast
-        let forecastUrl = 'http://api.wunderground.com/api/0c830f11d869563e/hourly/q/CA/San_Francisco.json';
-        this.setState({
-            this.getForecastData(forecastUrl);
-    });
+        let forecastUrl = 'http://api.wunderground.com/api/0c830f11d869563e/hourly/q/PA/State_College.json';
 
+        let that = this;
+        that.getForecastData(forecastUrl);
     }
 
 
     render() {
 
+        //  So this weather map seems to load..then get cached in the Android simulator
+        //  and doesnt change.  So for now... good.  Later look into why its cached.  -Ken  3/22/18
+
         //let animatedRadarUrl = 'http://api.wunderground.com/api/0c830f11d869563e/animatedradar/q/PA/State_College.gif?newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50';
-        let animatedRadarUrl = 'http://api.wunderground.com/api/0c830f11d869563e/radar/image.gif?centerlat=40.8&centerlon=-77.86&radius=50&width=640&height=480&rainsnow=1&timelabel=1&noclutter=1&newmaps=1';
+        let animatedRadarUrl = 'http://api.wunderground.com/api/0c830f11d869563e/radar/image.gif?centerlat=40.8&centerlon=-77.86&radius=40&width=640&height=480&rainsnow=0&timelabel=1&noclutter=1&newmaps=1';
 
         return (
             <ScrollView contentContainerStyle={styles.weathercontainer}>
@@ -151,47 +102,35 @@ export default class WeatherScreen extends React.Component {
                 <Image source={{uri: animatedRadarUrl}}
                        style={{width: 300, height: 300}} />
                 <Text style={styles.weatherheader}>6 Hour Weather Forecast </Text>
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev0} -- {this.state.month_name_abr0},{this.state.mday0}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time0}</Text>
-                <Text  style={styles.weathertext}>  {this.state.temp_0}/F  -  {this.state.forecast_0}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.wind_direction0}-{this.state.wind_speed0}mph</Text>
+                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[0].hour_time}: {this.state.hourly_forecast[0].weekday_name} {this.state.hourly_forecast[0].month_name_abr}-{this.state.hourly_forecast[0].mday}</Text>
+                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[0].temp}/F  -  {this.state.hourly_forecast[0].forecast}</Text>
+                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[0].wind_direction}-{this.state.hourly_forecast[0].wind_speed}mph</Text>
+                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
 
+                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[1].hour_time}: {this.state.hourly_forecast[1].weekday_name} {this.state.hourly_forecast[1].month_name_abr}-{this.state.hourly_forecast[1].mday}</Text>
+                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[1].temp}/F  -  {this.state.hourly_forecast[1].forecast}</Text>
+                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[1].wind_direction}-{this.state.hourly_forecast[1].wind_speed}mph</Text>
+                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
 
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev1} -- {this.state.month_name_abr1},{this.state.mday1}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time1}</Text>
-                <Text  style={styles.weathertext}>  {this.state.temp_1}/F  -  {this.state.forecast_1}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.wind_direction1}-{this.state.wind_speed1}mph</Text>
+                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[2].hour_time}: {this.state.hourly_forecast[2].weekday_name} {this.state.hourly_forecast[2].month_name_abr}-{this.state.hourly_forecast[2].mday}</Text>
+                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[2].temp}/F  -  {this.state.hourly_forecast[2].forecast}</Text>
+                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[2].wind_direction}-{this.state.hourly_forecast[2].wind_speed}mph</Text>
+                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
 
+                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[3].hour_time}: {this.state.hourly_forecast[3].weekday_name} {this.state.hourly_forecast[3].month_name_abr}-{this.state.hourly_forecast[3].mday}</Text>
+                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[3].temp}/F  -  {this.state.hourly_forecast[3].forecast}</Text>
+                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[3].wind_direction}-{this.state.hourly_forecast[3].wind_speed}mph</Text>
+                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
 
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev2} -- {this.state.month_name_abr2},{this.state.mday2}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time2}</Text>
-                <Text  style={styles.weathertext}>    {this.state.temp_2}/F  -  {this.state.forecast_2}</Text>
-                <Text  style={styles.weathertext}>    Wind  -  {this.state.wind_direction2}-{this.state.wind_speed2}mph</Text>
+                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[4].hour_time}: {this.state.hourly_forecast[4].weekday_name} {this.state.hourly_forecast[4].month_name_abr}-{this.state.hourly_forecast[4].mday}</Text>
+                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[4].temp}/F  -  {this.state.hourly_forecast[4].forecast}</Text>
+                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[4].wind_direction}-{this.state.hourly_forecast[4].wind_speed}mph</Text>
+                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
 
-
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev3} -- {this.state.month_name_abr3},{this.state.mday3}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time3}</Text>
-                <Text  style={styles.weathertext}>  {this.state.temp_3}/F  -  {this.state.forecast_3}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.wind_direction3}-{this.state.wind_speed3}mph</Text>
-
-
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev4} -- {this.state.month_name_abr4},{this.state.mday4}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time4}</Text>
-                <Text  style={styles.weathertext}>  {this.state.temp_4}/F  -  {this.state.forecast_4}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.wind_direction4}-{this.state.wind_speed4}mph</Text>
-
-
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev5} -- {this.state.month_name_abr5},{this.state.mday5}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time5}</Text>
-                <Text  style={styles.weathertext}>  {this.state.temp_5}/F  -  {this.state.forecast_5}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.wind_direction0}-{this.state.wind_speed5}mph</Text>
-
-
-                <Text style={styles.weatherdate}>  {this.state.weekday_name_abbrev6} -- {this.state.month_name_abr6},{this.state.mday6}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hour_time6}</Text>
-                <Text  style={styles.weathertext}>  {this.state.temp_6}/F  -  {this.state.forecast_6}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.wind_direction6}-{this.state.wind_speed6}mph</Text>
-
+                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[5].hour_time}: {this.state.hourly_forecast[5].weekday_name} {this.state.hourly_forecast[5].month_name_abr}-{this.state.hourly_forecast[5].mday}</Text>
+                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[5].temp}/F  -  {this.state.hourly_forecast[5].forecast}</Text>
+                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[5].wind_direction}-{this.state.hourly_forecast[5].wind_speed}mph</Text>
+                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
             </ScrollView>
         );
     }
@@ -232,9 +171,10 @@ const styles = StyleSheet.create({
     },
     weatherdate: {
         color: '#000000',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
         textAlign: 'left',
+        marginTop: 10,
 	},
     weathertext: {
         color: '#000000',

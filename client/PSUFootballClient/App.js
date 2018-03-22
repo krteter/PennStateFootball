@@ -1,7 +1,7 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
-
+ *  Main Class for the Penn State Football App
+ *  This react native component will render the
+ *  main screen for the application
  */
 
 import React from 'react';
@@ -20,6 +20,9 @@ import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScre
 
 
 
+//
+//  Main React.Component Class for PSU App
+//
 export default class App extends React.Component {
 
     render() {
