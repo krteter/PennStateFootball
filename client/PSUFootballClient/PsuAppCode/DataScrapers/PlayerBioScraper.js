@@ -150,10 +150,7 @@ export const getPlayerBioDataFromURL = (urlOfBioData) => {
                                           playerHighSchool, playerExperience, playerMajor);
 
 
-            //console.log(playerName + " " + playerNum + " " + playerPosition  + " " + playerClassYear + "  " + playerHometown + "  " + playerHighSchool + "  " + playerHeightWeight + "  " + playerExperience + "  " + playerMajor);
-
-            //  Use for debug breakpoint
-            //let temp = 999;
+            //console.log( add to DB:  playerName + " " + playerNum + " " + playerPosition  + "...." );
 
         });
 

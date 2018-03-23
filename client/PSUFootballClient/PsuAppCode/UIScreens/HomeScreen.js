@@ -25,7 +25,8 @@ export default class HomeScreen extends React.Component {
 
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
-        scrapeTeamRosterData();
+        //scrapeTeamRosterData();
+        TeamRosterDao.initPlayers();   // Use for test of smaller list... doesnt work too.  KS 3/23
 
     }
 

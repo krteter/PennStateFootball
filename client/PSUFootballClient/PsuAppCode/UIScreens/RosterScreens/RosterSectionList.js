@@ -3,6 +3,7 @@ import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-nati
 
 import TeamRosterDao from "../../DAO/TeamRosterDao";
 import {scrapeTeamRosterData} from "./../../DataScrapers/RosterScraper";
+import GameDayForecast from "../../Domain/GameDayForecast";
 
 
 
@@ -12,58 +13,69 @@ import {scrapeTeamRosterData} from "./../../DataScrapers/RosterScraper";
 //
 export default class RosterSectionList extends Component<{}> {
 
+
     constructor(props) {
 
         super(props);
 
         this.state = {
             teamplayers: {},
-            names_a: ['Johnny Appleseed', 'Joe Arcangelo'] ,
-            names_b: ['Damion Barber', 'Ryan Bates', 'Will Blair', 'Corey Bolds', 'Nick Bowers', 'Ellis Brooks', 'Cam Brown', 'DJ Brown', 'Journey Brown', 'Torrence Brown', 'Ryan Buchholz', 'Jabari Butler'] ,
-            names_c: ['Mr. Clean', 'Joe Calcagno', 'Tariq Castro-Fields', 'Max Chizmar', 'Sean Clifford', 'Jake Cooper', 'Mike Curry'] ,
-            names_d: [''] ,
-            names_e: [''] ,
-            names_f: [''] ,
-            names_g: [''] ,
-            names_h: [''] ,
+
+            names_a: [] ,
+            names_b: [] ,
+            names_c: [] ,
+            names_d: [] ,
+            names_e: [] ,
+            names_f: [] ,
+            names_g: [] ,
+            names_h: [] ,
             names_i: [] ,
             names_j: [] ,
             names_k: [] ,
             names_l: [] ,
-            names_m: ['Phil Mickelson'] ,
-            names_n: ['Danny Noonan'] ,
-            names_o: [''] ,
-            names_p: [''] ,
-            names_q: [''] ,
-            names_r: [''] ,
-            names_s: ['Ken Smith', 'Judge Smails'] ,
-            names_t: [''] ,
-            names_u: [''] ,
-            names_v: [''] ,
-            names_w: [''] ,
-            names_x: ['Tiger Woods'] ,
-            names_y: [''] ,
-            names_z: ['Marley Bob Ziggy']
+            names_m: [] ,
+            names_n: [] ,
+            names_o: [] ,
+            names_p: [] ,
+            names_q: [] ,
+            names_r: [] ,
+            names_s: [] ,
+            names_t: [] ,
+            names_u: [] ,
+            names_v: [] ,
+            names_w: [] ,
+            names_x: [] ,
+            names_y: [] ,
+            names_z: [],
         };
+
         this.addContentsToListArrays = this.addContentsToListArrays.bind(this);
+        this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
+        this.getSectionListItem = this.getSectionListItem.bind(this);
 
     }  // end constructor
 
 
 
-//    componentDidMount() {
-//    }
+    componentDidMount() {
+
+        //  Do the same to experiment if the rows wont come back
+        //  empty here when this is called.....???????
+        //  Add the players to our scroll list from our database
+        //  table - Player_Table
+        let that = this;
+        TeamRosterDao.getAllPlayers( this.addContentsToListArrays );
+
+    }
+
 
     componentWillMount() {
-
-
-
-        //let playerRosterSize = TeamRosterDao.getRosterSize();
 
         //  Add the players to our scroll list from our database
         //  table - Player_Table
         let that = this;
-        TeamRosterDao.getPlayers( that.addContentsToListArrays );
+        //TeamRosterDao.initPlayers();
+        TeamRosterDao.getAllPlayers( this.addContentsToListArrays );
 
     }  // end componentWillMount()
 
@@ -75,23 +87,40 @@ export default class RosterSectionList extends Component<{}> {
     //  players
     addContentsToListArrays(rows) {
 
-        if (rows !== undefined) {
+        if (rows !== undefined) {       //  rows is always undefined!  KS  3/23
+
             this.setState({
                 teamplayers: rows
             });
 
+            //  For now push all players into the "G"
+            //  heading of the list
+            let name_list = [];
             this.state.teamplayers.forEach(player =>
                 {
-                    this.state.names_g.push(player.name);
+                    let temp_name = player.name;
+                    name_list.push(temp_name);
                 }
             );
 
+            //  will use this next..
+            this.setState({
+                names_g: name_list
+            });
+
         } else {
-            this.state.names_j.push('Pushing Jimmy');
-            this.state.names_j.push('Pushing Johnny');
+
+            //  Our return is empty for getting all the players
+            //  from the database... so just put a name in the "J"s.
+            let list = [];
+            list.push('Pushing Jimmy');
+            list.push('Pushing Johnny');
+
+            this.setState({
+                names_j: list
+            });
         }
 
-        this.state.names_j.push('Pushing Peter Paul');
 
     }  // end addContentsToListArrays()
 
@@ -119,6 +148,8 @@ export default class RosterSectionList extends Component<{}> {
 
         //  Get the requested player's data from the database
         let that = this;
+
+        requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out
         TeamRosterDao.getSinglePlayer(requestedPlayer, that.getTeamPlayerResultsFunction);
 
     }

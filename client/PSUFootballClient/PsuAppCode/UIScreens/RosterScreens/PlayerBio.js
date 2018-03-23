@@ -14,23 +14,19 @@ export default class PlayerBio extends React.Component {
 
 
     constructor(requestedPlayer) {
-        super();
+
+        super(requestedPlayer);
+
         this.state = {
             requestedPlayer: 'Phil Mickelson',
             myPlayer: {}
         };
+
         this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
     }
 
 
     componentWillMount() {
-
-        //this.setState({
-        //    id: this.props.id,
-        //    name: this.props.name,
-        //    position: this.props.position,
-        //    description: this.props.description
-        //})
 
         //  Get the requested player's data from the database
         let that = this;
@@ -38,7 +34,7 @@ export default class PlayerBio extends React.Component {
         //  doing so won't break anything, but the getTeamPlayerResultsFunction sets state which can force a re-render
         //  here - it won't force a re-render in componentWillMount() as that part of the lifecycle happens just before
         //  render is called  (KT)  see https://reactjs.org/docs/react-component.html#componentwillmount
-        TeamRosterDao.getSinglePlayer(this.state.requestedPlayer, that.getTeamPlayerResultsFunction);
+        TeamRosterDao.getSinglePlayer(that.state.requestedPlayer, that.getTeamPlayerResultsFunction);
 
         console.debug('leaving........... PalyerBio.willMount()');
 
@@ -48,10 +44,14 @@ export default class PlayerBio extends React.Component {
     //  Function to pass to the database to be called with the
     //  respective player returned from the db 'get' player
     //  sql call
-    getTeamPlayerResultsFunction(dbPulledPlayer) {
+    getTeamPlayerResultsFunction(dbPulledPlayer) {      //  never gets called??   KS 3/23
 
         if (dbPulledPlayer !== undefined) {
-            this.state.myPlayer = dbPulledPlayer;  // set the returned player to our local instance
+
+            this.setState({
+                myPlayer: dbPulledPlayer    // set the returned player to our local instance
+            });
+
         } else {
             Alert.alert('Database Player Pull Failed!!');
         }

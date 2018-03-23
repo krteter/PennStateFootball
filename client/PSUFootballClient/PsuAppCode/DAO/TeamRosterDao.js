@@ -16,7 +16,7 @@ export default class TeamRosterDao {
 
         //  This will ensure the DB exists on first load
         //  -Create our Table with the following player fields:
-        //          name
+        //          name   (Primary Key)
         //          jerseyNum
         //          position
         //          imageUrl
@@ -37,37 +37,18 @@ export default class TeamRosterDao {
 
 
 
-    static initPlayers(setTeamResultsFunction) {
+    //static initPlayers(setTeamResultsFunction) {
+    static initPlayers() {
 
         console.debug('TRDao.initPlayers()');
-
-        //  This will ensure the DB exists on first load
-        //  -Create our Table with the following player fields:
-        //          name
-        //          jerseyNum
-        //          position
-        //          imageUrl
-        //          classyear
-        //          hometown
-        //          highschool
-        //          heightWeight
-        //          experience
-        //          major
-//        team_db.transaction(tx => {
-//            tx.executeSql(
-//                'CREATE TABLE IF NOT EXISTS Player_Table (name TEXT PRIMARY KEY NOT NULL UNIQUE, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT);'
-//            );
-//        });
 
 
 
         //TODO remove this before prod we'll use some other process to load data into the db, but this will make sure something exists for testing now
         let teamplayer1 = new TeamPlayer('Tiger Woods', '44', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg', 'Senior', 'Jupiter, FL', '6-2/186', 'Stanford', 'SR', 'Presidents Cup Captain');
-        //teamplayer1.id = 4;
         let teamplayer2 = new TeamPlayer('Phil Mickelson', '47', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_01810.png', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
-        //teamplayer2.id = 5;
         let teamplayer3 = new TeamPlayer('Brad Faxon', '56', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_01810.png', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
-        //teamplayer2.id = 6;
+
         let teamplayers = [teamplayer1, teamplayer2, teamplayer3];
 
         //  Loop thru above player array and add player
@@ -76,37 +57,17 @@ export default class TeamRosterDao {
             {
                 team_db.transaction(tx => {
                     tx.executeSql(
-                        'INSERT OR IGNORE INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                        'INSERT OR IGNORE INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                         [player.name, player.jerseyNum, player.position, player.imageUrl, player.classyear, player.hometown, player.heightWeight, player.highschool, player.experience, player.major]
-                    )
-                })
+                    );
+                });
             }
         );
-        // end remove this
 
-        setTeamResultsFunction(teamplayers);
         console.debug('leaving.... initPlayers()');
-        console.debug('       .... ');
+
     };
 
-
-    //
-    //  Method to ADD players to our Player_Table in our database
-    //
-    static addPlayers(rows) {
-
-        console.debug('TRDao.addPlayers()');
-
-        team_db.transaction(tx => {
-            rows.forEach(player => {
-                tx.executeSql(
-                    'INSERT INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                    [player.name, player.jerseyNum, player.position, player.imageUrl, player.classyear, player.hometown, player.heightWeight, player.highschool, player.experience, player.major]
-                );
-            });
-        });
-        console.debug('leaving.... addPlayers()');
-    };
 
 
     //
@@ -124,14 +85,14 @@ export default class TeamRosterDao {
                 [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major]
             );
         });
-        //console.debug('leaving.... addSinglePlayer()');
+
     };
 
 
     //
-    //  Method to GET players from our Player_Table in our database
+    //  Method to GET all players from our Player_Table in our database
     //
-    static getPlayers(setResultsFunction) {
+    static getAllPlayers(setResultsFunction) {
 
         console.debug('TRDao.getPlayers()');
 
@@ -148,7 +109,7 @@ export default class TeamRosterDao {
 
 
     //
-    //  Method to GET players from our Player_Table in our database
+    //  Method to GET a player from our Player_Table in our database
     //   - the requested player
     //   - the function to call with the player's info as input argument
     //
