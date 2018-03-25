@@ -13,12 +13,12 @@ import TeamRosterDao from "../../DAO/TeamRosterDao";
 export default class PlayerBio extends React.Component {
 
 
-    constructor(requestedPlayer) {
+    constructor(props) {
 
-        super(requestedPlayer);
+        super(props);
 
         this.state = {
-            requestedPlayer: 'Phil Mickelson',
+            requestedPlayerName: '',
             myPlayer: {}
         };
 
@@ -28,15 +28,23 @@ export default class PlayerBio extends React.Component {
 
     componentWillMount() {
 
+        // Set the Component's requestedPlayer
+        //   -PlayerBio will take a respective requestedPlayer as input
+        //    then look up the player's data from the database
+        this.setState({
+            requestedPlayerName: this.props.navigation.state.params.requestedPlayer
+        });
+
+
         //  Get the requested player's data from the database
         let that = this;
         // Note:  you may want to call the get player function during the componentWillMount() lifecycle method not
         //  doing so won't break anything, but the getTeamPlayerResultsFunction sets state which can force a re-render
         //  here - it won't force a re-render in componentWillMount() as that part of the lifecycle happens just before
         //  render is called  (KT)  see https://reactjs.org/docs/react-component.html#componentwillmount
-        TeamRosterDao.getSinglePlayer(that.state.requestedPlayer, that.getTeamPlayerResultsFunction);
+        TeamRosterDao.getSinglePlayer(this.state.requestedPlayerName, that.getTeamPlayerResultsFunction);
 
-        console.debug('leaving........... PalyerBio.willMount()');
+        console.debug('leaving........... PlayerBio.willMount()');
 
     }  // end componentWillMount()
 
@@ -67,7 +75,7 @@ export default class PlayerBio extends React.Component {
                     style={styles.imagestyle}
                     source={{uri: this.state.myPlayer.imageUrl}}
                 />
-                <Text style={styles.nametext}>#{this.state.myPlayer.jerseyNum}   {this.state.myPlayer.name} </Text>
+                <Text style={styles.nametext}>#{this.state.myPlayer.jerseyNum}   {this.state.requestedPlayerName} </Text>
                 <Text style={styles.playertext}>  </Text>
                 <Text style={styles.playertext}>Position: {this.state.myPlayer.position}</Text>
                 <Text style={styles.playertext}>Class: {this.state.myPlayer.classyear}</Text>
@@ -127,3 +135,4 @@ const styles = StyleSheet.create({
         height: null,
     },
 });
+

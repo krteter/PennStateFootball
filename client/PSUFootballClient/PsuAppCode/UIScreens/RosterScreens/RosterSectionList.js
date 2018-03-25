@@ -53,6 +53,8 @@ export default class RosterSectionList extends Component<{}> {
         this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
         this.getSectionListItem = this.getSectionListItem.bind(this);
 
+        this.setResultsFunction = this.setResultsFunction.bind(this);
+
     }  // end constructor
 
 
@@ -78,6 +80,15 @@ export default class RosterSectionList extends Component<{}> {
         TeamRosterDao.getAllPlayers( this.addContentsToListArrays );
 
     }  // end componentWillMount()
+
+
+    setResultsFunction(rows) {
+        if (rows !== undefined) {
+            this.setState({
+                players: rows
+            });
+        }
+    }
 
 
 

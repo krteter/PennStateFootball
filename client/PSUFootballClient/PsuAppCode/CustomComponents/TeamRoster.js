@@ -31,8 +31,8 @@ export default class TeamRoster extends React.Component {
 
         // make sure the db table exists if this is the first load
         // this table is an example, it should be changed to include production table columns
-        //let that = this;
-        //TeamRosterDao.initPlayers(that.setResultsFunction);  //  Dont want to use init here I want to
+        let that = this;
+        TeamRosterDao.initPlayers(that.setResultsFunction);  //  Dont want to use init here I want to
                                                                //  pull all of the players out of the database
                                                                //  that were already 'scraped' into it
    }

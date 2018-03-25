@@ -2,12 +2,21 @@ import {SQLite} from "expo";
 import TeamPlayer from "../Domain/TeamPlayer";
 
 
-// smitty - Add for Android Studio emulator
+// smitty - Add for Android Studio emulator database
+//          and not use Expo for it
 //let SQLite = require('react-native-sqlite-storage');
 
+
+
+//  Open the Team Roster Database locally
+//  on the device
 let team_db = SQLite.openDatabase('teamRoster.db');
 
 
+//
+//  Database Class to hold the Team's Roster
+//  of players
+//
 export default class TeamRosterDao {
 
     static createTeamRosterDatabase() {
@@ -37,11 +46,16 @@ export default class TeamRosterDao {
 
 
 
-    //static initPlayers(setTeamResultsFunction) {
-    static initPlayers() {
+    //
+    //  Method to create & add players to the Player_Table of the database
+    //     - We can use this to make sure something exists for testing purposes
+    //
+    static initPlayers(setResultsFunction) {
 
         console.debug('TRDao.initPlayers()');
 
+        //  Create Player_Table in database if not  already created
+        this.createTeamRosterDatabase();
 
 
         //TODO remove this before prod we'll use some other process to load data into the db, but this will make sure something exists for testing now
@@ -63,6 +77,8 @@ export default class TeamRosterDao {
                 });
             }
         );
+
+        setResultsFunction(teamplayers);
 
         console.debug('leaving.... initPlayers()');
 
@@ -125,24 +141,8 @@ export default class TeamRosterDao {
             }
         );
 
-
-//        let player = new TeamPlayer('Arnold Palmer', '83', 'GF',
-//                                    'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg',
-//                                    'Senior', 'Latrobe, PA', '5-10/186', 'Wake Forest', 'SR', '4 Time Masters Champion');
-
-//        let theTeamPlayer =  new TeamPlayer('Rory McIlroy', '29', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_28237.png', 'Junior', 'Dublin Ireland', '6-0/195', 'European Tour', 'Fr', 'Arnold Palmer Invitational Champion');
-
-        //  call the function with the respective 'Player' object & data
-//        theResultFunction(theTeamPlayer);
-
         console.debug('leaving.... getSinglePlayer()');
     };
-
-
-
-
-
-
 
 
 

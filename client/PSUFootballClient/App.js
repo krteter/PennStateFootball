@@ -10,13 +10,13 @@ import TwitterStream from "./PsuAppCode/UIScreens/TwitterStream";
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
 import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
-import RosterScreen from "./PsuAppCode/UIScreens/RosterScreens/RosterScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
+import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 
 
 
@@ -44,9 +44,6 @@ const RootStack = StackNavigator(
         APIcall: {
             screen: ExampleAPICall,
         },
-        RosterWeb: {
-            screen: RosterScreen,
-        },
         DBTest: {
             screen: Roster,
         },
@@ -64,6 +61,9 @@ const RootStack = StackNavigator(
         },
         GameDayWeather: {
             screen: WeatherScreen,
+        },
+        CalendarEvent: {
+            screen: AddCalendarEventScreen,
         },
     },
     {

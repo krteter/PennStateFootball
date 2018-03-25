@@ -3,6 +3,7 @@ import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
+import AddCalendarEventScreen from "./AddCalendarEventScreen";
 
 
 
@@ -16,6 +17,7 @@ export default class HomeScreen extends React.Component {
     }
 
 
+
     componentWillMount () {
 
 
@@ -26,14 +28,12 @@ export default class HomeScreen extends React.Component {
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
         //scrapeTeamRosterData();
-        TeamRosterDao.initPlayers();   // Use for test of smaller list... doesnt work too.  KS 3/23
+        //TeamRosterDao.initPlayers();   // Use for test of smaller list... doesnt work too.  KS 3/23
 
     }
 
 
     render() {
-
-
 
         let backgroundImg = './../../Images/psuFootballPlayer.png';
         return (
@@ -54,12 +54,6 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="API call"
                             onPress={() => this.props.navigation.navigate('APIcall')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Display Roster Webpage"
-                            onPress={() => this.props.navigation.navigate('RosterWeb')}
                         />
                     </View>
                     <View style={styles.button}>
@@ -89,13 +83,23 @@ export default class HomeScreen extends React.Component {
                     <View style={styles.button}>
                         <Button
                             title="Player Page"
-                            onPress={() => this.props.navigation.navigate('PlayerData')}
+                            onPress={() => this.props.navigation.navigate('PlayerData', {requestedPlayer: 'Phil Mickelson'} )}
                         />
                     </View>
                     <View style={styles.button}>
                         <Button
                             title="Gameday Weather"
                             onPress={() => this.props.navigation.navigate('GameDayWeather')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Add Calendar Event"
+                            onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
+                                                                                            endDateString:   '2018-05-06T20:30:00.000Z',
+                                                                                            location: 'Beaver Stadium',
+                                                                                            description: 'PSU Nittany Lions vs. VaTech Hokies',
+                                                                                            notes: 'Stripe-Out Game'} )}
                         />
                     </View>
                 </ImageBackground>
