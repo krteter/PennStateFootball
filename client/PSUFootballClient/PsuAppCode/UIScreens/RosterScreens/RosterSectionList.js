@@ -76,6 +76,8 @@ export default class RosterSectionList extends Component<{}> {
         //  table - Player_Table
 //        let that = this;
 //        TeamRosterDao.initializeScrapedPlayers(that.addContentsToListArrays);
+        let that = this;
+        TeamRosterDao.getAllPlayers( that.addContentsToListArrays );
 
     }  // end componentWillMount()
 

@@ -14,7 +14,7 @@ import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectio
 import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
-import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
+import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 
