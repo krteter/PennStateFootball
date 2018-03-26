@@ -20,6 +20,7 @@ export default class RosterSectionList extends Component<{}> {
 
         this.state = {
             teamplayers: {},
+            selectedPlayer: '',
 
             names_a: [] ,
             names_b: [] ,
@@ -50,10 +51,8 @@ export default class RosterSectionList extends Component<{}> {
         };
 
         this.addContentsToListArrays = this.addContentsToListArrays.bind(this);
-        this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
-        this.getSectionListItem = this.getSectionListItem.bind(this);
+        this.getSinglePlayerResultsFunction = this.getSinglePlayerResultsFunction.bind(this);
 
-        this.setResultsFunction = this.setResultsFunction.bind(this);
 
     }  // end constructor
 
@@ -66,7 +65,7 @@ export default class RosterSectionList extends Component<{}> {
         //  Add the players to our scroll list from our database
         //  table - Player_Table
         let that = this;
-        TeamRosterDao.getAllPlayers( this.addContentsToListArrays );
+        TeamRosterDao.getAllPlayers( that.addContentsToListArrays );
 
     }
 
@@ -75,20 +74,10 @@ export default class RosterSectionList extends Component<{}> {
 
         //  Add the players to our scroll list from our database
         //  table - Player_Table
-        let that = this;
-        //TeamRosterDao.initPlayers();
-        TeamRosterDao.getAllPlayers( this.addContentsToListArrays );
+//        let that = this;
+//        TeamRosterDao.initializeScrapedPlayers(that.addContentsToListArrays);
 
     }  // end componentWillMount()
-
-
-    setResultsFunction(rows) {
-        if (rows !== undefined) {
-            this.setState({
-                players: rows
-            });
-        }
-    }
 
 
 
@@ -98,14 +87,18 @@ export default class RosterSectionList extends Component<{}> {
     //  players
     addContentsToListArrays(rows) {
 
-        if (rows !== undefined) {       //  rows is always undefined!  KS  3/23
+        //  I need to figure out why or how I can get this to
+        //  have row not equal to undefined... always is... AHHHHHH!
+        if (rows !== undefined) {       //  rows is always undefined!  KS  3/25
 
             this.setState({
                 teamplayers: rows
             });
 
-            //  For now push all players into the "G"
-            //  heading of the list
+            //  For now push all players into the "G" heading of the
+            //  UI list - We can divide them up into their "letter" categories
+            //  later after we are successfully pulling all of them out
+            //  of the database.  For now just clump together in 'G'......
             let name_list = [];
             this.state.teamplayers.forEach(player =>
                 {
@@ -114,7 +107,8 @@ export default class RosterSectionList extends Component<{}> {
                 }
             );
 
-            //  will use this next..
+            //  set state will all in the "G" section
+            //  (this should render them all there)
             this.setState({
                 names_g: name_list
             });
@@ -122,7 +116,9 @@ export default class RosterSectionList extends Component<{}> {
         } else {
 
             //  Our return is empty for getting all the players
-            //  from the database... so just put a name in the "J"s.
+            //  from the database... so just put a couple of made up
+            //  names in the "J"s to show we are in this part of the
+            //  conditional code
             let list = [];
             list.push('Pushing Jimmy');
             list.push('Pushing Johnny');
@@ -131,7 +127,6 @@ export default class RosterSectionList extends Component<{}> {
                 names_j: list
             });
         }
-
 
     }  // end addContentsToListArrays()
 
@@ -142,33 +137,51 @@ export default class RosterSectionList extends Component<{}> {
     //  Function to pass to the database to be called with the
     //  respective player returned from the db 'get' player
     //  sql call.  A 'TeamPlayer' object is the argument
-    getTeamPlayerResultsFunction(dbPulledPlayer) {
+    getSinglePlayerResultsFunction(dbPulledPlayer) {
 
         if (dbPulledPlayer !== undefined) {
-            //this.state.myPlayer = dbPulledPlayer;  // set the returned player to our local instance
+
+            console.debug('RosterSectionList: selectedPlayer = ' + dbPulledPlayer.name);
             Alert.alert(dbPulledPlayer.name);
+
+            // set the returned player to our local state instance
+            this.setState({
+                selectedPlayer: dbPulledPlayer.name
+            });
+
+            //  Navigate to the PlayerBio UI with biography data
+            //  being loaded into its fields.
+            //        navigate()/show()/instantiate() --> PlayerBio( {selectedPlayer} );
+
+
         } else {
-            Alert.alert('Database Player Pull Failed!!');
+            Alert.alert('RosterSectionList: Pull player from Database Failed!!');
         }
-    }
+    }  // end getSinglePlayerResultsFunction()
 
 
-    //  Function called when the respective list item is
+
+    //  Function called when the respective "Player" list item is
     //  clicked on
-    getSectionListItem = (requestedPlayer)=> {
+    playerSectionListItemChosen = (requestedPlayer)=> {
 
         //  Get the requested player's data from the database
         let that = this;
 
-        requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out
-        TeamRosterDao.getSinglePlayer(requestedPlayer, that.getTeamPlayerResultsFunction);
+        requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
 
-    }
+        //  We want to use the name to pull that player from our
+        //  database Player_Table and then we inherently have all the
+        //  biography data for him.  Then in the results function, we
+        //  will want to navigate (and populate) the PlayerBio UI with
+        //  the respective data.
+        TeamRosterDao.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
+
+    } // end playerSectionListItemChosen()
+
 
 
     render() {
-
-
 
         return (
 
@@ -219,7 +232,7 @@ export default class RosterSectionList extends Component<{}> {
 
                     renderItem={ ({item}) =>
                         <Text style={styles.SectionListItemStyle}
-                              onPress={this.getSectionListItem.bind(this, item)}> { item }
+                              onPress={this.playerSectionListItemChosen.bind(this, item)}> { item }
                         </Text> }
                     keyExtractor={ (item, index) => index }
                 />
@@ -231,6 +244,7 @@ export default class RosterSectionList extends Component<{}> {
         );
     }
 }  // end class RosterSectionList
+
 
 
 const styles = StyleSheet.create({

@@ -41,9 +41,6 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterStream,
         },
-        APIcall: {
-            screen: ExampleAPICall,
-        },
         DBTest: {
             screen: Roster,
         },

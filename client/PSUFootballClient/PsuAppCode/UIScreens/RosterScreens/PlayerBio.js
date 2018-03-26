@@ -22,7 +22,7 @@ export default class PlayerBio extends React.Component {
             myPlayer: {}
         };
 
-        this.getTeamPlayerResultsFunction = this.getTeamPlayerResultsFunction.bind(this);
+        this.getIndividualPlayerFunction = this.getIndividualPlayerFunction.bind(this);
     }
 
 
@@ -39,10 +39,10 @@ export default class PlayerBio extends React.Component {
         //  Get the requested player's data from the database
         let that = this;
         // Note:  you may want to call the get player function during the componentWillMount() lifecycle method not
-        //  doing so won't break anything, but the getTeamPlayerResultsFunction sets state which can force a re-render
+        //  doing so won't break anything, but the getIndividualPlayerFunction() sets state which can force a re-render
         //  here - it won't force a re-render in componentWillMount() as that part of the lifecycle happens just before
         //  render is called  (KT)  see https://reactjs.org/docs/react-component.html#componentwillmount
-        TeamRosterDao.getSinglePlayer(this.state.requestedPlayerName, that.getTeamPlayerResultsFunction);
+        TeamRosterDao.getSinglePlayer(this.state.requestedPlayerName, that.getIndividualPlayerFunction);
 
         console.debug('leaving........... PlayerBio.willMount()');
 
@@ -52,7 +52,7 @@ export default class PlayerBio extends React.Component {
     //  Function to pass to the database to be called with the
     //  respective player returned from the db 'get' player
     //  sql call
-    getTeamPlayerResultsFunction(dbPulledPlayer) {      //  never gets called??   KS 3/23
+    getIndividualPlayerFunction(dbPulledPlayer) {      //  never gets called??   KS 3/23
 
         if (dbPulledPlayer !== undefined) {
 

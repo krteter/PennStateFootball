@@ -1,6 +1,8 @@
 import {SQLite} from "expo";
 import TeamPlayer from "../Domain/TeamPlayer";
 
+import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
+
 
 // smitty - Add for Android Studio emulator database
 //          and not use Expo for it
@@ -19,6 +21,10 @@ let team_db = SQLite.openDatabase('teamRoster.db');
 //
 export default class TeamRosterDao {
 
+
+    //
+    //  Method to create the Database & Player_Table to hold the
+    //  roster
     static createTeamRosterDatabase() {
 
         console.debug('TRDao.createTeamRosterDatabase()');
@@ -45,11 +51,14 @@ export default class TeamRosterDao {
     };
 
 
+/************
+
 
     //
     //  Method to create & add players to the Player_Table of the database
     //     - We can use this to make sure something exists for testing purposes
     //
+
     static initPlayers(setResultsFunction) {
 
         console.debug('TRDao.initPlayers()');
@@ -81,6 +90,40 @@ export default class TeamRosterDao {
         setResultsFunction(teamplayers);
 
         console.debug('leaving.... initPlayers()');
+
+    };
+
+
+ ***********/
+
+
+
+
+
+    //
+    //  Method to create & add players to the Player_Table of the database
+    //     - We can use this to make sure something exists for testing purposes
+    //
+    static initializeScrapedPlayers(theResultsFunction) {
+
+        console.debug('TRDao.initializeScrapedPlayers()');
+
+
+        //  Create Player_Table in database if not  already created
+        this.createTeamRosterDatabase();
+
+        //  Scrape the website for the players and their
+        //  respective bio data.   They will be added to the
+        //  database.
+        scrapeTeamRosterData();
+
+
+        //  Get all the players put into the database
+        //  by the website scrape
+        this.getAllPlayers(theResultsFunction);
+
+
+        console.debug('leaving.... initializeScrapedPlayers()');
 
     };
 
@@ -120,7 +163,6 @@ export default class TeamRosterDao {
             }
         );
         console.debug('leaving.... getPlayers()');
-        console.debug('       .............');
     };
 
 

@@ -105,8 +105,6 @@ export const scrapeTeamRosterData = () => {
 
             }  // end while keepParsingFlag
 
-            //  Use for debug breakpoint
-            //let temp = 999;
 
         });
 

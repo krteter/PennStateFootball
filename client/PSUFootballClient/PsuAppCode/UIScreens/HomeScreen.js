@@ -12,23 +12,32 @@ export default class HomeScreen extends React.Component {
     constructor(){
         super();
         this.state = {
-            showMsg: false
+            showMsg: false,
+            teamplayers: {}
         };
+
+        this.resultsFunction = this.resultsFunction.bind(this);
     }
 
+
+    resultsFunction(rows) {
+
+        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
+            this.setState({
+                teamplayers: rows
+            });
+        }
+    }
 
 
     componentWillMount () {
 
 
-        //  Create our Team Roster database to hold our players
-        //  and their respective information.
-        TeamRosterDao.createTeamRosterDatabase();
-
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
-        //scrapeTeamRosterData();
-        //TeamRosterDao.initPlayers();   // Use for test of smaller list... doesnt work too.  KS 3/23
+        //  doesnt work too.  KS 3/23
+        let that = this;
+        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
 
     }
 
@@ -52,19 +61,13 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.button}>
                         <Button
-                            title="API call"
-                            onPress={() => this.props.navigation.navigate('APIcall')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
                             title="DB Test"
                             onPress={() => this.props.navigation.navigate('DBTest')}
                         />
                     </View>
                     <View style={styles.button}>
                         <Button
-                            title="DB RosterTest"
+                            title="Roster DB Test"
                             onPress={() => this.props.navigation.navigate('DBRosterTest')}
                         />
                     </View>
