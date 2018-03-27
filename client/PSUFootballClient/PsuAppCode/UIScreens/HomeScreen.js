@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
+import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
 
 
 
@@ -18,6 +19,9 @@ export default class HomeScreen extends React.Component {
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
         scrapeTeamRosterData();
+		
+		//  Scrape game schedule data
+        scrapeGameScheduleData();
 
         let backgroundImg = '../../Images/psuFootballPlayer.png';
         return (
