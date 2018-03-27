@@ -8,7 +8,6 @@ export default class TeamRosterRow extends React.Component{
     constructor() {
         super();
         this.state = {
-            id: null,
             name: '',
             jerseyNum: '',
             position: '',
@@ -25,7 +24,6 @@ export default class TeamRosterRow extends React.Component{
 
     componentWillMount() {
         this.setState({
-            id: this.props.id,
             name: this.props.name,
             jerseyNum: this.props.jerseyNum,
             position: this.props.position,
@@ -43,7 +41,6 @@ export default class TeamRosterRow extends React.Component{
     render() {
         return (
             <View>
-                <Text>{this.state.id}</Text>
                 <Text>{this.state.name}</Text>
                 <Text>     {this.state.jerseyNum}</Text>
                 <Text>     {this.state.position}</Text>

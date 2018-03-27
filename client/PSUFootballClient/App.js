@@ -1,7 +1,7 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
-
+ *  Main Class for the Penn State Football App
+ *  This react native component will render the
+ *  main screen for the application
  */
 
 import React from 'react';
@@ -10,14 +10,21 @@ import TwitterStream from "./PsuAppCode/UIScreens/TwitterStream";
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
 import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
-import RosterScreen from "./PsuAppCode/UIScreens/RosterScreens/RosterScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
-import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
+import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
+import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
+import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 
+
+
+//
+//  Main React.Component Class for PSU App
+//
 export default class App extends React.Component {
+
     render() {
         return (
             <RootStack/>
@@ -34,12 +41,6 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterStream,
         },
-        APIcall: {
-            screen: ExampleAPICall,
-        },
- //       RosterWeb: {
- //           screen: RosterScreen,
- //       },
         DBTest: {
             screen: Roster,
         },
@@ -54,6 +55,12 @@ const RootStack = StackNavigator(
         },
         PlayerData: {
             screen: PlayerBio,
+        },
+        GameDayWeather: {
+            screen: WeatherScreen,
+        },
+        CalendarEvent: {
+            screen: AddCalendarEventScreen,
         },
     },
     {

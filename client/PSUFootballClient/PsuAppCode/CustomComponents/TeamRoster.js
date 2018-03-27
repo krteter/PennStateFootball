@@ -19,7 +19,7 @@ export default class TeamRoster extends React.Component {
 
     setResultsFunction(rows) {
 
-        if (rows !== undefined) {
+        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
             this.setState({
                 teamplayers: rows
             });
@@ -32,14 +32,17 @@ export default class TeamRoster extends React.Component {
         // make sure the db table exists if this is the first load
         // this table is an example, it should be changed to include production table columns
         let that = this;
-        TeamRosterDao.initPlayers(that.setResultsFunction);
-    }
+        TeamRosterDao.initPlayers(that.setResultsFunction);  //  Dont want to use init here I want to
+                                                               //  pull all of the players out of the database
+                                                               //  that were already 'scraped' into it
+   }
 
 
     componentWillMount() {
 
         let that = this;
-        TeamRosterDao.getPlayers(that.setResultsFunction);
+        TeamRosterDao.getAllPlayers(that.setResultsFunction);
+
     }
 
 
@@ -52,8 +55,7 @@ export default class TeamRoster extends React.Component {
             let myrosterTable = this.state.teamplayers.map((teamplayer) => {
                 return (
                     <TeamRosterRow
-                        id={teamplayer.id}
-                        key={teamplayer.id}
+                        key={teamplayer.name}
                         name={teamplayer.name}
                         jerseyNum={teamplayer.jerseyNum}
                         position={teamplayer.position}

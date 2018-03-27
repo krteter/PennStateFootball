@@ -11,10 +11,6 @@ import TeamRosterDao from "../DAO/TeamRosterDao";
 export const scrapeTeamRosterData = () => {
 
 
-    //  Create our Team Roster database to hold our players
-    //  and their respective information.
-    //TeamRosterDao.createTeamRosterDatabase();
-
 
     //  Get the text of the roster team URL page,
     //  scrape for player roster, add info to our
@@ -91,7 +87,7 @@ export const scrapeTeamRosterData = () => {
                     let playerName = parsedText.slice(0, playerNameEnd);
 
 
-                    console.log(playerName + "  " + rosterNumber + "  " + bioUrl);
+                    //console.log(playerName + "  " + rosterNumber + "  " + bioUrl);
 
 
                     //  Build the player's bio Url to then scrape all
@@ -109,8 +105,6 @@ export const scrapeTeamRosterData = () => {
 
             }  // end while keepParsingFlag
 
-            //  Use for debug breakpoint
-            //let temp = 999;
 
         });
 
