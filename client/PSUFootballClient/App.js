@@ -17,6 +17,7 @@ import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
+import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
 
 
 
@@ -61,6 +62,9 @@ const RootStack = StackNavigator(
         },
         CalendarEvent: {
             screen: AddCalendarEventScreen,
+        },
+        TicketSearch: {
+            screen: TicketSearchScreen,
         },
     },
     {

@@ -3,7 +3,7 @@ import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
-import AddCalendarEventScreen from "./AddCalendarEventScreen";
+
 
 
 
@@ -102,7 +102,17 @@ export default class HomeScreen extends React.Component {
                                                                                             endDateString:   '2018-05-06T20:30:00.000Z',
                                                                                             location: 'Beaver Stadium',
                                                                                             description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                                                                            notes: 'Stripe-Out Game'} )}
+                                                                                            notes: 'White-Out Game'} )}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Find Tickets For Event"
+                            onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T12:00:00.000Z',
+                                                                                           endDateString:   '2018-09-29T14:30:00.000Z',
+                                                                                           location: 'Beaver Stadium',
+                                                                                           description: 'PSU Nittany Lions vs. OSU Buckeyes',
+                                                                                           notes: 'Stripe-Out Game'} )}
                         />
                     </View>
                 </ImageBackground>
