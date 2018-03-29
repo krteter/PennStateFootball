@@ -102,7 +102,8 @@ export default class HomeScreen extends React.Component {
                                                                                             endDateString:   '2018-05-06T20:30:00.000Z',
                                                                                             location: 'Beaver Stadium',
                                                                                             description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                                                                            notes: 'White-Out Game'} )}
+                                                                                            notes: 'White-Out Game',
+                                                                                            eventState: 'PA'} )}
                         />
                     </View>
                     <View style={styles.button}>

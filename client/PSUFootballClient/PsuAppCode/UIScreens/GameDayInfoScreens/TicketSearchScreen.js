@@ -17,41 +17,119 @@ export default class TicketSearchScreen extends React.Component {
         this.state = {
             buttonTitle: 'Search For Tickets',
             buttonDisabled: false,
-            calendarAuth: '',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            eventStopDateString: '',    // Format:  2018-05-06T20:00:00.000Z  (greater than start time!!)
+            eventStopDateString: '',   // Format:  2018-05-06T18:00:00.000Z
             location: '',
-            notes: '',
             description: '',
-            seatgeekClientId: 'abcdefghijklmnop',
+            notes: '',
+            eventState: '',
+            ticketWebsiteUrl: 'www.psu.edu',
+            eventId: '123456',
         };
 
+
+        this.getEventId = this.getEventId.bind(this);
+        this.getTicketWebsiteUrl = this.getTicketWebsiteUrl.bind(this);
         this.searchForTickets = this.searchForTickets.bind(this);
     }
 
 
     //
-    //  Method to add an event to the Android calendar
-    //  - using 'react-native-calendar-events' package
+    //  Method to get the SeatGeek ticket site given
+    //  the respective Event Id.  We will use this
+    //  Url to redirect the user to ticket sales.
     //
-    searchForTickets() {
+    getTicketWebsiteUrl() {
+
+        let queryTicketsUrl = 'https://api.seatgeek.com/2/events/' + this.state.eventId;
+
+        //  Fetch the tickets website URL from a returned JSON response
+        fetch(queryTicketsUrl)
+            .then(response => response.json())
+            .then(jsonString => {
+
+                //  set tickets website url
+                this.setState({
+                    ticketWebsiteUrl: jsonString.events[0].url,
+                });
+
+            }).catch(err =>
+            console.error('An error occurred Linking to ', err)
+        );
+
+    }  // end getTicketWebsiteUrl()
 
 
-        // smitty
-        let linkToTicketsWebsiteUrl = 'https://seatgeek.com/ohio-state-buckeyes-at-penn-state-nittany-lions-football-tickets/ncaa-football/2018-09-29-12-pm/4111014';
+
+    //
+    //  Method to search for an Event Id via SeatGeek Ticket API
+    //  from the respective date, event venue, and Nittany Lions
+    //
+    getEventId() {
+
+
+        //  Parse the dateString for month, day, year
+        //parse = parse.dateString;   TBD
+        let month = '09';
+        let startDay = '29';
+        let year = '2018';
+        let endDateInt = parseInt(startDay) + 1;
+        let endDay = endDateInt.toString();
+
+        let eventQueryUrl = 'https://api.seatgeek.com/2/events?client_id=MTEwMTQyODN8MTUyMjE5NjY2NC4xOQ' +
+                            '&datetime_utc.gt=' + year + '-' + month + '-' + startDay +
+                            '&datetime_utc.lt=' + year + '-' + month + '-' + endDay +
+                            '&q=nittany+lions';
+
+
+        //  Fetch the EventUrl from a returned JSON response
+        fetch(eventQueryUrl)
+            .then(response => response.json())
+            .then(jsonString => {
+
+                //  set eventId
+                this.setState({
+                    eventId: jsonString.events[0].id,
+                    ticketWebsiteUrl: jsonString.events[0].url,
+                });
+
+            }).catch(err =>
+            console.error('An error occurred Linking to ', err)
+        );
+
+    }  // end getEventId()
+
+
+    //
+    //  Method to Redirect and load the event ticket website in
+    //  the device's web browser default app
+    //
+    searchForTickets(linkToTicketsWebsiteUrl) {
+
+        //linkToTicketsWebsiteUrl = 'https://seatgeek.com/ohio-state-buckeyes-at-penn-state-nittany-lions-football-tickets/ncaa-football/2018-09-29-12-pm/4111014';
+
+        // Set the Component's Button state to 'Done'
+        this.setState({
+            buttonTitle: "Done",
+            buttonDisabled: true
+        });
+
+        //  Check if linking to web browser app is supported
+        //  for this device/user
         Linking.canOpenURL(linkToTicketsWebsiteUrl).then(supported => {
 
-            if (!supported) {
-                console.log('Can\'t open website ticket URL: ' + linkToTicketsWebsiteUrl);
-            } else {
+            if (supported) {
 
                 //  The Linking component allows a redirect with the
                 //  respective URL into the device's default web browser
                 return Linking.openURL(linkToTicketsWebsiteUrl);
+
+            } else {
+                Alert.alert('Error: Opening web browser from app is not supported')
             }
 
         }).catch(err =>
-            console.error('An error occurred Linking to ', err)
+            Alert.alert('An error occurred opening browser at: ', err)
         );
 
     }  // end searchForTickets()
@@ -64,6 +142,7 @@ export default class TicketSearchScreen extends React.Component {
 
     componentWillMount () {
 
+
         // Set the Component's state
         this.setState({
             eventStartDateString: this.props.navigation.state.params.startDateString,
@@ -71,8 +150,12 @@ export default class TicketSearchScreen extends React.Component {
             location: this.props.navigation.state.params.location,
             description: this.props.navigation.state.params.description,
             notes: this.props.navigation.state.params.notes,
+            eventState: this.props.navigation.state.params.eventState,
         });
 
+
+        //  Fetch the respective Event Id for the desired event
+        this.getEventId();
 
     }   // end componentWillMount()
 
@@ -93,7 +176,7 @@ export default class TicketSearchScreen extends React.Component {
                 <View style={styles.button}>
                     <Button title={this.state.buttonTitle}
                             disabled={this.state.buttonDisabled}
-                            onPress={() => this.searchForTickets()} />
+                            onPress={() => this.searchForTickets(this.state.ticketWebsiteUrl)} />
                 </View>
 
             </View>
