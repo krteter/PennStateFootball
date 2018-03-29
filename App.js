@@ -10,6 +10,7 @@ import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
+import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 
@@ -45,6 +46,9 @@ const RootStack = StackNavigator(
     },
     PlayerData: {
         screen: PlayerBio,
+    },
+    PlayerData2: {
+        screen: PlayerBio2,
     },
     GameDayWeather: {
         screen: WeatherScreen,

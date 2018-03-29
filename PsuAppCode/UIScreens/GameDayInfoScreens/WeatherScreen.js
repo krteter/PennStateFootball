@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {Fab, Icon, Button} from 'native-base';
 import GameDayForecast from "../../Domain/GameDayForecast";
 
 
@@ -16,10 +15,6 @@ export default class WeatherScreen extends React.Component {
 
         super(props);
 
-        this.state = {
-          active:false
-        };
-
         //  Create an array of hourly game day forecast
         const hourly_forecast = [];
         const numHours = 6;
@@ -32,7 +27,7 @@ export default class WeatherScreen extends React.Component {
 
         //  State stuff to re-render
         this.state = {
-            hourly_forecast
+            hourly_forecast,
         };
 
         this.getForecastData = this.getForecastData.bind(this);
@@ -101,7 +96,6 @@ export default class WeatherScreen extends React.Component {
         let animatedRadarUrl = 'http://api.wunderground.com/api/0c830f11d869563e/radar/image.gif?centerlat=40.8&centerlon=-77.86&radius=40&width=640&height=480&rainsnow=0&timelabel=1&noclutter=1&newmaps=1';
 
         return (
-          <View>
             <ScrollView contentContainerStyle={styles.weathercontainer}>
                 <Text style={styles.citytext}>University Park, PA - Radar </Text>
 
@@ -138,54 +132,6 @@ export default class WeatherScreen extends React.Component {
                 <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[5].wind_direction}-{this.state.hourly_forecast[5].wind_speed}mph</Text>
                 <Text  style={styles.weathertext}>-- -- -- -- --</Text>
             </ScrollView>
-            <Fab
-              active={this.state.active}
-              direction="up"
-              containerStyle={{ }}
-              style={[styles.fabStyle, {backgroundColor: '#5067FF'}]}
-              position="bottomRight"
-              onPress={() => this.setState({ active: !this.state.active })}>
-              <Icon name="share" />
-              <Button style={{ backgroundColor: '#4248f4' }}>
-                <Icon
-                  name="home"
-                  onPress={() => this.props.navigation.navigate('Home')}
-                />
-              </Button>
-              <Button style={{ backgroundColor: '#f44242' }}>
-                <Icon name="american-football" />
-              </Button>
-              <Button style={{ backgroundColor: '#f4a941' }}>
-                <Icon
-                  name="search"
-                />
-              </Button>
-              <Button style={{ backgroundColor: '#dcf441' }}>
-                <Icon
-                  name="people"
-                  onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
-                />
-              </Button>
-              <Button style={{ backgroundColor: '#4ff441' }}>
-                <Icon
-                  name="rainy"
-                  onPress={() => this.props.navigation.navigate('GameDayWeather')}
-                />
-              </Button>
-              <Button style={{ backgroundColor: '#41f4eb' }}>
-                <Icon
-                  name="calendar"
-                  onPress={() => this.props.navigation.navigate('CalendarEvent')}
-                />
-              </Button>
-              <Button disabled style={{ backgroundColor: '#4155f4' }}>
-                <Icon
-                  name="egg"
-                  onPress={() => this.props.navigation.navigate('Twitter')}
-                />
-              </Button>
-            </Fab>
-          </View>
         );
     }
 }

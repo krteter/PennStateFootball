@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-native';
-import {Fab, Icon, Button} from 'native-base';
+import TeamPlayer from "./../../Domain/TeamPlayer";
 import TeamRosterDao from "../../DAO/TeamRosterDao";
 import {scrapeTeamRosterData} from "./../../DataScrapers/RosterScraper";
 import GameDayForecast from "../../Domain/GameDayForecast";
@@ -21,7 +21,6 @@ export default class RosterSectionList extends Component<{}> {
         this.state = {
             teamplayers: {},
             selectedPlayer: '',
-            active:false,
 
             names_a: [] ,
             names_b: [] ,
@@ -66,21 +65,22 @@ export default class RosterSectionList extends Component<{}> {
         //  Add the players to our scroll list from our database
         //  table - Player_Table
         let that = this;
+        console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
         TeamRosterDao.getAllPlayers( that.addContentsToListArrays );
 
     }
 
 
-    componentWillMount() {
-
-        //  Add the players to our scroll list from our database
-        //  table - Player_Table
-//        let that = this;
-//        TeamRosterDao.initializeScrapedPlayers(that.addContentsToListArrays);
-        let that = this;
-        TeamRosterDao.getAllPlayers( that.addContentsToListArrays );
-
-    }  // end componentWillMount()
+//     componentWillMount() {
+//
+//         //  Add the players to our scroll list from our database
+//         //  table - Player_Table
+// //        let that = this;
+// //        TeamRosterDao.initializeScrapedPlayers(that.addContentsToListArrays);
+//         //let that = this;
+//         //TeamRosterDao.getAllPlayers( that.addContentsToListArrays );
+//
+//     }  // end componentWillMount()
 
 
 
@@ -90,10 +90,11 @@ export default class RosterSectionList extends Component<{}> {
     //  players
     addContentsToListArrays(rows) {
 
+        console.debug('RosterSectionList.addContentsToListArrays()....    ');
         //  I need to figure out why or how I can get this to
         //  have row not equal to undefined... always is... AHHHHHH!
         if (rows !== undefined) {       //  rows is always undefined!  KS  3/25
-
+            console.debug('RosterSectionList.addContentsToListArrays()....    rows is defined');
             this.setState({
                 teamplayers: rows
             });
@@ -106,15 +107,155 @@ export default class RosterSectionList extends Component<{}> {
             this.state.teamplayers.forEach(player =>
                 {
                     let temp_name = player.name;
+                    console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
                     name_list.push(temp_name);
                 }
             );
 
             //  set state will all in the "G" section
             //  (this should render them all there)
-            this.setState({
-                names_g: name_list
-            });
+
+            for (i = 0; i < name_list.length; i++) {
+              let spaceIndex = name_list[i].indexOf(" ");
+              console.debug('RosterSectionList.addContentsToListArrays()....    spaceIndex is: ' + spaceIndex);
+              let lastFirstLetter = name_list[i].charAt(spaceIndex + 2);
+              console.debug('RosterSectionList.addContentsToListArrays()....    lastFirstLetter is: ' + lastFirstLetter);
+              switch(lastFirstLetter) {
+                case 'A':
+                    this.setState({
+                        names_a: [...this.state.names_a, name_list[i]]
+                    });
+                    break;
+                case 'B':
+                    this.setState({
+                        names_b: [...this.state.names_b, name_list[i]]
+                    });
+                    break;
+                case 'C':
+                    this.setState({
+                        names_c: [...this.state.names_c, name_list[i]]
+                    });
+                    break;
+                case 'D':
+                    this.setState({
+                        names_d: [...this.state.names_d, name_list[i]]
+                    });
+                    break;
+                case 'E':
+                    this.setState({
+                        names_e: [...this.state.names_e, name_list[i]]
+                    });
+                    break;
+                case 'F':
+                    this.setState({
+                        names_f: [...this.state.names_f, name_list[i]]
+                    });
+                    break;
+                case 'G':
+                    this.setState({
+                        names_g: [...this.state.names_g, name_list[i]]
+                    });
+                    break;
+                case 'H':
+                    this.setState({
+                        names_h: [...this.state.names_h, name_list[i]]
+                    });
+                    break;
+                case 'I':
+                    this.setState({
+                        names_i: [...this.state.names_i, name_list[i]]
+                    });
+                    break;
+                case 'J':
+                    this.setState({
+                        names_j: [...this.state.names_j, name_list[i]]
+                    });
+                    break;
+                case 'K':
+                    this.setState({
+                        names_k: [...this.state.names_k, name_list[i]]
+                    });
+                    break;
+                case 'L':
+                    this.setState({
+                        names_l: [...this.state.names_l, name_list[i]]
+                    });
+                    break;
+                case 'M':
+                    this.setState({
+                        names_m: [...this.state.names_m, name_list[i]]
+                    });
+                    break;
+                case 'N':
+                    this.setState({
+                        names_n: [...this.state.names_n, name_list[i]]
+                    });
+                    break;
+                case 'O':
+                    this.setState({
+                        names_o: [...this.state.names_o, name_list[i]]
+                    });
+                    break;
+                case 'P':
+                    this.setState({
+                        names_p: [...this.state.names_p, name_list[i]]
+                    });
+                    break;
+                case 'Q':
+                    this.setState({
+                        names_q: [...this.state.names_q, name_list[i]]
+                    });
+                    break;
+                case 'R':
+                    this.setState({
+                        names_r: [...this.state.names_r, name_list[i]]
+                    });
+                    break;
+                case 'S':
+                    this.setState({
+                        names_s: [...this.state.names_s, name_list[i]]
+                    });
+                    break;
+                case 'T':
+                    this.setState({
+                        names_t: [...this.state.names_t, name_list[i]]
+                    });
+                    break;
+                case 'U':
+                    this.setState({
+                        names_u: [...this.state.names_u, name_list[i]]
+                    });
+                    break;
+                case 'V':
+                    this.setState({
+                        names_v: [...this.state.names_v, name_list[i]]
+                    });
+                    break;
+                case 'W':
+                    this.setState({
+                        names_w: [...this.state.names_w, name_list[i]]
+                    });
+                    break;
+                case 'X':
+                    this.setState({
+                        names_x: [...this.state.names_x, name_list[i]]
+                    });
+                    break;
+                case 'Y':
+                    this.setState({
+                        names_y: [...this.state.names_y, name_list[i]]
+                    });
+                    break;
+                case 'Z':
+                    this.setState({
+                        names_z: [...this.state.names_z, name_list[i]]
+                    });
+                    break;
+              }
+            }
+            // this.setState({
+            //     names_g: name_list
+            // });
 
         } else {
 
@@ -144,14 +285,15 @@ export default class RosterSectionList extends Component<{}> {
 
         if (dbPulledPlayer !== undefined) {
 
-            console.debug('RosterSectionList: selectedPlayer = ' + dbPulledPlayer.name);
-            Alert.alert(dbPulledPlayer.name);
+            console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
+            //Alert.alert(dbPulledPlayer.name);
+
 
             // set the returned player to our local state instance
             this.setState({
                 selectedPlayer: dbPulledPlayer.name
             });
-
+            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer}); 
             //  Navigate to the PlayerBio UI with biography data
             //  being loaded into its fields.
             //        navigate()/show()/instantiate() --> PlayerBio( {selectedPlayer} );
@@ -170,8 +312,8 @@ export default class RosterSectionList extends Component<{}> {
 
         //  Get the requested player's data from the database
         let that = this;
-
-        requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
+        console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
+        //requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
 
         //  We want to use the name to pull that player from our
         //  database Player_Table and then we inherently have all the
@@ -239,53 +381,9 @@ export default class RosterSectionList extends Component<{}> {
                         </Text> }
                     keyExtractor={ (item, index) => index }
                 />
-                <Fab
-                  active={this.state.active}
-                  direction="up"
-                  containerStyle={{ }}
-                  style={[styles.fabStyle, {backgroundColor: '#5067FF'}]}
-                  position="bottomRight"
-                  onPress={() => this.setState({ active: !this.state.active })}>
-                  <Icon name="share" />
-                  <Button style={{ backgroundColor: '#4248f4' }}>
-                    <Icon
-                      name="home"
-                      onPress={() => this.props.navigation.navigate('Home')}
-                    />
-                  </Button>
-                  <Button style={{ backgroundColor: '#f44242' }}>
-                    <Icon name="american-football" />
-                  </Button>
-                  <Button style={{ backgroundColor: '#f4a941' }}>
-                    <Icon
-                      name="search"
-                    />
-                  </Button>
-                  <Button style={{ backgroundColor: '#dcf441' }}>
-                    <Icon
-                      name="people"
-                      onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
-                    />
-                  </Button>
-                  <Button style={{ backgroundColor: '#4ff441' }}>
-                    <Icon
-                      name="rainy"
-                      onPress={() => this.props.navigation.navigate('GameDayWeather')}
-                    />
-                  </Button>
-                  <Button style={{ backgroundColor: '#41f4eb' }}>
-                    <Icon
-                      name="calendar"
-                      onPress={() => this.props.navigation.navigate('CalendarEvent')}
-                    />
-                  </Button>
-                  <Button disabled style={{ backgroundColor: '#4155f4' }}>
-                    <Icon
-                      name="egg"
-                      onPress={() => this.props.navigation.navigate('Twitter')}
-                    />
-                  </Button>
-                </Fab>
+
+
+
             </View>
 
         );
