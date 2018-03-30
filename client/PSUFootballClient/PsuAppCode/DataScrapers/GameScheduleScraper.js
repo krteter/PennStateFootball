@@ -4,18 +4,20 @@ import Game from "../Domain/Game";
 // By default, we'll scrape schedule for current year (2018).  url variable for previous year is
 // also present but commented to allow testing of scrape consistency.  Perhaps we want to scrape
 // game schedule for other years also (???)
-
 export const scrapeGameScheduleData = () => {
+
   console.debug('scrapeGameScheduleData()');
-  //For now we will create the Game DB here. In the final version, creation of the
-  //DB will probably need to reside in the app service (?) so that the DB remains
-  //'alive' while the appliction is in service
-  //const GameSchedule = GameScheduleDao.initGameScheduleDB();
+
+  // For now we will create the Game DB here. In the final version, creation of the
+  // DB will probably need to reside in the app service (?) so that the DB remains
+  // 'alive' while the appliction is in service
+  //let GameSchedule = GameScheduleDao.initGameScheduleDB();
+  GameScheduleDao.initGameScheduleDB();
 
   //Using cheerio module for scraping
   const cheerio = require('react-native-cheerio');
   let url = 'http://www.espn.com/college-football/team/schedule/_/id/213';
-  //let url = 'http://www.espn.com/college-football/team/schedule/_/id/213/year/2017'
+  //let url = 'http://www.espn.com/college-football/team/schedule/_/id/213/year/2017';
 
   return fetch(url)
   .then(response => response.text())
@@ -71,37 +73,38 @@ export const scrapeGameScheduleData = () => {
       // console.log(result);
       // console.log(score);
 
-      // Insert scraped data into the metadata collection object
-      let metadata = {
-        OpponentTeamID: oppid,
-        GameDate: gamedate,
-        HomeAway: homeaway,
-        OpponentTeam: opponent,
-        OpponentHREF: opphref,
-        OpponentIMGSRC: oppsrc,
-        GameResult: result,
-        GameScore: score
-      };
+      /////////////////////////////////////////////////////////////
+      // Insert scraped data into the metadata collection object //
+      /////////////////////////////////////////////////////////////
+      // let metadata = {
+      //   OpponentTeamID: oppid,
+      //   GameDate: gamedate,
+      //   HomeAway: homeaway,
+      //   OpponentTeam: opponent,
+      //   OpponentHREF: opphref,
+      //   OpponentIMGSRC: oppsrc,
+      //   GameResult: result,
+      //   GameScore: score
+      // };
+      //
+      // // Push metadata into parsedResults array
+      // parsedResults.push(metadata);
+      // // Output data array to console
+      // console.log(parsedResults);
 
-      // Push metadata into parsedResults array
-      parsedResults.push(metadata);
-      // Output data array to console
-      console.log(parsedResults);
+      /////////////////////////////////////////////////////////////
 
-      ////////////////////////////////////////////////////
+      // Store game information in game object
+      let game = new Game(oppid, gamedate, homeaway, opponent, opphref, oppsrc, result, score);
+      // console.debug('OpponentID: ' + game.getid());
 
-      //Store game information in game object so we can INSERT into the DB
-      //let game = new Game(oppid, gamedate, homeaway, opponent, opphref, oppsrc, result, score);
-      //GameSchedule.addSchedule(game);
-
-      //Store each scraped schedule object into parsedResults array
-      //parsedResults.push(game);
+      // Store each game object into parsedResults array
+      parsedResults.push(game);
     }); // End loop
 
-    ///////////////////////////////////////////////////////////
-    // Preferably SQL INSERT into the GameDB will occur here //
-    ///////////////////////////////////////////////////////////
-    //GameSchedule.addSchedule(parsedResults);
+    // Store game schedule array into the DB
+    GameScheduleDao.addSchedule(parsedResults);
+
     console.debug('leaving... scrapeGameScheduleData()');
   }); // End function()
 } // End scrapeGameScheduleData()

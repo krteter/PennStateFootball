@@ -16,6 +16,7 @@ import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
+//import GameSchedule from "./PsuAppCode/CustomComponents/GameSchedule";
 
 export default class App extends React.Component {
     render() {
@@ -46,6 +47,9 @@ const RootStack = StackNavigator(
         DBRosterTest: {
             screen: TeamRoster,
         },
+//        DBGameScheduleTest: {
+//            screen: GameSchedule,
+//        },
         TimerExample: {
             screen: TimerExampleScreen,
         },
