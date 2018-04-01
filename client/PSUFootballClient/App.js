@@ -15,6 +15,7 @@ import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
+import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 
@@ -34,41 +35,44 @@ export default class App extends React.Component {
 
 
 const RootStack = StackNavigator(
-    {
-        Home: {
-            screen: HomeScreen,
-        },
-        Twitter: {
-            screen: TwitterStream,
-        },
-        DBTest: {
-            screen: Roster,
-        },
-        DBRosterTest: {
-            screen: TeamRoster,
-        },
-        TimerExample: {
-            screen: TimerExampleScreen,
-        },
-        AlphabetRosterList: {
-            screen: RosterSectionList,
-        },
-        PlayerData: {
-            screen: PlayerBio,
-        },
-        GameDayWeather: {
-            screen: WeatherScreen,
-        },
-        CalendarEvent: {
-            screen: AddCalendarEventScreen,
-        },
+  {
+    Home: {
+        screen: HomeScreen,
     },
-    {
-        initialRouteName: 'Home',
-        navigationOptions: {
-            title: 'PSU Football',
-        }
+    Twitter: {
+        screen: TwitterStream,
+    },
+    DBTest: {
+        screen: Roster,
+    },
+    DBRosterTest: {
+        screen: TeamRoster,
+    },
+    TimerExample: {
+        screen: TimerExampleScreen,
+    },
+    AlphabetRosterList: {
+        screen: RosterSectionList,
+    },
+    PlayerData: {
+        screen: PlayerBio,
+    },
+    PlayerData2: {
+        screen: PlayerBio2,
+    },
+    GameDayWeather: {
+        screen: WeatherScreen,
+    },
+    CalendarEvent: {
+        screen: AddCalendarEventScreen,
+    },
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: {
+        title: 'PSU Football',
     }
+  }
 );
 
 

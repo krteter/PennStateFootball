@@ -15,8 +15,10 @@ export const scrapeTeamRosterData = () => {
     //  Get the text of the roster team URL page,
     //  scrape for player roster, add info to our
     //  database
-    let rosterUrl = 'http://www.gopsusports.com/sports/m-footbl/mtt/psu-m-footbl-mtt.html';
+    console.debug('RosterScraper.scrapeTeamRosterData()');
 
+    let rosterUrl = 'http://www.gopsusports.com/sports/m-footbl/mtt/psu-m-footbl-mtt.html';
+    console.debug('RosterScraper.scrapeTeamRosterData()....    Fetched Roster at: ' + rosterUrl);
 
     //  Fetch the HTTP response and extract the URL's body text
     fetch(rosterUrl)
@@ -46,6 +48,7 @@ export const scrapeTeamRosterData = () => {
             //  needed for the players on the roster.
             let parsedText = rosterText;
             let keepParsingFlag = true;
+            console.debug('RosterScraper.scrapeTeamRosterData().fetch()....    Starting parsing...');
             while (keepParsingFlag) {
 
 
@@ -64,6 +67,7 @@ export const scrapeTeamRosterData = () => {
                     parsedText = parsedText.slice(rosterNumberBegin, parsedText.length);
                     let rosterNumberEnd = parsedText.indexOf("<");
                     let rosterNumber = parsedText.slice(0, rosterNumberEnd);
+                    console.debug('RosterScraper.scrapeTeamRosterData().fetch()....    rosterNumber is: ' + rosterNumber);
 
                     //  Get the Url of the player's bio data.  We will need
                     //  this to scrape this respective player's bio information
@@ -73,6 +77,7 @@ export const scrapeTeamRosterData = () => {
                     parsedText = parsedText.slice(bioUrlBegin, parsedText.length);
                     let bioUrlEnd = parsedText.indexOf(">");
                     let bioUrl = parsedText.slice(0, bioUrlEnd - 1);
+                    console.debug('RosterScraper.scrapeTeamRosterData().fetch()....    bioUrl is: ' + bioUrl);
 
                     //  Get the player's name
                     //    ( We can use this for debug, etc.  We will rescrape this from
@@ -85,6 +90,7 @@ export const scrapeTeamRosterData = () => {
                     parsedText = parsedText.slice(playerNameBegin, parsedText.length);
                     let playerNameEnd = parsedText.indexOf("<");
                     let playerName = parsedText.slice(0, playerNameEnd);
+                    console.debug('RosterScraper.scrapeTeamRosterData().fetch()....    playerName is: ' + playerName);
 
 
                     //console.log(playerName + "  " + rosterNumber + "  " + bioUrl);
@@ -94,6 +100,7 @@ export const scrapeTeamRosterData = () => {
                     //  the data.
                     let psuBaseUrl = 'http://www.gopsusports.com';
                     let playerBioUrl = psuBaseUrl + bioUrl;
+                    console.debug('RosterScraper.scrapeTeamRosterData().fetch()....    playerBioUrl is: ' + playerBioUrl);
 
                     //  Fetch the Url, scrape for data, then put
                     //  in our Team database of players
