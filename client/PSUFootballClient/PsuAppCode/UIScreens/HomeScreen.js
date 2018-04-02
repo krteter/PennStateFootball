@@ -6,8 +6,6 @@ import Expo from "expo";
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
 import AddCalendarEventScreen from "./AddCalendarEventScreen";
-import MenuFab from "../CustomComponents/MenuFab";
-import TwitterStream from "./TwitterStream";
 
 
 
@@ -39,6 +37,7 @@ export default class HomeScreen extends React.Component {
         'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
       });
       this.setState({ loading:false });
+      this.setState({ active:false });
     }
 
     render() {
@@ -46,6 +45,9 @@ export default class HomeScreen extends React.Component {
       if (this.state.loading) {
         return <Expo.AppLoading />;
       }
+      // Took Kevin's Twitter code and stuck it in a WebView. Probably a more elegant way to do this.
+      let jsTwitter = '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+      let sourceTwitter = jsTwitter + '<a class="twitter-timeline" href="https://twitter.com/PennStateFball?ref_src=twsrc%5Etfw">Tweets by PennStateFball</a>';
       let sourceESPN = 'https://www.espn.com/college-football/game?gameId=400953407';
       // Placeholer for the schedule. Can be modified to update automatically. Does not currently fit in the view.
       const webapp = require('./WebContent/index3.html');
@@ -71,20 +73,70 @@ export default class HomeScreen extends React.Component {
                 style={styles.scheduleStyle}
                 source={require('./images/psuSchedule.png')}
               />
-              <TwitterStream/>
+              <WebView
+                  style={styles.twitterStyle}
+                  source={{html: sourceTwitter}}
+                  javaScriptEnabled={true}
+              />
           </View>
           <View style={styles.bottomContainer}>
               <Image
                 style={styles.recruitingStyle}
                 source={require('./images/psuRecruiting.png')} />
-            <MenuFab styles={this.styles}/>
+            <Fab
+              active={this.state.active}
+              direction="up"
+              containerStyle={{ }}
+              style={[styles.fabStyle, {backgroundColor: '#5067FF'}]}
+              position="bottomRight"
+              onPress={() => this.setState({ active: !this.state.active })}>
+              <Icon name="share" />
+              <Button style={{ backgroundColor: '#4248f4' }}>
+                <Icon
+                  name="home"
+                  onPress={() => this.props.navigation.navigate('Home')}
+                />
+              </Button>
+              <Button style={{ backgroundColor: '#f44242' }}>
+                <Icon name="american-football" />
+              </Button>
+              <Button style={{ backgroundColor: '#f4a941' }}>
+                <Icon
+                  name="search"
+                />
+              </Button>
+              <Button style={{ backgroundColor: '#dcf441' }}>
+                <Icon
+                  name="people"
+                  onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
+                />
+              </Button>
+              <Button style={{ backgroundColor: '#4ff441' }}>
+                <Icon
+                  name="rainy"
+                  onPress={() => this.props.navigation.navigate('GameDayWeather')}
+                />
+              </Button>
+              <Button style={{ backgroundColor: '#41f4eb' }}>
+                <Icon
+                  name="calendar"
+                  onPress={() => this.props.navigation.navigate('CalendarEvent')}
+                />
+              </Button>
+              <Button disabled style={{ backgroundColor: '#4155f4' }}>
+                <Icon
+                  name="egg"
+                  onPress={() => this.props.navigation.navigate('Twitter')}
+                />
+              </Button>
+            </Fab>
           </View>
         </View>
       );
     }
 }
 
-  export var styles = StyleSheet.create({
+  var styles = StyleSheet.create({
       topContainer: {
           marginTop: 24,
           flex: 1,
