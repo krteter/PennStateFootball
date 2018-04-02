@@ -61,23 +61,15 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         //  empty here when this is called.....???????
         //  Add the players to our scroll list from our database
         //  table - Player_Table
+        //console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
         let that = this;
-        console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
         TeamRosterDao.getAllPlayers(that.addContentsToListArrays);
 
     }
 
 
 //     componentWillMount() {
-//
-//         //  Add the players to our scroll list from our database
-//         //  table - Player_Table
-// //        let that = this;
-// //        TeamRosterDao.initializeScrapedPlayers(that.addContentsToListArrays);
-//         //let that = this;
-//         //TeamRosterDao.getAllPlayers( that.addContentsToListArrays );
-//
-//     }  // end componentWillMount()
+//     }
 
 
     //
@@ -86,35 +78,36 @@ export default class RosterSectionList extends AbstractNavigableScreen {
     //  players
     addContentsToListArrays(rows) {
 
-        console.debug('RosterSectionList.addContentsToListArrays()....    ');
-        //  I need to figure out why or how I can get this to
-        //  have row not equal to undefined... always is... AHHHHHH!
-        if (rows !== undefined) {       //  rows is always undefined!  KS  3/25
-            console.debug('RosterSectionList.addContentsToListArrays()....    rows is defined');
+        //console.debug('RosterSectionList.addContentsToListArrays()....    ');
+
+        if (rows !== undefined) {
+
             this.setState({
                 teamplayers: rows
             });
 
-            //  For now push all players into the "G" heading of the
-            //  UI list - We can divide them up into their "letter" categories
-            //  later after we are successfully pulling all of them out
-            //  of the database.  For now just clump together in 'G'......
+            //  Loop thru all the roster players and put them into
+            //  this name_list array.  We will use this to divide them
+            //  up into our different sections.
             let name_list = [];
             this.state.teamplayers.forEach(player => {
                     let temp_name = player.name;
-                    console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
+                    //console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
                     name_list.push(temp_name);
                 }
             );
 
-            //  set state will all in the "G" section
-            //  (this should render them all there)
+            //  Loop thru each player and put them into each of the
+            //  alphabetical list headers based on the first letter
+            //  of their last name
+            for (let i = 0; i < name_list.length; i++) {
 
-            for (i = 0; i < name_list.length; i++) {
                 let spaceIndex = name_list[i].indexOf(" ");
-                console.debug('RosterSectionList.addContentsToListArrays()....    spaceIndex is: ' + spaceIndex);
+                //console.debug('RosterSectionList.addContentsToListArrays()....    spaceIndex is: ' + spaceIndex);
+
                 let lastFirstLetter = name_list[i].charAt(spaceIndex + 2);
-                console.debug('RosterSectionList.addContentsToListArrays()....    lastFirstLetter is: ' + lastFirstLetter);
+                //console.debug('RosterSectionList.addContentsToListArrays()....    lastFirstLetter is: ' + lastFirstLetter);
+
                 switch (lastFirstLetter) {
                     case 'A':
                         this.setState({
@@ -248,23 +241,6 @@ export default class RosterSectionList extends AbstractNavigableScreen {
                         break;
                 }
             }
-            // this.setState({
-            //     names_g: name_list
-            // });
-
-        } else {
-
-            //  Our return is empty for getting all the players
-            //  from the database... so just put a couple of made up
-            //  names in the "J"s to show we are in this part of the
-            //  conditional code
-            let list = [];
-            list.push('Pushing Jimmy');
-            list.push('Pushing Johnny');
-
-            this.setState({
-                names_j: list
-            });
         }
 
     }  // end addContentsToListArrays()
@@ -277,19 +253,16 @@ export default class RosterSectionList extends AbstractNavigableScreen {
 
         if (dbPulledPlayer !== undefined) {
 
-            console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
-            //Alert.alert(dbPulledPlayer.name);
-
+            //console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
 
             // set the returned player to our local state instance
             this.setState({
                 selectedPlayer: dbPulledPlayer.name
             });
-            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer});
+
             //  Navigate to the PlayerBio UI with biography data
             //  being loaded into its fields.
-            //        navigate()/show()/instantiate() --> PlayerBio( {selectedPlayer} );
-
+            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer});
 
         } else {
             Alert.alert('RosterSectionList: Pull player from Database Failed!!');
@@ -301,16 +274,14 @@ export default class RosterSectionList extends AbstractNavigableScreen {
     //  clicked on
     playerSectionListItemChosen = (requestedPlayer) => {
 
-        //  Get the requested player's data from the database
-        let that = this;
-        console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
-        //requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
+        //console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
 
         //  We want to use the name to pull that player from our
         //  database Player_Table and then we inherently have all the
         //  biography data for him.  Then in the results function, we
         //  will want to navigate (and populate) the PlayerBio UI with
         //  the respective data.
+        let that = this;
         TeamRosterDao.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
 
     } // end playerSectionListItemChosen()
@@ -325,7 +296,6 @@ export default class RosterSectionList extends AbstractNavigableScreen {
             <View style={{marginTop: (Platform.OS) == 'ios' ? 20 : 0}}>
 
                 <SectionList
-
                     sections={[
                         {title: 'A', data: this.state.names_a},
                         {title: 'B', data: this.state.names_b},
@@ -355,14 +325,9 @@ export default class RosterSectionList extends AbstractNavigableScreen {
                         {title: 'Z', data: this.state.names_z},
                     ]}
 
-
-                    //renderSectionHeader={ ({section}) =>
-                    //    <PlayerText /> }
-
                     renderSectionHeader={({section}) =>
                         <Text style={styles.SectionHeaderStyle}> {section.title}
                         </Text>}
-
 
                     renderItem={({item}) =>
                         <Text style={styles.SectionListItemStyle}

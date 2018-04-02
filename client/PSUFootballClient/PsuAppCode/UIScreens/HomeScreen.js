@@ -2,10 +2,31 @@ import React from 'react';
 import {Button, Header, Icon, Input, Item, Text, View} from 'native-base';
 import {Image, StyleSheet, WebView} from 'react-native';
 import Expo from "expo";
+
 import TeamRosterDao from "../DAO/TeamRosterDao";
 import MenuFab from "../CustomComponents/MenuFab";
 import TwitterStream from "./TwitterFeedScreen/TwitterStream";
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
+
+
+
+/*
+
+- Eventually we need to move the database here for the whole app
+  and each table for schedule, teamplayers, etc should be created
+  and used from this single database
+- Sandwich this in the HomeScreen or App.js class as global so
+  all can access it.-  KS 4/2/18
+
+import {SQLite} from "expo";
+
+//  Open the PSU Football App Database locally on the device
+let psuFootballApp_db = SQLite.openDatabase('PsuFootballApp.db');
+ */
+
+
+
+
 
 
 export default class HomeScreen extends AbstractNavigableScreen {
@@ -33,13 +54,18 @@ export default class HomeScreen extends AbstractNavigableScreen {
     }
 
     async componentWillMount() {
+
+        //  Scrape the player roster data from an
+        //  external web page and load it into our database.
         let that = this;
         TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
+
         // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
             'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
         });
+
         this.setState({loading: false});
     }
 
