@@ -99,7 +99,6 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="Add Calendar Event"
                             onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-                                                                                            endDateString:   '2018-05-06T20:30:00.000Z',
                                                                                             location: 'Beaver Stadium',
                                                                                             description: 'PSU Nittany Lions vs. VaTech Hokies',
                                                                                             notes: 'White-Out Game'} )}

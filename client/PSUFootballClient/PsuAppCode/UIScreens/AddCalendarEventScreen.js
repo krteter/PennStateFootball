@@ -19,7 +19,7 @@ export default class AddCalendarEventScreen extends React.Component {
             buttonDisabled: false,
             calendarAuth: '',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            duration:  '3',   // Duration = 3 hrs (default it!)
+            duration:  3,               // Duration = 3 hrs (default it!)
             location: '',
             notes: '',
             description: '',
@@ -49,7 +49,7 @@ export default class AddCalendarEventScreen extends React.Component {
             //  better, but it will do for our purposes
             let eventStartString = this.state.eventStartDateString;
             let startTimeHour = eventStartString.substr(11,2);
-            let endTimeHourInt = parseInt(startTimeHour) + 3;
+            let endTimeHourInt = parseInt(startTimeHour) + this.state.duration;
             let endTimeHour = endTimeHourInt.toString();
             let beginning = eventStartString.substr(0,11);
             let ending = eventStartString.substr(13,eventStartString.length-1);
@@ -60,14 +60,11 @@ export default class AddCalendarEventScreen extends React.Component {
             //  Add the respective event to our device's
             //  Calendar App
             //      reference:   https://github.com/wmcmahan/react-native-calendar-events/blob/master/README.md#saveevent
-            RNCalendarEvents.saveEvent(this.state.description, {
-
-                startDate: eventStartString,
-                endDate:   endDateString,
-                location: this.state.location,
-                description: this.state.description,
-                notes: this.state.notes,
-            });
+            RNCalendarEvents.saveEvent(this.state.description, { startDate: eventStartString,
+                                                                 endDate:   endDateString,
+                                                                 location: this.state.location,
+                                                                 description: this.state.description,
+                                                                 notes: this.state.notes });
 
             // Set the Component's Button state to 'Done'
             this.setState({
@@ -90,7 +87,6 @@ export default class AddCalendarEventScreen extends React.Component {
         // Set the Component's state
         this.setState({
             eventStartDateString: this.props.navigation.state.params.startDateString,
-            eventEndDateString:   this.props.navigation.state.params.endDateString,
             location: this.props.navigation.state.params.location,
             description: this.props.navigation.state.params.description,
             notes: this.props.navigation.state.params.notes,
@@ -138,7 +134,7 @@ export default class AddCalendarEventScreen extends React.Component {
                         <Text style={styles.eventdescription}>{this.state.description}</Text>
                         <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
                         <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
-                        <Text style={styles.eventdetails}>End:    {this.state.eventEndDateString}</Text>
+                        <Text style={styles.eventdetails}>Duration:   {this.state.duration} hrs</Text>
                         <Text style={styles.eventdetails}>{this.state.notes}</Text>
                     </View>
                     <View style={styles.button}>
