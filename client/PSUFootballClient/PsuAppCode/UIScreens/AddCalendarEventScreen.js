@@ -19,7 +19,7 @@ export default class AddCalendarEventScreen extends React.Component {
             buttonDisabled: false,
             calendarAuth: '',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            eventStopDateString: '',    // Format:  2018-05-06T20:00:00.000Z  (greater than start time!!)
+            duration:  '3',   // Duration = 3 hrs (default it!)
             location: '',
             notes: '',
             description: '',
@@ -43,13 +43,27 @@ export default class AddCalendarEventScreen extends React.Component {
 
         } else {
 
+            //  Determine the end time from the start time
+            //  (we wont assume rollover of time/day.  Since
+            //  events wont start that late.  (we could make this
+            //  better, but it will do for our purposes
+            let eventStartString = this.state.eventStartDateString;
+            let startTimeHour = eventStartString.substr(11,2);
+            let endTimeHourInt = parseInt(startTimeHour) + 3;
+            let endTimeHour = endTimeHourInt.toString();
+            let beginning = eventStartString.substr(0,11);
+            let ending = eventStartString.substr(13,eventStartString.length-1);
+            let endDateString = beginning + endTimeHour + ending;
+
+
+
             //  Add the respective event to our device's
             //  Calendar App
             //      reference:   https://github.com/wmcmahan/react-native-calendar-events/blob/master/README.md#saveevent
             RNCalendarEvents.saveEvent(this.state.description, {
 
-                startDate: this.state.eventStartDateString,
-                endDate:   this.state.eventEndDateString,
+                startDate: eventStartString,
+                endDate:   endDateString,
                 location: this.state.location,
                 description: this.state.description,
                 notes: this.state.notes,
@@ -71,6 +85,7 @@ export default class AddCalendarEventScreen extends React.Component {
 
 
     componentWillMount () {
+
 
         // Set the Component's state
         this.setState({

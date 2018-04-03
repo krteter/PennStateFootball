@@ -1,9 +1,9 @@
-import {SQLite} from "expo";
+//import {SQLite} from "expo";
 import Player from "../Domain/Player";
 
 
 // smitty - Add for Android Studio emulator
-//let SQLite = require('react-native-sqlite-storage');
+let SQLite = require('react-native-sqlite-storage');
 
 let db = SQLite.openDatabase('football.db');
 

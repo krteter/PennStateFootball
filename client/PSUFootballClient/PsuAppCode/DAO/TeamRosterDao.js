@@ -1,4 +1,4 @@
-import {SQLite} from "expo";
+//import {SQLite} from "expo";
 import TeamPlayer from "../Domain/TeamPlayer";
 
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
@@ -6,7 +6,7 @@ import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 
 // smitty - Add for Android Studio emulator database
 //          and not use Expo for it
-//let SQLite = require('react-native-sqlite-storage');
+let SQLite = require('react-native-sqlite-storage');
 
 
 

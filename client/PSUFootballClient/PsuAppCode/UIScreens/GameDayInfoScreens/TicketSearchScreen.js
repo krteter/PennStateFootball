@@ -18,11 +18,7 @@ export default class TicketSearchScreen extends React.Component {
             buttonTitle: 'Search For Tickets',
             buttonDisabled: false,
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            eventStopDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            location: '',
             description: '',
-            notes: '',
-            eventState: '',
             ticketWebsiteUrl: 'www.psu.edu',
             eventId: '123456',
         };
@@ -69,16 +65,20 @@ export default class TicketSearchScreen extends React.Component {
 
 
         //  Parse the dateString for month, day, year
-        //parse = parse.dateString;   TBD
-        let month = '09';
-        let startDay = '29';
-        let year = '2018';
+        //  and add a day to create the enddate
+        let dateString = this.state.eventStartDateString;
+        let startString = dateString.substr(0,10);
+        let startDay = startString.substr(8,2);
         let endDateInt = parseInt(startDay) + 1;
         let endDay = endDateInt.toString();
+        let endYearMonth = startString.substr(0,8);
+        let endString = endYearMonth.concat(endDay);
+
+
 
         let eventQueryUrl = 'https://api.seatgeek.com/2/events?client_id=MTEwMTQyODN8MTUyMjE5NjY2NC4xOQ' +
-                            '&datetime_utc.gt=' + year + '-' + month + '-' + startDay +
-                            '&datetime_utc.lt=' + year + '-' + month + '-' + endDay +
+                            '&datetime_utc.gt=' + startString +
+                            '&datetime_utc.lt=' + endString +
                             '&q=nittany+lions';
 
 
@@ -87,7 +87,9 @@ export default class TicketSearchScreen extends React.Component {
             .then(response => response.json())
             .then(jsonString => {
 
-                //  set eventId
+                //  The JSON from the SeatGeek API will return the eventID for the
+                //  event that day for the nittany lions and the ticket website URL
+                //  will be listed for that event.
                 this.setState({
                     eventId: jsonString.events[0].id,
                     ticketWebsiteUrl: jsonString.events[0].url,
@@ -106,6 +108,7 @@ export default class TicketSearchScreen extends React.Component {
     //
     searchForTickets(linkToTicketsWebsiteUrl) {
 
+        //  Example of what url should look like:
         //linkToTicketsWebsiteUrl = 'https://seatgeek.com/ohio-state-buckeyes-at-penn-state-nittany-lions-football-tickets/ncaa-football/2018-09-29-12-pm/4111014';
 
         // Set the Component's Button state to 'Done'
@@ -136,26 +139,21 @@ export default class TicketSearchScreen extends React.Component {
 
 
 
-//    componentDidMount () {
-//    }
+    componentDidMount () {
+
+        //  Fetch the respective Event Id for the desired event
+        this.getEventId();
+    }
 
 
     componentWillMount () {
 
-
         // Set the Component's state
         this.setState({
             eventStartDateString: this.props.navigation.state.params.startDateString,
-            eventEndDateString:   this.props.navigation.state.params.endDateString,
-            location: this.props.navigation.state.params.location,
             description: this.props.navigation.state.params.description,
-            notes: this.props.navigation.state.params.notes,
-            eventState: this.props.navigation.state.params.eventState,
         });
 
-
-        //  Fetch the respective Event Id for the desired event
-        this.getEventId();
 
     }   // end componentWillMount()
 
@@ -168,10 +166,7 @@ export default class TicketSearchScreen extends React.Component {
                 <Text style={styles.header}> Search For Game Tickets </Text>
                 <View style={styles.addeventview}>
                     <Text style={styles.eventdescription}>{this.state.description}</Text>
-                    <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
-                    <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
-                    <Text style={styles.eventdetails}>End:    {this.state.eventEndDateString}</Text>
-                    <Text style={styles.eventdetails}>{this.state.notes}</Text>
+                    <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>
                 </View>
                 <View style={styles.button}>
                     <Button title={this.state.buttonTitle}
