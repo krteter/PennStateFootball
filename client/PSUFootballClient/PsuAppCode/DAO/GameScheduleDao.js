@@ -2,7 +2,7 @@ import {SQLite} from "expo";
 import Game from "../Domain/Game";
 
 //let SQLite = require('react-native-sqlite-storage');
-let db = SQLite.openDatabase('Game.db');
+let psuFootballApp_db = SQLite.openDatabase('Game.db');
 
 export default class GameScheduleDao {
 
@@ -10,7 +10,7 @@ export default class GameScheduleDao {
   static initGameScheduleDB() {
     console.debug('GameScheduleDao.initScheduleTbl()');
     // This will ensure the DB exists on first load
-    db.transaction(tx => {
+      psuFootballApp_db.transaction(tx => {
       tx.executeSql(
         // Note: Opposing team id that is scraped will be used as the key value in the record
         'CREATE TABLE IF NOT EXISTS schedule (id INTEGER PRIMARY KEY NOT NULL UNIQUE, gamedate TEXT, homeaway TEXT, opponent TEXT, href TEXT, imgsrc TEXT, result TEXT, score TEXT);'
@@ -20,12 +20,12 @@ export default class GameScheduleDao {
     ////////////////////////////////
     // Do not need this stuff below
     ////////////////////////////////
-    // db.transaction(tx => {
+    // psuFootballApp_db.transaction(tx => {
     //     tx.executeSql(
     //         'DELETE FROM roster;'
     //     );
     // });
-    // db.transaction(tx => {
+    // psuFootballApp_db.transaction(tx => {
     //     tx.executeSql(
     //         'DROP TABLE roster;'
     //     );
@@ -43,7 +43,7 @@ export default class GameScheduleDao {
     // let players = [player, player2];
     // players.forEach(player =>
     //   {
-    //     db.transaction(tx => {
+    //     psuFootballApp_db.transaction(tx => {
     //       tx.executeSql(
     //         'INSERT OR IGNORE INTO roster(id, name, position, description) VALUES (?, ?, ?, ?)',
     //         [player.id, player.name, player.position, player.description]
@@ -61,7 +61,7 @@ export default class GameScheduleDao {
   // SQL Insert
   static addSchedule(rows) {
     console.debug('GameScheduleDao.addSchedule()');
-    db.transaction(tx => {
+      psuFootballApp_db.transaction(tx => {
       rows.forEach(game => {
         tx.executeSql(
           'INSERT INTO schedule (id, gamedate, homeaway, opponent, href, imgsrc, result, score) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -75,7 +75,7 @@ export default class GameScheduleDao {
   // SQL Select
   static getSchedule(setResultsFunction) {
     console.debug('GameScheduleDao.getSchedule()');
-    db.transaction(tx => {
+      psuFootballApp_db.transaction(tx => {
       tx.executeSql('SELECT * FROM schedule', [], (_, {rows: {_array} }) => {
         setResultsFunction(_array)
       });
