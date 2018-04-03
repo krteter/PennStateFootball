@@ -6,17 +6,17 @@
 
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
+
+import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
-import Roster from "./PsuAppCode/CustomComponents/Roster";
-import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
 import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
+import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
 
 
 //
@@ -40,12 +40,6 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterScreen,
         },
-        DBTest: {
-            screen: Roster,
-        },
-        DBRosterTest: {
-            screen: TeamRoster,
-        },
         TimerExample: {
             screen: TimerExampleScreen,
         },
@@ -63,6 +57,9 @@ const RootStack = StackNavigator(
         },
         CalendarEvent: {
             screen: AddCalendarEventScreen,
+        },
+        TicketSearch: {
+            screen: TicketSearchScreen,
         },
     },
     {
