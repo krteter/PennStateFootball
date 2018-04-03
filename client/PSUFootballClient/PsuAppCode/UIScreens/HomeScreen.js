@@ -99,7 +99,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
                         style={styles.scheduleStyle}
                         source={require('./images/psuSchedule.png')}
                     />
-                    <TwitterStream/>
+                    <TwitterStream />
                 </View>
                 <View style={styles.bottomContainer}>
                     <Image
