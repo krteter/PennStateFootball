@@ -21,7 +21,7 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
             buttonDisabled: false,
             calendarAuth: '',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            eventStopDateString: '',    // Format:  2018-05-06T20:00:00.000Z  (greater than start time!!)
+            eventEndDateString: '',    // Format:  2018-05-06T20:00:00.000Z  (greater than start time!!)
             location: '',
             notes: '',
             description: '',
@@ -48,13 +48,11 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
             //  Add the respective event to our device's
             //  Calendar App
             //      reference:   https://github.com/wmcmahan/react-native-calendar-events/blob/master/README.md#saveevent
-            RNCalendarEvents.saveEvent(this.state.description, {
-
-                startDate: this.state.eventStartDateString,
-                endDate: this.state.eventEndDateString,
-                location: this.state.location,
-                description: this.state.description,
-                notes: this.state.notes,
+            RNCalendarEvents.saveEvent(this.state.description, {  startDate: this.state.eventStartDateString,
+                                                                  endDate: this.state.eventEndDateString,
+                                                                  location: this.state.location,
+                                                                  description: this.state.description,
+                                                                  notes: this.state.notes,
             });
 
             // Set the Component's Button state to 'Done'

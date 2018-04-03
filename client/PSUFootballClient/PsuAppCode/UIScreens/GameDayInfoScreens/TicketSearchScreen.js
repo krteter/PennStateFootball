@@ -18,7 +18,7 @@ export default class TicketSearchScreen extends React.Component {
             buttonTitle: 'Search For Tickets',
             buttonDisabled: false,
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            eventStopDateString: '',   // Format:  2018-05-06T18:00:00.000Z
+            eventEndDateString: '',     // Format:  2018-05-06T18:00:00.000Z
             location: '',
             description: '',
             notes: '',
