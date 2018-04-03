@@ -1,121 +1,159 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
+import {Button, Header, Icon, Input, Item, Text, View} from 'native-base';
+import {Image, StyleSheet, WebView} from 'react-native';
+import Expo from "expo";
 
-import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
+
 import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
+import TeamRosterDao from "../DAO/TeamRosterDao";
+import MenuFab from "../CustomComponents/MenuFab";
+import TwitterStream from "./TwitterFeedScreen/TwitterStream";
+import AbstractNavigableScreen from "./AbstractNavigableScreen";
 
-export default class HomeScreen extends React.Component {
-    constructor(){
-        super();
+
+
+/*
+
+- Eventually we need to move the database here for the whole app
+  and each table for schedule, teamplayers, etc should be created
+  and used from this single database
+- Sandwich this in the HomeScreen or App.js class as global so
+  all can access it.-  KS 4/2/18
+
+import {SQLite} from "expo";
+
+//  Open the PSU Football App Database locally on the device
+let psuFootballApp_db = SQLite.openDatabase('PsuFootballApp.db');
+ */
+
+
+
+
+
+
+export default class HomeScreen extends AbstractNavigableScreen {
+    constructor(props) {
+        super(props);
         this.state = {
-            showMsg: false
+            loading: true,
+            showMsg: false,
+            teamplayers: {}
         };
+        this.resultsFunction = this.resultsFunction.bind(this);
+        this.navigate = this.navigate.bind(this);
     }
 
-    render() {
-        // Scrape the player roster data from an
-        // external web page and load it into our database.
-        scrapeTeamRosterData();
+
+    resultsFunction(rows) {
+        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
+            this.setState({
+                teamplayers: rows
+            });
+        }
+    }
+
+    navigate(location) {
+        this.props.navigation.navigate(location);
+    }
+
+    async componentWillMount() {
+
+        //  Scrape the player roster data from an
+        //  external web page and load it into our database.
+        let that = this;
+        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
 
         // Scrape game schedule data
         scrapeGameScheduleData();
 
-        let backgroundImg = '../../Images/psuFootballPlayer.png';
+        // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
+        await Expo.Font.loadAsync({
+            'Roboto': require('native-base/Fonts/Roboto.ttf'),
+            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+        });
+
+        this.setState({loading: false});
+    }
+
+    render() {
+        // Checks to see if font loading is complete before render.
+        if (this.state.loading) {
+            return <Expo.AppLoading/>;
+        }
+        let sourceESPN = 'https://www.espn.com/college-football/game?gameId=400953407';
+        // Placeholer for the schedule. Can be modified to update automatically. Does not currently fit in the view.
+        const webapp = require('./WebContent/index3.html');
         return (
-                <View style={styles.container}>
-                    <ImageBackground source={{ uri: backgroundImg}}
-                       resizeMode='cover'
-                       style={styles.backdrop}>
-                    <Text
-                        style={styles.header}
-                    >
-                        Main Menu
-                    </Text>
-                    <View style={styles.button}>
-                        <Button
-                            title="Twitter Feed"
-                            onPress={() => this.props.navigation.navigate('Twitter')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="API call"
-                            onPress={() => this.props.navigation.navigate('APIcall')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Display Roster Webpage"
-                            onPress={() => this.props.navigation.navigate('RosterWeb')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="DB Test"
-                            onPress={() => this.props.navigation.navigate('DBTest')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="DB RosterTest"
-                            onPress={() => this.props.navigation.navigate('DBRosterTest')}
-                        />
-                    </View>
-                    {/* <View style={styles.button}>
-                        <Button
-                            title="DB GameScheduleTest"
-                            onPress={() => this.props.navigation.navigate('DBGameScheduleTest')}
-                        />
-                    </View> */}
-                    <View style={styles.button}>
-                        <Button
-                            title="TimerExampleScreen"
-                            onPress={() => this.props.navigation.navigate('TimerExample')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Team Roster List"
-                            onPress={() => this.props.navigation.navigate('AlphabetRosterList')}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Player Page"
-                            onPress={() => this.props.navigation.navigate('PlayerData')}
-                        />
-                    </View>
-                </ImageBackground>
+            <View style={styles.topContainer}>
+                <View style={styles.bannerContainer}>
+                    <Header searchBar rounded>
+                        <Item>
+                            <Icon name="ios-search"/>
+                            <Input placeholder="Search"/>
+                            <Icon name="ios-people"/>
+                        </Item>
+                        <Button transparent>
+                            <Text>Search</Text>
+                        </Button>
+                    </Header>
+                    <WebView
+                        source={{uri: sourceESPN}}
+                    />
+                </View>
+                <View style={styles.middleContainer}>
+                    <Image
+                        style={styles.scheduleStyle}
+                        source={require('./images/psuSchedule.png')}
+                    />
+                    <TwitterStream />
+                </View>
+                <View style={styles.bottomContainer}>
+                    <Image
+                        style={styles.recruitingStyle}
+                        source={require('./images/psuRecruiting.png')}/>
+                    <MenuFab navigate={this.navigate}/>
+                </View>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-        backgroundColor: '#fff',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        height: '100%',
-    },
-    header: {
-        alignSelf: 'center',
-        marginTop: 50,
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'darkgrey',
-    },
-    button: {
-        alignSelf: 'center',
-        marginVertical: 5,
-        minWidth: 200,
-        maxWidth: '95%',
-    },
-    backdrop: {
+var styles = StyleSheet.create({
+    topContainer: {
+        marginTop: 24,
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'column'
+    },
+    bannerContainer: {
+        flex: .31,
+        flexDirection: 'column'
+    },
+    middleContainer: {
+        flex: .63,
+        flexDirection: 'row'
+    },
+    bottomContainer: {
+        flex: .16,
+        flexDirection: 'row',
+    },
+    recruitingStyle: {
+        flex: .77,
         width: null,
+        resizeMode: 'stretch',
         height: null,
+        flexDirection: 'row'
+    },
+    espnBanner: {
+        flex: .75,
+        backgroundColor: '#000'
+    },
+    scheduleStyle: {
+        flex: .5,
+        resizeMode: 'cover',
+        backgroundColor: '#FF3366'
+    },
+    twitterStyle: {
+        flex: 1,
+        backgroundColor: '#FF3366'
     },
 });

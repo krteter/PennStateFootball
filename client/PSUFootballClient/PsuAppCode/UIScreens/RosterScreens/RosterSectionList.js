@@ -1,145 +1,206 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, SectionList, Text, Platform, Alert } from 'react-native';
+import React from 'react';
+import {Alert, Platform, SectionList, StyleSheet, Text, View} from 'react-native';
+import TeamRosterDao from "../../DAO/TeamRosterDao";
+import MenuFab from "../../CustomComponents/MenuFab";
+import AbstractNavigableScreen from "../AbstractNavigableScreen";
+import Expo from "expo";
 
 
+//
+//  Class for a UI to display an alphabetical  list of all team
+//  player's loaded from the team roster database table (Player_Table).
+//
+export default class RosterSectionList extends AbstractNavigableScreen {
 
-
-
-export default class RosterSectionList extends Component<{}> {
 
     constructor(props) {
+
         super(props);
+
+        this.state = {
+            teamplayers: {},
+            selectedPlayer: '',
+            sections: null
+        };
+
+        this.addContentsToListArrays = this.addContentsToListArrays.bind(this);
+        this.getSinglePlayerResultsFunction = this.getSinglePlayerResultsFunction.bind(this);
+
+
+    }  // end constructor
+
+
+    componentDidMount() {
+
+        //  Do the same to experiment if the rows wont come back
+        //  empty here when this is called.....???????
+        //  Add the players to our scroll list from our database
+        //  table - Player_Table
+        let that = this;
+        console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
+        TeamRosterDao.getAllPlayers(that.addContentsToListArrays);
+
     }
 
-    //componentWillMount() {
-//
-       // AlertMe('sSmittyAlert');
-        //Upload();
-//
-    //}
-
-    //addContentsToListArrays() {
     //
-    //    import names_a.push('Ken');
-    //    this.names_a.push('Kenny');
-    //    this.names_a.push('Smitty');
-    //}
+    //  Method to add player names gathered from our
+    //  database's Plater_Table to our UI list of roster
+    //  players
+    addContentsToListArrays(rows) {
+
+        console.debug('RosterSectionList.addContentsToListArrays()....    ');
+        //  I need to figure out why or how I can get this to
+        //  have row not equal to undefined... always is... AHHHHHH!
+        if (rows !== undefined) {       //  rows is always undefined!  KS  3/25
+            console.debug('RosterSectionList.addContentsToListArrays()....    rows is defined');
+            this.setState({
+                teamplayers: rows
+            });
+
+            //  For now push all players into the "G" heading of the
+            //  UI list - We can divide them up into their "letter" categories
+            //  later after we are successfully pulling all of them out
+            //  of the database.  For now just clump together in 'G'......
+            let name_list = [];
+            this.state.teamplayers.forEach(player => {
+                    let temp_name = player.name;
+                    console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
+                    name_list.push(temp_name);
+                }
+            );
+
+            let namesListByLetter = [];
+
+            class nameListRow {
+                constructor(_letter){
+                    this.title = _letter;
+                    this.data = [];
+                }
+            }
+
+            name_list.forEach(name => {
+                let spaceIndex = name.indexOf(" ");
+                let lastFirstLetter = name.charAt(spaceIndex + 2);
+                console.log(lastFirstLetter);
+                let thisLetterRow = namesListByLetter.find(o => o.title === lastFirstLetter);
+                if(thisLetterRow === undefined) {
+                    let newRow = new nameListRow(lastFirstLetter);
+                    namesListByLetter.push(newRow);
+                    thisLetterRow = newRow;
+                }
+                thisLetterRow.data.push(name);
+
+            });
+            console.log(namesListByLetter);
+
+            this.setState({
+                sections: namesListByLetter
+            });
+
+        } else {
+
+            //  Our return is empty for getting all the players
+            //  from the database... so just put a couple of made up
+            //  names in the "J"s to show we are in this part of the
+            //  conditional code
+            let list = [];
+            list.push('Pushing Jimmy');
+            list.push('Pushing Johnny');
+
+            this.setState({
+                names_j: list
+            });
+        }
+
+    }  // end addContentsToListArrays()
 
 
-    GetSectionListItem = (item)=> {
-        Alert.alert(item)
-    }
+    //  Function to pass to the database to be called with the
+    //  respective player returned from the db 'get' player
+    //  sql call.  A 'TeamPlayer' object is the argument
+    getSinglePlayerResultsFunction(dbPulledPlayer) {
+
+        if (dbPulledPlayer !== undefined) {
+
+            console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
+            //Alert.alert(dbPulledPlayer.name);
+
+
+            // set the returned player to our local state instance
+            this.setState({
+                selectedPlayer: dbPulledPlayer.name
+            });
+            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer});
+            //  Navigate to the PlayerBio UI with biography data
+            //  being loaded into its fields.
+            //        navigate()/show()/instantiate() --> PlayerBio( {selectedPlayer} );
+
+
+        } else {
+            Alert.alert('RosterSectionList: Pull player from Database Failed!!');
+        }
+    }  // end getSinglePlayerResultsFunction()
+
+
+    //  Function called when the respective "Player" list item is
+    //  clicked on
+    playerSectionListItemChosen = (requestedPlayer) => {
+
+        //  Get the requested player's data from the database
+        let that = this;
+        console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
+        //requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
+
+        //  We want to use the name to pull that player from our
+        //  database Player_Table and then we inherently have all the
+        //  biography data for him.  Then in the results function, we
+        //  will want to navigate (and populate) the PlayerBio UI with
+        //  the respective data.
+        TeamRosterDao.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
+
+    } // end playerSectionListItemChosen()
 
 
     render() {
-
-
-        //  Pull data from our database to populate
-        //  our roster list here.
-        //  rosterListToUse = myDatabase.getRosterData();
-
-
-        var appleVar = 'Mark Allen';
-
-        let names_a = ['Johnny Appleseed', appleVar, 'Joe Arcangelo'] ;
-        var names_b = ['Damion Barber', 'Ryan Bates', 'Will Blair', 'Corey Bolds', 'Nick Bowers', 'Ellis Brooks',
-                       'Cam Brown', 'DJ Brown', 'Journey Brown', 'Torrence Brown', 'Ryan Buchholz', 'Jabari Butler'] ;
-        var names_c = ['Joe Calcagno', 'Tariq Castro-Fields', 'Max Chizmar', 'Sean Clifford', 'Jake Cooper', 'Mike Curry'] ;
-        var names_d = [''] ;
-        var names_e = [''] ;
-        var names_f = [''] ;
-        var names_g = [''] ;
-        var names_h = [''] ;
-        var names_i = [] ;
-        var names_j = [] ;
-        var names_k = [] ;
-        var names_l = [] ;
-        var names_m = ['Phil Mickelson'] ;
-        var names_n = ['Danny Noonan'] ;
-        var names_o = [''] ;
-        var names_p = [''] ;
-        var names_q = [''] ;
-        var names_r = [''] ;
-        var names_s = ['Ken Smith', 'Judge Smails'] ;
-        var names_t = [''] ;
-        var names_u = [''] ;
-        var names_v = [''] ;
-        var names_w = [''] ;
-        var names_x = ['Tiger Woods'] ;
-        var names_y = [''] ;
-        var names_z = ['Marley Ziggy'] ;
-
-
-
+        if(this.state.sections === null) {
+            return (<Expo.AppLoading />);
+        }
 
         return (
 
             //  Stole this from a web example... enhance this
             //  for our needs???
-            <View style={{ marginTop : (Platform.OS) == 'ios' ? 20 : 0 }}>
+            <View style={{marginTop: (Platform.OS) == 'ios' ? 20 : 0}}>
 
                 <SectionList
 
-                    sections={[
-                        { title: 'A', data: names_a },
-                        { title: 'B', data: names_b },
-                        { title: 'C', data: names_c },
-                        { title: 'D', data: names_d },
-                        { title: 'E', data: names_e },
-                        { title: 'F', data: names_f },
-                        { title: 'G', data: names_g },
-                        { title: 'H', data: names_h },
-                        { title: 'I', data: names_i },
-                        { title: 'J', data: names_j },
-                        { title: 'K', data: names_k },
-                        { title: 'L', data: names_l },
-                        { title: 'M', data: names_m },
-                        { title: 'N', data: names_n },
-                        { title: 'O', data: names_o },
-                        { title: 'P', data: names_p },
-                        { title: 'Q', data: names_q },
-                        { title: 'R', data: names_r },
-                        { title: 'S', data: names_s },
-                        { title: 'T', data: names_t },
-                        { title: 'U', data: names_u },
-                        { title: 'V', data: names_v },
-                        { title: 'W', data: names_w },
-                        { title: 'X', data: names_x },
-                        { title: 'Y', data: names_y },
-                        { title: 'Z', data: names_z },
-                    ]}
+                    sections = {this.state.sections}
+
+                    renderSectionHeader={({section}) =>
+                        <Text style={styles.SectionHeaderStyle}> {section.title}
+                        </Text>}
 
 
-                    //renderSectionHeader={ ({section}) =>
-                    //    <PlayerText /> }
-
-                    renderSectionHeader={ ({section}) =>
-                        <Text style={styles.SectionHeaderStyle}> { section.title }
-                        </Text> }
-
-
-
-                    renderItem={ ({item}) =>
+                    renderItem={({item}) =>
                         <Text style={styles.SectionListItemStyle}
-                              onPress={this.GetSectionListItem.bind(this, item)}> { item }
-                        </Text> }
-                    keyExtractor={ (item, index) => index }
+                              onPress={this.playerSectionListItemChosen.bind(this, item)}> {item}
+                        </Text>}
+                    keyExtractor={(item, index) => index}
                 />
 
-
-
+                <MenuFab navigate={this.navigate}/>
             </View>
 
         );
     }
-}
+}  // end class RosterSectionList
 
 
 const styles = StyleSheet.create({
 
-    SectionHeaderStyle:{
-        backgroundColor : '#0f2e59',
-        fontSize : 16,
+    SectionHeaderStyle: {
+        backgroundColor: '#0f2e59',
+        fontSize: 16,
         padding: 0,
         color: '#FFFFFF',
         borderColor: '#FFFFFF',
@@ -149,11 +210,11 @@ const styles = StyleSheet.create({
         height: 25,
     },
 
-    SectionListItemStyle:{
-        fontSize : 12,
+    SectionListItemStyle: {
+        fontSize: 12,
         padding: 5,
         color: '#000',
-        backgroundColor : '#F5F5F5'
+        backgroundColor: '#F5F5F5'
     }
 });
 

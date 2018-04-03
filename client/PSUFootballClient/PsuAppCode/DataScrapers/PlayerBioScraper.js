@@ -141,18 +141,16 @@ export const getPlayerBioDataFromURL = (urlOfBioData) => {
             }
 
 
-            console.log(playerName + " " + playerNum + " " + playerPosition  + " " + playerClassYear + "  " + playerHometown + "  " + playerHighSchool + "  " + playerHeightWeight + "  " + playerExperience + "  " + playerMajor);
-
             //  Add the player's bio info to the database
             //  myDatabase.addPlayerBioData(data.... );
             //  Create our Team Roster database to hold our players
             //  and their respective information.
-//            TeamRosterDao.addSinglePlayer(playerName, playerNum, playerPosition, playerImageUrl,
-//                                          playerClassYear, playerHometown, playerHeightWeight,
-//                                          playerHighSchool, playerExperience, playerMajor);
+            TeamRosterDao.addSinglePlayer(playerName, playerNum, playerPosition, playerImageUrl,
+                                          playerClassYear, playerHometown, playerHeightWeight,
+                                          playerHighSchool, playerExperience, playerMajor);
 
-            //  Use for debug breakpoint
-            //let temp = 999;
+
+            //console.log( add to DB:  playerName + " " + playerNum + " " + playerPosition  + "...." );
 
         });
 
