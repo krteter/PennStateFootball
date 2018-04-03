@@ -21,7 +21,7 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
             buttonDisabled: false,
             calendarAuth: '',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
-            eventEndDateString: '',    // Format:  2018-05-06T20:00:00.000Z  (greater than start time!!)
+            duration:  3,               // Duration = 3 hrs (default it!)
             location: '',
             notes: '',
             description: '',
@@ -45,15 +45,28 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
         } else {
 
+            //  Determine the end time from the start time
+            //  (we wont assume rollover of time/day.  Since
+            //  events wont start that late.  (we could make this
+            //  better, but it will do for our purposes
+            let eventStartString = this.state.eventStartDateString;
+            let startTimeHour = eventStartString.substr(11,2);
+            let endTimeHourInt = parseInt(startTimeHour) + this.state.duration;
+            let endTimeHour = endTimeHourInt.toString();
+            let beginning = eventStartString.substr(0,11);
+            let ending = eventStartString.substr(13,eventStartString.length-1);
+            let endDateString = beginning + endTimeHour + ending;
+
+
+
             //  Add the respective event to our device's
             //  Calendar App
             //      reference:   https://github.com/wmcmahan/react-native-calendar-events/blob/master/README.md#saveevent
-            RNCalendarEvents.saveEvent(this.state.description, {  startDate: this.state.eventStartDateString,
-                                                                  endDate: this.state.eventEndDateString,
-                                                                  location: this.state.location,
-                                                                  description: this.state.description,
-                                                                  notes: this.state.notes,
-            });
+            RNCalendarEvents.saveEvent(this.state.description, { startDate: eventStartString,
+                                                                 endDate:   endDateString,
+                                                                 location: this.state.location,
+                                                                 description: this.state.description,
+                                                                 notes: this.state.notes });
 
             // Set the Component's Button state to 'Done'
             this.setState({
@@ -75,7 +88,6 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
         // Set the Component's state
         this.setState({
             eventStartDateString: this.props.navigation.state.params.startDateString,
-            eventEndDateString: this.props.navigation.state.params.endDateString,
             location: this.props.navigation.state.params.location,
             description: this.props.navigation.state.params.description,
             notes: this.props.navigation.state.params.notes,
@@ -118,20 +130,20 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
         return (
             <View style={styles.container}>
 
-                <Text style={styles.header}> Add Event To Calendar </Text>
-                <View style={styles.addeventview}>
-                    <Text style={styles.eventdescription}>{this.state.description}</Text>
-                    <Text style={styles.eventdetails}>Location: {this.state.location}</Text>
-                    <Text style={styles.eventdetails}>Start: {this.state.eventStartDateString}</Text>
-                    <Text style={styles.eventdetails}>End: {this.state.eventEndDateString}</Text>
-                    <Text style={styles.eventdetails}>{this.state.notes}</Text>
-                </View>
-                <View style={styles.button}>
-                    <Button title={this.state.buttonTitle}
-                            disabled={this.state.buttonDisabled}
-                            onPress={() => this.addEventToMyCalendar()}/>
-                </View>
-                <MenuFab navigate={this.navigate}/>
+                    <Text style={styles.header}> Add Event To Calendar </Text>
+                    <View style={styles.addeventview}>
+                        <Text style={styles.eventdescription}>{this.state.description}</Text>
+                        <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
+                        <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
+                        <Text style={styles.eventdetails}>Duration:   {this.state.duration} hrs</Text>
+                        <Text style={styles.eventdetails}>{this.state.notes}</Text>
+                    </View>
+                    <View style={styles.button}>
+                        <Button title={this.state.buttonTitle}
+                                disabled={this.state.buttonDisabled}
+                                onPress={() => this.addEventToMyCalendar()} />
+                    </View>
+                    <MenuFab navigate={this.navigate}/>
             </View>
         );
     }
