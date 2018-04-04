@@ -36,7 +36,7 @@ export default class GameSchedule extends React.Component {
     if (this.state.games === undefined || this.state.games.forEach === undefined || this.state.games.length === 0) {
       return <Text>No Scheduled Games Found</Text>
     } else {
-      let myGameScheduleTable = this.state.games.map((games) => {
+      let myGameScheduleTable = this.state.games.map((game) => {
         return (
           <GameScheduleRow
             id={game.id}

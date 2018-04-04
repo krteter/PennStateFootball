@@ -99,10 +99,11 @@ export default class WeatherScreen extends AbstractNavigableScreen {
         return (
             <View>
                 <ScrollView contentContainerStyle={styles.weathercontainer}>
-                    <Text style={styles.citytext}>University Park, PA - Radar </Text>
+                    <Text style={styles.citytext}>University Park, PA</Text>
+                    <Text style={styles.radartext}>Radar</Text>
 
                     <Image source={{uri: animatedRadarUrl}}
-                           style={{width: 300, height: 300}}/>
+                           style={{width: 300, height: 300, marginTop: 20}}/>
                     <Text style={styles.weatherheader}>6 Hour Weather Forecast </Text>
                     <Text
                         style={styles.weatherdate}>  {this.state.hourly_forecast[0].hour_time}: {this.state.hourly_forecast[0].weekday_name} {this.state.hourly_forecast[0].month_name_abr}-{this.state.hourly_forecast[0].mday}</Text>
@@ -175,16 +176,21 @@ const styles = StyleSheet.create({
     },
     citytext: {
         color: '#000000',
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 20,
-        marginBottom: 20,
+    },
+    radartext: {
+        color: '#000000',
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     weatherheader: {
         marginTop: 40,
         color: '#000000',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
         textAlign: 'left',
