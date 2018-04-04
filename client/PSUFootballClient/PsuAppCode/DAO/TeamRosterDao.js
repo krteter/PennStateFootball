@@ -26,7 +26,7 @@ export default class TeamRosterDao {
     //  roster
     static createTeamRosterDatabase() {
 
-        console.debug('TRDao.createTeamRosterDatabase()');
+        //console.debug('TRDao.createTeamRosterDatabase()');
 
         //  This will ensure the DB exists on first load
         //  -Create our Table with the following player fields:
@@ -46,7 +46,7 @@ export default class TeamRosterDao {
             );
         });
 
-        console.debug('leaving.... createTeamRosterDatabase()');
+        //console.debug('leaving.... createTeamRosterDatabase()');
     };
 
 

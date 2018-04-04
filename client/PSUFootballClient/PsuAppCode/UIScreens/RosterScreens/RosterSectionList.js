@@ -37,7 +37,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         //  Add the players to our scroll list from our database
         //  table - Player_Table
         let that = this;
-        console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
+        //console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
         TeamRosterDao.getAllPlayers(that.addContentsToListArrays);
 
     }
@@ -64,7 +64,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
             let name_list = [];
             this.state.teamplayers.forEach(player => {
                     let temp_name = player.name;
-                    console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
+                    //console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
                     name_list.push(temp_name);
                 }
             );
@@ -97,19 +97,6 @@ export default class RosterSectionList extends AbstractNavigableScreen {
                 sections: namesListByLetter
             });
 
-        } else {
-
-            //  Our return is empty for getting all the players
-            //  from the database... so just put a couple of made up
-            //  names in the "J"s to show we are in this part of the
-            //  conditional code
-            let list = [];
-            list.push('Pushing Jimmy');
-            list.push('Pushing Johnny');
-
-            this.setState({
-                names_j: list
-            });
         }
 
     }  // end addContentsToListArrays()
@@ -123,17 +110,16 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         if (dbPulledPlayer !== undefined) {
 
             console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
-            //Alert.alert(dbPulledPlayer.name);
 
 
             // set the returned player to our local state instance
             this.setState({
                 selectedPlayer: dbPulledPlayer.name
             });
-            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer});
+            
             //  Navigate to the PlayerBio UI with biography data
             //  being loaded into its fields.
-            //        navigate()/show()/instantiate() --> PlayerBio( {selectedPlayer} );
+            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer});
 
 
         } else {

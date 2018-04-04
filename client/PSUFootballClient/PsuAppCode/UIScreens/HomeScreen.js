@@ -3,6 +3,8 @@ import {Button, Header, Icon, Input, Item, Text, View} from 'native-base';
 import {Image, StyleSheet, WebView} from 'react-native';
 import Expo from "expo";
 
+
+import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
 import MenuFab from "../CustomComponents/MenuFab";
 import TwitterStream from "./TwitterFeedScreen/TwitterStream";
@@ -41,6 +43,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
         this.navigate = this.navigate.bind(this);
     }
 
+
     resultsFunction(rows) {
         if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
             this.setState({
@@ -59,6 +62,9 @@ export default class HomeScreen extends AbstractNavigableScreen {
         //  external web page and load it into our database.
         let that = this;
         TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
+
+        // Scrape game schedule data
+        scrapeGameScheduleData();
 
         // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
         await Expo.Font.loadAsync({

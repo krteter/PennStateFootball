@@ -11,12 +11,15 @@ import {StackNavigator} from "react-navigation";
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
+
+import GameSchedule from "./PsuAppCode/CustomComponents/GameSchedule";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
 import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
 import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
+
 
 
 //
@@ -40,6 +43,9 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterScreen,
         },
+//        DBGameScheduleTest: {
+//            screen: GameSchedule,
+//        },
         TimerExample: {
             screen: TimerExampleScreen,
         },
