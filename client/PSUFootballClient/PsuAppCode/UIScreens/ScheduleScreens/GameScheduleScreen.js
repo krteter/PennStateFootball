@@ -1,9 +1,9 @@
 import React from 'react';
-import GameScheduleDao from '../DAO/GameScheduleDao';
-import GameScheduleRow from "./GameScheduleRow";
+import GameScheduleDao from '../../DAO/GameScheduleDao';
+import GameSchedule from '../../UIScreens/ScheduleScreens/GameSchedule';
 import {Text, View} from "react-native";
 
-export default class GameSchedule extends React.Component {
+export default class GameScheduleScreen extends React.Component {
 
   constructor() {
     super();
@@ -36,20 +36,20 @@ export default class GameSchedule extends React.Component {
     if (this.state.games === undefined || this.state.games.forEach === undefined || this.state.games.length === 0) {
       return <Text>No Scheduled Games Found</Text>
     } else {
-      let myGameScheduleTable = this.state.games.map((games) => {
+      let myGameScheduleTable = this.state.games.map((game) => {
         return (
-          <GameScheduleRow
-            id={game.id}
+          <GameSchedule
             key={game.id}
-            gamedate={game.gamedate}
-            homeaway={game.homeaway}
+            id={game.id}
             opponent={game.opponent}
             href={game.href}
             imgsrc={game.imgsrc}
+            gamedate={game.gamedate}
+            homeaway={game.homeaway}
             result={game.result}
             score={game.score}
           />
-        )
+        ) // End return()
       });
       return (
         <View>
