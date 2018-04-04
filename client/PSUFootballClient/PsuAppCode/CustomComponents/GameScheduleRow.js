@@ -21,7 +21,7 @@ export default class GameScheduleRow extends React.Component{
     this.setState({
       OpponentId: this.props.id,
       GameDate: this.props.gamedate,
-      HomeAway: this.props.homeaway
+      HomeAway: this.props.homeaway,
       Opponent: this.props.opponent,
       OpponentHref: this.props.href,
       OpponentImgSrc: this.props.imgsrc,
