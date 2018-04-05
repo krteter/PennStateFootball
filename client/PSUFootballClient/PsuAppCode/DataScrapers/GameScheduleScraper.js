@@ -95,15 +95,20 @@ export const scrapeGameScheduleData = () => {
       /////////////////////////////////////////////////////////////
 
       // Store game information in game object
-      let game = new Game(oppid, gamedate, homeaway, opponent, opphref, oppsrc, result, score);
-      // console.debug('OpponentID: ' + game.getid());
+      let game = new Game(gamedate, homeaway, opponent, opphref, oppsrc, result, score);
 
       // Store each game object into parsedResults array
       parsedResults.push(game);
     }); // End loop
 
+    // Clear DB
+    GameScheduleDao.clearGameScheduleDB();
+
     // Store game schedule array into the DB
     GameScheduleDao.addSchedule(parsedResults);
+
+    // SQL Select TEST - Check to see if scraped data is getting into DB
+    // GameScheduleDao.testSelect();
 
     console.debug('leaving... scrapeGameScheduleData()');
   }); // End function()

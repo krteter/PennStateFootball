@@ -12,7 +12,7 @@ import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 
-import GameSchedule from "./PsuAppCode/CustomComponents/GameSchedule";
+import GameScheduleScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
 import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
@@ -43,9 +43,9 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterScreen,
         },
-//        DBGameScheduleTest: {
-//            screen: GameSchedule,
-//        },
+       GameSchedule: {
+           screen: GameScheduleScreen,
+       },
         TimerExample: {
             screen: TimerExampleScreen,
         },
