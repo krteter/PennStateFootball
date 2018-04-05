@@ -120,7 +120,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
 
 var styles = StyleSheet.create({
     topContainer: {
-        marginTop: 24,
+        //marginTop: 24,
         flex: 1,
         flexDirection: 'column'
     },
