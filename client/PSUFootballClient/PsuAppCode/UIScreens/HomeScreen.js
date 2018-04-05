@@ -3,7 +3,9 @@ import {Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
+import GameScheduleDao from "../DAO/GameScheduleDao";
 
+import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
 
 
 
@@ -38,6 +40,10 @@ export default class HomeScreen extends React.Component {
         //  doesnt work too.  KS 3/23
         let that = this;
         //TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
+
+        // Scrape game schedule data
+        scrapeGameScheduleData();
+
 
     }
 
@@ -75,6 +81,18 @@ export default class HomeScreen extends React.Component {
                         <Button
                             title="TimerExampleScreen"
                             onPress={() => this.props.navigation.navigate('TimerExample')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Game Schedule"
+                            onPress={() => this.props.navigation.navigate('GameSchedule')}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Game Table"
+                            onPress={() => this.props.navigation.navigate('GameTable')}
                         />
                     </View>
                     <View style={styles.button}>
@@ -127,7 +145,7 @@ const styles = StyleSheet.create({
     },
     header: {
         alignSelf: 'center',
-        marginTop: 50,
+        marginTop: 10,
         fontSize: 24,
         fontWeight: 'bold',
         color: 'darkgrey',
