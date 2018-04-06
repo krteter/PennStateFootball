@@ -17,9 +17,9 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
         super(props);
 
         this.state = {
-            buttonTitle: '+  Add Event',
+            buttonTitle: 'Add Event',
             buttonDisabled: false,
-            calendarAuth: '',
+            calendarAuth: 'authorized',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
             duration:  3,               // Duration = 3 hrs (default it!)
             location: '',
@@ -36,6 +36,9 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
     //  - using 'react-native-calendar-events' package
     //
     addEventToMyCalendar() {
+
+        //let ken = 'authorized';
+
 
         //  Check if we are authorized to add
         //  an event to our Calendar App
@@ -94,6 +97,10 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
         });
 
 
+/*   this works for android simulator, but giving me
+     problems on my OS phone
+
+
         // Let's get access before doing anything
         RNCalendarEvents.authorizationStatus()
             .then(status => {
@@ -122,6 +129,10 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
             .catch(error => console.warn('Auth Error: ', error));
 
+
+             */
+
+
     }   // end componentWillMount()
 
 
@@ -129,21 +140,21 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
         return (
             <View style={styles.container}>
-
-                    <Text style={styles.header}> Add Event To Calendar </Text>
-                    <View style={styles.addeventview}>
-                        <Text style={styles.eventdescription}>{this.state.description}</Text>
-                        <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
-                        <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
-                        <Text style={styles.eventdetails}>Duration:   {this.state.duration} hrs</Text>
-                        <Text style={styles.eventdetails}>{this.state.notes}</Text>
-                    </View>
-                    <View style={styles.button}>
-                        <Button title={this.state.buttonTitle}
-                                disabled={this.state.buttonDisabled}
-                                onPress={() => this.addEventToMyCalendar()} />
-                    </View>
-                    <MenuFab navigate={this.navigate}/>
+                <Text style={styles.header}> Add Event To Calendar </Text>
+                <View style={styles.addeventview}>
+                    <Text style={styles.eventdescription}>{this.state.description}</Text>
+                    <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
+                    <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
+                    <Text style={styles.eventdetails}>Duration:   {this.state.duration} hrs</Text>
+                    <Text style={styles.eventdetails}>{this.state.notes}</Text>
+                </View>
+                <View>
+                    <Button style={styles.button}
+                            title={this.state.buttonTitle}
+                            disabled={this.state.buttonDisabled}
+                            onPress={() => this.addEventToMyCalendar()} />
+                </View>
+                <MenuFab navigate={this.navigate}/>
             </View>
         );
     }
@@ -164,20 +175,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 50,
         marginBottom: 40,
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: 'bold',
         color: '#000000',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: 'bold',
         color: '#000000',
     },
     eventdetails: {
         alignSelf: 'center',
-        fontSize: 15,
+        fontSize: 11,
         fontWeight: 'bold',
         color: '#000000',
     },
@@ -191,6 +202,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         minWidth: 200,
         maxWidth: '50%',
+        backgroundColor: '#e64c55',
     },
     backdrop: {
         flex: 1,

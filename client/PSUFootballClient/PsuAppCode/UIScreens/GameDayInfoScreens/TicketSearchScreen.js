@@ -1,6 +1,7 @@
 import React from 'react';
 import {Alert, Button, Linking, StyleSheet, Text, View} from 'react-native';
-
+import AbstractNavigableScreen from "../AbstractNavigableScreen";
+import MenuFab from "../../CustomComponents/MenuFab";
 
 
 
@@ -8,14 +9,14 @@ import {Alert, Button, Linking, StyleSheet, Text, View} from 'react-native';
 //  Class for a UI to display adding an
 //  event to our device's Calendar App
 //
-export default class TicketSearchScreen extends React.Component {
+export default class TicketSearchScreen extends AbstractNavigableScreen {
 
     constructor(props){
 
         super(props);
 
         this.state = {
-            buttonTitle: 'Search For Tickets',
+            buttonTitle: 'Search',
             buttonDisabled: false,
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
             description: '',
@@ -163,18 +164,19 @@ export default class TicketSearchScreen extends React.Component {
 
         return (
             <View style={styles.container}>
-
-                <Text style={styles.header}> Search For Game Tickets </Text>
+                <Text style={styles.header}> Search For </Text>
+                <Text style={styles.header}> Game Tickets </Text>
                 <View style={styles.addeventview}>
                     <Text style={styles.eventdescription}>{this.state.description}</Text>
                     <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>
                 </View>
-                <View style={styles.button}>
-                    <Button title={this.state.buttonTitle}
+                <View>
+                    <Button style={styles.button}
+                            title={this.state.buttonTitle}
                             disabled={this.state.buttonDisabled}
                             onPress={() => this.searchForTickets(this.state.ticketWebsiteUrl)} />
                 </View>
-
+                <MenuFab navigate={this.navigate}/>
             </View>
         );
     }
@@ -194,22 +196,22 @@ const styles = StyleSheet.create({
     },
     header: {
         alignSelf: 'center',
-        marginTop: 50,
-        marginBottom: 40,
-        fontSize: 24,
+        //marginTop: 50,
+        //marginBottom: 40,
+        fontSize: 18,
         fontWeight: 'bold',
         color: '#000000',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: 'bold',
         color: '#000000',
     },
     eventdetails: {
         alignSelf: 'center',
-        fontSize: 15,
+        fontSize: 11,
         fontWeight: 'bold',
         color: '#000000',
     },
@@ -223,6 +225,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         minWidth: 200,
         maxWidth: '50%',
+        backgroundColor: '#e64c55',
     },
     backdrop: {
         flex: 1,
