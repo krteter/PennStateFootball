@@ -53,7 +53,7 @@ export default class HomeScreen extends React.Component {
         let backgroundImg = './../../Images/psuFootballPlayer.png';
         return (
             <View style={styles.container}>
-                <ImageBackground source={{ uri: backgroundImg}}
+                <ImageBackground source={require('../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
                     <Text style={styles.header}>
@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
+        alignItems: 'center',
     },
 });

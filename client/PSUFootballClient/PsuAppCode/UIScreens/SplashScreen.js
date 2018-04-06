@@ -21,7 +21,7 @@ export default class SplashScreen extends React.Component {
         //smitty   setTimeout(() => this.props.navigation.navigate('Twitter'), 3000);
         setTimeout(() => this.props.navigation.navigate('Home')
 
-            , 5000);
+            , 2000);
 
         //setTimeout(() => this.props.navigator.navigate({ name: 'HomeScreen' }), 3000);
 
