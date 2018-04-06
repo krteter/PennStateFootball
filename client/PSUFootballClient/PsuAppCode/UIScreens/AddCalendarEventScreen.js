@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Button, StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 import RNCalendarEvents from 'react-native-calendar-events';
 
 
@@ -128,7 +128,9 @@ export default class AddCalendarEventScreen extends React.Component {
 
         return (
             <View style={styles.container}>
-
+                <ImageBackground source={require('../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
                     <Text style={styles.header}> Add Event To Calendar </Text>
                     <View style={styles.addeventview}>
                         <Text style={styles.eventdescription}>{this.state.description}</Text>
@@ -142,7 +144,7 @@ export default class AddCalendarEventScreen extends React.Component {
                                 disabled={this.state.buttonDisabled}
                                 onPress={() => this.addEventToMyCalendar()} />
                     </View>
-
+                </ImageBackground>
             </View>
         );
     }
@@ -155,7 +157,7 @@ export default class AddCalendarEventScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         // alignItems: 'center',
         // justifyContent: 'center',
         height: '100%',
@@ -166,20 +168,20 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     addeventview: {
         alignSelf: 'center',
@@ -195,7 +197,8 @@ const styles = StyleSheet.create({
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
+        alignItems: 'center',
     },
 });

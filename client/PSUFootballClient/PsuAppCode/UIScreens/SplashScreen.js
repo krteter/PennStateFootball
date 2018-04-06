@@ -21,7 +21,7 @@ export default class SplashScreen extends React.Component {
         //smitty   setTimeout(() => this.props.navigation.navigate('Twitter'), 3000);
         setTimeout(() => this.props.navigation.navigate('Home')
 
-            , 4000);
+            , 5000);
 
         //setTimeout(() => this.props.navigator.navigate({ name: 'HomeScreen' }), 3000);
 
@@ -49,7 +49,7 @@ export default class SplashScreen extends React.Component {
         return (
             <TouchableOpacity style={styles.indexContainer}>
                 <Image
-                    source={require('../../Images/psuFootballPlayer.png')}
+                    source={require('../../Images/PSU_splash.png')}
                     style={[
                         styles.base, {
                             resizeMode: 'cover'

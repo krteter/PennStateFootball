@@ -9,12 +9,29 @@ import Game from "../../Domain/Game";
 export default class GameScheduleTableViewScreen extends Component {
 
 
+    //    Website reference for a TABLE
+    //
+    //      https://www.npmjs.com/package/react-native-table-component
+    //
+    //        stole their example with a button and started adding
+    //        some of our stuff to see if it will work...
+
 
     constructor(props) {
         super(props);
         this.state = {
+
+            //   we could maybe lose the header... but for now... it gives a sense of where things line
+            //   up in the rendered table.   If we want the GameSchedule to be a scrolling list of games,
+            //   we could lose the header and if we dont have separators in the table as lines... then
+            //   we could 'fake' out a table to look like a bunch of scrolling "rows" of game info.
+            //   Just a thought.
             tableHead: ['Head', 'Head2', 'Head3', 'Head4'],
 
+            //  Hard coded these database fields in here for now.  Just to see if I could get them
+            //  to show up in the table.   At some point we can pull in from the database and populate
+            //  this tableData array.   But again... babysteps.   that could be a separate task rather
+            //  than the render task below.
             tableData: [
                 ['Sept 1' , '3:00pm', 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80', 'Appalachian St.', 'Home'],
                 ['Sept 8' , '3:00pm', 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80', 'Pitt', 'Away'],
@@ -61,7 +78,8 @@ export default class GameScheduleTableViewScreen extends Component {
 
 
     //  Method called with the Game Schedule
-    //  data returning
+    //  data returning....   TO TRY TO PULL the database info
+    //  into a tableData array structure??????   TBD code below
     dbResultsFunction(rows) {
 
 
@@ -70,7 +88,10 @@ export default class GameScheduleTableViewScreen extends Component {
         for (let i=0; i<12; i++) {
 
 
-
+            // THIS IS PULLED FROM THE SCRAPER CLASS FOR REFERENCE WHEN
+            // CODING UP THIS CLASS.... RATHER THAN SWITCHING BACK AND
+            // FORTH BETWEEN EDITOR FILES... IT CAN BE DELETED.  JOHN
+            //  YOU PROBABLY KNOW THESE BY HEART ALREADY... HAHA.
             ////////////////////////////////////////////////////
             // Output scraped data to console - FOR DEBUGGING //
             ////////////////////////////////////////////////////
@@ -112,20 +133,6 @@ export default class GameScheduleTableViewScreen extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         let tempTable = [];
 
         if (rows !== undefined) {
@@ -154,11 +161,21 @@ export default class GameScheduleTableViewScreen extends Component {
 
         const state = this.state;
         const element = (data, index) => (
+
+            //  So this is the button and if we can have this
+            //  hook up to go to the TicketSearchScreen....  or next cut
+            //  after that... take the guts of the method of calling the
+            //  SeatGeek webpage with the url and marry into this
+            //  class as a method (but that could come real late if
+            //  we could get the first cut of just going to the TicketSearchScreen
+            //  working.
             <TouchableOpacity onPress={() => this._alertIndex(index)}>
                 <View style={styles.btn}>
                     <Text style={styles.btnText}>button</Text>
                 </View>
             </TouchableOpacity>
+
+
         );
 
         return (
@@ -171,6 +188,11 @@ export default class GameScheduleTableViewScreen extends Component {
                                 state.tableData.map((rowData, index) => (
                                     <TableWrapper key={index} style={styles.row}>
                                         {
+                                            //  Im not sure how the 4th column gets a button out of this per say...
+                                            //  but I see the "3" below.. would need to look at this to see about
+                                            //  adding another column for "add to calendar".   Then we can look
+                                            //  at rendering the image of the opponent team as an icon.  We have
+                                            //  the URL.  might need to put it in an 'Image' tag.   Again TBD.
                                             rowData.map((cellData, cellIndex) => (
                                                 <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} textStyle={styles.text}/>
                                             ))

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView, ImageBackground} from 'react-native';
 import GameDayForecast from "../../Domain/GameDayForecast";
 
 
@@ -97,40 +97,46 @@ export default class WeatherScreen extends React.Component {
 
         return (
             <ScrollView contentContainerStyle={styles.weathercontainer}>
-                <Text style={styles.citytext}>University Park, PA - Radar </Text>
+                <ImageBackground source={require('../../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
+                    <Text style={styles.citytext}>University Park, PA - Radar </Text>
 
-                <Image source={{uri: animatedRadarUrl}}
+                    <Image source={{uri: animatedRadarUrl}}
                        style={{width: 300, height: 300}} />
-                <Text style={styles.weatherheader}>6 Hour Weather Forecast </Text>
-                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[0].hour_time}: {this.state.hourly_forecast[0].weekday_name} {this.state.hourly_forecast[0].month_name_abr}-{this.state.hourly_forecast[0].mday}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[0].temp}/F  -  {this.state.hourly_forecast[0].forecast}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[0].wind_direction}-{this.state.hourly_forecast[0].wind_speed}mph</Text>
-                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
+                    <Text style={styles.weatherheader}>6 Hour Weather Forecast</Text>
+                    <Text  style={styles.weatherdate}>{this.state.hourly_forecast[0].hour_time}: {this.state.hourly_forecast[0].weekday_name} {this.state.hourly_forecast[0].month_name_abr}-{this.state.hourly_forecast[0].mday}</Text>
+                    <Text  style={styles.weathertext}>{this.state.hourly_forecast[0].temp}/F  -  {this.state.hourly_forecast[0].forecast}</Text>
+                    <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[0].wind_direction}-{this.state.hourly_forecast[0].wind_speed}mph</Text>
+                    <Text  style={styles.weathertext}>  </Text>
 
-                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[1].hour_time}: {this.state.hourly_forecast[1].weekday_name} {this.state.hourly_forecast[1].month_name_abr}-{this.state.hourly_forecast[1].mday}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[1].temp}/F  -  {this.state.hourly_forecast[1].forecast}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[1].wind_direction}-{this.state.hourly_forecast[1].wind_speed}mph</Text>
-                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
+                    <Text  style={styles.weatherdate}>{this.state.hourly_forecast[1].hour_time}: {this.state.hourly_forecast[1].weekday_name} {this.state.hourly_forecast[1].month_name_abr}-{this.state.hourly_forecast[1].mday}</Text>
+                    <Text  style={styles.weathertext}>{this.state.hourly_forecast[1].temp}/F  -  {this.state.hourly_forecast[1].forecast}</Text>
+                    <Text  style={styles.weathertext}>Wind  -  {this.state.hourly_forecast[1].wind_direction}-{this.state.hourly_forecast[1].wind_speed}mph</Text>
+                    <Text  style={styles.weathertext}>  </Text>
 
-                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[2].hour_time}: {this.state.hourly_forecast[2].weekday_name} {this.state.hourly_forecast[2].month_name_abr}-{this.state.hourly_forecast[2].mday}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[2].temp}/F  -  {this.state.hourly_forecast[2].forecast}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[2].wind_direction}-{this.state.hourly_forecast[2].wind_speed}mph</Text>
-                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
+                    <Text  style={styles.weatherdate}>{this.state.hourly_forecast[2].hour_time}: {this.state.hourly_forecast[2].weekday_name} {this.state.hourly_forecast[2].month_name_abr}-{this.state.hourly_forecast[2].mday}</Text>
+                    <Text  style={styles.weathertext}>{this.state.hourly_forecast[2].temp}/F  -  {this.state.hourly_forecast[2].forecast}</Text>
+                    <Text  style={styles.weathertext}>Wind  -  {this.state.hourly_forecast[2].wind_direction}-{this.state.hourly_forecast[2].wind_speed}mph</Text>
+                    <Text  style={styles.weathertext}>  </Text>
 
-                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[3].hour_time}: {this.state.hourly_forecast[3].weekday_name} {this.state.hourly_forecast[3].month_name_abr}-{this.state.hourly_forecast[3].mday}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[3].temp}/F  -  {this.state.hourly_forecast[3].forecast}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[3].wind_direction}-{this.state.hourly_forecast[3].wind_speed}mph</Text>
-                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
+                    <Text  style={styles.weatherdate}>{this.state.hourly_forecast[3].hour_time}: {this.state.hourly_forecast[3].weekday_name} {this.state.hourly_forecast[3].month_name_abr}-{this.state.hourly_forecast[3].mday}</Text>
+                    <Text  style={styles.weathertext}>{this.state.hourly_forecast[3].temp}/F  -  {this.state.hourly_forecast[3].forecast}</Text>
+                    <Text  style={styles.weathertext}>Wind  -  {this.state.hourly_forecast[3].wind_direction}-{this.state.hourly_forecast[3].wind_speed}mph</Text>
+                    <Text  style={styles.weathertext}>  </Text>
 
-                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[4].hour_time}: {this.state.hourly_forecast[4].weekday_name} {this.state.hourly_forecast[4].month_name_abr}-{this.state.hourly_forecast[4].mday}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[4].temp}/F  -  {this.state.hourly_forecast[4].forecast}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[4].wind_direction}-{this.state.hourly_forecast[4].wind_speed}mph</Text>
-                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
+                    <Text  style={styles.weatherdate}>{this.state.hourly_forecast[4].hour_time}: {this.state.hourly_forecast[4].weekday_name} {this.state.hourly_forecast[4].month_name_abr}-{this.state.hourly_forecast[4].mday}</Text>
+                    <Text  style={styles.weathertext}>{this.state.hourly_forecast[4].temp}/F  -  {this.state.hourly_forecast[4].forecast}</Text>
+                    <Text  style={styles.weathertext}>Wind  -  {this.state.hourly_forecast[4].wind_direction}-{this.state.hourly_forecast[4].wind_speed}mph</Text>
+                    <Text  style={styles.weathertext}>  </Text>
 
-                <Text  style={styles.weatherdate}>  {this.state.hourly_forecast[5].hour_time}: {this.state.hourly_forecast[5].weekday_name} {this.state.hourly_forecast[5].month_name_abr}-{this.state.hourly_forecast[5].mday}</Text>
-                <Text  style={styles.weathertext}>  {this.state.hourly_forecast[5].temp}/F  -  {this.state.hourly_forecast[5].forecast}</Text>
-                <Text  style={styles.weathertext}>  Wind  -  {this.state.hourly_forecast[5].wind_direction}-{this.state.hourly_forecast[5].wind_speed}mph</Text>
-                <Text  style={styles.weathertext}>-- -- -- -- --</Text>
+                    <Text  style={styles.weatherdate}>{this.state.hourly_forecast[5].hour_time}: {this.state.hourly_forecast[5].weekday_name} {this.state.hourly_forecast[5].month_name_abr}-{this.state.hourly_forecast[5].mday}</Text>
+                    <Text  style={styles.weathertext}>{this.state.hourly_forecast[5].temp}/F  -  {this.state.hourly_forecast[5].forecast}</Text>
+                    <Text  style={styles.weathertext}>Wind  -  {this.state.hourly_forecast[5].wind_direction}-{this.state.hourly_forecast[5].wind_speed}mph</Text>
+                    <Text  style={styles.weathertext}>  </Text>
+                    <Text  style={styles.weathertext}>  </Text>
+                    <Text  style={styles.weathertext}>  </Text>
+                </ImageBackground>
             </ScrollView>
         );
     }
@@ -142,7 +148,7 @@ export default class WeatherScreen extends React.Component {
 const styles = StyleSheet.create({
     weathercontainer: {
         //flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         //justifyContent: 'center',
         //height: '100%',
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     citytext: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -163,22 +169,29 @@ const styles = StyleSheet.create({
     },
     weatherheader: {
         marginTop: 40,
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 20,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
         textAlign: 'left',
     },
     weatherdate: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 15,
         fontWeight: 'bold',
         textAlign: 'left',
         marginTop: 10,
 	},
     weathertext: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 13,
         textAlign: 'left',
+    },
+    backdrop: {
+        flex: 1,
+        flexDirection: 'column',
+        width: '100%',
+        height: null,
+        alignItems: 'center',
     },
 });

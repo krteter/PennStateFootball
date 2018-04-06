@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Button, Linking, StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, Linking, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 
 
@@ -162,8 +162,9 @@ export default class TicketSearchScreen extends React.Component {
 
         return (
             <View style={styles.container}>
-
-                <Text style={styles.header}> Search For Game Tickets </Text>
+                <ImageBackground source={require('../../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>                <Text style={styles.header}> Search For Game Tickets </Text>
                 <View style={styles.addeventview}>
                     <Text style={styles.eventdescription}>{this.state.description}</Text>
                     <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>
@@ -173,7 +174,7 @@ export default class TicketSearchScreen extends React.Component {
                             disabled={this.state.buttonDisabled}
                             onPress={() => this.searchForTickets(this.state.ticketWebsiteUrl)} />
                 </View>
-
+                </ImageBackground>
             </View>
         );
     }
@@ -186,7 +187,7 @@ export default class TicketSearchScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         // alignItems: 'center',
         // justifyContent: 'center',
         height: '100%',
@@ -197,20 +198,20 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     addeventview: {
         alignSelf: 'center',
@@ -226,7 +227,8 @@ const styles = StyleSheet.create({
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
+        alignItems: 'center',
     },
 });

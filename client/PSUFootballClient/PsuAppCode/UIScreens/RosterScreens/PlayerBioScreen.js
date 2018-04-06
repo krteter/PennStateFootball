@@ -68,9 +68,12 @@ export default class PlayerBio extends React.Component {
 
     render() {
 
+
         return (
             <View style={styles.playercontainer}>
-
+                <ImageBackground source={require('../../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
                 <Image
                     style={styles.imagestyle}
                     source={{uri: this.state.myPlayer.imageUrl}}
@@ -85,6 +88,7 @@ export default class PlayerBio extends React.Component {
                 <Text style={styles.playertext}>Major:
                     <Text style={styles.majortext}> {this.state.myPlayer.major}</Text>
                 </Text>
+                </ImageBackground>
             </View>
         );
     }
@@ -97,7 +101,7 @@ export default class PlayerBio extends React.Component {
 const styles = StyleSheet.create({
     playercontainer: {
         // flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         //justifyContent: 'center',
         height: '100%',
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     playertext: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
     },
 });
