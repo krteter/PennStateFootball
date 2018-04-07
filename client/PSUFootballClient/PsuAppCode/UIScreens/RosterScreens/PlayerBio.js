@@ -47,23 +47,26 @@ export default class PlayerBio extends AbstractNavigableScreen {
 
         return (
             <View style={styles.playercontainer}>
+                <ImageBackground source={require('./../../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
+                    <Image
+                       style={styles.imagestyle}
+                        source={{uri: player.imageUrl }}
+                    />
 
-                <Image
-                    style={styles.imagestyle}
-                    source={{uri: player.imageUrl }}
-                />
-
-                <Text style={styles.nametext}>#{player.jerseyNum}   {player.name} </Text>
-                <Text style={styles.playertext}>  </Text>
-                <Text style={styles.playertext}>Position: {player.position}</Text>
-                <Text style={styles.playertext}>Class: {player.classyear}</Text>
-                <Text style={styles.playertext}>Height/Weight: {player.heightWeight}</Text>
-                <Text style={styles.playertext}>Hometown: {player.hometown}</Text>
-                <Text style={styles.playertext}>Experience: {player.experience}</Text>
-                <Text style={styles.playertext}>Major:
+                    <Text style={styles.nametext}>#{player.jerseyNum}   {player.name} </Text>
+                    <Text style={styles.playertext}>  </Text>
+                    <Text style={styles.playertext}>Position: {player.position}</Text>
+                    <Text style={styles.playertext}>Class: {player.classyear}</Text>
+                    <Text style={styles.playertext}>Height/Weight: {player.heightWeight}</Text>
+                    <Text style={styles.playertext}>Hometown: {player.hometown}</Text>
+                    <Text style={styles.playertext}>Experience: {player.experience}</Text>
+                    <Text style={styles.playertext}>Major:
                     <Text style={styles.majortext}> {player.major}</Text>
-                </Text>
-                <MenuFab navigate={this.navigate} />
+                    </Text>
+                    <MenuFab navigate={this.navigate} />
+                </ImageBackground>
             </View>
         );
     }
@@ -76,7 +79,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
 const styles = StyleSheet.create({
     playercontainer: {
         // flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#0f0b40',
         alignItems: 'center',
         //justifyContent: 'center',
         height: '100%',
@@ -89,28 +92,28 @@ const styles = StyleSheet.create({
         height: 175,
     },
     nametext: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
     },
     playertext: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 13,
         fontWeight: 'bold',
         textAlign: 'center',
     },
     majortext: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 12,
         fontWeight: 'bold',
         textAlign: 'center',
     },
-
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
+        alignItems: 'center',
     },
 });

@@ -3,16 +3,20 @@ import {Button, Fab, Icon} from 'native-base';
 import {StyleSheet} from "react-native";
 
 export default class MenuFab extends React.Component {
+
     constructor() {
         super();
         this.state = {
             active: false
         }
         this.navigate = this.navigate.bind(this);
+        this.navigateToCalendar = this.navigateToCalendar.bind(this);
     }
+
 
     navigate(location) {
         this.props.navigate(location);
+
 
 //AddCalendarEventScreen
 //        onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
@@ -27,6 +31,26 @@ export default class MenuFab extends React.Component {
 //                                                                       description: 'PSU Nittany Lions vs. OSU Buckeyes'} )}
 
     }
+
+    //
+    //  Method to add event to Calendar
+    //  However this wont be here and will be located
+    //  to the game schedule screen.
+    navigateToCalendar() {
+
+
+        //this.props.navigate('CalendarEvent');
+
+        this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
+                                                         location: 'Beaver Stadium',
+                                                         description: 'PSU Nittany Lions vs. VaTech Hokies',
+                                                         notes: 'White-Out Game',
+                                                         eventState: 'PA'} )
+
+
+    }  // end navigateToCalendar()
+
+
 
     render() {
         return (
@@ -44,14 +68,14 @@ export default class MenuFab extends React.Component {
                         onPress={() => this.navigate('Home')}
                     />
                 </Button>
-                <Button style={{backgroundColor: '#f44242'}}>
+                {/*<Button style={{backgroundColor: '#f44242'}}>
                     <Icon name="american-football"/>
-                </Button>
-                <Button style={{backgroundColor: '#f4a941'}}>
+                </Button>*/}
+                {/*<Button style={{backgroundColor: '#f4a941'}}>
                     <Icon
                         name="search"
                     />
-                </Button>
+                </Button> */}
                 <Button style={{backgroundColor: '#dcf441'}}>
                     <Icon
                         name="people"
@@ -64,19 +88,13 @@ export default class MenuFab extends React.Component {
                         onPress={() => this.navigate('GameDayWeather')}
                     />
                 </Button>
-                {/* <Button style={{backgroundColor: '#41f4eb'}}>
-                    <Icon
-                        name="calendar"
-                        onPress={() => this.navigate('CalendarEvent')}
-                    />
-                </Button> */}
-                <Button style={{backgroundColor: '#41f4eb'}}>
+                <Button style={{backgroundColor: '#7a0f69'}}>
                     <Icon
                       name="calendar"
                       onPress={() => this.navigate('GameSchedule')}
                     />
                 </Button>
-                <Button disabled style={{backgroundColor: '#4155f4'}}>
+                <Button disabled style={{backgroundColor: '#26a6f4'}}>
                     <Icon
                         name="egg"
                         onPress={() => this.navigate('Twitter')}
