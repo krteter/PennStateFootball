@@ -13,12 +13,14 @@ import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectio
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 
 import GameScheduleScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleScreen";
-import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
-import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
+import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
 import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
+import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleTableViewScreen";
+import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
+
 
 import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
 
@@ -38,6 +40,9 @@ export default class App extends React.Component {
 
 const RootStack = StackNavigator(
     {
+        Splash: {
+            screen: SplashScreen,
+        },
         Home: {
             screen: HomeScreen,
         },
@@ -45,7 +50,8 @@ const RootStack = StackNavigator(
             screen: TwitterScreen,
         },
        GameSchedule: {
-           screen: GameScheduleScreen,
+//           screen: GameScheduleScreen,
+           screen: GameScheduleTableViewScreen,
        },
         TimerExample: {
             screen: TimerExampleScreen,
@@ -56,9 +62,6 @@ const RootStack = StackNavigator(
         PlayerData: {
             screen: PlayerBio,
         },
-        PlayerData2: {
-            screen: PlayerBio2,
-        },
         GameDayWeather: {
             screen: WeatherScreen,
         },
@@ -68,9 +71,12 @@ const RootStack = StackNavigator(
         TicketSearch: {
             screen: TicketSearchScreen,
         },
+        GameTable: {
+            screen: GameScheduleTableViewScreen,
+        },
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Splash',
         navigationOptions: {
             title: 'PSU Football',
         }

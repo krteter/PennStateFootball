@@ -1,6 +1,6 @@
 import React from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
-import {Button} from 'native-base';
+import {Alert, Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
+//import {Button} from 'native-base';
 import RNCalendarEvents from 'react-native-calendar-events';
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
 import MenuFab from "../CustomComponents/MenuFab";
@@ -17,9 +17,9 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
         super(props);
 
         this.state = {
-            buttonTitle: '+  Add Event',
+            buttonTitle: 'Add Event',
             buttonDisabled: false,
-            calendarAuth: '',
+            calendarAuth: 'authorized',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
             duration:  3,               // Duration = 3 hrs (default it!)
             location: '',
@@ -36,6 +36,9 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
     //  - using 'react-native-calendar-events' package
     //
     addEventToMyCalendar() {
+
+        //let ken = 'authorized';
+
 
         //  Check if we are authorized to add
         //  an event to our Calendar App
@@ -85,6 +88,7 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
     componentWillMount() {
 
+
         // Set the Component's state
         this.setState({
             eventStartDateString: this.props.navigation.state.params.startDateString,
@@ -92,6 +96,10 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
             description: this.props.navigation.state.params.description,
             notes: this.props.navigation.state.params.notes,
         });
+
+
+/*   this works for android simulator, but giving me
+     problems on my OS phone
 
 
         // Let's get access before doing anything
@@ -122,6 +130,10 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
             .catch(error => console.warn('Auth Error: ', error));
 
+
+             */
+
+
     }   // end componentWillMount()
 
 
@@ -129,8 +141,16 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
         return (
             <View style={styles.container}>
+                <ImageBackground source={require('../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}>Add Event</Text>
+                    <Text style={styles.header}>To Calendar</Text>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
 
-                    <Text style={styles.header}> Add Event To Calendar </Text>
                     <View style={styles.addeventview}>
                         <Text style={styles.eventdescription}>{this.state.description}</Text>
                         <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
@@ -144,6 +164,7 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
                                 onPress={() => this.addEventToMyCalendar()} />
                     </View>
                     <MenuFab navigate={this.navigate}/>
+                </ImageBackground>
             </View>
         );
     }
@@ -152,34 +173,35 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 }  // end AddCalendarEventScreen
 
 
+
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#0f0b64',
         // alignItems: 'center',
         // justifyContent: 'center',
         height: '100%',
     },
     header: {
         alignSelf: 'center',
-        marginTop: 50,
-        marginBottom: 40,
-        fontSize: 24,
+        //marginTop: 50,
+        //marginBottom: 40,
+        fontSize: 20,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
-        fontSize: 15,
+        fontSize: 11,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     addeventview: {
         alignSelf: 'center',
@@ -195,7 +217,8 @@ const styles = StyleSheet.create({
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
+        alignItems: 'center',
     },
 });
