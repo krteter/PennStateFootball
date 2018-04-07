@@ -1,7 +1,6 @@
 import React from 'react';
-import {Alert, Button, Linking, StyleSheet, Text, View} from 'react-native';
-import AbstractNavigableScreen from "../AbstractNavigableScreen";
-import MenuFab from "../../CustomComponents/MenuFab";
+import {Alert, Button, Linking, StyleSheet, Text, View, ImageBackground} from 'react-native';
+
 
 
 
@@ -164,19 +163,23 @@ export default class TicketSearchScreen extends AbstractNavigableScreen {
 
         return (
             <View style={styles.container}>
-                <Text style={styles.header}> Search For </Text>
-                <Text style={styles.header}> Game Tickets </Text>
-                <View style={styles.addeventview}>
-                    <Text style={styles.eventdescription}>{this.state.description}</Text>
-                    <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>
-                </View>
-                <View>
-                    <Button style={styles.button}
-                            title={this.state.buttonTitle}
-                            disabled={this.state.buttonDisabled}
-                            onPress={() => this.searchForTickets(this.state.ticketWebsiteUrl)} />
-                </View>
-                <MenuFab navigate={this.navigate}/>
+                <ImageBackground source={require('../../../Images/FieldBackground.png')}
+                                 resizeMode='cover'
+                                 style={styles.backdrop}>
+                    <Text style={styles.header}> Search For </Text>
+                    <Text style={styles.header}> Game Tickets </Text>
+                    <View style={styles.addeventview}>
+                        <Text style={styles.eventdescription}>{this.state.description}</Text>
+                        <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>
+                    </View>
+                    <View>
+                        <Button style={styles.button}
+                                title={this.state.buttonTitle}
+                                disabled={this.state.buttonDisabled}
+                                onPress={() => this.searchForTickets(this.state.ticketWebsiteUrl)} />
+                    </View>
+                    <MenuFab navigate={this.navigate}/>
+                </ImageBackground>
             </View>
         );
     }
@@ -189,7 +192,7 @@ export default class TicketSearchScreen extends AbstractNavigableScreen {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         // alignItems: 'center',
         // justifyContent: 'center',
         height: '100%',
@@ -200,20 +203,20 @@ const styles = StyleSheet.create({
         //marginBottom: 40,
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
         fontSize: 12,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
         fontSize: 11,
         fontWeight: 'bold',
-        color: '#000000',
+        color: '#ffffff',
     },
     addeventview: {
         alignSelf: 'center',
@@ -225,12 +228,12 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         minWidth: 200,
         maxWidth: '50%',
-        backgroundColor: '#e64c55',
     },
     backdrop: {
         flex: 1,
         flexDirection: 'column',
-        width: null,
+        width: '100%',
         height: null,
+        alignItems: 'center',
     },
 });

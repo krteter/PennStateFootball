@@ -19,6 +19,8 @@ import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScre
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
 import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
+import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleTableViewScreen";
+import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
 
 
 
@@ -37,6 +39,9 @@ export default class App extends React.Component {
 
 const RootStack = StackNavigator(
     {
+        Splash: {
+            screen: SplashScreen,
+        },
         Home: {
             screen: HomeScreen,
         },
@@ -67,9 +72,12 @@ const RootStack = StackNavigator(
         TicketSearch: {
             screen: TicketSearchScreen,
         },
+        GameTable: {
+            screen: GameScheduleTableViewScreen,
+        },
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Splash',
         navigationOptions: {
             title: 'PSU Football',
         }
