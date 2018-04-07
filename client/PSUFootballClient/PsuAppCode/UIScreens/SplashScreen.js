@@ -10,34 +10,10 @@ export default class SplashScreen extends React.Component {
 
     componentWillMount() {
 
-//        if(//something we can check to show splash screen)
-//            {
+        // This works from the top level... but it is a band aid for
+        // a real "slashscreen"
+        setTimeout(() => this.props.navigation.navigate('Home') , 4000);
 
-        //let that = this;
-        //onPress={() => this.props.navigation.navigate('GameSchedule')}
-
-
-        // Works
-        //smitty   setTimeout(() => this.props.navigation.navigate('Twitter'), 3000);
-        setTimeout(() => this.props.navigation.navigate('Home')
-
-            , 2000);
-
-        //setTimeout(() => this.props.navigator.navigate({ name: 'HomeScreen' }), 3000);
-
-        //this.props.navigate()
-/*
-        setTimeout(function () {
-
-            //this.props.navigator.navigate('Twitter');
-
-            that.props.navigator.push({ name: 'HomeScreen' });
-            }, 4000);
-*/
-
-        let ken = 99;
-
- //   }
 
     }  // end componentWillMount()
 
@@ -47,7 +23,8 @@ export default class SplashScreen extends React.Component {
         let width = Dimensions.get('window').width;
 
         return (
-            <TouchableOpacity style={styles.indexContainer}>
+            <TouchableOpacity style={styles.indexContainer}
+                              onPress={() => this.props.navigation.navigate('Home')}>
                 <Image
                     source={require('../../Images/PSU_splash.png')}
                     style={[

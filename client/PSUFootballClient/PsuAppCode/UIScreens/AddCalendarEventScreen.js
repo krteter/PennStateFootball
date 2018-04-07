@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
-import {Button} from 'native-base';
+//import {Button} from 'native-base';
 import RNCalendarEvents from 'react-native-calendar-events';
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
 import MenuFab from "../CustomComponents/MenuFab";
@@ -144,21 +144,27 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
                 <ImageBackground source={require('../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
-                <Text style={styles.header}> Add Event To Calendar </Text>
-                <View style={styles.addeventview}>
-                    <Text style={styles.eventdescription}>{this.state.description}</Text>
-                    <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
-                    <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
-                    <Text style={styles.eventdetails}>Duration:   {this.state.duration} hrs</Text>
-                    <Text style={styles.eventdetails}>{this.state.notes}</Text>
-                </View>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}>Add Event</Text>
+                    <Text style={styles.header}>To Calendar</Text>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
+
+                    <View style={styles.addeventview}>
+                        <Text style={styles.eventdescription}>{this.state.description}</Text>
+                        <Text style={styles.eventdetails}>Location:  {this.state.location}</Text>
+                        <Text style={styles.eventdetails}>Start:  {this.state.eventStartDateString}</Text>
+                        <Text style={styles.eventdetails}>Duration:   {this.state.duration} hrs</Text>
+                        <Text style={styles.eventdetails}>{this.state.notes}</Text>
+                    </View>
                     <View style={styles.button}>
                         <Button title={this.state.buttonTitle}
                                 disabled={this.state.buttonDisabled}
                                 onPress={() => this.addEventToMyCalendar()} />
-                </View>
-                <MenuFab navigate={this.navigate}/>
-		</ImageBackground>
+                    </View>
+                    <MenuFab navigate={this.navigate}/>
+                </ImageBackground>
             </View>
         );
     }
@@ -171,16 +177,16 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#0f0b64',
         // alignItems: 'center',
         // justifyContent: 'center',
         height: '100%',
     },
     header: {
         alignSelf: 'center',
-        marginTop: 50,
-        marginBottom: 40,
-        fontSize: 18,
+        //marginTop: 50,
+        //marginBottom: 40,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#ffffff',
     },

@@ -13,14 +13,14 @@ import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectio
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 
 import GameScheduleScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleScreen";
-import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBioScreen";
-import PlayerBio2 from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
+import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
 import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScreen";
 import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
 import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
 import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleTableViewScreen";
 import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
+
 
 
 
@@ -49,7 +49,8 @@ const RootStack = StackNavigator(
             screen: TwitterScreen,
         },
        GameSchedule: {
-           screen: GameScheduleScreen,
+//           screen: GameScheduleScreen,
+           screen: GameScheduleTableViewScreen,
        },
         TimerExample: {
             screen: TimerExampleScreen,
@@ -59,9 +60,6 @@ const RootStack = StackNavigator(
         },
         PlayerData: {
             screen: PlayerBio,
-        },
-        PlayerData2: {
-            screen: PlayerBio2,
         },
         GameDayWeather: {
             screen: WeatherScreen,

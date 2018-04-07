@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground, Button } from 'react-native';
 import { Table, TableWrapper, Row, Col, Rows, Cell } from 'react-native-table-component';
 
 import GameScheduleDao from "../../DAO/GameScheduleDao";
 import Game from "../../Domain/Game";
+import MenuFab from "../../CustomComponents/MenuFab";
+import AbstractNavigableScreen from "../AbstractNavigableScreen";
 
 
-export default class GameScheduleTableViewScreen extends Component {
+export default class GameScheduleTableViewScreen extends AbstractNavigableScreen {
 
 
     //    Website reference for a TABLE
@@ -238,6 +240,30 @@ export default class GameScheduleTableViewScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView vertical={true}>
+
+                    //  Clean these Buttons up for better display
+                    //  and they will get inserted into the table
+                    //  based on each game.  Listed here for demo
+                    //  purposes
+                    <View>
+                        <Button style={styles.button}
+                            title="Add Calendar Event"
+                            onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
+                                location: 'Beaver Stadium',
+                                description: 'PSU Nittany Lions vs. VaTech Hokies',
+                                notes: 'White-Out Game'} )}
+                        />
+                    </View>
+                    <View>
+                        <Button style={styles.button}
+                            title="Find Tickets For Event"
+                            onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T12:00:00.000Z',
+                                description: 'PSU Nittany Lions vs. OSU Buckeyes'} )}
+                        />
+                    </View>
+
+
+
                         <Text style={styles.header}> Add Event To Calendar </Text>
                         <View>
                             <Table borderStyle={{borderColor: '#000000'}} >
@@ -261,6 +287,7 @@ export default class GameScheduleTableViewScreen extends Component {
                             </Table>
                         </View>
                 </ScrollView>
+                <MenuFab navigate={this.navigate}/>
             </View>
         )
     }
@@ -323,6 +350,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: null,
         alignItems: 'center',
+    },
+    button: {
+        alignSelf: 'center',
+        marginVertical: 5,
+        minWidth: 200,
+        maxWidth: '95%',
     },
 });
 

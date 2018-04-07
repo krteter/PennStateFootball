@@ -119,7 +119,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
             
             //  Navigate to the PlayerBio UI with biography data
             //  being loaded into its fields.
-            this.props.navigation.navigate('PlayerData2', {player: dbPulledPlayer});
+            this.props.navigation.navigate('PlayerData', {player: dbPulledPlayer});
 
 
         } else {
@@ -134,7 +134,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
 
         //  Get the requested player's data from the database
         let that = this;
-        console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
+        //console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
         //requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
 
         //  We want to use the name to pull that player from our

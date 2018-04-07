@@ -1,6 +1,8 @@
 import React from 'react';
 import {Alert, Button, Linking, StyleSheet, Text, View, ImageBackground} from 'react-native';
 
+import AbstractNavigableScreen from "../AbstractNavigableScreen";
+import MenuFab from "../../CustomComponents/MenuFab";
 
 
 
@@ -166,12 +168,19 @@ export default class TicketSearchScreen extends AbstractNavigableScreen {
                 <ImageBackground source={require('../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
                     <Text style={styles.header}> Search For </Text>
                     <Text style={styles.header}> Game Tickets </Text>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
+
                     <View style={styles.addeventview}>
                         <Text style={styles.eventdescription}>{this.state.description}</Text>
                         <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>
                     </View>
+                    <Text style={styles.header}> </Text>
+                    <Text style={styles.header}> </Text>
                     <View>
                         <Button style={styles.button}
                                 title={this.state.buttonTitle}
@@ -192,7 +201,7 @@ export default class TicketSearchScreen extends AbstractNavigableScreen {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#0f0b40',
         // alignItems: 'center',
         // justifyContent: 'center',
         height: '100%',
@@ -201,7 +210,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         //marginTop: 50,
         //marginBottom: 40,
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#ffffff',
     },

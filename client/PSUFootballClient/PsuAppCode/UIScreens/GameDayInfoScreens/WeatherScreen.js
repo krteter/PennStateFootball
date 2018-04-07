@@ -97,8 +97,9 @@ export default class WeatherScreen extends AbstractNavigableScreen {
         let animatedRadarUrl = 'http://api.wunderground.com/api/0c830f11d869563e/radar/image.gif?centerlat=40.8&centerlon=-77.86&radius=40&width=640&height=480&rainsnow=0&timelabel=1&noclutter=1&newmaps=1';
 
         return (
+            <View>
             <ScrollView contentContainerStyle={styles.weathercontainer}>
-                <ImageBackground source={require('../../../Images/FieldBackground.png')}
+                <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
                     <Text style={styles.citytext}>University Park, PA</Text>
@@ -139,7 +140,10 @@ export default class WeatherScreen extends AbstractNavigableScreen {
                     <Text  style={styles.weathertext}>  </Text>
                     <Text  style={styles.weathertext}>  </Text>
                 </ImageBackground>
+
             </ScrollView>
+                <MenuFab navigate={this.navigate}/>
+            </View>
         );
     }
 }
@@ -150,7 +154,7 @@ export default class WeatherScreen extends AbstractNavigableScreen {
 const styles = StyleSheet.create({
     weathercontainer: {
         //flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#0f0b40',
         alignItems: 'center',
         //justifyContent: 'center',
         //height: '100%',
