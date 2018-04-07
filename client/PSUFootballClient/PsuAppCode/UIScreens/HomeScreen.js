@@ -1,15 +1,13 @@
 import React from 'react';
-import {Button, Header, Icon, Input, Item, Text, View} from 'native-base';
+import {View} from 'native-base';
 import {Image, StyleSheet, WebView} from 'react-native';
 import Expo from "expo";
-
-
 import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
 import MenuFab from "../CustomComponents/MenuFab";
 import TwitterStream from "./TwitterFeedScreen/TwitterStream";
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
-
+import RosterSearchBox from "../CustomComponents/RosterSearchBox";
 
 
 /*
@@ -25,10 +23,6 @@ import {SQLite} from "expo";
 //  Open the PSU Football App Database locally on the device
 let psuFootballApp_db = SQLite.openDatabase('PsuFootballApp.db');
  */
-
-
-
-
 
 
 export default class HomeScreen extends AbstractNavigableScreen {
@@ -86,16 +80,10 @@ export default class HomeScreen extends AbstractNavigableScreen {
         return (
             <View style={styles.topContainer}>
                 <View style={styles.bannerContainer}>
-                    <Header searchBar rounded>
-                        <Item>
-                            <Icon name="ios-search"/>
-                            <Input placeholder="Search"/>
-                            <Icon name="ios-people"/>
-                        </Item>
-                        <Button transparent>
-                            <Text>Search</Text>
-                        </Button>
-                    </Header>
+                    <RosterSearchBox
+                        players={this.state.teamplayers}
+                        navigate={this.navigate}
+                    />
                     <WebView
                         source={{uri: sourceESPN}}
                     />
@@ -105,7 +93,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
                         style={styles.scheduleStyle}
                         source={require('./images/psuSchedule.png')}
                     />
-                    <TwitterStream />
+                    <TwitterStream/>
                 </View>
                 <View style={styles.bottomContainer}>
                     <Image

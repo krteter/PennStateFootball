@@ -2,7 +2,7 @@ import {SQLite} from "expo";
 import Game from "../Domain/Game";
 
 //let SQLite = require('react-native-sqlite-storage');
-let db = SQLite.openDatabase('Game.db');
+let db = SQLite.openDatabase('PsuFootballApp.db');
 
 export default class GameScheduleDao {
 

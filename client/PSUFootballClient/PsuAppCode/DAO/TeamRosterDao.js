@@ -133,6 +133,13 @@ export default class TeamRosterDao {
     };
 
 
-
+    static getPlayersNames(setResultsFunction) {
+        psuFootballApp_db.transaction(tx => {
+                tx.executeSql('SELECT name, position FROM roster', [], (_, {rows: {_array} }) => {
+                    setResultsFunction(_array)
+                });
+            }
+        );
+    }
 
 }  // end class TeamRosterDao

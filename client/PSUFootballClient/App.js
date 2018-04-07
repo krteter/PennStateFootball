@@ -20,6 +20,7 @@ import AddCalendarEventScreen from "./PsuAppCode/UIScreens/AddCalendarEventScree
 import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
 import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
 
+import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
 
 
 //

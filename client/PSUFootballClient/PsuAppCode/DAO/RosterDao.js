@@ -5,7 +5,7 @@ import Player from "../Domain/Player";
 // smitty - Add for Android Studio emulator
 //let SQLite = require('react-native-sqlite-storage');
 
-let db = SQLite.openDatabase('football.db');
+let db = SQLite.openDatabase('PsuFootballApp.db');
 
 
 export default class RosterDao {
@@ -66,6 +66,17 @@ export default class RosterDao {
         console.debug('RosterDao.getPlayers()');
         db.transaction(tx => {
                 tx.executeSql('SELECT * FROM roster', [], (_, {rows: {_array} }) => {
+                    setResultsFunction(_array)
+                });
+            }
+        );
+        console.debug('leaving...getPlayers()');
+    }
+
+    static getPlayersNames(setResultsFunction) {
+        console.debug('RosterDao.getPlayers()');
+        db.transaction(tx => {
+                tx.executeSql('SELECT name, position FROM roster', [], (_, {rows: {_array} }) => {
                     setResultsFunction(_array)
                 });
             }
