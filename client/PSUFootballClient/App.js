@@ -6,10 +6,9 @@
 
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import TwitterStream from "./PsuAppCode/UIScreens/TwitterStream";
+import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScreen";
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import {StackNavigator} from "react-navigation";
-import ExampleAPICall from "./PsuAppCode/UIScreens/ExampleHTMLFetch";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import Roster from "./PsuAppCode/CustomComponents/Roster";
 import TeamRoster from "./PsuAppCode/CustomComponents/TeamRoster";
@@ -46,7 +45,7 @@ const RootStack = StackNavigator(
             screen: HomeScreen,
         },
         Twitter: {
-            screen: TwitterStream,
+            screen: TwitterScreen,
         },
         DBTest: {
             screen: Roster,

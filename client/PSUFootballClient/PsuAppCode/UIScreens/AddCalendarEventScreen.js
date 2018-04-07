@@ -15,9 +15,9 @@ export default class AddCalendarEventScreen extends React.Component {
         super(props);
 
         this.state = {
-            buttonTitle: '+  Add Event',
+            buttonTitle: 'Add Event',
             buttonDisabled: false,
-            calendarAuth: '',
+            calendarAuth: 'authorized',
             eventStartDateString: '',   // Format:  2018-05-06T18:00:00.000Z
             duration:  3,               // Duration = 3 hrs (default it!)
             location: '',
@@ -34,6 +34,9 @@ export default class AddCalendarEventScreen extends React.Component {
     //  - using 'react-native-calendar-events' package
     //
     addEventToMyCalendar() {
+
+        //let ken = 'authorized';
+
 
         //  Check if we are authorized to add
         //  an event to our Calendar App
@@ -81,7 +84,7 @@ export default class AddCalendarEventScreen extends React.Component {
 //    }
 
 
-    componentWillMount () {
+    componentWillMount() {
 
 
         // Set the Component's state
@@ -93,7 +96,11 @@ export default class AddCalendarEventScreen extends React.Component {
         });
 
 
-            // Let's get access before doing anything
+/*   this works for android simulator, but giving me
+     problems on my OS phone
+
+
+        // Let's get access before doing anything
         RNCalendarEvents.authorizationStatus()
             .then(status => {
 
@@ -120,6 +127,10 @@ export default class AddCalendarEventScreen extends React.Component {
             }) // end then
 
             .catch(error => console.warn('Auth Error: ', error));
+
+
+             */
+
 
     }   // end componentWillMount()
 

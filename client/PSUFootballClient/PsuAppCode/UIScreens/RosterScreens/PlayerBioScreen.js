@@ -74,20 +74,20 @@ export default class PlayerBio extends React.Component {
                 <ImageBackground source={require('../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
-                <Image
-                    style={styles.imagestyle}
-                    source={{uri: this.state.myPlayer.imageUrl}}
-                />
-                <Text style={styles.nametext}>#{this.state.myPlayer.jerseyNum}   {this.state.requestedPlayerName} </Text>
-                <Text style={styles.playertext}>  </Text>
-                <Text style={styles.playertext}>Position: {this.state.myPlayer.position}</Text>
-                <Text style={styles.playertext}>Class: {this.state.myPlayer.classyear}</Text>
-                <Text style={styles.playertext}>Height/Weight: {this.state.myPlayer.heightWeight}</Text>
-                <Text style={styles.playertext}>Hometown: {this.state.myPlayer.hometown}</Text>
-                <Text style={styles.playertext}>Experience: {this.state.myPlayer.experience}</Text>
-                <Text style={styles.playertext}>Major:
+                    <Image
+                        style={styles.imagestyle}
+                        source={{uri: this.state.myPlayer.imageUrl}}
+                    />
+                    <Text style={styles.nametext}>#{this.state.myPlayer.jerseyNum}   {this.state.requestedPlayerName} </Text>
+                    <Text style={styles.playertext}>  </Text>
+                    <Text style={styles.playertext}>Position: {this.state.myPlayer.position}</Text>
+                    <Text style={styles.playertext}>Class: {this.state.myPlayer.classyear}</Text>
+                    <Text style={styles.playertext}>Height/Weight: {this.state.myPlayer.heightWeight}</Text>
+                    <Text style={styles.playertext}>Hometown: {this.state.myPlayer.hometown}</Text>
+                    <Text style={styles.playertext}>Experience: {this.state.myPlayer.experience}</Text>
+                    <Text style={styles.playertext}>Major:
                     <Text style={styles.majortext}> {this.state.myPlayer.major}</Text>
-                </Text>
+                    </Text>
                 </ImageBackground>
             </View>
         );

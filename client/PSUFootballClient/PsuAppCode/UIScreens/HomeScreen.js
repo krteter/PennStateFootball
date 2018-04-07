@@ -65,7 +65,7 @@ export default class HomeScreen extends React.Component {
                             onPress={() => this.props.navigation.navigate('Twitter')}
                         />
                     </View>
-                    <View style={styles.button}>
+                    {/* <View style={styles.button}>
                         <Button
                             title="DB Test"
                             onPress={() => this.props.navigation.navigate('DBTest')}
@@ -82,7 +82,7 @@ export default class HomeScreen extends React.Component {
                             title="TimerExampleScreen"
                             onPress={() => this.props.navigation.navigate('TimerExample')}
                         />
-                    </View>
+                    </View>  */}
                     <View style={styles.button}>
                         <Button
                             title="Game Schedule"

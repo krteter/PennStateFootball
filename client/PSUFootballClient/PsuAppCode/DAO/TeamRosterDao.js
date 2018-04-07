@@ -12,7 +12,7 @@ let SQLite = require('react-native-sqlite-storage');
 
 //  Open the Team Roster Database locally
 //  on the device
-let team_db = SQLite.openDatabase('teamRoster.db');
+let psuFootballApp_db = SQLite.openDatabase('PsuFootballApp.db');
 
 
 //
@@ -27,7 +27,7 @@ export default class TeamRosterDao {
     //  roster
     static createTeamRosterDatabase() {
 
-        console.debug('TRDao.createTeamRosterDatabase()');
+        //console.debug('TRDao.createTeamRosterDatabase()');
 
         //  This will ensure the DB exists on first load
         //  -Create our Table with the following player fields:
@@ -41,63 +41,14 @@ export default class TeamRosterDao {
         //          heightWeight
         //          experience
         //          major
-        team_db.transaction(tx => {
+        psuFootballApp_db.transaction(tx => {
             tx.executeSql(
                 'CREATE TABLE IF NOT EXISTS Player_Table (name TEXT PRIMARY KEY NOT NULL UNIQUE, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT);'
             );
         });
 
-        console.debug('leaving.... createTeamRosterDatabase()');
+        //console.debug('leaving.... createTeamRosterDatabase()');
     };
-
-
-/************
-
-
-    //
-    //  Method to create & add players to the Player_Table of the database
-    //     - We can use this to make sure something exists for testing purposes
-    //
-
-    static initPlayers(setResultsFunction) {
-
-        console.debug('TRDao.initPlayers()');
-
-        //  Create Player_Table in database if not  already created
-        this.createTeamRosterDatabase();
-
-
-        //TODO remove this before prod we'll use some other process to load data into the db, but this will make sure something exists for testing now
-        let teamplayer1 = new TeamPlayer('Tiger Woods', '44', 'GF', 'http://grfx.cstv.com/photos/schools/psu/sports/m-footbl/auto_headshot/12565686.jpeg', 'Senior', 'Jupiter, FL', '6-2/186', 'Stanford', 'SR', 'Presidents Cup Captain');
-        let teamplayer2 = new TeamPlayer('Phil Mickelson', '47', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_01810.png', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
-        let teamplayer3 = new TeamPlayer('Brad Faxon', '56', 'GF', 'https://pga-tour-res.cloudinary.com/image/upload/c_fill,d_headshots_default.png,f_auto,g_face:center,h_190,q_auto,r_max,w_190/headshots_01810.png', 'Junior', 'Carlisbad, CA', '6-0/195', 'Arizona St', 'JR', 'Ryder Cup Team Member');
-
-        let teamplayers = [teamplayer1, teamplayer2, teamplayer3];
-
-        //  Loop thru above player array and add player
-        //  to the Player_Table database
-        teamplayers.forEach(player =>
-            {
-                team_db.transaction(tx => {
-                    tx.executeSql(
-                        'INSERT OR IGNORE INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        [player.name, player.jerseyNum, player.position, player.imageUrl, player.classyear, player.hometown, player.heightWeight, player.highschool, player.experience, player.major]
-                    );
-                });
-            }
-        );
-
-        setResultsFunction(teamplayers);
-
-        console.debug('leaving.... initPlayers()');
-
-    };
-
-
- ***********/
-
-
-
 
 
     //
@@ -106,8 +57,7 @@ export default class TeamRosterDao {
     //
     static initializeScrapedPlayers(theResultsFunction) {
 
-        console.debug('TRDao.initializeScrapedPlayers()');
-
+        //console.debug('TRDao.initializeScrapedPlayers()');
 
         //  Create Player_Table in database if not  already created
         this.createTeamRosterDatabase();
@@ -117,13 +67,11 @@ export default class TeamRosterDao {
         //  database.
         scrapeTeamRosterData();
 
-
         //  Get all the players put into the database
         //  by the website scrape
         this.getAllPlayers(theResultsFunction);
 
-
-        console.debug('leaving.... initializeScrapedPlayers()');
+        //console.debug('leaving.... initializeScrapedPlayers()');
 
     };
 
@@ -135,10 +83,10 @@ export default class TeamRosterDao {
     static addSinglePlayer(name, jerseyNum, position, imageUrl, classyear,
                            hometown, heightWeight, highschool, experience, major) {
 
-        console.debug('TRDao.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
+        //console.debug('TRDao.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
 
         //  Add a single player row to the database
-        team_db.transaction(tx => {
+        psuFootballApp_db.transaction(tx => {
             tx.executeSql(
                 'INSERT INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major]
@@ -153,16 +101,15 @@ export default class TeamRosterDao {
     //
     static getAllPlayers(setResultsFunction) {
 
-        console.debug('TRDao.getPlayers()');
+        //console.debug('TRDao.getPlayers()');
 
-        team_db.transaction(tx => {
-            // tx.executeSql('SQL QUERY HERE where name = ?', [AnyParametersToMatchThe?], functionToReturnTheResultSetTo);
+        psuFootballApp_db.transaction(tx => {
                 tx.executeSql('SELECT * FROM Player_Table', [], (_, {rows: {_array} }) => {
                     setResultsFunction(_array)
                 });
             }
         );
-        console.debug('leaving.... getPlayers()');
+        //console.debug('leaving.... getPlayers()');
     };
 
 
@@ -173,17 +120,17 @@ export default class TeamRosterDao {
     //
     static getSinglePlayer(playerName, theResultFunction) {
 
-        console.debug('TRDao.getSinglePlayer()');
+        //console.debug('TRDao.getSinglePlayer()');
 
         //  TODO:  Need some help here figuring out how to query and return data
-        team_db.transaction(tx => {
+        psuFootballApp_db.transaction(tx => {
                 tx.executeSql('SELECT * FROM Player_Table WHERE name=?', [playerName], (_, {rows: {_array}}) => {
                     theResultFunction(_array[0])
                 });
             }
         );
 
-        console.debug('leaving.... getSinglePlayer()');
+        //console.debug('leaving.... getSinglePlayer()');
     };
 
 

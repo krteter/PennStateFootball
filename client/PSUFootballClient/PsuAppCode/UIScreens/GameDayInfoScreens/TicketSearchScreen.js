@@ -164,7 +164,8 @@ export default class TicketSearchScreen extends React.Component {
             <View style={styles.container}>
                 <ImageBackground source={require('../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
-                                 style={styles.backdrop}>                <Text style={styles.header}> Search For Game Tickets </Text>
+                                 style={styles.backdrop}>
+                    <Text style={styles.header}> Search For Game Tickets </Text>
                 <View style={styles.addeventview}>
                     <Text style={styles.eventdescription}>{this.state.description}</Text>
                     <Text style={styles.eventdetails}>Date:  {this.state.eventStartDateString}</Text>

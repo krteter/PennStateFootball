@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground } from 'react-native';
 import { Table, TableWrapper, Row, Col, Rows, Cell } from 'react-native-table-component';
 
 import GameScheduleDao from "../../DAO/GameScheduleDao";
@@ -238,30 +238,28 @@ export default class GameScheduleTableViewScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView vertical={true}>
-                    <Text style={styles.header}> Add Event To Calendar </Text>
-                    <View>
-                        <Table borderStyle={{borderColor: '#000000'}} >
+                        <Text style={styles.header}> Add Event To Calendar </Text>
+                        <View>
+                            <Table borderStyle={{borderColor: '#000000'}} >
 
-                            <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
-
-
-                            <TableWrapper style={styles.wrapper}>
-
-                                <Col data={state.tableIconCol}
-                                     style={styles.imagestyle}
-                                     heightArr={[50, 70, 90, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
-                                     textStyle={styles.text}/>
-
-                                <Rows data={state.tableData}
-                                      style={styles.rowstyle}
-                                      flexArr={[2, 2, 4, 2, 1, 1]}
-                                      textStyle={styles.text}/>
-
-                            </TableWrapper>
+                                <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
 
 
-                        </Table>
-                    </View>
+                                <TableWrapper style={styles.wrapper}>
+
+                                    <Col data={state.tableIconCol}
+                                        style={styles.imagestyle}
+                                        heightArr={[50, 70, 90, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
+                                        textStyle={styles.text}/>
+
+                                    <Rows data={state.tableData}
+                                        style={styles.rowstyle}
+                                        flexArr={[2, 2, 4, 2, 1, 1]}
+                                        textStyle={styles.text}/>
+
+                                </TableWrapper>
+                            </Table>
+                        </View>
                 </ScrollView>
             </View>
         )
@@ -318,6 +316,13 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         backgroundColor: '#FFF1C1',
+    },
+    backdrop: {
+        flex: 1,
+        flexDirection: 'column',
+        width: '100%',
+        height: null,
+        alignItems: 'center',
     },
 });
 
