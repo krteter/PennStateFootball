@@ -46,8 +46,8 @@ export default class HomeScreen extends AbstractNavigableScreen {
         }
     }
 
-    navigate(location) {
-        this.props.navigation.navigate(location);
+    navigate(location, props) {
+        this.props.navigation.navigate(location, props);
     }
 
     async componentWillMount() {

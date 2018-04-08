@@ -8,10 +8,12 @@ export default class RosterSearchBox extends React.Component {
         super(props);
         let names = [];
         this.state = {
+            players: this.props.players,
             names: names,
             query: ''
         };
         this.setPlayersNamesList = this.setPlayersNamesList.bind(this);
+        this.navigateToPlayerBio = this.navigateToPlayerBio.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -23,7 +25,8 @@ export default class RosterSearchBox extends React.Component {
             })
         });
         this.setState({
-            names: names
+            names: names,
+            players: newProps.players
         });
     }
 
@@ -59,6 +62,7 @@ export default class RosterSearchBox extends React.Component {
         const { query } = this.state;
         const players = this.findPlayer(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
+        let that = this;
         return (
             <View style={styles.container}>
                 <Autocomplete
@@ -69,29 +73,22 @@ export default class RosterSearchBox extends React.Component {
                     onChangeText={text => this.setState({query: text})}
                     placeholder="Enter Name of a PSU Player"
                     renderItem={({name, position}) => (
-                        <TouchableOpacity onPress={() => this.setState({query: name})}>
+                        <TouchableOpacity onPress={() => this.navigateToPlayerBio(name)}>
                             <Text>
                                 {name} {position}
                             </Text>
                         </TouchableOpacity>
                     )}
                 />
-                <View style={styles.descriptionContainer}>
-                    {players.length > 0 ? (
-                        RosterSearchBox.navigateToPlayerBio(players[0])
-                    ) : (
-                        <Text style={styles.infoText}>
-                            Enter Name of a PSU Player :
-                            {query}
-                        </Text>
-                    )}
-                </View>
             </View>
         );
     }
 
-    static navigateToPlayerBio(player) {
-
+    navigateToPlayerBio(playerName) {
+        console.log(playerName);
+        let player = this.state.players.find(p => p.name === playerName);
+        console.log(JSON.stringify(player));
+        this.props.navigate('PlayerData', {player: player});
     }
 }
 
