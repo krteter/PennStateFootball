@@ -58,11 +58,11 @@ export default class MenuFab extends React.Component {
                 active={this.state.active}
                 direction="up"
                 containerStyle={{}}
-                style={[styles.fabStyle, {backgroundColor: '#5067FF'}]}
+                style={[styles.fabStyle, {backgroundColor: '#717171'}]}
                 position="bottomRight"
                 onPress={() => this.setState({active: !this.state.active})}>
                 <Icon name="share"/>
-                <Button style={{backgroundColor: '#4248f4'}}>
+                <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                         name="home"
                         onPress={() => this.navigate('Home')}
@@ -76,27 +76,27 @@ export default class MenuFab extends React.Component {
                         name="search"
                     />
                 </Button> */}
-                <Button style={{backgroundColor: '#dcf441'}}>
+                <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                         name="people"
                         onPress={() => this.navigate('AlphabetRosterList')}
                     />
                 </Button>
-                <Button style={{backgroundColor: '#4ff441'}}>
+                <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                         name="rainy"
                         onPress={() => this.navigate('GameDayWeather')}
                     />
                 </Button>
-                <Button style={{backgroundColor: '#7a0f69'}}>
+                <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                       name="calendar"
                       onPress={() => this.navigate('GameSchedule')}
                     />
                 </Button>
-                <Button disabled style={{backgroundColor: '#26a6f4'}}>
+                <Button disabled style={{backgroundColor: '#0f0b40'}}>
                     <Icon
-                        name="egg"
+                        name="paper"
                         onPress={() => this.navigate('Twitter')}
                     />
                 </Button>
