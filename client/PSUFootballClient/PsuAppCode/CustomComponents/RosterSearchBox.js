@@ -1,6 +1,6 @@
 import React from 'react';
 import Autocomplete from 'react-native-autocomplete-input';
-import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import TeamRosterDao from "../DAO/TeamRosterDao";
 
 export default class RosterSearchBox extends React.Component {
@@ -21,7 +21,8 @@ export default class RosterSearchBox extends React.Component {
         newProps.players.map(p => {
             names.push({
                 name: p.name,
-                position: p.position
+                position: p.position,
+                jerseyNum: p.jerseyNum
             })
         });
         this.setState({
@@ -39,18 +40,17 @@ export default class RosterSearchBox extends React.Component {
 
     setPlayersNamesList(names) {
         if (names !== undefined) {
-            console.log(names);
             this.setState({names: names});
         }
     }
 
     findPlayer(query) {
-       if (query === '') {
+        if (query === '') {
             return [];
         }
-        const { names } = this.state;
+        const {names} = this.state;
         const regex = new RegExp(`${query.trim()}`, 'i');
-        return names.filter(film => film.name.search(regex) >= 0);
+        return names.filter(p => p.name.search(regex) >= 0 || p.position.search(regex) >= 0 || p.jerseyNum.search(regex) >= 0);
     }
 
     render() {
@@ -59,35 +59,37 @@ export default class RosterSearchBox extends React.Component {
                 <Text>Loading Players...</Text>
             );
         }
-        const { query } = this.state;
+        const {query} = this.state;
         const players = this.findPlayer(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
-        let that = this;
         return (
-            <View style={styles.container}>
-                <Autocomplete
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    data={players.length === 1 && comp(query, players[0].name) ? [] : players}
-                    defaultValue={query}
-                    onChangeText={text => this.setState({query: text})}
-                    placeholder="Enter Name of a PSU Player"
-                    renderItem={({name, position}) => (
-                        <TouchableOpacity onPress={() => this.navigateToPlayerBio(name)}>
-                            <Text>
-                                {name} {position}
+            <Autocomplete
+                autoCapitalize="none"
+                autoCorrect={false}
+                containerStyle={styles.autocompleteContainer}
+                data={players.length === 1 && comp(query, players[0].name) ? [] : players}
+                defaultValue={query}
+                onChangeText={text => this.setState({query: text})}
+                placeholder="Search for a PSU Player"
+                renderItem={({name, position, jerseyNum}) => (
+                    <TouchableWithoutFeedback onPress={() => {
+                        this.navigateToPlayerBio(name);
+                        Keyboard.dismiss();
+                    }
+                    }>
+                        <View>
+                            <Text style={styles.itemText}>
+                                {name} {position} {jerseyNum}
                             </Text>
-                        </TouchableOpacity>
-                    )}
-                />
-            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                )}
+            />
         );
     }
 
     navigateToPlayerBio(playerName) {
-        console.log(playerName);
         let player = this.state.players.find(p => p.name === playerName);
-        console.log(JSON.stringify(player));
         this.props.navigate('PlayerData', {player: player});
     }
 }
@@ -95,20 +97,20 @@ export default class RosterSearchBox extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#F5FCFF',
-        flex: 1,
-        paddingTop: 25
+        paddingTop: 25,
+        paddingBottom: 15
     },
     autocompleteContainer: {
-        flex: 1,
         left: 0,
         position: 'absolute',
         right: 0,
         top: 0,
-        zIndex: 100
+        zIndex: 10000
     },
     itemText: {
-        fontSize: 15,
-        margin: 2
+        fontSize: 18,
+        margin: 2,
+        paddingTop: 2
     },
     descriptionContainer: {
         // `backgroundColor` needs to be set otherwise the

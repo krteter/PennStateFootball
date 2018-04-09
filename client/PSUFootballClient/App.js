@@ -50,7 +50,6 @@ const RootStack = StackNavigator(
             screen: TwitterScreen,
         },
        GameSchedule: {
-//           screen: GameScheduleScreen,
            screen: GameScheduleTableViewScreen,
        },
         TimerExample: {

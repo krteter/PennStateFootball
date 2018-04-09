@@ -1,21 +1,34 @@
 import React from 'react';
 import { StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
-
+import { NavigationActions } from 'react-navigation';
 import HomeScreen from "./HomeScreen";
 
 
 
 export default class SplashScreen extends React.Component {
-
+    constructor() {
+        super();
+        this._navigateHome = this._navigateHome.bind(this);
+    }
 
     componentWillMount() {
 
         // This works from the top level... but it is a band aid for
         // a real "slashscreen"
-        setTimeout(() => this.props.navigation.navigate('Home') , 4000);
+        setTimeout(() => this._navigateHome() , 4000);
 
 
     }  // end componentWillMount()
+
+    // resetting the navigation stack instead of a direct navigation removes the back arrow
+    // from the homescreen that allows navigation back to the splash screen
+    _navigateHome() {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'Home' })],
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
 
 
     render() {
@@ -24,7 +37,7 @@ export default class SplashScreen extends React.Component {
 
         return (
             <TouchableOpacity style={styles.indexContainer}
-                              onPress={() => this.props.navigation.navigate('Home')}>
+                              onPress={() => this._navigateHome()}>
                 <Image
                     source={require('../../Images/PSU_splash.png')}
                     style={[
