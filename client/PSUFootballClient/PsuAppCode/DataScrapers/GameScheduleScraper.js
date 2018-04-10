@@ -1,4 +1,4 @@
-import GameScheduleDao from "../DAO/GameScheduleDao";
+import GameScheduleDao from "../DAO/TeamRosterDao";
 import Game from "../Domain/Game";
 
 // By default, we'll scrape schedule for current year (2018).  url variable for previous year is
@@ -215,7 +215,7 @@ export const scrapeGameScheduleData = () => {
     }); // End loop
 
     // Clear SQL table
-    GameScheduleDao.clearScheduleTbl();
+    //GameScheduleDao.clearScheduleTbl();
 
     // Drop SQl table
     // GameScheduleDao.dropScheduleTbl();

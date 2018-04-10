@@ -1,5 +1,5 @@
 import React from 'react';
-import GameScheduleDao from '../../DAO/GameScheduleDao';
+import GameScheduleDao from '../../DAO/TeamRosterDao';
 import GameSchedule from '../../UIScreens/ScheduleScreens/GameSchedule';
 //import {Text, View, ScrollView, StyleSheet} from "react-native";
 import {StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground, Button} from "react-native"
