@@ -14,7 +14,7 @@ export const scrapeGameScheduleData = () => {
   //let GameSchedule = GameScheduleDao.initGameScheduleDB();
   GameScheduleDao.initGameScheduleDB();
 
-  //Using cheerio module for scraping
+  // Using cheerio module for scraping
   const cheerio = require('react-native-cheerio');
   let url = 'http://www.espn.com/college-football/team/schedule/_/id/213';
   //let url = 'http://www.espn.com/college-football/team/schedule/_/id/213/year/2017';
@@ -40,12 +40,125 @@ export const scrapeGameScheduleData = () => {
       let gamedate;
       let homeaway;
       if (str2.search('@') < 0) {
-        gamedate = str2.substring(0,str2.search('vs'));
+        gamedate = str2.substring(0,str2.search('vs')).trim();
         homeaway = 'Home';
+        // console.debug('gamedate = ' + gamedate);
       } else {
-        gamedate = str2.substring(0,str2.search('@'));
+        gamedate = str2.substring(0,str2.search('@')).trim();
         homeaway = 'Away';
+        // console.debug('gamedate = ' + gamedate);
       }
+
+      // Convert game date to zulu date format (for add calendar functionality)
+      let gamedatezulu;
+      let month;
+      let day;
+      let year = (new Date()).getFullYear();
+      let time = 'T18:00:00.000Z';
+
+      // Note: This sequence of if statments may not be pretty... however
+      // it works...
+      if (gamedate.indexOf('Jan') > 0) {
+        month = '01';
+        day = gamedate.substring(gamedate.search('Jan')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Feb') > 0) {
+        month = '02';
+        day = gamedate.substring(gamedate.search('Feb')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Mar') > 0) {
+        month = '03';
+        day = gamedate.substring(gamedate.search('Mar')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Apr') > 0) {
+        month = '04';
+        day = gamedate.substring(gamedate.search('Apr')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('May') > 0) {
+        month = '05';
+        day = gamedate.substring(gamedate.search('May')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Jun') > 0) {
+        month = '06';
+        day = gamedate.substring(gamedate.search('Jun')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Jul') > 0) {
+        month = '07';
+        day = gamedate.substring(gamedate.search('Jul')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Aug') > 0) {
+        month = '08';
+        day = gamedate.substring(gamedate.search('Aug')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Sept') > 0) {
+        month = '09';
+        day = gamedate.substring(gamedate.search('Sept')+4,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Oct') > 0) {
+        month = '10';
+        day = gamedate.substring(gamedate.search('Oct')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Nov') > 0) {
+        month = '11';
+        day = gamedate.substring(gamedate.search('Nov')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else if (gamedate.indexOf('Dec') > 0) {
+        month = '12';
+        day = gamedate.substring(gamedate.search('Dec')+3,gamedate.length).trim();
+        if ((day.length) == 1) {
+          day = '0' + day;
+        }
+        gamedatezulu = year + '-' + month + '-' + day + time;
+        //console.debug(gamedatezulu);
+      } else {
+        gamedatezulu = ''
+        console.debug('No dates to convert into zulu format!');
+      }
+
       // Scrape opposing team name
       let opponent = $(this).children().children().children('.team-name').text();
       // Scrape opposing team href and img src
@@ -95,14 +208,17 @@ export const scrapeGameScheduleData = () => {
       /////////////////////////////////////////////////////////////
 
       // Store game information in game object
-      let game = new Game(gamedate, homeaway, opponent, opphref, oppsrc, result, score);
+      let game = new Game(gamedate, gamedatezulu, homeaway, oppid, opponent, opphref, oppsrc, result, score);
 
       // Store each game object into parsedResults array
       parsedResults.push(game);
     }); // End loop
 
-    // Clear DB
-    GameScheduleDao.clearGameScheduleDB();
+    // Clear SQL table
+    GameScheduleDao.clearScheduleTbl();
+
+    // Drop SQl table
+    // GameScheduleDao.dropScheduleTbl();
 
     // Store game schedule array into the DB
     GameScheduleDao.addSchedule(parsedResults);
