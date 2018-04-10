@@ -10,46 +10,12 @@ export default class MenuFab extends React.Component {
             active: false
         }
         this.navigate = this.navigate.bind(this);
-        this.navigateToCalendar = this.navigateToCalendar.bind(this);
     }
 
 
     navigate(location) {
         this.props.navigate(location);
-
-
-//AddCalendarEventScreen
-//        onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-//                                                                        location: 'Beaver Stadium',
-//                                                                        description: 'PSU Nittany Lions vs. VaTech Hokies',
-//                                                                        notes: 'White-Out Game',
-//                                                                        eventState: 'PA'} )}
-
-
-//TicketSearchScreen
-//        onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T12:00:00.000Z',
-//                                                                       description: 'PSU Nittany Lions vs. OSU Buckeyes'} )}
-
     }
-
-    //
-    //  Method to add event to Calendar
-    //  However this wont be here and will be located
-    //  to the game schedule screen.
-    navigateToCalendar() {
-
-
-        //this.props.navigate('CalendarEvent');
-
-        this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-                                                         location: 'Beaver Stadium',
-                                                         description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                                         notes: 'White-Out Game',
-                                                         eventState: 'PA'} )
-
-
-    }  // end navigateToCalendar()
-
 
 
     render() {
@@ -68,14 +34,6 @@ export default class MenuFab extends React.Component {
                         onPress={() => this.navigate('Home')}
                     />
                 </Button>
-                {/*<Button style={{backgroundColor: '#f44242'}}>
-                    <Icon name="american-football"/>
-                </Button>*/}
-                {/*<Button style={{backgroundColor: '#f4a941'}}>
-                    <Icon
-                        name="search"
-                    />
-                </Button> */}
                 <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                         name="people"
@@ -90,10 +48,16 @@ export default class MenuFab extends React.Component {
                 </Button>
                 <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
-                      name="calendar"
-                      onPress={() => this.navigate('GameSchedule')}
+                        name="calendar"
+                        onPress={() => this.navigate('GameSchedule')}
                     />
                 </Button>
+                <Button style={{backgroundColor: '#535353'}}>
+                <Icon
+                    name="calendar"
+                    onPress={() => this.navigate('GameScheduleTableView')}
+                />
+            </Button>
                 <Button disabled style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                         name="paper"
