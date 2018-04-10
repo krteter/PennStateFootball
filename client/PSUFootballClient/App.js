@@ -22,7 +22,7 @@ import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/
 import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
 
 
-import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
+// import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
 
 
 //
@@ -49,8 +49,11 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterScreen,
         },
+       // GameSchedule: {
+       //     screen: GameScheduleTableViewScreen,
+       // },
        GameSchedule: {
-           screen: GameScheduleTableViewScreen,
+           screen: GameScheduleScreen,
        },
         TimerExample: {
             screen: TimerExampleScreen,

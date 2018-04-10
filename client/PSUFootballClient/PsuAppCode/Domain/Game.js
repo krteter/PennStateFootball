@@ -2,10 +2,12 @@
 // will be pulled from an external website
 export default class Game {
 
-  constructor(gamedate, homeaway, opponent, href, imgsrc, result, score) {
+  constructor(gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score) {
     // console.debug('Game.constructor()');
     this.gamedate = gamedate;
+    this.gamedatezulu = gamedatezulu;
     this.homeaway = homeaway;
+    this.opponentid = opponentid;
     this.opponent = opponent;
     this.href = href;
     this.imgsrc = imgsrc;

@@ -2,7 +2,8 @@ import {SQLite} from "expo";
 import Game from "../Domain/Game";
 
 //let SQLite = require('react-native-sqlite-storage');
-let db = SQLite.openDatabase('PsuFootballApp.db');
+// let db = SQLite.openDatabase('PsuFootballApp.db');
+let db = SQLite.openDatabase('Game.db');
 
 export default class GameScheduleDao {
 
@@ -13,26 +14,33 @@ export default class GameScheduleDao {
     db.transaction(tx => {
       tx.executeSql(
         // Note: Opposing team id that is scraped will be used as the key value in the record
-        'CREATE TABLE IF NOT EXISTS schedule (id INTEGER PRIMARY KEY NOT NULL UNIQUE, gamedate TEXT, homeaway TEXT, opponent TEXT, href TEXT, imgsrc TEXT, result TEXT, score TEXT);'
+        'CREATE TABLE IF NOT EXISTS schedule (id INTEGER PRIMARY KEY NOT NULL UNIQUE, gamedate TEXT, gamedatezulu TEXT, homeaway TEXT, opponentid TEXT, opponent TEXT, href TEXT, imgsrc TEXT, result TEXT, score TEXT);'
       );
     }, function(e) {
       console.log("ERROR: " + e.message);
     });
 
-    // Don't need this...
-    // db.transaction(tx => {
-    //     tx.executeSql(
-    //         'DROP TABLE roster;'
-    //     );
-    // });
-
     //setResultsFunction(game);
     console.debug('leaving... GameScheduleDao.initScheduleTbl()');
   };
 
+  // SQL Drop (schedule table)
+  static dropScheduleTbl() {
+    console.debug('GameScheduleDao.dropScheduleTbl()');
+    db.transaction(tx => {
+      tx.executeSql(
+        'DROP TABLE schedule;'
+      );
+      console.debug('Table SCHEDULE successfully dropped');
+    }, function(e) {
+      console.log("ERROR: " + e.message);
+    });
+    console.debug('leaving... GameScheduleDao.dropScheduleTbl()');
+  }
+
   // SQL Delete (data)
-  static clearGameScheduleDB() {
-    console.debug('GameScheduleDao.clearGameScheduleDB()');
+  static clearScheduleTbl() {
+    console.debug('GameScheduleDao.clearScheduleTbl()');
     db.transaction(tx => {
       tx.executeSql(
         'DELETE FROM schedule;'
@@ -41,7 +49,7 @@ export default class GameScheduleDao {
     }, function(e) {
       console.log("ERROR: " + e.message);
     });
-    console.debug('leaving... GameScheduleDao.clearGameScheduleDB()');
+    console.debug('leaving... GameScheduleDao.clearScheduleTbl()');
   }
 
   // SQL Insert
@@ -51,8 +59,8 @@ export default class GameScheduleDao {
       rows.forEach(game => {
         console.debug('Inserting into SCHEDULE table -- OpponentName: ' + game.opponent);
         tx.executeSql(
-          'INSERT INTO schedule (gamedate, homeaway, opponent, href, imgsrc, result, score) VALUES (?, ?, ?, ?, ?, ?, ?)',
-          [game.gamedate, game.homeaway, game.opponent, game.href, game.imgsrc, game.result, game.score],
+          'INSERT INTO schedule (gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [game.gamedate, game.gamedatezulu, game.homeaway, game.opponentid, game.opponent, game.href, game.imgsrc, game.result, game.score],
           function(tx, results) {
             // console.debug('insertId: ' + results.insertId + '; rowsAffected: ' + results.rowsAffected);
         });
