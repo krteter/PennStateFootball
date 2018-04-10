@@ -2,8 +2,7 @@ import React from 'react';
 import {View} from 'native-base';
 import {Image, StyleSheet, WebView} from 'react-native';
 import Expo from "expo";
-import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
-import TeamRosterDao from "../DAO/TeamRosterDao";
+
 import MenuFab from "../CustomComponents/MenuFab";
 import TwitterStream from "./TwitterFeedScreen/TwitterStream";
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
@@ -31,20 +30,20 @@ export default class HomeScreen extends AbstractNavigableScreen {
         this.state = {
             loading: true,
             showMsg: false,
-            teamplayers: {}
+            //teamplayers: {}
         };
-        this.resultsFunction = this.resultsFunction.bind(this);
+//        this.resultsFunction = this.resultsFunction.bind(this);
         this.navigate = this.navigate.bind(this);
     }
 
 
-    resultsFunction(rows) {
-        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
-            this.setState({
-                teamplayers: rows
-            });
-        }
-    }
+//    resultsFunction(rows) {
+//        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
+//            this.setState({
+//                teamplayers: rows
+//            });
+//        }
+//    }
 
     navigate(location, props) {
         this.props.navigation.navigate(location, props);
@@ -54,11 +53,11 @@ export default class HomeScreen extends AbstractNavigableScreen {
 
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
-        let that = this;
-        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
+//        let that = this;
+//        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
 
         // Scrape game schedule data
-        scrapeGameScheduleData();
+//        scrapeGameScheduleData();
 
         // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
         await Expo.Font.loadAsync({

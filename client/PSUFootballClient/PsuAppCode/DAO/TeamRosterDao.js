@@ -26,7 +26,7 @@ export default class TeamRosterDao {
     //  roster
     static createTeamRosterDatabase() {
 
-        //console.debug('TRDao.createTeamRosterDatabase()');
+        console.debug('TRDao.createTeamRosterDatabase()');
 
         //  This will ensure the DB exists on first load
         //  -Create our Table with the following player fields:
@@ -46,7 +46,7 @@ export default class TeamRosterDao {
             );
         });
 
-        //console.debug('leaving.... createTeamRosterDatabase()');
+        console.debug('leaving.... createTeamRosterDatabase()');
     };
 
 
@@ -56,7 +56,7 @@ export default class TeamRosterDao {
     //
     static initializeScrapedPlayers(theResultsFunction) {
 
-        //console.debug('TRDao.initializeScrapedPlayers()');
+        console.debug('TRDao.initializeScrapedPlayers()');
 
         //  Create Player_Table in database if not  already created
         this.createTeamRosterDatabase();
@@ -70,7 +70,7 @@ export default class TeamRosterDao {
         //  by the website scrape
         this.getAllPlayers(theResultsFunction);
 
-        //console.debug('leaving.... initializeScrapedPlayers()');
+        console.debug('leaving.... initializeScrapedPlayers()');
 
     };
 
@@ -82,7 +82,7 @@ export default class TeamRosterDao {
     static addSinglePlayer(name, jerseyNum, position, imageUrl, classyear,
                            hometown, heightWeight, highschool, experience, major) {
 
-        //console.debug('TRDao.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
+        console.debug('TRDao.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
 
         //  Add a single player row to the database
         psuFootballApp_db.transaction(tx => {
@@ -100,7 +100,7 @@ export default class TeamRosterDao {
     //
     static getAllPlayers(setResultsFunction) {
 
-        //console.debug('TRDao.getPlayers()');
+        console.debug('TRDao.getPlayers()');
 
         psuFootballApp_db.transaction(tx => {
                 tx.executeSql('SELECT * FROM Player_Table', [], (_, {rows: {_array} }) => {
@@ -108,7 +108,7 @@ export default class TeamRosterDao {
                 });
             }
         );
-        //console.debug('leaving.... getPlayers()');
+        console.debug('leaving.... getPlayers()');
     };
 
 
@@ -119,7 +119,7 @@ export default class TeamRosterDao {
     //
     static getSinglePlayer(playerName, theResultFunction) {
 
-        //console.debug('TRDao.getSinglePlayer()');
+        console.debug('TRDao.getSinglePlayer()');
 
         //  TODO:  Need some help here figuring out how to query and return data
         psuFootballApp_db.transaction(tx => {
@@ -129,7 +129,7 @@ export default class TeamRosterDao {
             }
         );
 
-        //console.debug('leaving.... getSinglePlayer()');
+        console.debug('leaving.... getSinglePlayer()');
     };
 
 

@@ -5,6 +5,10 @@ import Player from "../Domain/Player";
 // smitty - Add for Android Studio emulator
 //let SQLite = require('react-native-sqlite-storage');
 
+// OBSOLETE CODE    RDM 4/10/18
+// DO NOT USE
+// OBSOLETE CODE
+
 let db = SQLite.openDatabase('PsuFootballApp.db');
 
 

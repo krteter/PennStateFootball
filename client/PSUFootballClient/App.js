@@ -21,7 +21,7 @@ import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/Ticket
 import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleTableViewScreen";
 import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
 
-
+import TeamRosterDao from "./PsuAppCode/DAO/TeamRosterDao";
 import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
 
 
@@ -29,6 +29,38 @@ import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScra
 //  Main React.Component Class for PSU App
 //
 export default class App extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+                teamplayers: {}
+            };
+
+        this.resultsFunction = this.resultsFunction.bind(this);
+    }
+
+
+
+
+    resultsFunction(rows) {
+        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
+            this.setState({
+                teamplayers: rows
+            });
+        }
+    }
+
+    async componentWillMount() {
+
+        //  Scrape the player roster data from an
+        //  external web page and load it into our database.
+        let that = this;
+        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
+
+        // Scrape game schedule data
+        scrapeGameScheduleData();
+
+    }
 
     render() {
         return (
