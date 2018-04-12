@@ -49,7 +49,7 @@ export default class GameScheduleDao {
     console.debug('GameScheduleDao.addSchedule()');
     db.transaction(tx => {
       rows.forEach(game => {
-        console.debug('Inserting into SCHEDULE table -- OpponentName: ' + game.opponent);
+        //console.debug('Inserting into SCHEDULE table -- OpponentName: ' + game.opponent);
         tx.executeSql(
           'INSERT INTO schedule (gamedate, homeaway, opponent, href, imgsrc, result, score) VALUES (?, ?, ?, ?, ?, ?, ?)',
           [game.gamedate, game.homeaway, game.opponent, game.href, game.imgsrc, game.result, game.score],
