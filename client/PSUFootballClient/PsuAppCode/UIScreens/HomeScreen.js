@@ -34,7 +34,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
             teamplayers: {}
         };
         this.resultsFunction = this.resultsFunction.bind(this);
-        this.navigate = this.navigate.bind(this);
+        this.navigateWithProps = this.navigateWithProps.bind(this);
     }
 
 
@@ -46,7 +46,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
         }
     }
 
-    navigate(location, props) {
+    navigateWithProps(location, props) {
         this.props.navigation.navigate(location, props);
     }
 
@@ -82,7 +82,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
                 <View style={styles.bannerContainer}>
                     <RosterSearchBox
                         players={this.state.teamplayers}
-                        navigate={this.navigate}
+                        navigate={this.navigateWithProps}
                     />
                     <WebView
                         source={{uri: sourceESPN}}
@@ -110,11 +110,11 @@ var styles = StyleSheet.create({
     topContainer: {
         //marginTop: 24,
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'row'
     },
     bannerContainer: {
         flex: .31,
-        flexDirection: 'column'
+        flexDirection: 'row'
     },
     middleContainer: {
         flex: .63,

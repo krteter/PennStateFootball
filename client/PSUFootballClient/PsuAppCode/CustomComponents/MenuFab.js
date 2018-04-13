@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Fab, Icon} from 'native-base';
 import {StyleSheet} from "react-native";
+import {NavigationActions} from "react-navigation";
 
 export default class MenuFab extends React.Component {
 
@@ -41,16 +42,16 @@ export default class MenuFab extends React.Component {
 
         //this.props.navigate('CalendarEvent');
 
-        this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-                                                         location: 'Beaver Stadium',
-                                                         description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                                         notes: 'White-Out Game',
-                                                         eventState: 'PA'} )
+        this.props.navigation.navigate('CalendarEvent', {
+            startDateString: '2018-05-06T18:00:00.000Z',
+            location: 'Beaver Stadium',
+            description: 'PSU Nittany Lions vs. VaTech Hokies',
+            notes: 'White-Out Game',
+            eventState: 'PA'
+        })
 
 
     }  // end navigateToCalendar()
-
-
 
     render() {
         return (
@@ -90,8 +91,8 @@ export default class MenuFab extends React.Component {
                 </Button>
                 <Button style={{backgroundColor: '#7a0f69'}}>
                     <Icon
-                      name="calendar"
-                      onPress={() => this.navigate('GameSchedule')}
+                        name="calendar"
+                        onPress={() => this.navigate('GameSchedule')}
                     />
                 </Button>
                 <Button disabled style={{backgroundColor: '#26a6f4'}}>
