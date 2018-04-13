@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'native-base';
-import {Image, StyleSheet, WebView} from 'react-native';
+import {Image, StyleSheet, WebView, Text} from 'react-native';
 import Expo from "expo";
 import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
@@ -13,7 +13,7 @@ import RosterSearchBox from "../CustomComponents/RosterSearchBox";
 /*
 
 - Eventually we need to move the database here for the whole app
-  and each table for schedule, teamplayers, etc should be created
+  and each table for schedule, teamPlayers, etc should be created
   and used from this single database
 - Sandwich this in the HomeScreen or App.js class as global so
   all can access it.-  KS 4/2/18
@@ -31,7 +31,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
         this.state = {
             loading: true,
             showMsg: false,
-            teamplayers: {}
+            teamPlayers: {}
         };
         this.resultsFunction = this.resultsFunction.bind(this);
         this.navigateWithProps = this.navigateWithProps.bind(this);
@@ -41,7 +41,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
     resultsFunction(rows) {
         if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
             this.setState({
-                teamplayers: rows
+                teamPlayers: rows
             });
         }
     }
@@ -81,26 +81,21 @@ export default class HomeScreen extends AbstractNavigableScreen {
             <View style={styles.topContainer}>
                 <View style={styles.bannerContainer}>
                     <RosterSearchBox
-                        players={this.state.teamplayers}
+                        players={this.state.teamPlayers}
                         navigate={this.navigateWithProps}
                     />
                     <WebView
                         source={{uri: sourceESPN}}
                     />
                 </View>
-                <View style={styles.middleContainer}>
-                    <Image
-                        style={styles.scheduleStyle}
-                        source={require('./images/psuSchedule.png')}
-                    />
+                <Image
+                    style={styles.scheduleStyle}
+                    source={require('./images/psuSchedule.png')}
+                />
+                <View style={styles.twitterContainer}>
                     <TwitterStream/>
                 </View>
-                <View style={styles.bottomContainer}>
-                    <Image
-                        style={styles.recruitingStyle}
-                        source={require('./images/psuRecruiting.png')}/>
-                    <MenuFab navigate={this.navigate}/>
-                </View>
+                <MenuFab navigate={this.navigate}/>
             </View>
         );
     }
@@ -108,40 +103,29 @@ export default class HomeScreen extends AbstractNavigableScreen {
 
 var styles = StyleSheet.create({
     topContainer: {
-        //marginTop: 24,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'column'
     },
     bannerContainer: {
-        flex: .31,
-        flexDirection: 'row'
+        flex: 1.5,
+        flexDirection: 'column'
     },
-    middleContainer: {
-        flex: .63,
-        flexDirection: 'row'
-    },
-    bottomContainer: {
-        flex: .16,
-        flexDirection: 'row',
-    },
-    recruitingStyle: {
-        flex: .77,
-        width: null,
-        resizeMode: 'stretch',
-        height: null,
-        flexDirection: 'row'
+    twitterContainer: {
+        flex: 3.5,
+        flexDirection: 'column'
     },
     espnBanner: {
-        flex: .75,
+        flex: 1.33,
         backgroundColor: '#000'
     },
     scheduleStyle: {
+        flex: 2,
+        flexDirection: 'column',
+        backgroundColor: '#FF3366',
+    },
+    searchBox: {
         flex: .5,
-        resizeMode: 'cover',
-        backgroundColor: '#FF3366'
-    },
-    twitterStyle: {
-        flex: 1,
-        backgroundColor: '#FF3366'
-    },
+        flexDirection: 'column',
+        backgroundColor: '#000',
+    }
 });

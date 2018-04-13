@@ -1,7 +1,8 @@
 import React from 'react';
 import Autocomplete from 'react-native-autocomplete-input';
-import {Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import TeamRosterDao from "../DAO/TeamRosterDao";
+import {Icon} from "native-base";
 
 export default class RosterSearchBox extends React.Component {
     constructor(props) {
@@ -63,28 +64,42 @@ export default class RosterSearchBox extends React.Component {
         const players = this.findPlayer(query);
         const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
         return (
-            <Autocomplete
-                autoCapitalize="none"
-                autoCorrect={false}
-                containerStyle={styles.autocompleteContainer}
-                data={players.length === 1 && comp(query, players[0].name) ? [] : players}
-                defaultValue={query}
-                onChangeText={text => this.setState({query: text})}
-                placeholder="Search for a PSU Player"
-                renderItem={({name, position, jerseyNum}) => (
-                    <TouchableWithoutFeedback onPress={() => {
-                        this.navigateToPlayerBio(name);
-                        Keyboard.dismiss();
-                    }
-                    }>
-                        <View>
-                            <Text style={styles.itemText}>
-                                {name} {position} {jerseyNum}
-                            </Text>
-                        </View>
-                    </TouchableWithoutFeedback>
+            <View>
+                <Icon
+                    name={'search'}
+                    style={styles.searchIcon}
+                />
+                <Autocomplete
+                    style={styles.searchBox}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    containerStyle={styles.autocompleteContainer}
+                    data={players.length === 1 && comp(query, players[0].name) ? [] : players}
+                    defaultValue={query}
+                    onChangeText={text => this.setState({query: text})}
+                    placeholder="Search for a PSU Player"
+                    renderItem={({name, position, jerseyNum}) => (
+                        <TouchableWithoutFeedback onPress={() => {
+                            this.navigateToPlayerBio(name);
+                            Keyboard.dismiss();
+                        }
+                        }>
+                            <View>
+                                <Text style={styles.itemText}>
+                                    {name} {position} {jerseyNum}
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    )}
+                />
+                {this.state.query !== '' && (
+                    <Icon
+                    name={'md-trash'}
+                    style={styles.cancelIcon}
+                    onPress={() => this.setState({query: ''})}
+                    />
                 )}
-            />
+            </View>
         );
     }
 
@@ -95,8 +110,23 @@ export default class RosterSearchBox extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    cancelIcon: {
+        position: 'absolute',
+        width: 20,
+        top: 10,
+        right: 10,
+        zIndex: 10001
+    },
+    searchBox: {
+        backgroundColor: '#F5FCFF',
+        padding: 7,
+        paddingLeft: 35,
+        borderWidth: 2,
+        borderColor: '#000',
+    },
     container: {
         backgroundColor: '#F5FCFF',
+        marginRight: 10,
         paddingTop: 25,
         paddingBottom: 15
     },
@@ -105,7 +135,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         top: 0,
-        zIndex: 10000
+        zIndex: 10000,
     },
     itemText: {
         fontSize: 18,
@@ -136,5 +166,11 @@ const styles = StyleSheet.create({
     },
     openingText: {
         textAlign: 'center'
+    },
+    searchIcon: {
+        position: 'absolute',
+        top: 10,
+        left: 10,
+        zIndex: 10001
     }
 });

@@ -18,7 +18,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         super(props);
 
         this.state = {
-            teamplayers: {},
+            teamPlayers: {},
             selectedPlayer: '',
             sections: null
         };
@@ -54,7 +54,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         if (rows !== undefined) {       //  rows is always undefined!  KS  3/25
             //console.debug('RosterSectionList.addContentsToListArrays()....    rows is defined');
             this.setState({
-                teamplayers: rows
+                teamPlayers: rows
             });
 
             //  For now push all players into the "G" heading of the
@@ -62,7 +62,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
             //  later after we are successfully pulling all of them out
             //  of the database.  For now just clump together in 'G'......
             let name_list = [];
-            this.state.teamplayers.forEach(player => {
+            this.state.teamPlayers.forEach(player => {
                     let temp_name = player.name;
                     //console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
                     name_list.push(temp_name);

@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Fab, Icon} from 'native-base';
 import {StyleSheet} from "react-native";
-import {NavigationActions} from "react-navigation";
 
 export default class MenuFab extends React.Component {
 
@@ -27,7 +26,7 @@ export default class MenuFab extends React.Component {
                 style={[styles.fabStyle, {backgroundColor: '#717171'}]}
                 position="bottomRight"
                 onPress={() => this.setState({active: !this.state.active})}>
-                <Icon name="share"/>
+                <Icon name="menu"/>
                 <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                         name="home"
@@ -53,14 +52,14 @@ export default class MenuFab extends React.Component {
                     />
                 </Button>
                 <Button style={{backgroundColor: '#535353'}}>
-                <Icon
-                    name="calendar"
-                    onPress={() => this.navigate('GameScheduleTableView')}
-                />
-            </Button>
+                    <Icon
+                        name="calendar"
+                        onPress={() => this.navigate('GameScheduleTableView')}
+                    />
+                </Button>
                 <Button disabled style={{backgroundColor: '#0f0b40'}}>
                     <Icon
-                        name="paper"
+                        name="logo-twitter"
                         onPress={() => this.navigate('Twitter')}
                     />
                 </Button>
