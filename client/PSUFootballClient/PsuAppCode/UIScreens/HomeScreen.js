@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'native-base';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, WebView} from 'react-native';
 import Expo from "expo";
 import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
 import TeamRosterDao from "../DAO/TeamRosterDao";
@@ -84,7 +84,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
                         players={this.state.teamPlayers}
                         navigate={this.navigateWithProps}
                     />
-                    <NWebView
+                    <WebView
                         source={{uri: sourceESPN}}
                         scrollEnabled={false}
                     />
@@ -127,6 +127,7 @@ var styles = StyleSheet.create({
         flex: 1.5,
         flexDirection: 'column',
         backgroundColor: '#FF3366',
+        zIndex: 1,
     },
     searchBox: {
         flex: .5,

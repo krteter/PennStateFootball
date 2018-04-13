@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
     itemText: {
         fontSize: 18,
         margin: 2,
-        paddingTop: 2
+        paddingTop: 2,
+        paddingBottom: 2,
     },
     descriptionContainer: {
         // `backgroundColor` needs to be set otherwise the
