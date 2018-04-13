@@ -4,11 +4,10 @@ import { Table, TableWrapper, Row, Col, Rows, Cell } from 'react-native-table-co
 
 import GameScheduleDao from "../../DAO/GameScheduleDao";
 import Game from "../../Domain/Game";
-import MenuFab from "../../CustomComponents/MenuFab";
-import AbstractNavigableScreen from "../AbstractNavigableScreen";
+import TicketSearchScreen from "../GameDayInfoScreens/TicketSearchScreen";
 
 
-export default class GameScheduleTableViewScreen extends AbstractNavigableScreen {
+export default class GameScheduleTableViewScreen extends Component {
 
 
     //    Website reference for a TABLE
@@ -20,9 +19,10 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
 
     constructor(props) {
+
         super(props);
 
-        const imageItem = 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80';
+
 
 //        const elementButton = (value) => (
 //            <TouchableOpacity onPress={() => this._alertIndex(value)}>
@@ -34,99 +34,97 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
 
 
-        const cellImage = (value) => (
+        const cellLogoImage = (value) => (
 
-            <Image style={styles.imagestyle}  source={{uri: imageItem}} tableIconCol
+            <Image style={styles.imagestyle}  source={{uri: value}}
+            />
+        );
+
+
+
+        const calendarButton = (value) => (
+
+            <TouchableOpacity onPress={() => this._alertIndex(value)}>
+                <View style={styles.btn}>
+                    <Text style={styles.btnText}>Button{value}</Text>
+                </View>
+            </TouchableOpacity>
+
+
+
+        );
+
+
+        const ticketButton = (value) => (
+
+            <Button style={styles.button}
+                    title="Search For Ticket"
+                    onPress={() => this.props.navigation.navigate('TicketSearch')}
             />
         );
 
 
         this.state = {
 
-            //   we could maybe lose the header... but for now... it gives a sense of where things line
-            //   up in the rendered table.   If we want the GameSchedule to be a scrolling list of games,
-            //   we could lose the header and if we dont have separators in the table as lines... then
-            //   we could 'fake' out a table to look like a bunch of scrolling "rows" of game info.
-            //   Just a thought.
-            tableHead: ['Head', 'Head2', 'Head3', 'Head4', 'Head5', 'Head6', 'Head7'],
+            tableGameData: [],
 
-            //  Hard coded these database fields in here for now.  Just to see if I could get them
-            //  to show up in the table.   At some point we can pull in from the database and populate
-            //  this tableData array.   But again... babysteps.   that could be a separate task rather
-            //  than the render task below.
-            tableData: [
-                ['Sept 1' , '3:01pm',  'Appalachian St.', 'Home', 'A2Cal', 'FTick'],
-                ['Sept 2' , '3:02pm',  'Pittsburgh', 'Away', 'A2Cal', 'FTick'],
-                ['Sept 3' , '3:03pm', 'Kent State', 'Home', 'A2Cal', 'FTick'],
-                ['Sept 4' , '3:04pm',  'Purdue St.', 'Home', 'A2Cal', 'FTick'],
-                ['Sept 11' , '3:05pm',  'Appalachian St.', 'Home', 'A2Cal', 'FTick'],
-                ['Sept 14' , '3:06pm',  'Wisconsin', 'Away', 'A2Cal', 'FTick'],
-                ['Sept 18' , '3:07pm',  'USC', 'Away', 'A2Cal', 'FTick'],
-                ['Sept 29' , '3:08pm', 'Ball State', 'Home', 'A2Cal', 'FTick'],
-                ['Oct 13' , '3:09pm',  'Ohio State', 'Away', 'A2Cal', 'FTick'],
-                ['Oct 22' , '4:00pm',  'NY State', 'Away', 'A2Cal', 'FTick'],
-                ['Nov 1' , '5:00pm',  'Maryland', 'Home', 'A2Cal', 'FTick'],
-                ['Nov 12' , '6:00pm',   'Virginia Tech', 'Away', 'A2Cal', 'FTick'],
-                ['Nov 10' , '7:00pm',  'Arizona', 'Home', 'A2Cal', 'FTick'],
-                ['Dec 1' , '8:00pm',  'Notre Lame', 'Home', 'A2Cal', 'FTick'],
-                ['Dec 25' , '9:00pm',  'Colorado St.', 'Away', 'A2Cal', 'FTick']
-            ],
-
-
-/*
-                //   So do we need to .push() each individual item into this array
-                //   to then call each one when we want to render it.
+    //        tableIconCol: [],
 
             tableIconCol: [
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
-                [ 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80' ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80') ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/221.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2309.png&amp;h=80&amp;w=80') ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/356.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/194.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/127.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/84.png&amp;h=80&amp;w=80'  ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2294.png&amp;h=80&amp;w=80') ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/130.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/275.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/164.png&amp;h=80&amp;w=80' ) ],
+                [ cellLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/120.png&amp;h=80&amp;w=80' ) ]
             ],
-	*/
 
-            tableIconCol: [
-                [ cellImage('1') ],
-                [ cellImage('2') ],
-                [ cellImage('3') ],
-                [ cellImage('4') ],
-                [ cellImage('5') ],
-                [ cellImage('6') ],
-                [ cellImage('7') ],
-                [ cellImage('8') ],
-                [ cellImage('9') ],
-                [ cellImage('10') ],
-                [ cellImage('11') ],
-                [ cellImage('12') ],
-                [ cellImage('13') ],
-                [ cellImage('14') ],
-                [ cellImage('15') ],
-                [ cellImage('16') ],
 
+            calIconCol: [
+                [ calendarButton('1') ],
+                [ calendarButton('2') ],
+                [ calendarButton('3') ],
+                [ calendarButton('4') ],
+                [ calendarButton('5') ],
+                [ calendarButton('6') ],
+                [ calendarButton('7') ],
+                [ calendarButton('8') ],
+                [ calendarButton('9') ],
+                [ calendarButton('10') ],
+                [ calendarButton('11') ],
+                [ calendarButton('12') ]
             ],
-			
-			
-			
-			
-            tableRows: {}
-        }
 
-        this.dbResultsFunction = this.dbResultsFunction.bind(this);
+            ticketIconCol: [
+                [ ticketButton('1') ],
+                [ ticketButton('2') ],
+                [ ticketButton('3') ],
+                [ ticketButton('4') ],
+                [ ticketButton('5') ],
+                [ ticketButton('6') ],
+                [ ticketButton('7') ],
+                [ ticketButton('8') ],
+                [ ticketButton('9') ],
+                [ ticketButton('10') ],
+                [ ticketButton('11') ],
+                [ ticketButton('12') ]
+            ],
 
-    }
+            games: {}       //  rows of games from schedule DB
+
+        }  // end state
+
+
+        this.getGamesFunction = this.getGamesFunction.bind(this);
+
+    }  // end constructor
+
 
 
     _alertIndex(index) {
@@ -135,81 +133,31 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
 
     //  Method called with the Game Schedule
-    //  data returning....   TO TRY TO PULL the database info
-    //  into a tableData array structure??????   TBD code below
-    dbResultsFunction(rows) {
+    //  data returning....
+    getGamesFunction(rows) {
 
-
-        // Look for string '[class*=team-23]'. This will be our starting
-        // point for each line item in the game schedule table
-        for (let i=0; i<12; i++) {
-
-
-            // THIS IS PULLED FROM THE SCRAPER CLASS FOR REFERENCE WHEN
-            // CODING UP THIS CLASS.... RATHER THAN SWITCHING BACK AND
-            // FORTH BETWEEN EDITOR FILES... IT CAN BE DELETED.  JOHN
-            //  YOU PROBABLY KNOW THESE BY HEART ALREADY... HAHA.
-            ////////////////////////////////////////////////////
-            // Output scraped data to console - FOR DEBUGGING //
-            ////////////////////////////////////////////////////
-            // console.log(gamedate);
-            // console.log(homeaway);
-            // console.log(opponent);
-            // console.log(oppid);
-            // console.log(opphref);
-            // console.log(oppsrc);
-            // console.log(result);
-            // console.log(score);
-
-            /////////////////////////////////////////////////////////////
-            // Insert scraped data into the metadata collection object //
-            /////////////////////////////////////////////////////////////
-            // let metadata = {
-            //   OpponentTeamID: oppid,
-            //   GameDate: gamedate,
-            //   HomeAway: homeaway,
-            //   OpponentTeam: opponent,
-            //   OpponentHREF: opphref,
-            //   OpponentIMGSRC: oppsrc,
-            //   GameResult: result,
-            //   GameScore: score
-            // };
-            //
-
-
-            // Store game information in game object
-            let game = new Game(gamedate, homeaway, opponent, opphref, oppsrc, result, score);
-
-            // Store each game object into parsedResults array
-            parsedResults.push(game);
-        } // End loop
-
-
-
-
-
-
-
-        let tempTable = [];
-
+        //  Add the games to our state
         if (rows !== undefined) {
-
-
             this.setState({
-                tableRows: rows
+                games: rows
             });
         }
+    }  // end getGamesFunction()
+
+
+    componentDidMount() {
+        // Make sure the db table exists if this is the first load
+        let that = this;
+        GameScheduleDao.initGameScheduleDB(that.getGamesFunction);
     }
 
 
     componentWillMount () {
 
         // Get the Game Schedule from the database
-        GameScheduleDao.getSchedule(this.dbResultsFunction);
-
+        let that = this;
+        GameScheduleDao.getSchedule(that.getGamesFunction);
     }
-
-
 
 
 
@@ -237,57 +185,110 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
         );
 
+
+        const cLogoImage = (value) => (
+
+            <Image style={styles.imagestyle}  source={{uri: value}}
+            />
+        );
+
+
+
+        //  Now loop thru the games and get the data to  be displayed on the TableView
+        //  and put them in our table arrays to be displayed
+        let gameData = [];
+        let oppTeamIcon = [];
+
+        for (let i = 0; i < this.state.games.length; i++) {
+
+            //  game data text (default the time since TBD)
+            gameData = [this.state.games[i].gamedate, '3:00 PM', this.state.games[i].opponent , this.state.games[i].homeaway];
+            this.state.tableGameData.push(gameData);
+
+            //  game data icon url
+            console.debug('href = ' + this.state.games[i].href);
+
+            //  TODO:  JOHN CAN WE MAKE THIS THE URL of the IMAGE ICON INSTEAD OF THE TEAM URL ??????
+            //   The second statement works with the hardcoded icon.  however I am going to use the
+            //   hardcoded array of icons above for Adrian demo.   So in reality if we could change
+            //   the scraper to get the team logo icon and put into the database, I think the next statement (KS) will be the one
+            //   we need.
+        //(KS)    oppTeamIcon = [cLogoImage(this.state.games[i].href)];
+
+         //   oppTeamIcon = [cLogoImage('http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/127.png&amp;h=80&amp;w=80')];
+         //   this.state.tableIconCol.push(oppTeamIcon);
+
+        } // end for
+
+
+
         return (
             <View style={styles.container}>
-                <ScrollView vertical={true}>
 
-                    //  Clean these Buttons up for better display
-                    //  and they will get inserted into the table
-                    //  based on each game.  Listed here for demo
-                    //  purposes
-                    <View>
-                        <Button style={styles.button}
-                            title="Add Calendar Event"
-                            onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-                                location: 'Beaver Stadium',
-                                description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                notes: 'White-Out Game'} )}
-                        />
-                    </View>
-                    <View>
-                        <Button style={styles.button}
-                            title="Find Tickets For Event"
-                            onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T12:00:00.000Z',
-                                description: 'PSU Nittany Lions vs. OSU Buckeyes'} )}
-                        />
-                    </View>
+                    <ScrollView vertical={true}>
+                        {/*   <View>  */}
+                        <ImageBackground source={require('./../../../Images/FieldBackground.png')}
+                                         resizeMode='cover'
+                                         style={styles.backdrop}>
+                            <Button style={styles.button}
+                                    title="Add To Calendar"
+                                    onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
+                                                                                                    location: 'Beaver Stadium',
+                                                                                                    description: 'PSU Nittany Lions vs. VaTech Hokies',
+                                                                                                    notes: 'White-Out Game'} )}
+                            />
+                            <Button style={styles.button}
+                                    title="Search For Ticket"
+                                    onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T18:00:00.000Z',
+                                                                                                   description: 'PSU Nittany Lions vs. Ohio State Buckeyes'} )}
+                            />
+                            {/*    </View> */}
 
+                    <Text style={styles.schedtitle}>2018 Game Schedule</Text>
+                        {/* <View>  */}
 
+                        <Table borderStyle={{borderColor: 'transparent' }} style={{flexDirection: 'row'}}>
 
-                        <Text style={styles.header}> Add Event To Calendar </Text>
-                        <View>
-                            <Table borderStyle={{borderColor: '#000000'}} >
+                            {/* Left Wrapper */}
+                            <TableWrapper style={styles.tableWrap }>
+                                <TableWrapper style={{flexDirection: 'row'}}>
 
-                                <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
-
-
-                                <TableWrapper style={styles.wrapper}>
-
-                                    <Col data={state.tableIconCol}
-                                        style={styles.imagestyle}
-                                        heightArr={[50, 70, 90, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
-                                        textStyle={styles.text}/>
-
-                                    <Rows data={state.tableData}
-                                        style={styles.rowstyle}
-                                        flexArr={[2, 2, 4, 2, 1, 1]}
-                                        textStyle={styles.text}/>
+                                    <Col data={state.tableIconCol} style={styles.logocol}
+                                         heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]} textStyle={styles.titleText}/>
 
                                 </TableWrapper>
-                            </Table>
-                        </View>
+                            </TableWrapper>
+
+
+                            {/* Middle Wrapper */}
+                            <TableWrapper style={{flex:1}}>
+
+                                <Rows data={state.tableGameData} heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]} textStyle={styles.rowstyle}/>
+                            </TableWrapper>
+
+
+                            {/* Right Wrapper */}
+                            <TableWrapper style={styles.tableWrap }>
+                                <TableWrapper style={{flexDirection: 'row'}}>
+
+                                    <Col data={state.tableIconCol} style={styles.addbuttoncol}
+                                         heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]} textStyle={styles.titleText}/>
+                                    <Col data={state.tableIconCol} style={styles.ticketbuttoncol}
+                                         heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]} textStyle={styles.titleText}/>
+
+                                </TableWrapper>
+                            </TableWrapper>
+
+                        </Table>
+
+
+
+                        {/*   </View>   */}
+                    <Text style={styles.header}>remove spacer1</Text>
+                    <Text style={styles.header}>remove spacer2</Text>
+
+                        </ImageBackground>
                 </ScrollView>
-                <MenuFab navigate={this.navigate}/>
             </View>
         )
     }
@@ -296,27 +297,27 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
-        paddingTop: 30,
-        backgroundColor: '#fff',
+        padding: 2,
+        paddingTop: 10,
+        backgroundColor: '#c2ceff',
     },
-    head: {
-        height: 40,
-        backgroundColor: '#808B97',
+    tableWrap: {
+        width: 40,
+        justifyContent: 'center',
     },
-    header: {
+    schedtitle: {
         alignSelf: 'center',
         marginTop: 10,
         marginBottom: 10,
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#20159c',
+        color: '#ffffff',
     },
     text: {
         //margin: 6,
-        color: '#000000',
+        color: '#ffffff',
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 12,
     },
     wrapper: {
         flexDirection: 'row',
@@ -336,13 +337,32 @@ const styles = StyleSheet.create({
         //margin: 3,
         height: (50),
         width: 50,
-        backgroundColor: '#bbf7b4',
+        justifyContent: 'center',
+        backgroundColor: '#4cf76b',
     },
     rowstyle: {
+        flex: 1,
         justifyContent: 'center',
         height: 50,
         flexDirection: 'row',
-        backgroundColor: '#FFF1C1',
+        color: '#ffffff',
+        backgroundColor: '#fff246',
+        margin: 6,
+    },
+    logocol: {
+        flex: 1,
+        backgroundColor: '#fa3f37',
+        justifyContent: 'center',
+    },
+    addbuttoncol: {
+        flex: 1,
+        backgroundColor: '#faa7aa',
+        justifyContent: 'center',
+    },
+    ticketbuttoncol: {
+        flex: 1,
+        backgroundColor: '#fa8876',
+        justifyContent: 'center',
     },
     backdrop: {
         flex: 1,
@@ -350,12 +370,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: null,
         alignItems: 'center',
-    },
-    button: {
-        alignSelf: 'center',
-        marginVertical: 5,
-        minWidth: 200,
-        maxWidth: '95%',
     },
 });
 
@@ -375,6 +389,13 @@ const styles = StyleSheet.create({
                                                       textStyle={styles.text}/>
                                             ))
 }
+
+
+
+
+                                <Col data={state.tableGameData} heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]} textStyle={styles.text}/>
+
+
 
                                             */}
 
