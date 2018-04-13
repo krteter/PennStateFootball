@@ -12,7 +12,7 @@ export const scrapeGameScheduleData = () => {
   // DB will probably need to reside in the app service (?) so that the DB remains
   // 'alive' while the appliction is in service
   //let GameSchedule = GameScheduleDao.initGameScheduleDB();
-  GameScheduleDao.initGameScheduleDB();
+  //GameScheduleDao.initGameScheduleDB();
 
   // Using cheerio module for scraping
   const cheerio = require('react-native-cheerio');
@@ -208,10 +208,10 @@ export const scrapeGameScheduleData = () => {
       /////////////////////////////////////////////////////////////
 
       // Store game information in game object
-      let game = new Game(gamedate, gamedatezulu, homeaway, oppid, opponent, opphref, oppsrc, result, score);
+      console.debug('Adding the following information about ' + opponent)
+      GameScheduleDao.addGameSchedule(gamedate, gamedatezulu, homeaway, oppid, opponent, opphref, oppsrc, result, score);
 
       // Store each game object into parsedResults array
-      parsedResults.push(game);
     }); // End loop
 
     // Clear SQL table
@@ -221,7 +221,7 @@ export const scrapeGameScheduleData = () => {
     // GameScheduleDao.dropScheduleTbl();
 
     // Store game schedule array into the DB
-    GameScheduleDao.addSchedule(parsedResults);
+    //GameScheduleDao.addSchedule(parsedResults);
 
     // SQL Select TEST - Check to see if scraped data is getting into DB
     // GameScheduleDao.testSelect();

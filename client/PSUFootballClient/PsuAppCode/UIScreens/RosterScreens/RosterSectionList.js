@@ -64,7 +64,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
             let name_list = [];
             this.state.teamplayers.forEach(player => {
                     let temp_name = player.name;
-                    console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
+                    //console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
                     name_list.push(temp_name);
                 }
             );

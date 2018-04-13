@@ -145,6 +145,7 @@ export const getPlayerBioDataFromURL = (urlOfBioData) => {
             //  myDatabase.addPlayerBioData(data.... );
             //  Create our Team Roster database to hold our players
             //  and their respective information.
+            //console.log('Adding a player....');
             TeamRosterDao.addSinglePlayer(playerName, playerNum, playerPosition, playerImageUrl,
                                           playerClassYear, playerHometown, playerHeightWeight,
                                           playerHighSchool, playerExperience, playerMajor);

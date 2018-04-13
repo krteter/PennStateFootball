@@ -46,6 +46,7 @@ export const scrapeTeamRosterData = () => {
             //  needed for the players on the roster.
             let parsedText = rosterText;
             let keepParsingFlag = true;
+            let total_Players = 0;
             while (keepParsingFlag) {
 
 
@@ -98,9 +99,11 @@ export const scrapeTeamRosterData = () => {
                     //  Fetch the Url, scrape for data, then put
                     //  in our Team database of players
                     getPlayerBioDataFromURL(playerBioUrl);
+                    total_Players++;
 
                 } else {
                     keepParsingFlag = false;
+                    console.log('Total number of players: ' + total_Players);
                 }
 
             }  // end while keepParsingFlag

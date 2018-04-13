@@ -35,7 +35,7 @@ export default class GameScheduleScreen extends React.Component {
   componentDidMount() {
     // Make sure the db table exists if this is the first load
     let that = this;
-    GameScheduleDao.initGameScheduleDB(that.setResultsFunction);
+    //GameScheduleDao.initGameScheduleDB(that.setResultsFunction);
   }
 
   componentWillMount() {
