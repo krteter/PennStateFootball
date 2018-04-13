@@ -5,13 +5,12 @@
  */
 
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, AsyncStorage} from 'react-native';
 import {StackNavigator} from "react-navigation";
 
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
 import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
-
 import GameScheduleScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";
@@ -55,10 +54,36 @@ export default class App extends React.Component {
         //  Scrape the player roster data from an
         //  external web page and load it into our database.
         let that = this;
-        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
+        var updateDatabase = false;
 
-        // Scrape game schedule data
-        scrapeGameScheduleData();
+        try {
+            const dateOfUpdate = await AsyncStorage.getItem('@PSUfootballDBupdateDate:key');
+            console.log('Database last updated: ' + dateOfUpdate);
+            if (dateOfUpdate !== null){
+                dateOfUpdate = parseInt(dateOfUpdate);
+                //console.log('Database last updated: ' + dateOfUpdate)
+                if ((Date.now() - dateOfUpdate) > 5000){
+                //if ((Date.now() - dateOfUpdate) > 259200000){
+                    updateDatabase = true;
+                    console.log('Database is three or more days old. Updating...');
+                }
+            }
+            else if (dateOfUpdate == null){
+                console.log('Database has never been updated. Updating...');
+                updateDatabase = true;
+            }
+            else {
+                console.log('Database is not more than three days old. Continuing...')
+            }
+        } catch (error) {
+            console.log(error)
+            updateDatabase = true;
+            // Error retrieving data
+        }
+
+        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction, updateDatabase);
+
+
 
     }
 
@@ -81,9 +106,6 @@ const RootStack = StackNavigator(
         Twitter: {
             screen: TwitterScreen,
         },
-       // GameSchedule: {
-       //     screen: GameScheduleTableViewScreen,
-       // },
        GameSchedule: {
            screen: GameScheduleScreen,
        },
