@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, Platform, SectionList, StyleSheet, Text, View} from 'react-native';
-import TeamRosterDao from "../../DAO/TeamRosterDao";
+import DatabaseDAO from "../../DAO/DatabaseDAO";
 import MenuFab from "../../CustomComponents/MenuFab";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
 import Expo from "expo";
@@ -38,7 +38,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         //  table - Player_Table
         let that = this;
         console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
-        TeamRosterDao.getAllPlayers(that.addContentsToListArrays);
+        DatabaseDAO.getAllPlayers(that.addContentsToListArrays);
 
     }
 
@@ -142,7 +142,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         //  biography data for him.  Then in the results function, we
         //  will want to navigate (and populate) the PlayerBio UI with
         //  the respective data.
-        TeamRosterDao.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
+        DatabaseDAO.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
 
     } // end playerSectionListItemChosen()
 

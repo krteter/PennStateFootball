@@ -91,7 +91,7 @@ export default class MenuFab extends React.Component {
                 <Button style={{backgroundColor: '#0f0b40'}}>
                     <Icon
                       name="calendar"
-                      onPress={() => this.navigate('GameSchedule')}
+                      onPress={() => this.navigate('GameTable')}
                     />
                 </Button>
                 <Button disabled style={{backgroundColor: '#0f0b40'}}>

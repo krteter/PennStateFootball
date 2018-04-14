@@ -1,5 +1,5 @@
 import React from 'react';
-import GameScheduleDao from '../../DAO/TeamRosterDao';
+import DatabaseDAO from '../../DAO/DatabaseDAO';
 import GameSchedule from '../../UIScreens/ScheduleScreens/GameSchedule';
 //import {Text, View, ScrollView, StyleSheet} from "react-native";
 import {StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground, Button} from "react-native"
@@ -35,12 +35,12 @@ export default class GameScheduleScreen extends React.Component {
   componentDidMount() {
     // Make sure the db table exists if this is the first load
     let that = this;
-    //GameScheduleDao.initGameScheduleDB(that.setResultsFunction);
+    //DatabaseDAO.initGameScheduleDB(that.setResultsFunction);
   }
 
   componentWillMount() {
     let that = this;
-    GameScheduleDao.getSchedule(that.setResultsFunction);
+    DatabaseDAO.getSchedule(that.setResultsFunction);
   }
 
   render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Autocomplete from 'react-native-autocomplete-input';
 import {Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
-import TeamRosterDao from "../DAO/TeamRosterDao";
+import DatabaseDAO from "../DAO/DatabaseDAO";
 
 export default class RosterSearchBox extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ export default class RosterSearchBox extends React.Component {
     componentWillMount() {
         if (this.state.names === undefined) {
             let that = this;
-            TeamRosterDao.getPlayersNames(that.setPlayersNamesList);
+            DatabaseDAO.getPlayersNames(that.setPlayersNamesList);
         }
     }
 

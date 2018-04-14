@@ -20,7 +20,7 @@ import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/Ticket
 import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleTableViewScreen";
 import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
 
-import TeamRosterDao from "./PsuAppCode/DAO/TeamRosterDao";
+import DatabaseDAO from "./PsuAppCode/DAO/DatabaseDAO";
 import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
 
 
@@ -34,15 +34,11 @@ export default class App extends React.Component {
         this.state = {
                 teamplayers: {}
             };
-
         this.resultsFunction = this.resultsFunction.bind(this);
     }
 
-
-
-
     resultsFunction(rows) {
-        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
+        if (rows !== undefined) {
             this.setState({
                 teamplayers: rows
             });
@@ -50,19 +46,19 @@ export default class App extends React.Component {
     }
 
     async componentWillMount() {
-
-        //  Scrape the player roster data from an
-        //  external web page and load it into our database.
         let that = this;
+        //Database initially considered created
         var updateDatabase = false;
-
         try {
+            //Use AsyncStorage to persist the key
             const dateOfUpdate = await AsyncStorage.getItem('@PSUfootballDBupdateDate:key');
             console.log('Database last updated: ' + dateOfUpdate);
             if (dateOfUpdate !== null){
+                //Key can only be stored as a String. Make it an Integer
                 dateOfUpdate = parseInt(dateOfUpdate);
-                //console.log('Database last updated: ' + dateOfUpdate)
+                //Update the database if the database was last updated less than five seconds ago
                 if ((Date.now() - dateOfUpdate) > 5000){
+                //Update the database if the database was last updated less than three days ago
                 //if ((Date.now() - dateOfUpdate) > 259200000){
                     updateDatabase = true;
                     console.log('Database is three or more days old. Updating...');
@@ -78,13 +74,9 @@ export default class App extends React.Component {
         } catch (error) {
             console.log(error)
             updateDatabase = true;
-            // Error retrieving data
         }
-
-        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction, updateDatabase);
-
-
-
+        //Initialize the database
+        DatabaseDAO.initializeDatabase(that.resultsFunction, updateDatabase);
     }
 
     render() {
@@ -105,12 +97,6 @@ const RootStack = StackNavigator(
         },
         Twitter: {
             screen: TwitterScreen,
-        },
-       GameSchedule: {
-           screen: GameScheduleScreen,
-       },
-        TimerExample: {
-            screen: TimerExampleScreen,
         },
         AlphabetRosterList: {
             screen: RosterSectionList,
