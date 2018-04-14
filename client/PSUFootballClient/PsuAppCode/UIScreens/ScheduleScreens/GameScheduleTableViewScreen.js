@@ -68,10 +68,11 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             </TouchableOpacity>
         );
 
-        const ticketButton = (value) => (
-            <TouchableOpacity onPress={() => this._alertIndex(value)}>
+        const ticketButton = (value, opponent) => (
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: value,
+                description: 'PSU Nittany Lions vs. ' + opponent})}>
                 <View style={styles.btn}>
-                    <Text style={styles.btnText}>Tick</Text>
+                    <Text style={styles.btnText}>Tickets</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -88,7 +89,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             gameData.push(this.state.games[i].opponent);
             gameData.push(this.state.games[i].homeaway);
             gameData.push(calendarButton(i));
-            gameData.push(ticketButton(i));
+            gameData.push(ticketButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent));
             this.state.tableGameData.push(gameData);
 
             //  Add our image icon source for
@@ -98,6 +99,9 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             this.state.tableIconCol.push(oppTeamIcon);
 
         }
+
+
+
 
 
 

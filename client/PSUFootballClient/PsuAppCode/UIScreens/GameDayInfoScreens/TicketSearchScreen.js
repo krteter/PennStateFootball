@@ -83,6 +83,8 @@ export default class TicketSearchScreen extends AbstractNavigableScreen {
                             '&datetime_utc.lt=' + endString +
                             '&q=nittany+lions';
 
+        console.debug('EventQueryUrl: ' + eventQueryUrl);
+
 
         //  Fetch the EventUrl from a returned JSON response
         fetch(eventQueryUrl)
