@@ -10,7 +10,6 @@ import {StackNavigator} from "react-navigation";
 
 import HomeScreen from "./PsuAppCode/UIScreens/HomeScreen";
 import RosterSectionList from "./PsuAppCode/UIScreens/RosterScreens/RosterSectionList";
-import TimerExampleScreen from "./PsuAppCode/UIScreens/TimerExampleScreen";
 import GameScheduleScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleScreen";
 import PlayerBio from "./PsuAppCode/UIScreens/RosterScreens/PlayerBio";
 import WeatherScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/WeatherScreen";

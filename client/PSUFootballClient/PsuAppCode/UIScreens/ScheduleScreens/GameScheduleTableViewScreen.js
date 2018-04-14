@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground, Button } from 'react-native';
 import { Table, TableWrapper, Row, Col, Rows, Cell } from 'react-native-table-component';
-
 import DatabaseDAO from '../../DAO/DatabaseDAO';
-import Game from "../../Domain/Game";
 import MenuFab from "../../CustomComponents/MenuFab";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
 
@@ -58,7 +56,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
 
         const cLogoImage = (value) => (
-            <Image style={styles.imagestyle}  source={{uri: value}}
+            <Image style={styles.imagestyle}  source={{uri: value}}  key={value}
             />
         );
 
@@ -86,8 +84,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             //  game data text
             //    - default the time since TBD
             let gameData = [];
-            gameData.push(this.state.games[i].gamedate + '\n' + '3:00 PM');
-            //gameData.push('4:00 PM');
+            gameData.push(this.state.games[i].gamedate + '\n' + 'TBD');
             gameData.push(this.state.games[i].opponent);
             gameData.push(this.state.games[i].homeaway);
             gameData.push(calendarButton(i));
@@ -161,6 +158,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
                     </ImageBackground>
                 </ScrollView>
+                <MenuFab navigate={this.navigate}/>
             </View>
         )
     }

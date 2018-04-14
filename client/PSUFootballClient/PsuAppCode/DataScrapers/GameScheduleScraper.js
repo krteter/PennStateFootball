@@ -1,5 +1,4 @@
 import DatabaseDAO from "../DAO/DatabaseDAO";
-import Game from "../Domain/Game";
 
 // By default, we'll scrape schedule for current year (2018).  url variable for previous year is
 // also present but commented to allow testing of scrape consistency.  Perhaps we want to scrape
@@ -169,7 +168,7 @@ export const scrapeGameScheduleData = () => {
       }
 
       // Store game information in game object
-      console.debug('Adding the following information about ' + opponent)
+      //console.debug('Adding the following information about ' + opponent)
       DatabaseDAO.addGameSchedule(gamedate, gamedatezulu, homeaway, oppid, opponent, opphref, oppsrc, result, score);
 
 

@@ -1,5 +1,4 @@
 import {SQLite} from "expo";
-import Game from "../Domain/Game";
 import {AsyncStorage} from 'react-native';
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
@@ -67,23 +66,38 @@ export default class TeamRosterDao {
         psuFootballApp_db.transaction(tx => {
             tx.executeSql(
                 'INSERT INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major]
+                [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major],
+//                function(tx, results) {
+//                console.debug('insertId: ' + results.insertId + '; rowsAffected: ' + results.rowsAffected);
+//                }, function(e) {
+//                    console.log("ERROR: " + e.message);
+//                    console.log("Record likely exists.")
+//                   }
+
             );
         });
     };
+
+
+
+
+
+
 
     //Add a game to the schedule table. See scrapeGameScheduleData() and GameScheduleScraper.js
     static addGameSchedule(gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score) {
         //console.debug('TeamRosterDao.addGameSchedule()....    ' + opponent);
         psuFootballApp_db.transaction(tx => {
             tx.executeSql(
-              'INSERT INTO schedule (gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-              [gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score],
-              function(tx, results) {
-                console.debug('insertId: ' + results.insertId + '; rowsAffected: ' + results.rowsAffected);
-            }, function(e) {
-                             console.log("ERROR: " + e.message);
-                           });
+                'INSERT INTO schedule (gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [gamedate, gamedatezulu, homeaway, opponentid, opponent, href, imgsrc, result, score],
+//                function(tx, results) {
+//                console.debug('insertId: ' + results.insertId + '; rowsAffected: ' + results.rowsAffected);
+//                }, function(e) {
+//                    console.log("ERROR: " + e.message);
+//                    console.log("Record likely exists.")
+//                   }
+            );
         });
     }
 
