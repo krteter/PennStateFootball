@@ -79,11 +79,11 @@ export default class HomeScreen extends AbstractNavigableScreen {
         const webapp = require('./WebContent/index3.html');
         return (
             <View style={styles.topContainer}>
+                <RosterSearchBox
+                    players={this.state.teamPlayers}
+                    navigate={this.navigateWithProps}
+                />
                 <View style={styles.bannerContainer}>
-                    <RosterSearchBox
-                        players={this.state.teamPlayers}
-                        navigate={this.navigateWithProps}
-                    />
                     <WebView
                         source={{uri: sourceESPN}}
                         scrollEnabled={false}
