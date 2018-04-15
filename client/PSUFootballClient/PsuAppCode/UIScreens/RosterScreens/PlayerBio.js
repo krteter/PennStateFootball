@@ -46,25 +46,43 @@ export default class PlayerBio extends AbstractNavigableScreen {
 
 
         return (
-            <View style={styles.playercontainer}>
+            <View style={styles.pagecontainer}>
                 <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
-                    <Image
-                       style={styles.imagestyle}
-                        source={{uri: player.imageUrl }}
-                    />
+                    <View style={styles.biocontainer}>
+                        <View style={styles.biotitlecontainer}>
+                            <Text style={styles.nametext}>#{player.jerseyNum}</Text>
+                            <Text style={styles.nametext}>{player.name}</Text>
+                            <Text style={styles.nametext}>{player.position}</Text>
+                        </View>
+                        <View style={styles.biodetailscontainer}>
+                            <Image
+                               style={styles.imagestyle}
+                                source={{uri: player.imageUrl }}
+                            />
+                            <View style={styles.biotextcontainer}>
 
-                    <Text style={styles.nametext}>#{player.jerseyNum}   {player.name} </Text>
-                    <Text style={styles.playertext}>  </Text>
-                    <Text style={styles.playertext}>Position: {player.position}</Text>
-                    <Text style={styles.playertext}>Class: {player.classyear}</Text>
-                    <Text style={styles.playertext}>Height/Weight: {player.heightWeight}</Text>
-                    <Text style={styles.playertext}>Hometown: {player.hometown}</Text>
-                    <Text style={styles.playertext}>Experience: {player.experience}</Text>
-                    <Text style={styles.playertext}>Major:
-                    <Text style={styles.majortext}> {player.major}</Text>
-                    </Text>
+                                <Text style={styles.playertext}>  </Text>
+                                <Text style={styles.playertext}>Class: {player.classyear}</Text>
+                                <Text style={styles.playertext}>Height/Weight: {player.heightWeight}</Text>
+                                <Text style={styles.playertext}>Hometown: {player.hometown}</Text>
+                                <Text style={styles.playertext}>Experience: {player.experience}</Text>
+                                <Text style={styles.playertext}>Major:
+                                    <Text style={styles.majortext}> {player.major}</Text>
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.statscontainer}>
+
+                    </View>
+                    <View style={styles.recruitingcontainer}>
+
+                    </View>
+
+
+
                     <MenuFab navigate={this.navigate} />
                 </ImageBackground>
             </View>
@@ -77,17 +95,60 @@ export default class PlayerBio extends AbstractNavigableScreen {
 
 
 const styles = StyleSheet.create({
-    playercontainer: {
-        // flex: 1,
+    pagecontainer: {
+        //flex: 1,
         backgroundColor: '#0f0b40',
-        alignItems: 'center',
+        //alignItems: 'flex-start',
+        //justifyContent: 'center',
+        height: '100%',
+    },
+    biocontainer: {
+        flex: .40,
+        backgroundColor: '#0f0b40',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        height: '100%',
+    },
+    biotitlecontainer: {
+        flex: .10,
+        backgroundColor: '#0f0b40',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        height: '100%',
+    },
+    biodetailscontainer: {
+        flex: .90,
+        backgroundColor: '#0f0b40',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        height: '100%',
+    },
+    biotextcontainer: {
+        //flex: .30,
+        backgroundColor: '#0f0b40',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        height: '100%',
+    },
+    statscontainer: {
+        flex: .30,
+        backgroundColor: '#15ff00',
+        alignItems: 'flex-start',
+        //justifyContent: 'center',
+        height: '100%',
+    },
+    recruitingcontainer: {
+        flex: .3,
+        backgroundColor: '#ff0000',
+        alignItems: 'flex-start',
         //justifyContent: 'center',
         height: '100%',
     },
     imagestyle: {
-        marginTop: 90,
-        marginBottom: 40,
-        justifyContent: 'center',
+        marginTop: 10,
+        marginLeft: 10,
+        marginBottom: 10,
+        //alignItems: 'flex-start',
         width: 175,
         height: 175,
     },
@@ -95,7 +156,7 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 18,
         fontWeight: 'bold',
-        textAlign: 'center',
+        textAlign: 'left',
     },
     playertext: {
         color: '#ffffff',
@@ -114,6 +175,48 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '100%',
         height: null,
-        alignItems: 'center',
+        //alignItems: 'center',
     },
 });
+
+//const styles = StyleSheet.create({
+//    playercontainer: {
+//        //flex: 1,
+//        backgroundColor: '#0f0b40',
+//        alignItems: 'flex-start',
+//        //justifyContent: 'center',
+//        height: '100%',
+//    },
+//    imagestyle: {
+//        marginTop: 10,
+//        marginBottom: 40,
+//        alignItems: 'flex-start',
+//        width: 175,
+//        height: 175,
+//    },
+//    nametext: {
+//        color: '#ffffff',
+//        fontSize: 18,
+//        fontWeight: 'bold',
+//        textAlign: 'center',
+//    },
+//    playertext: {
+//        color: '#ffffff',
+//        fontSize: 13,
+//        fontWeight: 'bold',
+//        textAlign: 'center',
+//    },
+//    majortext: {
+//        color: '#ffffff',
+//        fontSize: 12,
+//        fontWeight: 'bold',
+//        textAlign: 'center',
+//    },
+//    backdrop: {
+//        flex: 1,
+//        flexDirection: 'column',
+//        width: '100%',
+//        height: null,
+//        alignItems: 'center',
+//    },
+//});
