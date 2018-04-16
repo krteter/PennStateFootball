@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, ImageBackground} from 'react-native';
 import TeamPlayer from "./../../Domain/TeamPlayer";
-
+import player from "./../../PlayerRecruitingProfiles/Test";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
 import MenuFab from "../../CustomComponents/MenuFab";
 
@@ -22,13 +22,15 @@ export default class PlayerBio extends AbstractNavigableScreen {
 
     async componentWillMount() {
 
-      // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
-      await Expo.Font.loadAsync({
+        Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
+
+        // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
+        await Expo.Font.loadAsync({
         'Roboto': require('native-base/Fonts/Roboto.ttf'),
         'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      });
-      this.setState({ loading:false });
-      this.setState({ active:false });
+        });
+        this.setState({ loading:false });
+        this.setState({ active:false });
     }
 
 
@@ -64,10 +66,10 @@ export default class PlayerBio extends AbstractNavigableScreen {
                             <View style={styles.biotextcontainer}>
 
                                 <Text style={styles.playertext}>  </Text>
+                                <Text style={styles.playertext}>Height / Weight: {player.heightWeight}</Text>
                                 <Text style={styles.playertext}>Class: {player.classyear}</Text>
-                                <Text style={styles.playertext}>Height/Weight: {player.heightWeight}</Text>
+                                <Text style={styles.playertext}>Eligibility: {player.experience}</Text>
                                 <Text style={styles.playertext}>Hometown: {player.hometown}</Text>
-                                <Text style={styles.playertext}>Experience: {player.experience}</Text>
                                 <Text style={styles.playertext}>Major:
                                     <Text style={styles.majortext}> {player.major}</Text>
                                 </Text>
@@ -80,8 +82,6 @@ export default class PlayerBio extends AbstractNavigableScreen {
                     <View style={styles.recruitingcontainer}>
 
                     </View>
-
-
 
                     <MenuFab navigate={this.navigate} />
                 </ImageBackground>
@@ -104,21 +104,21 @@ const styles = StyleSheet.create({
     },
     biocontainer: {
         flex: .40,
-        backgroundColor: '#0f0b40',
+        //backgroundColor: '#0f0b40',
         justifyContent: 'flex-start',
         flexDirection: 'column',
         height: '100%',
     },
     biotitlecontainer: {
-        flex: .10,
-        backgroundColor: '#0f0b40',
+        flex: .15,
+        //backgroundColor: '#0f0b40',
         justifyContent: 'space-around',
         flexDirection: 'row',
         height: '100%',
     },
     biodetailscontainer: {
-        flex: .90,
-        backgroundColor: '#0f0b40',
+        flex: .85,
+        //backgroundColor: '#0f0b40',
         justifyContent: 'flex-start',
         flexDirection: 'row',
         height: '100%',
@@ -148,21 +148,23 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 10,
         marginBottom: 10,
+        marginRight: 10,
         //alignItems: 'flex-start',
         width: 175,
         height: 175,
     },
     nametext: {
         color: '#ffffff',
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'left',
     },
     playertext: {
+        width: 170,
         color: '#ffffff',
         fontSize: 13,
         fontWeight: 'bold',
-        textAlign: 'center',
+        textAlign: 'left',
     },
     majortext: {
         color: '#ffffff',
