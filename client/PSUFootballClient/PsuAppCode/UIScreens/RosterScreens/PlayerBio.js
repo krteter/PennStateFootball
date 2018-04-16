@@ -1,9 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, ImageBackground} from 'react-native';
 import TeamPlayer from "./../../Domain/TeamPlayer";
-import player from "./../../PlayerRecruitingProfiles/Test";
+//import player from "../../PlayerRecruitingProfiles/Test";
+//import player from "PSUFootballClient/PlayerRecruitingProfiles/Test";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
+//import player from "../PlayerRecruitingProfiles/Test"
 import MenuFab from "../../CustomComponents/MenuFab";
+import test from "../WebContent/index3";
+//client/PSUFootballClient/PsuAppCode/UIScreens/WebContent/index3.html
+//client/PSUFootballClient/PsuAppCode/UIScreens/RosterScreens/PlayerBio.js
+
 
 
 
