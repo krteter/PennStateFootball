@@ -11,14 +11,6 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
     constructor(props) {
         super(props);
 
-        const imageItem = 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80';
-
-        const cellImage = (value) => (
-
-            <Image style={styles.imagestyle}  source={{uri: imageItem}} tableIconCol
-            />
-        );
-
         this.state = {
 
             tableGameData: [],
@@ -100,17 +92,6 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
         return (
             <View style={styles.container}>
 
@@ -122,14 +103,14 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                         <Button style={styles.button}
                                 title="Add To Calendar"
                                 onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-                                                                                                location: 'Beaver Stadium',
-                                                                                                description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                                                                                notes: 'White-Out Game'} )}
+                                    location: 'Beaver Stadium',
+                                    description: 'PSU Nittany Lions vs. VaTech Hokies',
+                                    notes: 'White-Out Game'} )}
                         />
                         <Button style={styles.button}
                                 title="Search For Ticket"
                                 onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T18:00:00.000Z',
-                                                                                               description: 'PSU Nittany Lions vs. Ohio State Buckeyes'} )}
+                                    description: 'PSU Nittany Lions vs. Ohio State Buckeyes'} )}
                         />
 
                         <Text style={styles.schedtitle}>2018 Game Schedule</Text>
@@ -237,6 +218,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-
-
-

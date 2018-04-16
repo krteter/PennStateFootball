@@ -50,12 +50,12 @@ export default class PlayerBio extends AbstractNavigableScreen {
                 <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
+                    <Text style={styles.nametext}>#{player.jerseyNum}   {player.name} </Text>
+
                     <Image
                        style={styles.imagestyle}
                         source={{uri: player.imageUrl }}
                     />
-
-                    <Text style={styles.nametext}>#{player.jerseyNum}   {player.name} </Text>
                     <Text style={styles.playertext}>  </Text>
                     <Text style={styles.playertext}>Position: {player.position}</Text>
                     <Text style={styles.playertext}>Class: {player.classyear}</Text>
@@ -85,27 +85,28 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     imagestyle: {
-        marginTop: 90,
-        marginBottom: 40,
+        marginTop: 40,
+        marginBottom: 25,
         justifyContent: 'center',
         width: 175,
         height: 175,
     },
     nametext: {
         color: '#ffffff',
-        fontSize: 18,
+        marginTop: 70,
+        fontSize: 26,
         fontWeight: 'bold',
         textAlign: 'center',
     },
     playertext: {
         color: '#ffffff',
-        fontSize: 13,
+        fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
     },
     majortext: {
         color: '#ffffff',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center',
     },

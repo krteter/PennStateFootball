@@ -2,6 +2,9 @@ import React from 'react';
 import {Alert, Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 //import {Button} from 'native-base';
 import RNCalendarEvents from 'react-native-calendar-events';
+import Calendar from 'expo';
+
+
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
 import MenuFab from "../CustomComponents/MenuFab";
 
@@ -60,16 +63,32 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
             let ending = eventStartString.substr(13,eventStartString.length-1);
             let endDateString = beginning + endTimeHour + ending;
 
-
+            console.debug('AddCalendarEvent start:' + eventStartString + '     end: ' + endDateString);
 
             //  Add the respective event to our device's
             //  Calendar App
             //      reference:   https://github.com/wmcmahan/react-native-calendar-events/blob/master/README.md#saveevent
+//            RNCalendarEvents.saveEvent(this.state.description, { startDate: eventStartString,
+//                                                                 endDate:   endDateString,
+//                                                                 location: this.state.location,
+//                                                                 description: this.state.description,
+//                                                                 notes: this.state.notes });
+
             RNCalendarEvents.saveEvent(this.state.description, { startDate: eventStartString,
-                                                                 endDate:   endDateString,
-                                                                 location: this.state.location,
-                                                                 description: this.state.description,
-                                                                 notes: this.state.notes });
+                endDate:   endDateString,
+                location: 'Beaver Stadium',
+                description: 'PSU Nittany Lions vs. VaTech Hokies',
+                notes: 'White-Out Game' });
+
+
+            //  This is the Expo package way of doing it.
+            //let calendarId = Expo.Calendar.DEFAULT;
+            //let myCalendar = new Calendar();
+
+            //Expo.Calendar.createEventAsync(calendarId, details);
+            //https://docs.expo.io/versions/latest/sdk/calendar.html#details-object---a-map-of-details-for-the-event-to-be-created-see-below-for-a-description-of-these-fieldstitle-stringstartdate-date----requiredenddate-date----required-on-androidallday-booleanlocation-stringnotes-stringalarms-arrayalarmrecurrencerule-recurrenceruleavailability-stringtimezone-string----required-on-androidendtimezone-string----android-onlyurl-string----ios-onlyorganizeremail-string----android-onlyaccesslevel-string----android-onlyguestscanmodify-boolean----android-onlyguestscaninviteothers-boolean----android-onlyguestscanseeguests-boolean----android-only
+
+
 
             // Set the Component's Button state to 'Done'
             this.setState({
@@ -98,8 +117,8 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
         });
 
 
-/*   this works for android simulator, but giving me
-     problems on my OS phone
+//   this works for android simulator, but giving me
+//     problems on my OS phone
 
 
         // Let's get access before doing anything
@@ -130,8 +149,6 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
             .catch(error => console.warn('Auth Error: ', error));
 
-
-             */
 
 
     }   // end componentWillMount()
@@ -193,13 +210,13 @@ const styles = StyleSheet.create({
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
-        fontSize: 12,
+        fontSize: 24,
         fontWeight: 'bold',
         color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
-        fontSize: 11,
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#ffffff',
     },
