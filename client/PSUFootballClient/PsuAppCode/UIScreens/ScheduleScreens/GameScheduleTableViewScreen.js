@@ -19,6 +19,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             />
         );
 
+
         this.state = {
 
             tableGameData: [],
@@ -59,6 +60,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             <Image style={styles.imagestyle}  source={{uri: value}}  key={value}
             />
         );
+
 
         const calendarButton = (startdate, opponent, location) => (
             // <TouchableOpacity onPress={() => this._alertIndex(value)}>
@@ -129,6 +131,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                     <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                      resizeMode='cover'
                                      style={styles.backdrop}>
+
                         {/* <Button style={styles.button}
                                 title="Add To Calendar"
                                 // '2018-05-06T18:00:00.000Z'
@@ -140,12 +143,14 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                         <Button style={styles.button}
                                 title="Search For Ticket"
                                 onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T18:00:00.000Z',
+
                                                                                                description: 'PSU Nittany Lions vs. Ohio State Buckeyes'} )}
                         /> */}
 
                         <Text style={styles.schedtitle}>2018 Game Schedule</Text>
 
                         <Table borderStyle={{borderColor: 'transparent' }} style={{flexDirection: 'row'}}>
+
 
                             {/* Left TableWrapper */}
                             <TableWrapper style={styles.tableWrap }>
@@ -159,7 +164,9 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                             {/* Right Table */}
                             <Table  style={{flex: 1}}>
                                 <Rows data={this.state.tableGameData}
+
                                       widthArr={[80, 85, 55, 55, 55]}
+
                                       heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
                                       textStyle={styles.rowstyle}/>
                             </Table>
@@ -248,3 +255,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
+

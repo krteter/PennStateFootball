@@ -2,8 +2,7 @@ import React from 'react';
 import {View} from 'native-base';
 import {Image, StyleSheet, WebView} from 'react-native';
 import Expo from "expo";
-import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
-import TeamRosterDao from "../DAO/TeamRosterDao";
+
 import MenuFab from "../CustomComponents/MenuFab";
 import TwitterStream from "./TwitterFeedScreen/TwitterStream";
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
@@ -13,7 +12,7 @@ import RosterSearchBox from "../CustomComponents/RosterSearchBox";
 /*
 
 - Eventually we need to move the database here for the whole app
-  and each table for schedule, teamplayers, etc should be created
+  and each table for schedule, teamPlayers, etc should be created
   and used from this single database
 - Sandwich this in the HomeScreen or App.js class as global so
   all can access it.-  KS 4/2/18
@@ -31,35 +30,15 @@ export default class HomeScreen extends AbstractNavigableScreen {
         this.state = {
             loading: true,
             showMsg: false,
-            teamplayers: {}
         };
-        this.resultsFunction = this.resultsFunction.bind(this);
-        this.navigate = this.navigate.bind(this);
+        this.navigateWithProps = this.navigateWithProps.bind(this);
     }
 
-
-    resultsFunction(rows) {
-        if (rows !== undefined) {         //  rows keeps being undefined here! KS  3/23
-            this.setState({
-                teamplayers: rows
-            });
-        }
-    }
-
-    navigate(location, props) {
+    navigateWithProps(location, props) {
         this.props.navigation.navigate(location, props);
     }
 
     async componentWillMount() {
-
-        //  Scrape the player roster data from an
-        //  external web page and load it into our database.
-        let that = this;
-        TeamRosterDao.initializeScrapedPlayers(that.resultsFunction);
-
-        // Scrape game schedule data
-        scrapeGameScheduleData();
-
         // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.
         await Expo.Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -75,32 +54,25 @@ export default class HomeScreen extends AbstractNavigableScreen {
             return <Expo.AppLoading/>;
         }
         let sourceESPN = 'https://www.espn.com/college-football/game?gameId=400953407';
-        // Placeholer for the schedule. Can be modified to update automatically. Does not currently fit in the view.
-        const webapp = require('./WebContent/index3.html');
         return (
             <View style={styles.topContainer}>
+                <RosterSearchBox
+                    navigateWithProps={this.navigateWithProps}
+                />
                 <View style={styles.bannerContainer}>
-                    <RosterSearchBox
-                        players={this.state.teamplayers}
-                        navigate={this.navigate}
-                    />
                     <WebView
                         source={{uri: sourceESPN}}
+                        scrollEnabled={false}
                     />
                 </View>
-                <View style={styles.middleContainer}>
-                    <Image
-                        style={styles.scheduleStyle}
-                        source={require('./images/psuSchedule.png')}
-                    />
+                <Image
+                    style={styles.scheduleStyle}
+                    source={require('./images/psuSchedule.png')}
+                />
+                <View style={styles.twitterContainer}>
                     <TwitterStream/>
                 </View>
-                <View style={styles.bottomContainer}>
-                    <Image
-                        style={styles.recruitingStyle}
-                        source={require('./images/psuRecruiting.png')}/>
-                    <MenuFab navigate={this.navigate}/>
-                </View>
+                <MenuFab navigate={this.navigate}/>
             </View>
         );
     }
@@ -108,40 +80,34 @@ export default class HomeScreen extends AbstractNavigableScreen {
 
 var styles = StyleSheet.create({
     topContainer: {
-        //marginTop: 24,
         flex: 1,
         flexDirection: 'column'
     },
     bannerContainer: {
-        flex: .31,
+        flex: 1.5,
+        flexDirection: 'column',
+        borderBottomWidth: 1,
+        borderColor: '#636363',
+    },
+    twitterContainer: {
+        borderTopWidth: 1,
+        borderColor: '#636363',
+        flex: 4,
         flexDirection: 'column'
     },
-    middleContainer: {
-        flex: .63,
-        flexDirection: 'row'
-    },
-    bottomContainer: {
-        flex: .16,
-        flexDirection: 'row',
-    },
-    recruitingStyle: {
-        flex: .77,
-        width: null,
-        resizeMode: 'stretch',
-        height: null,
-        flexDirection: 'row'
-    },
     espnBanner: {
-        flex: .75,
+        flex: 1.33,
         backgroundColor: '#000'
     },
     scheduleStyle: {
+        flex: 1.5,
+        flexDirection: 'column',
+        backgroundColor: '#FF3366',
+        zIndex: 1,
+    },
+    searchBox: {
         flex: .5,
-        resizeMode: 'cover',
-        backgroundColor: '#FF3366'
-    },
-    twitterStyle: {
-        flex: 1,
-        backgroundColor: '#FF3366'
-    },
+        flexDirection: 'column',
+        backgroundColor: '#000',
+    }
 });

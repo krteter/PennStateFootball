@@ -1,5 +1,4 @@
-import GameScheduleDao from "../DAO/GameScheduleDao";
-import Game from "../Domain/Game";
+import DatabaseDAO from "../DAO/DatabaseDAO";
 
 // By default, we'll scrape schedule for current year (2018).  url variable for previous year is
 // also present but commented to allow testing of scrape consistency.  Perhaps we want to scrape
@@ -8,16 +7,9 @@ export const scrapeGameScheduleData = () => {
 
   console.debug('scrapeGameScheduleData()');
 
-  // For now we will create the Game DB here. In the final version, creation of the
-  // DB will probably need to reside in the app service (?) so that the DB remains
-  // 'alive' while the appliction is in service
-  //let GameSchedule = GameScheduleDao.initGameScheduleDB();
-  GameScheduleDao.initGameScheduleDB();
-
   // Using cheerio module for scraping
   const cheerio = require('react-native-cheerio');
   let url = 'http://www.espn.com/college-football/team/schedule/_/id/213';
-  //let url = 'http://www.espn.com/college-football/team/schedule/_/id/213/year/2017';
 
   return fetch(url)
   .then(response => response.text())
@@ -174,58 +166,13 @@ export const scrapeGameScheduleData = () => {
       } else {
         result = str3.substring(1);
       }
-      ////////////////////////////////////////////////////
-      // Output scraped data to console - FOR DEBUGGING //
-      ////////////////////////////////////////////////////
-      // console.log(gamedate);
-      // console.log(homeaway);
-      // console.log(opponent);
-      // console.log(oppid);
-      // console.log(opphref);
-      // console.log(oppsrc);
-      // console.log(result);
-      // console.log(score);
-
-      /////////////////////////////////////////////////////////////
-      // Insert scraped data into the metadata collection object //
-      /////////////////////////////////////////////////////////////
-      // let metadata = {
-      //   OpponentTeamID: oppid,
-      //   GameDate: gamedate,
-      //   HomeAway: homeaway,
-      //   OpponentTeam: opponent,
-      //   OpponentHREF: opphref,
-      //   OpponentIMGSRC: oppsrc,
-      //   GameResult: result,
-      //   GameScore: score
-      // };
-      //
-      // // Push metadata into parsedResults array
-      // parsedResults.push(metadata);
-      // // Output data array to console
-      // console.log(parsedResults);
-
-      /////////////////////////////////////////////////////////////
 
       // Store game information in game object
-      let game = new Game(gamedate, gamedatezulu, homeaway, oppid, opponent, opphref, oppsrc, result, score);
+      //console.debug('Adding the following information about ' + opponent)
+      DatabaseDAO.addGameSchedule(gamedate, gamedatezulu, homeaway, oppid, opponent, opphref, oppsrc, result, score);
 
-      // Store each game object into parsedResults array
-      parsedResults.push(game);
-    }); // End loop
 
-    // Clear SQL table
-    GameScheduleDao.clearScheduleTbl();
-
-    // Drop SQl table
-    // GameScheduleDao.dropScheduleTbl();
-
-    // Store game schedule array into the DB
-    GameScheduleDao.addSchedule(parsedResults);
-
-    // SQL Select TEST - Check to see if scraped data is getting into DB
-    // GameScheduleDao.testSelect();
-
+    });
     console.debug('leaving... scrapeGameScheduleData()');
-  }); // End function()
-} // End scrapeGameScheduleData()
+  });
+}

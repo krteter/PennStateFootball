@@ -2,6 +2,9 @@ import React from 'react';
 import {Alert, Button, StyleSheet, Text, View, ImageBackground} from 'react-native';
 //import {Button} from 'native-base';
 import RNCalendarEvents from 'react-native-calendar-events';
+import Calendar from 'expo';
+
+
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
 import MenuFab from "../CustomComponents/MenuFab";
 
@@ -73,9 +76,11 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
             // console.debug('Event Start: ' + startDatetime.toUTCString());
             // console.debug('Event End: ' + endDatetime.toUTCString());
 
+
             //  Add the respective event to our device's
             //  Calendar App
             //      reference:   https://github.com/wmcmahan/react-native-calendar-events/blob/master/README.md#saveevent
+
             // RNCalendarEvents.saveEvent(this.state.description, { startDate: eventStartString,
             //                                                      endDate:   endDateString,
             //                                                      location: this.state.location,
@@ -85,6 +90,7 @@ export default class AddCalendarEventScreen extends AbstractNavigableScreen {
 
             // RNCalendarEvents.saveEvent('title test', { startDate: eventStartString.replace(/-/g,'').replace(/:/g,'').replace('.000',''),
             //                                            endDate: endDateString.replace(/-/g,'').replace(/:/g,'').replace('.000','') });
+
 
             // Set the Component's Button state to 'Done'
             this.setState({
@@ -203,13 +209,13 @@ const styles = StyleSheet.create({
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
-        fontSize: 12,
+        fontSize: 24,
         fontWeight: 'bold',
         color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
-        fontSize: 11,
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#ffffff',
     },

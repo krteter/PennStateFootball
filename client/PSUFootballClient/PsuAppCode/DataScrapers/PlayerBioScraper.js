@@ -1,4 +1,4 @@
-import TeamRosterDao from "../DAO/TeamRosterDao";
+import DatabaseDAO from "../DAO/DatabaseDAO";
 
 
 //
@@ -145,7 +145,8 @@ export const getPlayerBioDataFromURL = (urlOfBioData) => {
             //  myDatabase.addPlayerBioData(data.... );
             //  Create our Team Roster database to hold our players
             //  and their respective information.
-            TeamRosterDao.addSinglePlayer(playerName, playerNum, playerPosition, playerImageUrl,
+            //console.log('Adding a player....');
+            DatabaseDAO.addSinglePlayer(playerName, playerNum, playerPosition, playerImageUrl,
                                           playerClassYear, playerHometown, playerHeightWeight,
                                           playerHighSchool, playerExperience, playerMajor);
 

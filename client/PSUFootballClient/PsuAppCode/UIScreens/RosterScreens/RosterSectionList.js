@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, Platform, SectionList, StyleSheet, Text, View} from 'react-native';
-import TeamRosterDao from "../../DAO/TeamRosterDao";
+import DatabaseDAO from "../../DAO/DatabaseDAO";
 import MenuFab from "../../CustomComponents/MenuFab";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
 import Expo from "expo";
@@ -18,7 +18,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         super(props);
 
         this.state = {
-            teamplayers: {},
+            teamPlayers: {},
             selectedPlayer: '',
             sections: null
         };
@@ -37,8 +37,8 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         //  Add the players to our scroll list from our database
         //  table - Player_Table
         let that = this;
-        //console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
-        TeamRosterDao.getAllPlayers(that.addContentsToListArrays);
+        console.debug('RosterSectionList.componentDidMount()....    Getting all players...');
+        DatabaseDAO.getAllPlayers(that.addContentsToListArrays);
 
     }
 
@@ -48,13 +48,13 @@ export default class RosterSectionList extends AbstractNavigableScreen {
     //  players
     addContentsToListArrays(rows) {
 
-        //console.debug('RosterSectionList.addContentsToListArrays()....    ');
+        console.debug('RosterSectionList.addContentsToListArrays()....    ');
         //  I need to figure out why or how I can get this to
         //  have row not equal to undefined... always is... AHHHHHH!
         if (rows !== undefined) {       //  rows is always undefined!  KS  3/25
-            //console.debug('RosterSectionList.addContentsToListArrays()....    rows is defined');
+            console.debug('RosterSectionList.addContentsToListArrays()....    rows is defined');
             this.setState({
-                teamplayers: rows
+                teamPlayers: rows
             });
 
             //  For now push all players into the "G" heading of the
@@ -62,7 +62,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
             //  later after we are successfully pulling all of them out
             //  of the database.  For now just clump together in 'G'......
             let name_list = [];
-            this.state.teamplayers.forEach(player => {
+            this.state.teamPlayers.forEach(player => {
                     let temp_name = player.name;
                     //console.debug('RosterSectionList.addContentsToListArrays()....    temp_name is: ' + temp_name);
                     name_list.push(temp_name);
@@ -109,7 +109,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
 
         if (dbPulledPlayer !== undefined) {
 
-            //console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
+            console.debug('RosterSectionList.getSinglePlayerResultsFunction()....    dbPulledPlayer is: ' + dbPulledPlayer.name);
 
 
             // set the returned player to our local state instance
@@ -134,7 +134,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
 
         //  Get the requested player's data from the database
         let that = this;
-        //console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
+        console.debug('RosterSectionList.playerSectionListItemChosen()....    requestedPlayer is: ' + requestedPlayer);
         //requestedPlayer = 'Nick Bowers';   //hard code for now.. to see if we can get it out of DBase
 
         //  We want to use the name to pull that player from our
@@ -142,7 +142,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
         //  biography data for him.  Then in the results function, we
         //  will want to navigate (and populate) the PlayerBio UI with
         //  the respective data.
-        TeamRosterDao.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
+        DatabaseDAO.getSinglePlayer(requestedPlayer, that.getSinglePlayerResultsFunction);
 
     } // end playerSectionListItemChosen()
 

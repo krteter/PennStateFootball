@@ -83,6 +83,8 @@ export default class TicketSearchScreen extends AbstractNavigableScreen {
                             '&datetime_utc.lt=' + endString +
                             '&q=nittany+lions';
 
+        console.debug('EventQueryUrl: ' + eventQueryUrl);
+
 
         //  Fetch the EventUrl from a returned JSON response
         fetch(eventQueryUrl)
@@ -210,20 +212,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         //marginTop: 50,
         //marginBottom: 40,
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: 'bold',
         color: '#ffffff',
     },
     eventdescription: {
         alignSelf: 'center',
         marginBottom: 10,
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#ffffff',
     },
     eventdetails: {
         alignSelf: 'center',
-        fontSize: 11,
+        fontSize: 14,
         fontWeight: 'bold',
         color: '#ffffff',
     },
