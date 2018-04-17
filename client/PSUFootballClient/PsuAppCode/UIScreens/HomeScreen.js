@@ -1,12 +1,14 @@
 import React from 'react';
 import {View} from 'native-base';
-import {Image, StyleSheet, WebView} from 'react-native';
+import {ImageBackground, StyleSheet, Text, WebView} from 'react-native';
 import Expo from "expo";
 
 import MenuFab from "../CustomComponents/MenuFab";
 import TwitterStream from "./TwitterFeedScreen/TwitterStream";
 import AbstractNavigableScreen from "./AbstractNavigableScreen";
 import RosterSearchBox from "../CustomComponents/RosterSearchBox";
+import GameScheduleTable from "./ScheduleScreens/GameScheduleTable";
+import DatabaseDAO from '../DAO/DatabaseDAO';
 
 
 /*
@@ -30,8 +32,10 @@ export default class HomeScreen extends AbstractNavigableScreen {
         this.state = {
             loading: true,
             showMsg: false,
+            games: []
         };
         this.navigateWithProps = this.navigateWithProps.bind(this);
+        this.getGamesFunction = this.getGamesFunction.bind(this);
     }
 
     navigateWithProps(location, props) {
@@ -46,6 +50,19 @@ export default class HomeScreen extends AbstractNavigableScreen {
         });
 
         this.setState({loading: false});
+
+        let that = this;
+        DatabaseDAO.getNextTwoScheduledGames(that.getGamesFunction);
+    }
+
+    getGamesFunction(rows) {
+
+        //  Add the games to our state
+        if (rows !== undefined) {
+            this.setState({
+                games: rows
+            });
+        }
     }
 
     render() {
@@ -65,10 +82,14 @@ export default class HomeScreen extends AbstractNavigableScreen {
                         scrollEnabled={false}
                     />
                 </View>
-                <Image
-                    style={styles.scheduleStyle}
-                    source={require('./images/psuSchedule.png')}
-                />
+                <View style={styles.scheduleStyle}>
+                    <ImageBackground source={require('./../../Images/FieldBackground.png')}
+                                     resizeMode='cover'
+                                     style={scheduleStyles.backdrop}>
+                        <Text style={styles.scheduleHeader}>Upcoming Games</Text>
+                        <GameScheduleTable styles={scheduleStyles} games={this.state.games}/>
+                    </ImageBackground>
+                </View>
                 <View style={styles.twitterContainer}>
                     <TwitterStream/>
                 </View>
@@ -100,14 +121,90 @@ var styles = StyleSheet.create({
         backgroundColor: '#000'
     },
     scheduleStyle: {
-        flex: 1.5,
+        flex: 1.48,
         flexDirection: 'column',
-        backgroundColor: '#FF3366',
         zIndex: 1,
+        paddingTop: 2,
+        paddingBottom: 2,
     },
     searchBox: {
         flex: .5,
         flexDirection: 'column',
         backgroundColor: '#000',
+    },
+    scheduleHeader: {
+        color:  '#ffffff',
+        textAlign: 'center',
     }
+
+});
+
+const scheduleStyles = StyleSheet.create({
+    header: {
+        color: '#bbf7b4',
+    },
+    container: {
+        flex: 1,
+        padding: 2,
+        paddingTop: 10,
+        backgroundColor: '#0f0b40',
+    },
+    tableWrap: {
+        width: 40,
+        justifyContent: 'center',
+    },
+    schedtitle: {
+        alignSelf: 'center',
+        marginTop: 50,
+        marginBottom: 40,
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#ffffff',
+    },
+    wrapper: {
+        flexDirection: 'row',
+    },
+    btn: {
+        width: 35,
+        height: 18,
+        backgroundColor: '#78B7BB',
+        borderRadius: 2,
+    },
+    btnText: {
+        textAlign: 'center',
+        color: '#fff',
+    },
+    imagestyle: {
+        flex: 1,
+        //margin: 3,
+        height: 90,
+        width: 90,
+        justifyContent: 'center',
+        backgroundColor: '#4cf76b',
+    },
+    rowstyle: {
+        flex: 1,
+        justifyContent: 'center',
+        height: 50,
+        flexDirection: 'row',
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#ffffff',
+        margin: 6,
+        textAlign: 'center',
+        alignItems: 'center',
+        marginTop: 6,
+    },
+    logocol: {
+        flex: 1,
+        //backgroundColor: '#ffffff',
+        justifyContent: 'center',
+    },
+    backdrop: {
+        flex: 1,
+        flexDirection: 'column',
+        width: '100%',
+        height: null,
+        alignItems: 'center',
+    },
 });

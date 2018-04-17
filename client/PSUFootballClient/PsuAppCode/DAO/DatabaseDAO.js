@@ -129,16 +129,30 @@ export default class TeamRosterDao {
 
     //It does what it says it does
     static getSchedule(setResultsFunction) {
-    console.debug('DatabaseDAO.getSchedule()');
-    psuFootballApp_db.transaction(tx => {
-        tx.executeSql('SELECT * FROM schedule', [], (_, {rows: {_array} }) => {
-            setResultsFunction(_array)
-            //Debug code to make sure we aren't creating extra records
-            console.debug('# of records in SCHEDULE table: ' + _array.length);
-      });
-    }, function(e) {
-      console.log("ERROR: " + e.message);
-    });
-    console.debug('leaving... DatabaseDAO.getSchedule()');
+        console.debug('DatabaseDAO.getSchedule()');
+        psuFootballApp_db.transaction(tx => {
+            tx.executeSql('SELECT * FROM schedule', [], (_, {rows: {_array}}) => {
+                setResultsFunction(_array)
+                //Debug code to make sure we aren't creating extra records
+                console.debug('# of records in SCHEDULE table: ' + _array.length);
+            });
+        }, function (e) {
+            console.log("ERROR: " + e.message);
+        });
+        console.debug('leaving... DatabaseDAO.getSchedule()');
+    }
+    //It does what it says it does
+    static getNextTwoScheduledGames(setResultsFunction) {
+        console.debug('DatabaseDAO.getNextTwoScheduledGames()');
+        psuFootballApp_db.transaction(tx => {
+            tx.executeSql('SELECT * FROM schedule WHERE gamedate > ? ORDER BY gamedatezulu LIMIT 2', [Date.now()], (_, {rows: {_array} }) => {
+                setResultsFunction(_array);
+                //Debug code to make sure we aren't creating extra records
+                console.debug('# of records in SCHEDULE table: ' + _array.length);
+            });
+        }, function(e) {
+            console.log("ERROR: " + e.message);
+        });
+        console.debug('leaving... DatabaseDAO.getNextTwoScheduledGames()');
     }
 }

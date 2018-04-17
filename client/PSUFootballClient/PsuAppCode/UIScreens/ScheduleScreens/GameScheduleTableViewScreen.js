@@ -1,24 +1,15 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView, Image, ImageBackground, Button } from 'react-native';
-import { Table, TableWrapper, Row, Col, Rows, Cell } from 'react-native-table-component';
+import React from 'react';
+import {ImageBackground, ScrollView, StyleSheet, Text, View} from 'react-native';
 import DatabaseDAO from '../../DAO/DatabaseDAO';
 import MenuFab from "../../CustomComponents/MenuFab";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
+import GameScheduleTable from "./GameScheduleTable";
 
 
 export default class GameScheduleTableViewScreen extends AbstractNavigableScreen {
 
     constructor(props) {
         super(props);
-
-        const imageItem = 'http://a.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/2026.png&amp;h=80&amp;w=80';
-
-        const cellImage = (value) => (
-
-            <Image style={styles.imagestyle}  source={{uri: imageItem}} tableIconCol
-            />
-        );
-
 
         this.state = {
 
@@ -32,10 +23,6 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
     }
 
-    _alertIndex(index) {
-        Alert.alert(`This is row ${index + 1}`);
-    }
-
     getGamesFunction(rows) {
 
         //  Add the games to our state
@@ -46,7 +33,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
         }
     }
 
-    componentWillMount () {
+    componentWillMount() {
 
         // Get the Game Schedule from the database
         let that = this;
@@ -56,72 +43,6 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
     render() {
 
 
-        const cLogoImage = (value) => (
-            <Image style={styles.imagestyle}  source={{uri: value}}  key={value}
-            />
-        );
-
-
-        const calendarButton = (startdate, opponent, location) => (
-            // <TouchableOpacity onPress={() => this._alertIndex(value)}>
-            //     <View style={styles.btn}>
-            //         <Text style={styles.btnText}>Cal</Text>
-            //     </View>
-            // </TouchableOpacity>
-
-            // let gameLocation = 'test';
-
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: startdate,
-                location: location,
-                description: 'PSU Nittany Lions vs. ' + opponent,
-                notes: 'PSU Nittany Lions vs. ' + opponent} )}>
-                <View style={styles.btn}>
-                    <Text style={styles.btnText}>Cal</Text>
-                </View>
-            </TouchableOpacity>
-        );
-
-        const ticketButton = (value, opponent) => (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: value,
-                description: 'PSU Nittany Lions vs. ' + opponent})}>
-                <View style={styles.btn}>
-                    <Text style={styles.btnText}>Tix</Text>
-                </View>
-            </TouchableOpacity>
-        );
-
-
-        //  Now loop thru the games and get the data to  be displayed on the TableView
-        //  and put them in our table arrays to be displayed
-        for (let i = 0; i < this.state.games.length; i++) {
-
-            //  game data text
-            //    - default the time since TBD
-            let gameData = [];
-            gameData.push(this.state.games[i].gamedate + '\n' + 'TBD');
-            gameData.push(this.state.games[i].opponent);
-            gameData.push(this.state.games[i].homeaway);
-
-            /////////////////////////////////////////////
-            // gameData.push(calendarButton(i));
-            let gameLocation = '';
-            if (this.state.games[i].homeaway == 'Home') {
-              gameLocation = '@Beaver Stadium'
-            } else if (this.state.games[i].homeaway == 'Away') {
-              gameLocation = '@' + this.state.games[i].opponent
-            }
-
-            /////////////////////////////////////////////
-
-            gameData.push(calendarButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent, gameLocation));
-            gameData.push(ticketButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent));
-            this.state.tableGameData.push(gameData);
-
-            //  Add our image icon source for display in schedule
-            let oppTeamIcon = [];
-            oppTeamIcon = [cLogoImage(this.state.games[i].imgsrc)];
-            this.state.tableIconCol.push(oppTeamIcon);
-        }
 
         return (
             <View style={styles.container}>
@@ -132,46 +53,10 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                                      resizeMode='cover'
                                      style={styles.backdrop}>
 
-                        {/* <Button style={styles.button}
-                                title="Add To Calendar"
-                                // '2018-05-06T18:00:00.000Z'
-                                onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
-                                                                                                location: 'Beaver Stadium',
-                                                                                                description: 'PSU Nittany Lions vs. VaTech Hokies',
-                                                                                                notes: 'White-Out Game'} )}
-                        />
-                        <Button style={styles.button}
-                                title="Search For Ticket"
-                                onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T18:00:00.000Z',
-
-                                                                                               description: 'PSU Nittany Lions vs. Ohio State Buckeyes'} )}
-                        /> */}
-
                         <Text style={styles.schedtitle}>2018 Game Schedule</Text>
 
-                        <Table borderStyle={{borderColor: 'transparent' }} style={{flexDirection: 'row'}}>
 
-
-                            {/* Left TableWrapper */}
-                            <TableWrapper style={styles.tableWrap }>
-                                <TableWrapper style={{flexDirection: 'row'}}>
-                                    <Col data={this.state.tableIconCol} style={styles.logocol}
-                                         heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
-                                         textStyle={styles.titleText}/>
-                                </TableWrapper>
-                            </TableWrapper>
-
-                            {/* Right Table */}
-                            <Table  style={{flex: 1}}>
-                                <Rows data={this.state.tableGameData}
-
-                                      widthArr={[80, 85, 55, 55, 55]}
-
-                                      heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
-                                      textStyle={styles.rowstyle}/>
-                            </Table>
-
-                        </Table>
+                        <GameScheduleTable styles={styles} games={this.state.games}/>
 
                         <Text style={styles.header}> </Text>
                         <Text style={styles.header}> </Text>
