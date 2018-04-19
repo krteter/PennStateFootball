@@ -1,1441 +1,293 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" data-template="responsive" class="twofourseven-site" lang="en-US">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mark Allen at DeMatha Catholic</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="application-name" content="247Sports" />
-    <meta name="msapplication-TileColor" content="#005695" />
-    <meta name="msapplication-TileImage" content="https://assets.247sports.com/Content/Img/logo_win8.png" />
-    <title> Mark Allen, DeMatha Catholic, Running Back </title>
-    <link rel="apple-touch-icon" href="https://assets.247sports.com/Content/Img/247touch.png" />
-    <link href="https://assets.247sports.com/favicon.ico" type="image/x-icon" rel="icon" />
-    <link href="https://assets.247sports.com/favicon.ico" type="image/x-icon" rel="shortcut icon" />
-    <meta property="fb:app_id" content="1523983947844395" />
-    <meta property="fb:pages" content="130373190333432" />
-    <!--[if lt IE 10]> <link href='https://assets.247sports.com/Content/SkyNet/Styles/shared/site.css' rel='stylesheet' type='text/css'> <link href='https://assets.247sports.com/Content/SkyNet/Styles/main/layout.css' rel='stylesheet' type='text/css'> <![endif]-->
-    <script src="https://s3media.247sports.com/Scripts/247Sports/Shared/Surround.min.js"></script>
-    <script>
-        var $tfs = new Object();
-        var isGuestCaching = true;
-        if (isGuestCaching) { //generate guid
-            function guid() {
-                return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-            }
-
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-            } //determing if we have atc, asc, or gid.
-            if (readCookie('ATC') === false || readCookie('ASC') === false || readCookie('GID') === false) {
-                window.delayAnalytics = true;
-                var setCookieUrl = '//247sports.com/Guest/ManageMyCookies'; //checks for referer in the url
-                if (location.search.indexOf('referer=')) {
-                    setCookieUrl = setCookieUrl + location.search;
-                }
-                var xhttp = new XMLHttpRequest();
-                xhttp.open('GET', setCookieUrl, true);
-                xhttp.onload = function() {
-                    window.localStorage.setItem('client-ip', xhttp.getResponseHeader('X-Client-IP'));
-                    $tfs.RealIp = xhttp.getResponseHeader('X-Client-IP');
-                    $tfs.SessionId = readCookie('ASC');
-                    $tfs.TrackingId = readCookie('ATC');
-                    $tfs.User.ATC = readCookie('ATC');
-                    window.delayAnalytics = false;
-                };
-                xhttp.send();
-            }
-            var userAtc = readCookie('ATC');
-            var userAsc = readCookie('ASC');
-            var UserGid = readCookie('GID');
-            var userRequestID = guid();
-        } else {
-            window.delayAnalytics = false;
-        }
-        $tfs.LazyLoadAds = true;
-        $tfs.csrf = '';
-        $tfs.RequestId = userRequestID;
-        if ((match = document.cookie.match(new RegExp("(^| )ASC=([^;]+)"))) != null) $tfs.SessionId = match[2];
-        if ((match = document.cookie.match(new RegExp("(^| )ATC=([^;]+)"))) != null) $tfs.TrackingId = match[2];
-        $tfs.CurrentSite = {
-            "Key": "33",
-            "Alias": "247sports",
-            "Name": "247Sports",
-            "DefaultUrl": "//247sports.com",
-            "CurrentDomain": "247sports.com",
-            "Network": "247Sports",
-            "NetworkKey": 1,
-            "FirstPromoLine": "Fastest-growing network",
-            "SecondPromoLine": "Trusted source for college and recruiting news",
-            "BoardCaptcha": "True",
-            "EmailSubscriptions": [26, 27],
-            "CurrentPromotion": {
-                "ButtonText": "7-Day Free Trial",
-                "SubscribeText": "7-Day Free Trial",
-                "Promo1Text": "Team \u0026 Recruiting Scoop!",
-                "Promo2Text": "Your source for @CurrentSite.Institution.Name news"
-            },
-            "Institution": {
-                "Name": null,
-                "Mascot": null,
-                "Conference": null,
-                "League": null
-            }
-        };
-        $tfs.User = {
-            "Key": null,
-            "Alias": null,
-            "Status": "Guest",
-            "RegisteredDate": "N/A",
-            "Activated": "N/A",
-            "LastFreeTrial": "",
-            "SubscriptionStart": "N/A",
-            "SubscriptionExpire": "N/A",
-            "SubscriptionCanceled": "N/A",
-            "SubscriptionCanceledReason": "N/A",
-            "AllAccess": "NoAccess",
-            "PostCount": 0,
-            "HideSigs": "False",
-            "RoleGroup": "None",
-            "ContributorType": "None",
-            "HasFavoriteBoards": "False",
-            "EmailSubscriptions": [],
-            "Newsletter": "Unsubscribed",
-            "AgeRange": "18-24",
-            "AdBlock": false,
-            "FollowedUsers": [],
-            "IgnoredUsers": [],
-            "NoAdsOnBoardsNetworks": [],
-            "AllAccessVipNetworks": [],
-            "SportslineNetworks": [],
-            "FanaticsDiscountNetworks": []
-        };
-        if ($tfs.TrackingId) {
-            $tfs.User.ATC = $tfs.TrackingId;
-        }
-        $tfs.User.Site = {
-            "Key": "33",
-            "Alias": "247sports",
-            "Name": "247Sports",
-            "DefaultUrl": "//247sports.com",
-            "CurrentDomain": "247sports.com",
-            "Network": "247Sports",
-            "NetworkKey": 1,
-            "FirstPromoLine": "Fastest-growing network",
-            "SecondPromoLine": "Trusted source for college and recruiting news",
-            "BoardCaptcha": "True",
-            "EmailSubscriptions": [26, 27],
-            "CurrentPromotion": {
-                "ButtonText": "7-Day Free Trial",
-                "SubscribeText": "7-Day Free Trial",
-                "Promo1Text": "Team \u0026 Recruiting Scoop!",
-                "Promo2Text": "Your source for @CurrentSite.Institution.Name news"
-            },
-            "Institution": {
-                "Name": null,
-                "Mascot": null,
-                "Conference": null,
-                "League": null
-            }
-        };
-        $tfs.Guest = new Object();
-        if (isGuestCaching) {
-            $tfs.Guest.Referer = readCookie('referer');
-        }
-        $tfs.Player = {
-            "Key": 22591,
-            "LeagueAbbreviation": "NCAA"
-        };
-        $tfs.Recirculator = 'on';
-        $tfs.Related = Array();
-        $tfs.RealIp = window.localStorage.getItem('client-ip');
-    </script>
-    <script async src="https://js-sec.indexww.com/ht/ls-247sports.js"></script>
-    <script async src="https://mtrx.go.sonobi.com/morpheus.247sports.2694.js"></script>
-    <script>
-        var surround = new Object();
-        surround.cat = ['a', 'b', 'c', 'd', 'e', 'f'];
-        surround.cookie = readCookie('surround');
-        xfpDomain = '.' + location.hostname; //xfpEnvironment = "7336";
-        xfpEnvironment = "8264";
-        var xfpObj = 'vguid=' + surround.vguid;
-        if (window.location.search.toLowerCase().indexOf('adnetwork') > 0 && !isNaN(getQueryVariable('adNetwork'))) {
-            var xfpEnvironment = getQueryVariable('adNetwork');
-        }
-        if (surround.cookie == false || surround.cookie == undefined) {
-            surround.pick = Math.floor(Math.random() * surround.cat.length);
-            surround.subsession = Math.floor(Math.random() * 4) + 1; /*subsessions 1-4*/
-            document.cookie = ("surround=" + surround.cat[surround.pick] + "|" + surround.subsession + ";domain=" + xfpDomain + ";path=/");
-            surround.cookie = readCookie('surround');
-        }
-        if (surround.cookie) {
-            surround.sessions = surround.cookie.split("|");
-        }
-        surround.vguid = v1(); // set the vguid. This requires the code in the block above this one.
-        //first page load
-        // tracks if this is the first page the user has visited in this session
-        function xfpFirstPageCookie() {
-            if (xfpFirstPage) {
-                return xfpFirstPage;
-            } // only run once per page, if already set, just return value
-            var xfpFirstPage = readCookie('XFP_FIRSTPAGE'); // get firstPage cookie
-            if (!xfpFirstPage) { // if cookie doesn't exist, this is the first page, so firstPage = 1
-                xfpFirstPage = 1;
-            } else if (xfpFirstPage == 1) { // else, this is the second page, set firstPage = 0
-                xfpFirstPage = 0;
-            }
-            var exp = new Date();
-            exp.setTime(exp.getTime() + xfpGetTimeToExpiration(.75)); // get number of milliseconds until 12:45am ET
-            document.cookie = ('XFP_FIRSTPAGE =' + xfpFirstPage + ";expires=" + exp.toUTCString() + ";domain=" + xfpDomain + ";path=/;");
-            return xfpFirstPage; // set and return the parameter DVAR_FIRSTPAGE = firstPage
+    <style>
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
         }
 
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) {
-                    return pair[1];
-                }
-            }
-            return (false);
-        } // given the expiration hour in ET, return the number of milliseconds to
-        // expiration from the given Date Object (defaults to current date)
-        function xfpGetTimeToExpiration(etExpireHour, dt) {
-            dt = dt || new Date();
-            var etUtcOffset = 5; // hours
-            if (isEDT(dt)) etUtcOffset = 4; // if in daylight savings time
-            var utcExpire = (etExpireHour + etUtcOffset) % 24; // UTC expire time in hours
-            var utcTime = 60 * dt.getUTCHours() + dt.getUTCMinutes(); // UTC time in mins
-            var minsToExpiration = 60 * utcExpire - utcTime; // time to expiration
-            if (minsToExpiration < 0) minsToExpiration = 24 * 60 + minsToExpiration;
-            return 60000 * minsToExpiration; // in milliseconds
-        } // determine if Daylight Savings Time is being observed in the ET timezone
-        //   at the date/time of the given Date Object (defaults to current time)
-        function isEDT(dt) {
-            dt = dt || new Date(); // default to current date
-            var month = dt.getUTCMonth(); // get month in UTC
-            if (month > 2 && month < 10) return true; // in EDT if Apr to Oct
-            if (month < 2 || month > 10) return false; // not in EDT if Jan,Feb,Dec
-            var date = dt.getUTCDate(); // get day of month in UTC
-            var day = dt.getUTCDay(); // get day of week in UTC
-            if (month == 10) { // November
-                if (date > 7) return false; // after first week, not in EDT
-                if (day == 0) { // Sunday of first week, check time
-                    if (dt.getUTCHours() < 6) return true; //before 6am UTC, in EDT
-                    return false; // 6am UTC or later, not in EDT
-                }
-                if (date > day) return false; // Sunday has passed, not in EDT
-                return true; // Sunday has not passed, in EDT
-            } // March
-            if (date < 8) return false; // still first week, not in EDT
-            if (date > 14) return true; // after second week, in EDT
-            if (day == 0) { // Sunday of second week, check time
-                if (dt.getUTCHours() > 6) return true; // 7am UTC or later, in EDT
-                return false; // before 7am UTC, not in EDT
-            }
-            if (date - day > 7) return true; // Sunday has passed, in EDT
-            return false; // Sunday has not passed, not in EDT
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
         }
-        var xfpFirstPage = xfpFirstPageCookie();
-        var xfpSession = (surround.cookie) ? surround.sessions[0] : 'off';
-        var xfpSubsession = (surround.cookie) ? surround.sessions[1] : 'off';
 
-        function xfpGetArgs() {
-            var args = new Object();
-            var query = location.search.substring(1); // get query string
-            var pairs = query.split("&");
-            for (var i = 0; i < pairs.length; i++) {
-                var pos = pairs[i].indexOf('='); // Look for name "name=value"
-                if (pos == -1) continue; // If not found, skip
-                var argname = pairs[i].substring(0, pos); // Extract the name
-                var value = pairs[i].substring(pos + 1); // Extract the value
-                value = decodeURIComponent(value); // Decode it, if needed
-                var adTarg = argname.match(/adTargeting_/); // Do we have a match on adTargeting_<key>
-                // Set Targeting for spec'd out query parms
-                if (argname == 'env' || argname == 'session' || argname == 'subses' || argname == 'adRegion' || argname == 'ftag' || argname == 'ttag' || (adTarg)) { // args[argname] = value;
-                    if (adTarg) {
-                        argname = argname.substring(12);
-                    } // strip off adTargeting_ from the name if present
-                    googletag.pubads().setTargeting(argname, value); // Set Targeting
-                    if (argname == 'ftag' || argname == 'ttag') {
-                        document.cookie = ("xfpFtag=" + value + ";domain=" + xfpDomain + ";path=/");
-                        newFtag = 1;
-                    }
-                    xfpObj += '~' + argname + '=' + value;
-                }
-            }
-            var xfpFtagVal = readCookie("xfpFtag"); // check if we have an ftag cookie
-            var newFtag = 0;
-            if ((newFtag == 0) && xfpFtagVal) { // If no new setting for ftag but we had an old one then
-                googletag.pubads().setTargeting('ftag', xfpFtagVal); // Set Targeting
-                xfpObj += '~ftag=' + xfpFtagVal;
-            }
-        } //google dfp tag
-        var googletag = googletag || {};
-        googletag.cmd = googletag.cmd || [];
-        (function() {
-            var gads = document.createElement('script');
-            gads.async = true;
-            gads.type = 'text/javascript';
-            var useSSL = 'https:' == document.location.protocol;
-            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
-            var node = document.getElementsByTagName('script')[0];
-            node.parentNode.insertBefore(gads, node);
-        })();
-        if (window.location.search.toLowerCase().indexOf('utm_medium=newsletter') > 0) {
-            sessionStorage.setItem('xfpReferrer', 'newsletter');
+        body {
+            line-height: 1;
         }
-        if (sessionStorage.getItem('xfpReferrer') !== null) {
-            var xfpReferrer = "newsletter";
-        } else if (typeof document.referrer !== 'undefined' && document.referrer != '') {
-            if (document.referrer.match(/^https?:\/\/([^\/]+\.)?facebook\.com(\/|$)/i)) {
-                var xfpReferrer = "fb";
-            }
+
+        ol,
+        ul,
+        menu {
+            list-style: none;
         }
-        var xfpEnv = "prod";
-        var tfsMobile = (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 900);
-        var tfsNetwork = '247sports';
-        var tfsMedium = (tfsMobile ? 'maw-' : 'aw-') + tfsNetwork;
-        var tfsPageSite = '';
-        if ($tfs.CurrentSite.Institution.Name != null) {
-            tfsPageSite = $tfs.CurrentSite.Institution.Name + ($tfs.CurrentSite.Institution.Mascot != null ? ('_' + $tfs.CurrentSite.Institution.Mascot) : '');
-        } else {
-            tfsPageSite = tfsNetwork;
+
+        blockquote,
+        q {
+            quotes: none;
         }
-        tfsPageSite = tfsPageSite.replace(/\([^)]*\)|\s|'|\&/g, '').replace(/\.|-/g, '_').toLowerCase();
-    </script>
-    <script>
-        if (typeof fbq === 'undefined') {
-            ! function(f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function() {
-                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = '2.0';
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t, s)
-            }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '320233411816140');
-            fbq('init', '1575186632756631');
-            fbq('track', 'PageView');
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: '';
+            content: none;
         }
-    </script> <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1575186632756631&ev=PageView&noscript=1"
-/></noscript>
-    <script src="https://assets.247sports.com/Scripts/SkyNet/Shared/detect.js"></script>
-    <script>
-        var sp_abd = 'false';
-        document.addEventListener('sp.blocking', function(e) {
-            sp_abd = 'true';
-            googletag.cmd.push(function() {
-                googletag.pubads().setTargeting('st', '1');
-            });
-        });
-    </script>
-    <link href="https://247sports.com/Player/Mark-Allen-22591/high-school-35629" rel="canonical" />
-    <meta name="keywords" content="Mark Allen, Running Back, Football, High School, Penn State, DeMatha Catholic">
-    <meta name="description" content="Mark Allen is a 5-7, 185-pound Running Back from Hyattsville, MD. He committed to Penn State Nittany Lions in October of 2012. Allen tore his ACL midway through...">
-    <meta content="Mark Allen, DeMatha Catholic , Running Back" property="og:title" />
-    <meta content="athlete" property="og:type" />
-    <meta content="https://247sports.com/Player/Mark-Allen-22591/high-school-35629" property="og:url" />
-    <meta content="https://s3media.247sports.com/Uploads/Assets/146/803/4_7803146.jpg" property="og:image" />
-    <meta content="247Sports" property="og:site_name" />
-    <meta content="Mark Allen is a 5-7, 185-pound Running Back from Hyattsville, MD. He committed to Penn State Nittany Lions in October of 2012. Allen tore his ACL midway through..." property="og:description" />
-    <meta name="twitter:card" content="@247Sports">
-    <meta name="twitter:description" content="summary">
-    <meta name="twitter:site" content="Mark Allen, DeMatha Catholic , Running Back">
-    <meta name="twitter:title" content="Mark Allen is a 5-7, 185-pound Running Back from Hyattsville, MD. He committed to Penn State Nittany Lions in October of 2012. Allen tore his ACL midway through...">
-    <meta name="twitter:creator" content="@247Sports">
-    <meta name="twitter:image" content="https://s3media.247sports.com/Uploads/Assets/146/803/4_7803146.jpg">
-    <meta name="twitter:domain" content="247Sports.com">
-    <script>
-        var tfsPageArena = 'collegefootball';
-        var tfsRecruiting = 'true';
-        var tfsPageType = 'profiles';
-        var tfsPagePath = '/' + xfpEnvironment + '/' + tfsMedium + '/' + tfsPageArena + '/' + (tfsRecruiting == "true" ? 'recruiting/' : '') + tfsPageType;
-        var slots = {};
-        googletag.cmd.push(function() {
-            if (tfsMobile) {
-                if ($tfs.User.Status.indexOf("Active") == -1) {
-                    slots['mobile_banner_top'] = googletag.defineSlot(tfsPagePath, [
-                        [5, 5],
-                        [320, 50]
-                    ], "mobile_banner_top").addService(googletag.pubads()).setTargeting("pos", "top");
-                    slots['mobile_flex_mpu_top'] = googletag.defineSlot(tfsPagePath, [
-                        [300, 250],
-                        [321, 31]
-                    ], "mobile_flex_mpu_top").addService(googletag.pubads()).setTargeting("pos", "top");
-                }
-                slots['mobile_mpu_top'] = googletag.defineSlot(tfsPagePath, [300, 250], "mobile_mpu_top").addService(googletag.pubads()).setTargeting("pos", "middle");
-                slots['mobile_mpu_bottom'] = googletag.defineSlot(tfsPagePath, [300, 250], "mobile_mpu_bottom").addService(googletag.pubads()).setTargeting("pos", "bottom");
-            } else {
-                slots['top_strip'] = googletag.defineSlot(tfsPagePath, [5, 5], "top_strip").addService(googletag.pubads()).setTargeting("pos", "top");
-                slots['leader_top'] = googletag.defineSlot(tfsPagePath, [
-                    [728, 90],
-                    [970, 66],
-                    [970, 90],
-                    [970, 250]
-                ], "leader_top").addService(googletag.pubads()).setTargeting("pos", "top");
-                slots['mpu_plus_top'] = googletag.defineSlot(tfsPagePath, [
-                    [300, 250],
-                    [300, 600]
-                ], "mpu_plus_top").addService(googletag.pubads()).setTargeting("pos", "top");
-                if ($tfs.User.Status.indexOf("Active") == -1) {
-                    slots['mpu_middle'] = googletag.defineSlot(tfsPagePath, [300, 250], "mpu_middle").addService(googletag.pubads()).setTargeting("pos", "middle");
-                    slots['leader_middle'] = googletag.defineSlot(tfsPagePath, [
-                        [728, 90],
-                        [970, 66]
-                    ], "leader_middle").addService(googletag.pubads()).setTargeting("pos", "middle");
-                    slots['leader_bottom'] = googletag.defineSlot(tfsPagePath, [
-                        [728, 90],
-                        [970, 66]
-                    ], "leader_bottom").addService(googletag.pubads()).setTargeting("pos", "bottom");
-                }
-            }
-            if ($tfs.User.Status == 'Guest' && $tfs.CurrentSite.Key !== '1537' && tfsPageType !== 'pickem') {
-                slots['image_top'] = googletag.defineSlot(tfsPagePath, [4, 4], "image_top").addService(googletag.pubads()).setTargeting("pos", "top");
-            }
-            slots['interstitial'] = googletag.defineOutOfPageSlot(tfsPagePath, "interstitial").addService(googletag.pubads());
-            googletag.pubads().setTargeting("ptype", "" + tfsPageType);
-            googletag.pubads().setTargeting("user", ($tfs.User.Status.toLowerCase() == 'guest' ? 'anon' : $tfs.User.Status.replace(/\+/g, '_').toLowerCase()));
-            googletag.pubads().setTargeting("env", "" + xfpEnv);
-            googletag.pubads().setTargeting("team", "" + tfsPageSite);
-            googletag.pubads().setTargeting("firstpg", "" + xfpFirstPage);
-            googletag.pubads().setTargeting("session", xfpSession);
-            googletag.pubads().setTargeting("subses", "" + xfpSubsession);
-            if (typeof sp_abd !== 'undefined' && sp_abd === 'true') {
-                googletag.pubads().setTargeting('st', ['1']);
-            } else {
-                googletag.pubads().setTargeting('st', ['0']);
-            }
-            googletag.pubads().setTargeting("vguid", surround.vguid);
-            if (xfpReferrer) {
-                googletag.pubads().setTargeting("ref", "" + xfpReferrer);
-            }
-            xfpGetArgs();
-            googletag.pubads().addEventListener('impressionViewable', function(e) {
-                var adPath = e.slot.getAdUnitPath();
-                var adSlot = e.slot.getSlotElementId();
-                if (typeof $247Global.adImpression !== 'function') {
-                    var adTimer = setTimeout(function() {
-                        if (typeof $247Global.adImpression === 'function') {
-                            $247Global.adImpression(adPath, adSlot);
-                            clearTimeout(adTimer);
-                            adTimer = 0;
-                        }
-                    }, 200);
-                } else {
-                    $247Global.adImpression(adPath, adSlot);
-                }
-            });
-            googletag.pubads().enableAsyncRendering();
-            googletag.pubads().enableSingleRequest();
-            googletag.pubads().collapseEmptyDivs();
-            googletag.enableServices();
-        });
-    </script>
-    <link href="https://assets.247sports.com/site/minify.css?type=css&amp;v=1576&amp;files=/content/skynet/styles/shared/style.css,/content/skynet/styles/shared/global.css,/content/skynet/styles/shared/site.css,/content/skynet/styles/bundle/menu.bundle.css,/content/skynet/styles/main/layout.css,/content/skynet/styles/247marketingstyle.css,/content/skynet/styles/bos.css,/content/247sports/styles/main/site.css,/content/skynet/styles/embeds/playerembed.css,/content/skynet/styles/embeds/playerpredictionembed.css" rel="stylesheet" type="text/css" />
-    <link href="https://assets.247sports.com/site/minify.css?type=css&amp;v=1576&amp;files=/content/skynet/styles/bundle/player.bundle.css,/content/skynet/styles/content/gallery.css,/content/skynet/styles/bundle/newsfeed.bundle.css" rel="stylesheet" type="text/css" />
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        html,
+        button,
+        input,
+        select,
+        textarea {
+            font-family: sans-serif;
+            color: #333;
+        }
+
+        * {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #005695;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            vertical-align: middle;
+            max-width: 100%;
+            height: auto;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        h4 {
+            font-size: 1em;
+        }
+
+        h5 {
+            font-size: 0.83em;
+        }
+
+        h6 {
+            font-size: 0.67em;
+        }
+
+        body {
+            background-color: #fff;
+        }
+
+        .h_lst {
+            overflow: hidden;
+        }
+
+        .h_lst>li {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .foggy_icn {
+            background: url(https://assets.247sports.com/Content/Img/sprt_misc.png) no-repeat scroll 5px -1775px transparent;
+            display: block;
+            height: 50px;
+            text-indent: -9999px;
+            width: 50px;
+        }
+
+        .grey {
+            color: #999;
+            vertical-align: middle;
+        }
+    </style>
+    <link href="https://assets.247sports.com/site/minify.css?type=css&amp;v=1576&amp;files=/content/skynet/styles/shared/reset.css,/content/skynet/styles/embeds/playerembed.css,/content/skynet/styles/shared/style.css" rel="stylesheet" type="text/css" />
     <link href="https://assets.247sports.com/Content/SkyNet/Styles/Sites/Site33.css?v=1576" rel="stylesheet" type="text/css" />
     <!--[if lt IE 9]><script src="https://assets.247sports.com/scripts/SkyNet/shared/html5.js" type="text/javascript"></script><![endif]-->
-    <!--[if lt IE 10]><link href="https://assets.247sports.com/Content/SkyNet/Styles/shared/ie.css" media="screen" rel="stylesheet" type="text/css" /><![endif]--><noscript><style>.jsonly { display: none; }</style></noscript>
-    <script src="//native.sharethrough.com/assets/tag.js" async></script>
+    <!--[if lt IE 10]><link href="https://assets.247sports.com/Content/SkyNet/Styles/shared/ie.css" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+    <script src="https://s3media.247sports.com/Scripts/247Sports/Shared/Surround.min.js"></script>
+
 </head>
 
-<body class="nonsubscribe player_22591 player_pg postcontainer_pg tag_pg genericmodel_pg playersport_rm genericmodel_rm skybox-auto-collapse" style="display: block !important;">
-<div id="skybox-above" data-skybox="desktop">
-    <div id="top_strip" class="ad-top-strip">
-        <script type="text/javascript">
-                googletag.cmd.push(function() {
-                    if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['top_strip']) {
-                        googletag.display("top_strip");
-                    }
-                });
-            </script>
-    </div>
-</div>
-<div id="interstitial">
-    <script type="text/javascript">
-            googletag.cmd.push(function() {
-                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['interstitial']) {
-                    googletag.display("interstitial");
-                }
-            });
-        </script>
-</div>
-<div id="image_top">
-    <script type="text/javascript">
-            if (typeof(slots) != 'undefined' && slots['image_top']) {
-                googletag.cmd.push(function() {
-                    googletag.display("image_top");
-                });
-            }
-        </script>
-</div>
-<section class="main-wrapper">
-    <div class="adhesion-block" data-skybox="mobile">
-        <div id="mobile_banner_top" class="dfp_ad ad-top-strip">
-            <script>
-                    googletag.cmd.push(function() {
-                        if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mobile_banner_top']) {
-                            googletag.display("mobile_banner_top");
-                        }
-                    });
-                </script>
-        </div>
-    </div>
-    <header class="topnav">
-        <div class="network-bar clearfix">
-            <div class="network-block">
-                <ul class="network-bar-list h_lst">
-                    <li><a href="//247sports.com/League/NCAA-FB/Teams" title="NCAAF Teams">Teams</a></li>
-                    <li><a href="https://www.cbssports.com/live/" target="_blank">CBS SPORTS HQ</a></li>
-                    <li><a href="https://cbssports.com" target="_blank">CBSSports</a></li>
-                    <li><a href="https://sportsline.com" target="_blank">SportsLine</a></li>
-                    <li><a href="http://maxpreps.com" target="_blank">MaxPreps</a></li>
-                    <li><a data-js="sportsline-fanshop" href="http://247sports.fanatics.com" rel="nofollow" target="_blank">Shop</a></li>
-                    <li> <a href="https://www.stubhub.com/?gcid=chAFF-_-geoUS-_-genAllTix-_-dt170502-_-cmpHeaderteams-_-part247Sports" class="stubhub-tracker" data-stubhub-element="247Sports Global Nav" target="_blank" rel="nofollow">Tickets</a> </li>
-                </ul>
+<body>
+<div class="profile-embed">
+    <div class="card">
+        <div class="player-info lvl-PrivateHighSchool">
+            <div class="picture-container"> <img alt="Mark Allen" height="140" src="https://s3media.247sports.com/Uploads/Assets/859/903/4_903859.jpg" title="Mark Allen" width="105" />
+                <div class="skew"></div>
             </div>
-            <div class="social-block"> <span>Follow 247Sports</span>
-                <ul class="h_lst nav-social-lst">
-                    <li class="fb"><a href="https://www.facebook.com/247Sports" title="Facebook" target="_blank"><b class="icon-facebook"></b><span class="hidden">Facebook</span></a></li>
-                    <li class="tw"><a href="https://twitter.com/247Sports" title="Twitter" target="_blank"><b class="icon-twitter"></b><span class="hidden">Twitter</span></a></li>
-                    <li class="ig"><a href="https://www.instagram.com/247Sports" title="Instagram" target="_blank"><b class="icon-instagram"></b><span class="hidden">instagram</span></a></li>
+            <div class="playerinfo-blk">
+                <h2><a href="https://247sports.com/Player/Mark-Allen-22591" target="_blank">Mark Allen</a></h2>
+                <ul class="playerinfo_lst h_lst">
+                    <li>RB </li>
+                    <li>5-7 </li>
+                    <li>185 </li>
+                    <li class="class-year">Class of 14 </li>
+                </ul>
+                <p class="location">Hyattsville, MD</p>
+                <p class="location">(DeMatha Catholic)</p>
+            </div>
+            <div class="watermark" style="background-image: url(https://s3media.247sports.com/Uploads/Assets/328/648/9_4648328.png);"></div>
+        </div>
+        <div class="ranking-header">
+            <h4>&mdash; 247SPORTS COMPOSITE &mdash;</h4>
+        </div>
+        <div class="ranking-card">
+            <div>
+                <h4>247Sports Composite</h4>
+                <div class="rating"> <span class="icon-starsolid yellow"></span><span class="icon-starsolid yellow"></span><span class="icon-starsolid yellow"></span><span class="icon-starsolid lightgrey"></span><span class="icon-starsolid lightgrey"></span> <span class="number">0.8355</span> </div>
+            </div>
+            <div>
+                <ul class="composite-ranks">
+                    <li> <span>NATL.</span>
+                        <h2 class="rating">1106</h2>
+                    </li>
+                    <li> <span>RB</span>
+                        <h2 class="rating">66</h2>
+                    </li>
+                    <li> <span>MD</span>
+                        <h2 class="rating">28</h2>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="nav-bar">
-            <div class="nav-bar__logo-wrapper"> <a href="/" class="main-logo" aria-label="Twenty Four Seven Sports Logo"> <img src="https://s3media.247sports.com/Content/Img/247sports-web.png" alt="Twenty Four Seven Sports"> </a> </div>
-            <div class="nav-bar__user-nav-wrapper user-nav-wrapper"> <a data-test="login" href="https://247sports.com/User/Login">LOG IN</a> </div>
-            <div class="nav-bar__user-nav-wrapper user-nav-wrapper join">
-                <div class="join-wrapper"> <a data-test="subscribe" href="https://247sports.com/UserSubscription/New?promo=JOIN">JOIN</a> </div>
-            </div>
-            <div class="nav-bar__menu menu" role="navigation"> <a href="#" data-js="menu__hamburger" aria-label="Dropdown Menu"><b class="icon-hamburger2 menu__hamburger"> </b></a>
-                <div class="nav-bar__container nav-bar__container--hidden">
-                    <ul class="menu__list">
-                        <li class="menu__list-item hoverable"> <a href="#" data-js="slidedown"> <span class="icon-football menu__icon"></span> <span class="menu__name">NFL</span> <b class="icon-caret-down"></b> </a>
-                            <div class="nav-flyout">
-                                <ul class="nav-flyout__list">
-                                    <li><a href="//247sports.com/League/NFL/Teams" title="NFL Teams">Teams</a></li>
-                                    <li><a href="/Institution/NFL-25373/Feeds" title="247Sports Bolts">News Feed</a></li>
-                                    <li><a href="//247sports.com/League/NFL/DraftPicks">Draft</a></li>
-                                    <li><a href="https://247sports.com/PowerRanking/247Sports-NFL-Composite-Power-Rankings-2017-5" title="NFL Power Rankings">Power Rankings</a></li>
-                                    <li><a href="https://www.cbssports.com/nfl/scoreboard/" target="_blank">Scores</a></li>
-                                    <li><a href="/League/NFL/Schedule">Schedule</a></li>
-                                </ul>
-                                <ul class="nav-flyout__list">
-                                    <li><a href="/League/NFL/GamePicks">Expert Picks</a></li>
-                                    <li><a href="https://www.cbssports.com/nfl/standings" target="_blank">Standings</a></li>
-                                    <li><a href="https://www.cbssports.com/nfl/stats/playersort/nfl/year-2017-season-regular-category-passing" target="_blank">Season Stat Leaders</a></li>
-                                    <li><a href="https://www.cbssports.com/nfl/stats/teamsort/nfl/year-2017-season-regular-category-passing-type-offense" target="_blank">Team Stat Leaders</a></li>
-                                    <li><a href="//247sports.com/Season/2018-Football/ProPlayerRankings">NFL Top247</a></li>
-                                    <li><a href="https://www.cbssports.com/nfl/injuries" target="_blank" title="NFL Injury Report">NFL Injury Report</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item hoverable"> <a href="#" data-js="slidedown"> <span class="icon-basketball menu__icon"></span> <span class="menu__name">NBA</span> <b class="icon-caret-down"></b> </a>
-                            <div class="nav-flyout">
-                                <ul class="nav-flyout__list">
-                                    <li><a href="//247sports.com/League/NBA/Teams" title="NBA Teams">Teams</a></li>
-                                    <li><a href="/Institution/NBA-25374/Feeds" title="247Sports Bolts">News Feed</a></li>
-                                    <li><a href="https://www.cbssports.com/nba/scoreboard/" target="_blank">Scores</a></li>
-                                    <li><a href="/League/NBA/Schedule">Schedule</a></li>
-                                </ul>
-                                <ul class="nav-flyout__list">
-                                    <li><a href="https://www.cbssports.com/nba/standings" target="_blank">Standings</a></li>
-                                    <li><a href="https://www.cbssports.com/nba/stats/playersort/nba/year-2017-season-regularseason-category-scoringpergame" target="_blank">Season Stat Leaders</a></li>
-                                    <li><a href="https://www.cbssports.com/nba/stats/teamsort/nba/year-2017-season-regularseason-category-scoringpergame-type-team" target="_blank">Team Stat Leaders</a></li>
-                                    <li><a href="https://www.cbssports.com/nba/injuries" target="_blank">NBA Injury Report</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item hoverable"> <a href="#" data-js="slidedown"> <span class="icon-football menu__icon"></span> <span class="menu__name">NCAAF</span> <b class="icon-caret-down"></b> </a>
-                            <div class="nav-flyout">
-                                <ul class="nav-flyout__list">
-                                    <li><a href="//247sports.com/League/NCAA-FB/Teams" title="NCAAF Teams">Teams</a></li>
-                                    <li><a href="https://247sports.com/Page/NFL-College-Sports-NBA-and-Recruiting-100021/Feeds" title="College Football News Feed">News Feed</a></li>
-                                    <li><a href="https://www.cbssports.com/college-football/scoreboard/" target="_blank">Scores</a></li>
-                                    <li><a href="/League/NCAA-FB/Schedule">Schedules</a></li>
-                                    <li><a href="//247sports.com/Season/2018-Football/CollegePlayerRankings">College Top247</a></li>
-                                    <li><a href="//247sports.com/Season/2018-Football/CollegeTeamTalentComposite">College Team Talent</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="/League/NCAA-FB/GamePicks">Expert Picks</a></li>
-                                    <li><a href="/League/NCAA-FB/USA-Today-Rankings">Polls</a></li>
-                                    <li><a href="https://www.cbssports.com/collegefootball/stats/leaders/NCAAF/PYDS" target="_blank">Player Leaders</a></li>
-                                    <li><a href="https://www.cbssports.com/collegefootball/stats/teamsort/NCAAF/PASSING" target="_blank">Team Leaders</a></li>
-                                    <li><a href="https://247sports.com/Video?Type=CBS" title=" CBS Videos">Videos</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item hoverable"> <a href="#" data-js="slidedown"> <span class="icon-basketball menu__icon"></span> <span class="menu__name">NCAAB</span> <b class="icon-caret-down"></b> </a>
-                            <div class="nav-flyout">
-                                <ul class="nav-flyout__list">
-                                    <li><a href="//247sports.com/League/NCAA-BK/Teams" title="NCAAB Teams">Teams</a></li>
-                                    <li><a href="https://247sports.com/Page/NFL-College-Sports-NBA-and-Recruiting-100021/Feeds" title="247Sports News Feed">News Feed</a></li>
-                                    <li><a href="https://www.cbssports.com/college-basketball/scoreboard/" target="_blank">Scores</a></li>
-                                    <li><a href="/League/NCAA-BK/Schedule">Schedules</a></li>
-                                </ul>
-                                <ul class="nav-flyout__list">
-                                    <li><a href="/League/NCAA-BK/USA-Today-Rankings">Polls</a></li>
-                                    <li><a href="https://www.cbssports.com/collegebasketball/stats/leaders/NCAAB/PTSAVG" target="_blank">Player Leaders</a></li>
-                                    <li><a href="https://www.cbssports.com/collegebasketball/stats/teamsort/NCAAB/SCORING" target="_blank">Team Leaders</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item hoverable"> <a href="//247sports.com/college/football/recruiting" title="National Signing Day -- Football Recruiting" data-js="slidedown">  <span class="icon-football menu__icon"></span>  <span class="menu__name">FB Rec</span> <b class="icon-caret-down"></b> </a>
-                            <div class="nav-flyout shift-left">
-                                <ul class="nav-flyout__list">
-                                    <li> <a href="//247sports.com/college/football/recruiting" title="College Football Recruiting">
-                                        FB Recruiting Home </a> </li>
-                                    <li><a href="https://247sports.com/Page/National-Signing-Day-Football-Recruiting-100134/Headlines" title="Football News Feed">News Feed</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/CompositeTeamRankings">Team Rankings</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/Commits">Commitments</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/Decommits">Decommitments</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/ScheduledCommits">Scheduled Commits</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/CompositeRecruitRankings?InstitutionGroup=HighSchool" title="247Sports Composite">Player Rankings</a></li>
-                                </ul>
-                                <ul class="nav-flyout__list">
-                                    <li><a href="https://247sports.com/Season/2019-Football/Recruits" title="Player Database">Player Search</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/TargetPredictions" title=" Crystal Ball">Crystal Ball</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/ExpertRankings" title="Expert Predictions">Experts</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football/CompositeCoachRankings" title="Recruiter Rankings">Recruiter Rankings</a></li>
-                                    <li><a href="https://247sports.com/Season/2019-Football?View=Interests#tabs_calculator" title="Football Class Calculator">Class Calculator</a></li>
-                                    <li><a href="//247sports.com/Sport/Football/AllTimeRecruitRankings" title="All Time Top Football Recruits">All Time Top Recruits</a> </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item hoverable"> <a href="//247sports.com/college/basketball/recruiting" title="College Basketball Recruiting News" data-js="slidedown">  <span class="icon-basketball menu__icon"></span>  <span class="menu__name">BB Rec</span> <b class="icon-caret-down"></b> </a>
-                            <div class="nav-flyout shift-left">
-                                <ul class="nav-flyout__list">
-                                    <li> <a href="//247sports.com/college/basketball/recruiting" title="College Basketball Recruiting">
-                                        BK Recruiting Home </a> </li>
-                                    <li><a href="https://247sports.com/Page/College-Basketball-Recruiting-News-100135/Headlines" title="Basketball News Feed">News Feed</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/CompositeTeamRankings">Team Rankings</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/Commits">Commitments</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/Decommits">Decommitments</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/ScheduledCommits">Scheduled Commits</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/CompositeRecruitRankings?InstitutionGroup=HighSchool" title="247Sports Composite">Player Rankings</a></li>
-                                </ul>
-                                <ul class="nav-flyout__list">
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/Recruits" title="Player Database">Player Search</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/TargetPredictions" title=" Crystal Ball">Crystal Ball</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball/ExpertRankings" title="Expert Predictions">Experts</a></li>
-                                    <li><a href="https://247sports.com/Season/2018-Basketball?View=Interests#tabs_calculator" title="Basketball Class Calculator">Class Calculator</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item"> <a href="/Site?View=Community"> <span class="icon-list menu__icon"></span> <span class="menu__name">Community</span> </a> </li>
-                        <li class="menu__list-item hoverable"> <a href="#" data-js="slidedown"> <span class="menu__icon menu__icon--ellipsis"> <span class="icon-circle"></span><span class="icon-circle"></span><span class="icon-circle"></span> </span> <span class="menu__name menu__name--more">More</span> </a>
-                            <div class="nav-flyout shift-left">
-                                <ul class="nav-flyout__list">
-                                    <li><a href="//247sports.com/quote" title="Quotes">Quotes</a></li>
-                                    <li><a href="//247sports.com/support" title="Support and FAQ">Support and FAQ</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="menu__list-item tickets menu__list-item--tickets"> <a href="https://www.stubhub.com/?gcid=chAFF-_-geoUS-_-genAllTix-_-dt170502-_-cmpHeaderteams-_-part247Sports" target="_blank" class="stubhub-tracker" data-stubhub-element="247Sports Nav" rel="nofollow"> <span class="icon-ticket menu__icon"></span> <span class="menu__name">Tickets</span> </a> </li>
-                        <li class="menu__list-item store menu__list-item--store"> <a href="http://247sports.fanatics.com" target="_blank" rel="nofollow" data-js="sportsline-fanshop"> <span class="icon-cart menu__icon"></span> <span class="menu__name">Shop</span> </a> </li>
-                    </ul>
-                    <div class="nav-bar--searchform searchform_blk">
-                        <form class="search-form" id="SearchForm2" action="/Site" method="get">
-                            <fieldset> <input type="hidden" name="View" value="Search" /> <input type="search" name="q" placeholder="Search 247Sports" /> <button type="submit" class="icon-search"></button> </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="nav-bar__search search"> <a href="/Site?View=Search"><b class="icon-search"> </b></a> </div>
-        </div>
-    </header>
-    <section class="scorestrip stripit">
-        <div data-js='saagEmbed' class="saag-frame" data-league='nba'></div> <a class="slingtv" target="_blank" height="55" width="110" href="https://servedby.flashtalking.com/click/8/58116;3041075;50126;211;0/?ft_width=1&ft_height=1&url=18526803"> <img src="https://s3media.247sports.com/Content/Img/sling-mm-bk-min.jpg?v=1" alt="Sling TV"> </a>
-        <script type="text/javascript">
-                random = Math.random() * 10000000000000000;
-                document.write('<img src="https://servedby.flashtalking.com/imp/8/58116;3041075;201;redirect;CBSSports;slngdusacbbxxxxxnpdcbsdircbsmm247spcbsmmbtxxxxxx120x060/?cachebuster=' + random + '&url=https://dishdigital.sp1.convertro.com/view/vt/v1/dishdigital/15/cvo.gif?cvosrc=display.cbssports.cbbxxx&cvo_cid=58116&cvo_creative=cbsmmbutton&cvo_pid=slngd_usa_sports_xx_npd_cbs_dir_cbs247nbax_cbsbttn_xxxxxx_120x060" width="0" height="0">');
-                document.write('<img src="https://pubads.g.doubleclick.net/gampad/ad?iu=/8264/aw-cbsi/tracking&sz=1x1&t=lineid%3D450551889%26vguid%3D' + surround.vguid + '&c=' + Date.now() + '" width="0" height="0">');
-            </script>
-    </section>
-    <section class="clearfix main" id="page-content">
-        <div id="leader_top" class="dfp_ad">
-            <script>
-                    googletag.cmd.push(function() {
-                        if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['leader_top']) {
-                            googletag.display("leader_top");
-                        }
-                    });
-                </script>
-        </div>
-        <div class="main-div clearfix">
-            <section class="main-content full hasvideo">
-                <div class="nimda profile-edit"> <a class="nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F989FD817D0C03A15441F855EE421BF170EEE9999BA862024D8FCE163" href="#" rel="nofollow">Edit Profile</a> </div>
-                <script type="application/ld+json">
-                        {
-                            "@context": "http://schema.org",
-                            "@type": "Person",
-                            "mainEntityOfPage": {
-                                "@type": "WebPage",
-                                "@id": "https://247sports.com/Player/Mark-Allen-22591"
-                            },
-                            "affiliation": {
-                                "@type": "SportsTeam",
-                                "name": "DeMatha Catholic "
-                            },
-                            "birthDate": "2/10/1996 12:00:00 AM",
-                            "image": "https://s3media.247sports.com/Uploads/Assets/859/903/903859.jpg",
-                            "name": "Mark Allen",
-                            "height": [{
-                                "@type": "QuantitativeValue",
-                                "value": "5-7"
-                            }],
-                            "weight": [{
-                                "@type": "QuantitativeValue",
-                                "value": "185"
-                            }]
-                        }
-                    </script>
-                <style>
-                        .player-info::after {
-                            content: "";
-                            background: url(https://s3media.247sports.com/Uploads/Assets/328/648/9_4648328.png);
-                            right: -100px;
-                        }
-                    </style>
-                <header class="profile-header player">
-                    <div class="header-text">
-                        <div class="player-search"> <a class="icon-search"></a>
-                            <form action="https://247sports.com/Player" class="player-search-form" method="Get">
-                                <fieldset> <label for="Profie Search" class="hidden">Find another player</label> <input id="FullName" name="FullName" placeholder="Search Players" type="text" /> <button type="submit" class="hidden">Search</button> </fieldset>
-                            </form>
-                            <div class="link-wrap"> <a href="#" class="tltp_click tltp_lt embed">Embed Player</a>
-                                <div class="tooltip flyout_cmp embedcode_blk"> <textarea id="embed22591" readonly><iframe class="twofourseven-embed" style="max-width: 100%" frameborder="0" width="600" height="200" src="https://247sports.com/PlayerSport/Mark-Allen-at-DeMatha-Catholic-44677/Embed"></iframe><script async src="https://assets.247sports.com/Scripts/SkyNet/Shared/embed.js" charset="utf-8"></script></textarea> <button data-clipboard-target="#embed22591" class="btn2" data-js="text-copy">Copy</button> </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="player-info clearfix">
-                                <div class="picture-container"> <img height="200" src="https://s3media.247sports.com/Uploads/Assets/859/903/4_903859.jpg" width="150" />
-                                    <div class="skew"></div>
-                                </div>
-                                <div class="playerinfo-blk">
-                                    <h2>Mark</h2>
-                                    <h2>Allen</h2>
-                                    <div class="institution-block"> <a href="#" data-js="institution-selector">High School <b class="icon-down"></b></a>
-                                        <ul class="hidden">
-                                            <li><a href="https://247sports.com/Player/Mark-Allen-22591/college-127930">Penn State (NCAA)</a></li>
-                                            <li><a href="https://247sports.com/Player/Mark-Allen-22591/high-school-35629">DeMatha Catholic (HS)</a></li>
-                                        </ul>
-                                    </div>
-                                    <ul class="playerinfo_lst h_lst">
-                                        <li><a href="https://247sports.com/Season/2014-Football/CompositeRecruitRankings?InstitutionGroup=HighSchool&amp;Position=RB">RB</a> </li>
-                                        <li>5-7 </li>
-                                        <li>185 </li>
-                                        <li><b>40</b> 4.43 </li>
-                                        <li> <b>Age</b> 22 yrs </li>
-                                        <li class="class-of"> CLASS OF 14 </li>
-                                    </ul>
-                                    <p class="location"> <span>Hyattsville, MD</span> <span>(DeMatha Catholic)</span> </p>
-                                </div>
-                            </div>
-                            <div class="ranking-card">
-                                <div class="ranking-header">
-                                    <h4>&mdash; 247SPORTS COMPOSITE &mdash;</h4>
-                                </div>
-                                <div class="ranking-body">
-                                    <div class="stars"> <span class="composite-stars"><span class="icon-starsolid yellow"></span><span class="icon-starsolid yellow"></span><span class="icon-starsolid yellow"></span><span class="icon-starsolid lightgrey"></span><span class="icon-starsolid lightgrey"></span></span> <span class="comp-rank">0.8355</span> <span class="composite-strength"><span class="yellow"></span><span class="yellow"></span><span class="yellow"></span><span class="yellow"></span></span> <a class="ranking-info info-icon" href="//247sports.com/Article/247Rating-Explanation-81574" target="_blank">?</a> </div>
-                                    <ul class="composite-ranks">
-                                        <li> <a href="https://247sports.com/Season/2014-Football/CompositeRecruitRankings?InstitutionGroup=HighSchool"> <label class="label">NATL. RANK</label> <h2 class="rating">1106</h2> </a> </li>
-                                        <li> <a href="https://247sports.com/Season/2014-Football/CompositeRecruitRankings?InstitutionGroup=HighSchool&amp;Position=RB"> <label class="label">RB RANK</label> <h2 class="rating">66</h2> </a> </li>
-                                        <li> <a href="https://247sports.com/Season/2014-Football/CompositeRecruitRankings?InstitutionGroup=HighSchool&amp;State=MD"> <label class="label">MD RANK</label> <h2 class="rating">28</h2> </a> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ranking">
-                            <ul class="tfs-rankings">
-                                <li> <span>247SPORTS</span> <span class="tfs-stars"><span class="icon-starsolid yellow"></span><span class="icon-starsolid yellow"></span><span class="icon-starsolid yellow"></span><span class="icon-starsolid lightgrey"></span><span class="icon-starsolid lightgrey"></span></span> <span class="tfs-rank">81</span> </li>
-                                <li> <a href="https://247sports.com/Season/2014-Football/RecruitRankings?InstitutionGroup=HighSchool"> <span>NATL. RK</span> <span class="rating">1476</span> </a> </li>
-                                <li> <a href="https://247sports.com/Season/2014-Football/RecruitRankings?InstitutionGroup=HighSchool&amp;Position=RB"> <span>RB RK</span> <span class="rating">93</span> </a> </li>
-                                <li> <a href="https://247sports.com/Season/2014-Football/RecruitRankings?InstitutionGroup=HighSchool&amp;State=MD"> <span>MD RK</span> <span class="rating">37</span> </a> </li>
-                            </ul>
-                        </div>
-                        <div class="commit-box" style="background-color: rgb(0, 36, 82)"> <img alt="Penn State" class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/1_7827533.png" height="50" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Penn State" width="50" /><noscript><img alt="Penn State" height="50" src="https://s3media.247sports.com/Uploads/Assets/533/827/1_7827533.png" title="Penn State" width="50" /></noscript>
-                            <h3> <a href="https://247sports.com/college/penn-state/Season/2014-Football/Commits">Penn State</a> <span class="mascot">Nittany Lions</span> </h3> <span>Enrolled</span> <span class="committed-date">6/30/2014</span> </div>
-                        <section class="profile-prediction-ticker comp white-before blank nimda" data-roles="Expert">
-                            <section class="comp-bdy">
-                                <p>There are no predictions. <a class="nimda" data-roles="Expert" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7E453238E542819DCA1ADCC6602C4C02805CE82CA1194D82C7C7EAD13C6AE9B5CC726E35C1755D4472EC19BF2871972A39AF2AC6C963D89ACC16F7526FD93286649EA5A953859D13D4CE7C18AE996CE2434021" href="#" rel="nofollow">Make Prediction</a></p>
-                            </section>
-                        </section>
-                    </div>
-                    <div class="videos-header-container">
-                        <section class="videos-header-comp">
-                            <div class="video-header"> <span><b class="icon-play6"></b> Must Watch Highlight</span><a class="admin-link nimda" data-js="admin-link" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F989FD817D0C03A15441F855EE421BF170EEE9999BA862024CBF1EC724C279A53591E0EDE02A2357E9B7444F07E899E28" href="#" rel="nofollow" target="_blank">Add Video</a> </div>
-                            <section class="comp-bdy">
-                                <div class="main-video">
-                                    <div class="hudl-comp"> <iframe class="youtube-player" type="text/html" width="512" height="288" src="https://www.youtube.com/embed/MCrSBUs1Vys"></iframe> </div>
-                                </div>
-                                <script>
-                                        $tfs.Related.push({
-                                            "Key": 706632,
-                                            "Name": "DeMatha: Mark Allen 40 yd Run",
-                                            "OriginalFilename": "MCrSBUs1Vys",
-                                            "Date": "2/27/2012 6:51:20 PM",
-                                            "Type": "youtbe",
-                                            "Height": "360",
-                                            "Width": "480",
-                                            "Path": "http://www.youtube.com/v/MCrSBUs1Vys",
-                                            "User": 48,
-                                            "Text": "DeMatha: Mark Allen 40 yd Run - High School Football: DeMatha vs. Dunbar (9/23/11) - www.DCSportsFan.com - www.TheSportsFanNetwork.com",
-                                            "Class": "Video",
-                                            "Thumbnail": "https://i.ytimg.com/vi/MCrSBUs1Vys/0.jpg",
-                                            "Duration": "11",
-                                            "AssetSource": null,
-                                            "AssetExtension": null,
-                                            "Host": "",
-                                            "SystemPath": "C:\\inetpub\\wwwroot\\247Sports",
-                                            "DefaultName": "DeMatha: Mark Allen 40 yd Run",
-                                            "Tags": [{
-                                                "id": "plr_22591",
-                                                "name": "Mark Allen",
-                                                "type": "Player"
-                                            }],
-                                            "Location": "PlayerHeader",
-                                            "AutoPlay": true
-                                        });
-                                    </script>
-                                <ul class="videoheader_lst">
-                                    <li> <a href="http://www.hudl.com/athlete/666776/highlights/18746377" target="_blank">Mark Allen - Highlight Videos - Hudl</a> </li>
-                                    <li> <a href="#" target="_blank" data-js="video-swap" data-type="youtube" data-originalfilename="MCrSBUs1Vys">DeMatha: Mark Allen 40 yd Run</a> </li>
-                                </ul>
-                            </section>
-                        </section>
-                    </div>
-                    <div class="sticky-video">
-                        <div class="hudl-comp" data-campaign="hudl"> <a class="toggle-videofooter"><span class="icon-hamburger open"></span> <span class="close right icon-close"></span></a> <iframe data-src='//www.hudl.com/embed/athlete/666776/highlights/18746377?autoplay=true' width='432' height='243' frameborder='0' allowfullscreen data-js="source-swap"></iframe>
-                            <p> <a href="https://www.hudl.com/embed/athlete/666776/highlights/18746377?autoplay=true" target="_blank">Mark Allen - Highlight Videos - Hudl</a> </p>
-                        </div>
-                        <script>
-                                $tfs.Related.push({
-                                    "Key": 880937,
-                                    "Date": "2013-04-02T17:04:39",
-                                    "OriginalFilename": "http://www.hudl.com/athlete/666776/highlights/18746377",
-                                    "Type": "hudl",
-                                    "Height": 0,
-                                    "Width": 0,
-                                    "FileSystem": null,
-                                    "Path": "http://www.hudl.com/athlete/666776/highlights/18746377",
-                                    "User": 36,
-                                    "Class": 24,
-                                    "Text": "",
-                                    "Name": "Mark Allen - Highlight Videos - Hudl",
-                                    "Thumbnail": "",
-                                    "Duration": 0,
-                                    "Location": "PlayerHeader",
-                                    "AutoPlay": true
-                                });
-                            </script>
-                    </div>
-                </header>
-                <section class="profile-main">
-                    <div class="profile-comps player">
-                        <section class="college-comp comp">
-                            <header class="comp-hdr committed"> <img src="https://s3media.247sports.com/Uploads/College/41/1_4607.gif" width="50" height="50" />
-                                <h2 class="committed">Enrolled</h2> <a class="admin-link nimda" data-js="admin-link" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9A96DA1CC0DB613540039A5CE82CA1194D82C7C7EAD13C39AEACB02E0C06D07E4E1C58F924B933788C2C67E86CDFB53F80" href="#" rel="nofollow" target="_blank">Add Interest</a> <a class="admin-link nimda" data-js="admin-link" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9A96DA1CC0DB613540039A5CE82CA1194D82C7C7EAD13C39AEACB02E0C06D07E4E1C58F924B933788C2C67E86CDFB63B99B8DE01" href="#" rel="nofollow">Manage Interests</a> <span class="committed-date">6/30/2014</span>
-                                <ul class="h_lst">
-                                    <li><b>4</b> OFFERS</li>
-                                    <li><b>1</b> VISITS</li>
-                                    <li><b>0 </b> COACH VISITS</li>
-                                </ul>
-                            </header>
-                            <section class="comp-bdy">
-                                <ul class="college-list">
-                                    <li>
-                                        <ul class="h_lst college-list-hdr">
-                                            <li class="school">Team</li>
-                                            <li class="offer">Offer</li>
-                                            <li class="interest">Interest</li>
-                                            <li class="recruitedby">Recruited By</li>
-                                            <li class="posavail">Roster Outlook</li>
-                                            <li class="visitdate">Visit</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <ul class="h_lst college-list-item">
-                                            <li class="avatar"> <a href="//247sports.com/college/penn-state/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/328/648/5_4648328.png" width="25" height="25" /> </a> </li>
-                                            <li class="school"> <a href="//247sports.com/college/penn-state/Season/2014-Football/Commits">Penn State </a> </li>
-                                            <li class="offer"> <b class="checkmark"></b> </li>
-                                            <li class="interest"> <span class="enrolled-bg" title="enrolled">Enrolled</span> <a class="drawer meta edit-link nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9A96DA1CC0DB61114B198B01C03EA75D2DA2D9C0A2FE7D67F8F6A5614A35984D59075FA03EA326699B642DAA29C2C875B2BDD010" href="#" rel="nofollow">(Edit)</a> </li>
-                                            <li class="recruitedby">
-                                                <div class="recruitedby_blk">
-                                                    <ul class="pskcoach_lst">
-                                                        <li class="keeper"> <b class="active_icn">K</b> <a href="https://247sports.com/Coach/Charles-Huff-1732">Charles Huff</a> </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="posavail"> <a href="https://247sports.com/Recruitment/Mark-Allen-23489/RecruitInterests">4 (0 Commit)</a> </li>
-                                            <li class="visitdate"> <a href="https://247sports.com/college/penn-state/Season/2014-Football/Visits"><span>Visit: </span>Dec 6</a> </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <ul class="h_lst all-choices-list">
-                                    <li> <a href="//247sports.com/college/cincinnati/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/240/648/5_4648240.png" width="25" height="25" /> </a> </li>
-                                    <li> <a href="//247sports.com/college/temple/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/315/152/5_8152315.png" width="25" height="25" /> </a> </li>
-                                    <li> <a href="//247sports.com/college/wake-forest/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/345/682/5_4682345.png" width="25" height="25" /> </a> </li>
-                                    <li> <a href="//maryland.247sports.com/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/311/682/5_4682311.png" width="25" height="25" /> </a> </li>
-                                    <li> <a href="//247sports.com/college/north-carolina-state/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/728/975/5_7975728.png" width="25" height="25" /> </a> </li>
-                                    <li> <a href="//247sports.com/college/north-carolina/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/602/120/5_8120602.png" width="25" height="25" /> </a> </li>
-                                    <li> <a href="//247sports.com/college/west-virginia/Season/2014-Football/Commits"> <img src="https://s3media.247sports.com/Uploads/Assets/295/648/5_4648295.png" width="25" height="25" /> </a> </li>
-                                </ul>
-                                <p><a href="https://247sports.com/Recruitment/Mark-Allen-23489/RecruitInterests">View Complete Team List</a></p>
-                            </section>
-                        </section>
-                        <section class="timeline-comp comp white-before">
-                            <header class="comp-hdr">
-                                <h2>Timeline</h2> <a class="admin-link nimda" data-js="admin-link" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F989FD817D0C03A15441F855EE421BF170EEE9999BA862024C9F1E5724F3DDB78791F54E319A468539B3E" href="#" rel="nofollow" target="_blank">Add Timeline Events</a> </header>
-                            <section class="comp-bdy">
-                                <article class="timeline-event" data-js="timeline-event"> <span>Apr 16</span>
-                                    <div class="timeline-wrapper" style="background-color: "> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" width="25" /></noscript>
-                                        <h3>Game</h3>
-                                        <p> Mark Allen had 14 carries for 59 yards and caught... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC61776B2CC3479175E64B51F49F84CADB787F" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Oct 31</span>
-                                    <div class="timeline-wrapper" style="background-color: "> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" width="25" /></noscript>
-                                        <h3>Game</h3>
-                                        <p> Mark Allen had two carries for 23 yards and his... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC61776B2CC347957AE14157F29D84CADB787F" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Oct 10</span>
-                                    <div class="timeline-wrapper" style="background-color: "> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" width="25" /></noscript>
-                                        <h3>Game</h3>
-                                        <p> Mark Allen had 45 yards on eight carries and... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC61776B2CC347957CE64B56FB9884CADB787F" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Sep 26</span>
-                                    <div class="timeline-wrapper" style="background-color: "> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" width="25" /></noscript>
-                                        <h3>Game</h3>
-                                        <p> Mark Allen had five carries for 5 yards and two... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC61776B2CC3409C7AE44254F19284CADB787F" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Jun 30</span>
-                                    <div class="timeline-wrapper colored" style="background-color: #002452"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" width="25" /></noscript>
-                                        <h3>Enrolled</h3>
-                                        <p> Mark Allen enrolls at Penn State Nittany Lions <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC61776B2CC3419C7EEA4B52F49284CADB787F" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Apr 12</span>
-                                    <div class="timeline-wrapper colored" style="background-color: #002452"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" width="25" /></noscript>
-                                        <h3>U. Visit</h3>
-                                        <p> Mark Allen unofficially visits Penn State Nittany... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC61776B2CC3419D7CE24051F79C84CADB787F" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Feb 5</span>
-                                    <div class="timeline-wrapper colored" style="background-color: #002452"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" width="25" /></noscript>
-                                        <h3>Signed</h3>
-                                        <p> Mark Allen signs letter of intent to Penn State <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC617771048316C924BD174D86DDCEE1CB3C58F4FFE6724779872B0A5B02BC5BE268589A2060" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Jan 27</span>
-                                    <div class="timeline-wrapper" style="background-color: "> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/146/803/5_7803146.jpg" width="25" /></noscript>
-                                        <h3>Rating</h3>
-                                        <p> Mark Allen rated 81 by 247Sports. <a class="more_anc" href="https://247sports.com/Player/Mark-Allen-22591?Institution=2454">...more</a> <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC617771048316C924BD174D86DDCEE1CB3C59FCECE1794479872B0F5C07BA58E268589A2060" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Jan 19</span>
-                                    <div class="timeline-wrapper colored" style="background-color: #002452"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" width="25" /></noscript>
-                                        <h3>U. Visit</h3>
-                                        <p> Mark Allen unofficially visits Penn State Nittany... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC617771048316C924BD174D86DDCEE1CB3C5EB0CEE1644A20982F0A5803BA54E47632BB2D7DE8" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Dec 6</span>
-                                    <div class="timeline-wrapper colored" style="background-color: #002452"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" width="25" /></noscript>
-                                        <h3>O. Visit</h3>
-                                        <p> Mark Allen officially visits Penn State <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC617771048316C924BD174D86DDCEE1CB3C44B0CEE1644A20982F085F04BC5BE07232BB2D7DE8" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                                <article class="timeline-event" data-js="timeline-event"> <span>Dec 6</span>
-                                    <div class="timeline-wrapper colored" style="background-color: #002452"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" height="25" src="https://assets.247sports.com/Content/Img/1x1.gif" width="25" /><noscript><img height="25" src="https://s3media.247sports.com/Uploads/Assets/533/827/5_7827533.png" width="25" /></noscript>
-                                        <h3>U. Visit</h3>
-                                        <p> Mark Allen unofficially visits Penn State Nittany... <a class="nimda" data-src="EB488CB70A03A2BE57B5FAEFB0BB3E2A7A403E24EC59A696FC18D0DC617771048316C924BD174D86DDCEE1CB3C5EB0CEE1644A20982F085F04BC5BE27232BB2D7DE8" href="#" rel="nofollow">Edit</a> </p>
-                                    </div>
-                                </article>
-                            </section>
-                            <section class="comp-ftr"> <a href="/Player/Mark-Allen-22591/TimelineEvents">See All 29 Entries</a> </section>
-                        </section>
-                        <section class="playerstats-comp comp">
-                            <header class="comp-hdr">
-                                <h2>Stats</h2>
-                            </header>
-                            <section class="stats-content">
-                                <div class="stats-tbl-container">
-                                    <table class="name_tbl">
-                                        <thead>
-                                        <tr>
-                                            <th class="year">Year</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="name"> <span>2012</span> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="name"> <span>TOTAL</span> </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="scrolltbl_blk">
-                                        <table class="data_tbl">
-                                            <thead>
-                                            <tr>
-                                                <th title="Rushing Attempts">RuAtt</th>
-                                                <th title="Rushing Yards">RuYd</th>
-                                                <th title="Rushing Touchdowns">RuTD</th>
-                                                <th title="Receptions">Rec</th>
-                                                <th title="Reception Yards">RecYd</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td> 101 </td>
-                                                <td> 682 </td>
-                                                <td> 4 </td>
-                                                <td> 7 </td>
-                                                <td> 79 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>101</td>
-                                                <td>682</td>
-                                                <td>4</td>
-                                                <td>7</td>
-                                                <td>79</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </section>
-                        </section>
-                        <aside class="comp yieldmo">
-                            <div id="mobile_flex_mpu_top" class="dfp_ad">
-                                <script>
-                                        googletag.cmd.push(function() {
-                                            if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mobile_flex_mpu_top']) {
-                                                googletag.display("mobile_flex_mpu_top");
-                                            } else {
-                                                document.getElementById('mobile_flex_mpu_top').parentNode.remove();
-                                            }
-                                        });
-                                    </script>
-                            </div>
-                        </aside>
-                        <aside class="rightaside grey-after">
-                            <div data-js="player-sticky">
-                                <div id="mpu_plus_top" class="dfp_ad">
-                                    <script>
-                                            googletag.cmd.push(function() {
-                                                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mpu_plus_top']) {
-                                                    googletag.display("mpu_plus_top");
-                                                }
-                                            });
-                                        </script>
-                                </div>
-                                <div id="mobile_mpu_top" class="dfp_ad">
-                                    <script>
-                                            googletag.cmd.push(function() {
-                                                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mobile_mpu_top']) {
-                                                    googletag.display("mobile_mpu_top");
-                                                }
-                                            });
-                                        </script>
-                                </div>
-                                <section class="comp bio-comp">
-                                    <header class="comp-hdr">
-                                        <h2>Player Background</h2>
-                                    </header>
-                                    <section class="comp-bdy">
-                                        <p>
-                                        <p>Mark Allen is a 5-7, 185-pound Running Back from Hyattsville, MD. He committed to Penn State Nittany Lions in October of 2012. Allen tore his ACL midway through his junior season. </p>
-                                        </p>
-                                    </section>
-                                </section>
-                                <section class="videos-comp comp flex-half">
-                                    <header class="comp-hdr">
-                                        <h2>Videos</h2><a class="admin-link nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F989FD817D0C03A15441F855EE421BF170EEE9999BA862024CBF1EC724C279A53591E0EDE02A2357E9B7444F07E899E28" href="#" rel="nofollow" target="_blank">Add Video</a> </header>
-                                    <section class="comp-bdy">
-                                        <ul class="videos-list">
-                                            <li class="attachvideo"><a class="fancybox fancybox.ajax image-videos" href="https://247sports.com/Video/Lions247-video-interview-Mark-Allen-5-2917198?View=Full"><img alt="Video Thumbnail" height="100" src="https://i1.ytimg.com/vi/mU2o64l1Sa0/0.jpg" width="150" />  <noscript>&lt;img src="https://i.ytimg.com/vi/sHXo2HYMoGM/0.jpg" width="70" height="50" /&gt;</noscript> </a>
-                                                <div>
-                                                    <p> <a class="title_lnk" data-id="2917198" href="https://247sports.com/Video/Lions247-video-interview-Mark-Allen-5-2917198?View=Full" target="_blank" title="Lions247 video interview - Mark Allen - 5/...">Lions247 video interview - Mark Allen - 5/...  (3:07) </a> </p>
-                                                    <ul class="lnk_lst nimda">
-                                                        <li><a class="drawer nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9E9ADD0BDA9D59314A039D41917AFE0409A7CEC4A2D67F7FF8EAFE7E462398505D1B5AA02CBB2B78906421B12DC9CA6DC6E0814BC05368D9" href="#" rel="nofollow">Edit</a></li>
-                                                        <li><a class="fancybox fancybox.ajax nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9E9ADD0BDA9D59314A039D41917AFE0409A7CEC4A2D67F7FF8EAFE7E462398505D1B5AA02CBB2B78906421B12DC9CA6DC6E0814BC1526DC8039B" href="#" rel="nofollow">Delete</a></li>
-                                                    </ul>
-                                                    <script>
-                                                            $tfs.Related.push({
-                                                                "Key": 2917198,
-                                                                "Name": "Lions247 video interview - Mark Allen - 5/...",
-                                                                "OriginalFilename": "mU2o64l1Sa0",
-                                                                "Date": "6/4/2014 1:29:23 PM",
-                                                                "Type": "youtbe",
-                                                                "Height": "360",
-                                                                "Width": "480",
-                                                                "Path": "http://www.youtube.com/v/mU2o64l1Sa0",
-                                                                "User": 69,
-                                                                "Text": "Future Penn State running back Mark Allen talks about his future with the Nittany Lions, his comeback from ACL surgery and more. For complete coverage of Penn State football log on to Lions247.com.",
-                                                                "Class": "Video",
-                                                                "Thumbnail": "https://i1.ytimg.com/vi/mU2o64l1Sa0/0.jpg",
-                                                                "Duration": "187",
-                                                                "AssetSource": null,
-                                                                "AssetExtension": null,
-                                                                "Host": "",
-                                                                "SystemPath": "C:\\inetpub\\wwwroot\\247Sports",
-                                                                "DefaultName": "Lions247 video interview - Mark Allen - 5/...",
-                                                                "Tags": [{
-                                                                    "id": "plr_22591",
-                                                                    "name": "Mark Allen",
-                                                                    "type": "Player"
-                                                                }],
-                                                                "Location": "Player Profile Videos"
-                                                            });
-                                                        </script>
-                                                </div>
-                                            </li>
-                                            <li class="attachvideo nonyoutube"><a class="image-videos" href="/tu/ODIwNDI3dGlueTI0Nw==?utm_source=Player&amp;utm_medium=Video&amp;utm_campaign=Mark+Allen&amp;utm_content=Image" target="_blank" title="Mark Allen - Highlight Videos - Hudl"><img alt="Video Thumbnail" class="video-headshot jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/4_7803146.jpg" height="50" src="https://assets.247sports.com/Content/Img/1x1.gif" width="50" /><noscript><img alt="Video Thumbnail" class="video-headshot" height="50" src="https://s3media.247sports.com/Uploads/Assets/146/803/4_7803146.jpg" width="50" /></noscript> </a>
-                                                <div>
-                                                    <p> <a class="title_lnk" data-id="880937" href="https://247sports.com/Video/Mark-Allen-Highlight-Videos-Hudl-880937?View=Full" target="_blank" title="Mark Allen - Highlight Videos - Hudl">Mark Allen - Highlight Videos - Hudl </a> </p>
-                                                    <ul class="lnk_lst nimda">
-                                                        <li><a class="drawer nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9E9ADD0BDA9D58395706C332C921B61C4D8BC2CCE7D3786CF5ECA5414A30D0724F4479F809BB6A25C6792DAF28DFBE3E9EAD" href="#" rel="nofollow">Edit</a></li>
-                                                        <li><a class="fancybox fancybox.ajax nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9E9ADD0BDA9D58395706C332C921B61C4D8BC2CCE7D3786CF5ECA5414A30D0724F4479F809BB6A25C6792DAF28DFBF3F9BBCCD01" href="#" rel="nofollow">Delete</a></li>
-                                                    </ul>
-                                                    <script>
-                                                            $tfs.Related.push({
-                                                                "Key": 880937,
-                                                                "Name": "Mark Allen - Highlight Videos - Hudl",
-                                                                "OriginalFilename": "http://www.hudl.com/athlete/666776/highlights/18746377",
-                                                                "Date": "4/2/2013 5:04:39 PM",
-                                                                "Type": "hudl",
-                                                                "Height": "0",
-                                                                "Width": "0",
-                                                                "Path": "http://www.hudl.com/athlete/666776/highlights/18746377",
-                                                                "User": 36,
-                                                                "Text": "",
-                                                                "Class": "Video",
-                                                                "Thumbnail": "",
-                                                                "Duration": "0",
-                                                                "AssetSource": null,
-                                                                "AssetExtension": null,
-                                                                "Host": "",
-                                                                "SystemPath": "C:\\inetpub\\wwwroot\\247Sports",
-                                                                "DefaultName": "Mark Allen - Highlight Videos - Hudl",
-                                                                "Tags": [{
-                                                                    "id": "plr_22591",
-                                                                    "name": "Mark Allen",
-                                                                    "type": "Player"
-                                                                }],
-                                                                "Location": "Player Profile Videos"
-                                                            });
-                                                        </script>
-                                                </div>
-                                            </li>
-                                            <li class="attachvideo"><a class="fancybox fancybox.ajax image-videos" href="https://247sports.com/Video/DeMatha-Mark-Allen-40-yd-Run-706632?View=Full"><img alt="Video Thumbnail" height="100" src="https://i.ytimg.com/vi/MCrSBUs1Vys/0.jpg" width="150" />  <noscript>&lt;img src="https://i.ytimg.com/vi/sHXo2HYMoGM/0.jpg" width="70" height="50" /&gt;</noscript> </a>
-                                                <div>
-                                                    <p> <a class="title_lnk" data-id="706632" href="https://247sports.com/Video/DeMatha-Mark-Allen-40-yd-Run-706632?View=Full" target="_blank" title="DeMatha: Mark Allen 40 yd Run">DeMatha: Mark Allen 40 yd Run  (0:11) </a> </p>
-                                                    <ul class="lnk_lst nimda">
-                                                        <li><a class="drawer nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9E9ADD0BDA9D513D680C9A1BC4609E1312A886EAE3D37465B0ACB83A5A30984F49071CBA5DE1712ECC6651F87684" href="#" rel="nofollow">Edit</a></li>
-                                                        <li><a class="fancybox fancybox.ajax nimda" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F9E9ADD0BDA9D513D680C9A1BC4609E1312A886EAE3D37465B0ACB83A5A30984F49071CBA5DE1712ECC6650F973958F3F" href="#" rel="nofollow">Delete</a></li>
-                                                    </ul>
-                                                    <script>
-                                                            $tfs.Related.push({
-                                                                "Key": 706632,
-                                                                "Name": "DeMatha: Mark Allen 40 yd Run",
-                                                                "OriginalFilename": "MCrSBUs1Vys",
-                                                                "Date": "2/27/2012 6:51:20 PM",
-                                                                "Type": "youtbe",
-                                                                "Height": "360",
-                                                                "Width": "480",
-                                                                "Path": "http://www.youtube.com/v/MCrSBUs1Vys",
-                                                                "User": 48,
-                                                                "Text": "DeMatha: Mark Allen 40 yd Run - High School Football: DeMatha vs. Dunbar (9/23/11) - www.DCSportsFan.com - www.TheSportsFanNetwork.com",
-                                                                "Class": "Video",
-                                                                "Thumbnail": "https://i.ytimg.com/vi/MCrSBUs1Vys/0.jpg",
-                                                                "Duration": "11",
-                                                                "AssetSource": null,
-                                                                "AssetExtension": null,
-                                                                "Host": "",
-                                                                "SystemPath": "C:\\inetpub\\wwwroot\\247Sports",
-                                                                "DefaultName": "DeMatha: Mark Allen 40 yd Run",
-                                                                "Tags": [{
-                                                                    "id": "plr_22591",
-                                                                    "name": "Mark Allen",
-                                                                    "type": "Player"
-                                                                }],
-                                                                "Location": "Player Profile Videos"
-                                                            });
-                                                        </script>
-                                                </div>
-                                            </li>
-                                        </ul> <a href="https://247sports.com/Player/Mark-Allen-22591/Videos">All videos</a> </section>
-                                </section>
-                                <section class="tweets-comp comp nimda" data-roles="analyst">
-                                    <header class="comp-hdr">
-                                        <h2>Add Twitter</h2>
-                                    </header>
-                                    <section> <input id="TwitterContact_Info" name="TwitterContact.Info" placeholder="Twitter Name" type="text" /> <input id="TwitterContact_ContactType" name="TwitterContact.ContactType" type="hidden" value="Twitter" /> <a class="btn skn4 ajax-put" href="https://247sports.com/Player/Mark-Allen-22591">Save</a> </section>
-                                </section>
-                                <section class="photos-comp comp">
-                                    <header class="comp-hdr">
-                                        <h2>In Pictures </h2> <a class="admin-link nimda" data-js="admin-link" data-src="AC13CAF34E4AFDFE17F5BEB2A3BB21715D07302EED1F989FD817D0C03A15441F855EE421BF170EEE9999BA862024CDF0E7634C279A505D0750EA08" href="#" rel="nofollow">Add Photos</a> </header>
-                                    <section class="comp-bdy">
-                                        <div data-js="photo_big"> <a class="actionshot_img photos_sldshw_btn" href="https://247sports.com/Player/22591/ProfilePhotos/20180404Practice000161JPG-8283280?View=Full" title="(Photo: Harvey Levine-FOS/247)">Start SlideShow</a> <a class="actionshot_img" href="https://247sports.com/Player/22591/ProfilePhotos/20180404Practice000161JPG-8283280?View=Full" rel="Player Photo" title="(Photo: Harvey Levine-FOS/247)"><img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/280/283/14_8283280.JPG" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/280/283/14_8283280.JPG" width="310" /></noscript> </a> </div>
-                                        <div>
-                                            <ul>
-                                                <li class="selected">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/20180404Practice000161JPG-8283280?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/280/283/14_8283280.JPG" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/280/283/14_8283280.JPG" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/Mark-Allenjpg-8264530?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/530/264/14_8264530.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/530/264/14_8264530.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/Image-Title-8030191?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/191/30/14_8030191.JPG" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/191/30/14_8030191.JPG" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/20180319Practice00222jpg-8235677?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/677/235/14_8235677.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/677/235/14_8235677.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="headshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/Kristina-Petersen-AllenMark-H-17-MS-2951jpg-7803146?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/146/803/4_7803146.jpg" height="200" src="https://assets.247sports.com/Content/Img/1x1.gif" width="150" /><noscript><img height="200" src="https://s3media.247sports.com/Uploads/Assets/146/803/4_7803146.jpg" width="150" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/Image-Title-2848422?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/422/848/14_2848422.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/422/848/14_2848422.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/DMV-guysjpg-7540314?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/314/540/14_7540314.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/314/540/14_7540314.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/TitleAlt-Text-3780107?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/107/780/14_3780107.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/107/780/14_3780107.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/Mark-Allenjpg-5212358?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/358/212/14_5212358.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/358/212/14_5212358.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                                <li class="">
-                                                    <div data-js="image-swap" data-orientation="actionshot_img" data-url="https://247sports.com/Player/22591/ProfilePhotos/TitleAlt-Text-4951413?View=Full"> <img class="jsonly" data-src="https://s3media.247sports.com/Uploads/Assets/413/951/14_4951413.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" width="310" /><noscript><img height="160" src="https://s3media.247sports.com/Uploads/Assets/413/951/14_4951413.jpg" width="310" /></noscript> </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </section> <a href="https://247sports.com/Player/Mark-Allen-22591/ProfilePhotos?OrderBy=Date%60Object%3ADESC">All Photos</a> </section>
-                                <form action="https://247sports.com/Season/2014-Football/Recruits" autocomplete="off" class="recruit-search-form" method="Get">
-                                    <section class="home-comp recruit-search-form__comp">
-                                        <header class="comp-hdr home-comp__header recruit-search-form__header">
-                                            <h2 class="home-comp__heading recruit-search-form__heading">Recruit Search</h2> <a class="tltp_click tltp_bm" href="https://247sports.com/Season/2014-Football/Recruits">Football <span class="icon-caret-down" aria-hidden="true"></span> </a>
-                                            <div class="tooltip flyout_cmp sport">
-                                                <ul>
-                                                    <li><a href="https://247sports.com/Season/2014-Football/Recruits">Football</a></li>
-                                                    <li><a href="https://247sports.com/Season/2014-Basketball/Recruits">Basketball</a></li>
-                                                    <li><a href="https://247sports.com/Season/2014-Baseball/Recruits">Baseball</a></li>
-                                                </ul>
-                                            </div> <a class="tltp_click tltp_bm" href="https://247sports.com/Season/2014-Football/Recruits">2014 <span class="icon-caret-down" aria-hidden="true"></span> </a>
-                                            <div class="flyout_cmp year tooltip">
-                                                <ul>
-                                                    <li><a href="https://247sports.com/Season/2022-Football/Recruits">2022</a></li>
-                                                    <li><a href="https://247sports.com/Season/2021-Football/Recruits">2021</a></li>
-                                                    <li><a href="https://247sports.com/Season/2020-Football/Recruits">2020</a></li>
-                                                    <li><a href="https://247sports.com/Season/2019-Football/Recruits">2019</a></li>
-                                                    <li><a href="https://247sports.com/Season/2018-Football/Recruits">2018</a></li>
-                                                    <li><a href="https://247sports.com/Season/2017-Football/Recruits">2017</a></li>
-                                                    <li><a href="https://247sports.com/Season/2016-Football/Recruits">2016</a></li>
-                                                    <li><a href="https://247sports.com/Season/2015-Football/Recruits">2015</a></li>
-                                                    <li><a href="https://247sports.com/Season/2014-Football/Recruits">2014</a></li>
-                                                    <li><a href="https://247sports.com/Season/2013-Football/Recruits">2013</a></li>
-                                                    <li><a href="https://247sports.com/Season/2012-Football/Recruits">2012</a></li>
-                                                    <li><a href="https://247sports.com/Season/2011-Football/Recruits">2011</a></li>
-                                                    <li><a href="https://247sports.com/Season/2010-Football/Recruits">2010</a></li>
-                                                    <li><a href="https://247sports.com/Season/2009-Football/Recruits">2009</a></li>
-                                                    <li><a href="https://247sports.com/Season/2008-Football/Recruits">2008</a></li>
-                                                    <li><a href="https://247sports.com/Season/2007-Football/Recruits">2007</a></li>
-                                                    <li><a href="https://247sports.com/Season/2006-Football/Recruits">2006</a></li>
-                                                    <li><a href="https://247sports.com/Season/2005-Football/Recruits">2005</a></li>
-                                                    <li><a href="https://247sports.com/Season/2004-Football/Recruits">2004</a></li>
-                                                    <li><a href="https://247sports.com/Season/2003-Football/Recruits">2003</a></li>
-                                                    <li><a href="https://247sports.com/Season/2002-Football/Recruits">2002</a></li>
-                                                    <li><a href="https://247sports.com/Season/2001-Football/Recruits">2001</a></li>
-                                                    <li><a href="https://247sports.com/Season/2000-Football/Recruits">2000</a></li>
-                                                    <li><a href="https://247sports.com/Season/1999-Football/Recruits">1999</a></li>
-                                                </ul>
-                                            </div>
-                                        </header>
-                                        <section class="recruit-search-form__body">
-                                            <fieldset class="recruit-search-form__fieldset">
-                                                <Input class="recruit-search-form__search-input" label="" name="DefaultName" placeholder="Enter first, last, or full name" type="search" /> <input class="recruit-search-form__submit-button" type="submit" value="Search"> </fieldset>
-                                            <ul class="recruit-search-form__list">
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__interest-type-link" href="https://247sports.com/Season/2019-Football?View=Interests#tabs_targets">Targets</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__interest-type-link" href="https://247sports.com/Season/2019-Football?View=Interests#tabs_offers">Offers</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__interest-type-link" href="https://247sports.com/Season/2019-Football?View=Interests#tabs_visits">Visits</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__interest-type-link" href="https://247sports.com/Season/2019-Football?View=Interests#tabs_commits">Commits</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__interest-type-link" href="https://247sports.com/Season/2019-Football?View=Interests#tabs_decommits">Decommits</a> </li>
-                                            </ul>
-                                            <ul class="recruit-search-form__list">
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=QB">QB</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=BACK">BACK</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=REC">REC</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=O-LINE">O-LINE</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=D-LINE">D-LINE</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=LB">LB</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=DB">DB</a> </li>
-                                                <li class="recruit-search-form__list-item"> <a class="recruit-search-form__position-link" href="https://247sports.com/Season/2014-Football/Recruits?Position.PositionGroup=OTH">OTH</a> </li>
-                                            </ul>
-                                        </section>
-                                    </section>
-                                </form>
-                                <section class="legend-comp comp">
-                                    <header class="comp-hdr">
-                                        <h2>Legend</h2>
-                                    </header>
-                                    <section>
-                                        <ul class="legend-list">
-                                            <li><b class="grey icon-play6"></b> <span>Video Highlights</span></li>
-                                            <li><b class="icon-time"></b> <span>Early Enrollee</span></li>
-                                            <li> <b><svg class="signee" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve"> <g id="icomoon-ignore"> </g> <g> <path d="M681.3,698.3c-14-79.5-83.4-139.9-166.8-139.9s-152.9,60.4-166.8,139.9H64.1v57.8h899.8v-57.8H681.3z M514.5,613.3 c53,0,97.6,36,110.6,84.9H403.8C416.9,649.4,461.5,613.3,514.5,613.3z"/> <rect x="485.7" y="283.4" width="57.8" height="197.2"/> <rect x="313.1" y="335.3" transform="matrix(0.866 -0.5 0.5 0.866 -171.1586 229.1374)" width="57.8" height="197.2"/> <rect x="180.2" y="458.2" transform="matrix(0.5 -0.866 0.866 0.5 -377.7031 459.4716)" width="57.8" height="197.2"/> <rect x="587.6" y="405.1" transform="matrix(0.5 -0.866 0.866 0.5 -32.6961 811.2792)" width="197.2" height="57.8"/> <rect x="720.6" y="527.9" transform="matrix(0.866 -0.5 0.5 0.866 -168.6695 484.1898)" width="197.2" height="57.8"/> </g></svg> </b> <span>Early Signee</span> </li>
-                                            <li><b class="icon-walkon"></b> <span>Walk-On</span></li>
-                                            <li><b class="icon-grey-shirt"></b> <span>Grey Shirt</span></li>
-                                            <li><b class="red icon-grey-shirt"></b> <span>Red Shirt</span></li>
-                                            <li><b class="red icon-medical-redshirt"></b> <span>Medical Redshirt</span></li>
-                                            <li><b class="active_icn">P</b> <span>Primary</span></li>
-                                            <li><b class="active_icn">S</b> <span>Secondary</span></li>
-                                            <li><b class="active_icn">K</b> <span>Keeper</span></li>
-                                            <li><b class="inactive_icn">P</b> <span>Primary (Inactive)</span></li>
-                                            <li><b class="inactive_icn">S</b> <span>Secondary (Inactive)</span></li>
-                                            <li><b class="inactive_icn">K</b> <span>Keeper (Inactive)</span></li>
-                                        </ul>
-                                    </section>
-                                </section>
-                                <div id="mpu_middle" class="dfp_ad">
-                                    <script>
-                                            googletag.cmd.push(function() {
-                                                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mpu_middle']) {
-                                                    googletag.display("mpu_middle");
-                                                }
-                                            });
-                                        </script>
-                                </div>
-                                <div id="mobile_mpu_bottom" class="dfp_ad">
-                                    <script>
-                                            googletag.cmd.push(function() {
-                                                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mobile_mpu_bottom']) {
-                                                    googletag.display("mobile_mpu_bottom");
-                                                }
-                                            });
-                                        </script>
-                                </div>
-                            </div>
-                        </aside>
-                        <section class="news-comp comp">
-                            <header>
-                                <h2>Latest Updates</h2><a href="https://247sports.com/Player/Mark-Allen-22591/Headlines">207 Headlines</a> </header>
-                            <section class="news-feed">
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Article/Notebook-Lions-kicking-competition-must-wait-until-summer-117030986" class="news-article__img"> <img alt="Notebook: Lions&#39; kicking competition must wait until summer" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/kZ_pu0Dbzmn35NmRCTMh31EqbWQ=/310x160/top/Uploads/Assets/296/283/8283296.JPG" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Notebook: Lions&#39; kicking competition must wait until summer" width="310" /><noscript><img alt="Notebook: Lions&#39; kicking competition must wait until summer" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/kZ_pu0Dbzmn35NmRCTMh31EqbWQ=/310x160/top/Uploads/Assets/296/283/8283296.JPG" title="Notebook: Lions&#39; kicking competition must wait until summer" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Article/Notebook-Lions-kicking-competition-must-wait-until-summer-117030986">Notebook: Lions' kicking competition must wait until summer</a></h3>
-                                    <div> <span class="author">Andrew Callahan</span> <span class="time"> <time> Apr 5, 4:30 AM </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Gallery/PHOTOS-An-inside-look-at-Penn-States-spring-practice-117031420" class="news-article__img"> <img alt="PHOTOS: An inside look at Penn State&#39;s spring practice" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/IxrDuAC4XQIFoBacVIIK_8vH4OQ=/310x160/top/Uploads/Assets/310/283/8283310.JPG" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="PHOTOS: An inside look at Penn State&#39;s spring practice" width="310" /><noscript><img alt="PHOTOS: An inside look at Penn State&#39;s spring practice" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/IxrDuAC4XQIFoBacVIIK_8vH4OQ=/310x160/top/Uploads/Assets/310/283/8283310.JPG" title="PHOTOS: An inside look at Penn State&#39;s spring practice" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Gallery/PHOTOS-An-inside-look-at-Penn-States-spring-practice-117031420">PHOTOS: An inside look at Penn State's spring practice</a></h3>
-                                    <div> <span class="author">Harvey Levine</span> <span class="time"> <time> Apr 4, 10:01 PM </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Gallery/Photos-Penn-State-open-practice-II-116806551" class="news-article__img"> <img alt="Photos: Penn State open practice II" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/Nfau-eOi2oEMwf4p2OEFNsd_iYc=/310x160/top/Uploads/Assets/520/264/8264520.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Photos: Penn State open practice II" width="310" /><noscript><img alt="Photos: Penn State open practice II" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/Nfau-eOi2oEMwf4p2OEFNsd_iYc=/310x160/top/Uploads/Assets/520/264/8264520.jpg" title="Photos: Penn State open practice II" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Gallery/Photos-Penn-State-open-practice-II-116806551">Photos: Penn State open practice II</a></h3>
-                                    <div> <span class="author">Sean Fitz</span> <span class="time"> <time> Mar 29, 11:00 AM </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Gallery/Penn-State-kicks-off-spring-practice-for-2018-116466675" class="news-article__img"> <img alt="Penn State kicks off spring practice for 2018" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/VaZjxkpkZshjmYXuOxs2CeBFyV4=/310x160/top/Uploads/Assets/569/235/8235569.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Penn State kicks off spring practice for 2018" width="310" /><noscript><img alt="Penn State kicks off spring practice for 2018" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/VaZjxkpkZshjmYXuOxs2CeBFyV4=/310x160/top/Uploads/Assets/569/235/8235569.jpg" title="Penn State kicks off spring practice for 2018" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Gallery/Penn-State-kicks-off-spring-practice-for-2018-116466675">Penn State kicks off spring practice for 2018</a></h3>
-                                    <div> <span class="author">Harvey Levine</span> <span class="time"> <time> Mar 19, 6:58 PM </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Gallery/Penn-State-spring-ball-preview-Now-or-never-for-these-6-Lions-116322559" class="news-article__img"> <img alt="Penn State spring ball preview: Now or never for these 6 Lions" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/_oZ5ZfzonjX4TtH0gFnvpQWXTPU=/310x160/top/Uploads/Assets/485/226/8226485.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Penn State spring ball preview: Now or never for these 6 Lions" width="310" /><noscript><img alt="Penn State spring ball preview: Now or never for these 6 Lions" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/_oZ5ZfzonjX4TtH0gFnvpQWXTPU=/310x160/top/Uploads/Assets/485/226/8226485.jpg" title="Penn State spring ball preview: Now or never for these 6 Lions" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Gallery/Penn-State-spring-ball-preview-Now-or-never-for-these-6-Lions-116322559">Penn State spring ball preview: Now or never for these 6 Lions</a></h3>
-                                    <div> <span class="author">Mark Brennan</span> <span class="time"> <time> Mar 17, 7:35 AM </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Article/2018-Penn-State-class-breakdown-QBs-and-RBs-112364331" class="news-article__img"> <img alt="2018 Penn State class breakdown: QBs and RBs" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/ySHI9v2B9wUqxTLvUiOm9G23EU8=/310x160/top/Uploads/Assets/482/330/5330482.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="2018 Penn State class breakdown: QBs and RBs" width="310" /><noscript><img alt="2018 Penn State class breakdown: QBs and RBs" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/ySHI9v2B9wUqxTLvUiOm9G23EU8=/310x160/top/Uploads/Assets/482/330/5330482.jpg" title="2018 Penn State class breakdown: QBs and RBs" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Article/2018-Penn-State-class-breakdown-QBs-and-RBs-112364331">2018 Penn State class breakdown: QBs and RBs</a></h3>
-                                    <div> <span class="author">Andrew Callahan</span> <span class="time"> <time> Dec 20, 2017 </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Article/Penn-States-offensive-regular-season-snap-counts-112122394" class="news-article__img"> <img alt="Penn State&#39;s offensive regular-season snap counts" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/ovAp-B5bZN7kEtWsE6R1k5xRKPE=/310x160/top/Uploads/Assets/759/841/7841759.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Penn State&#39;s offensive regular-season snap counts" width="310" /><noscript><img alt="Penn State&#39;s offensive regular-season snap counts" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/ovAp-B5bZN7kEtWsE6R1k5xRKPE=/310x160/top/Uploads/Assets/759/841/7841759.jpg" title="Penn State&#39;s offensive regular-season snap counts" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Article/Penn-States-offensive-regular-season-snap-counts-112122394">Penn State's offensive regular-season snap counts</a></h3>
-                                    <div> <span class="author">Andrew Callahan</span> <span class="time"> <time> Dec 11, 2017 </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Article/Penn-State-backup-running-back-leaving-the-program-111808629" class="news-article__img"> <img alt="Penn State backup running back leaving the program" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/wtyZJT85D4cvVwv3VP18Qm0YbE0=/310x160/top/Uploads/Assets/51/929/7929051.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Penn State backup running back leaving the program" width="310" /><noscript><img alt="Penn State backup running back leaving the program" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/wtyZJT85D4cvVwv3VP18Qm0YbE0=/310x160/top/Uploads/Assets/51/929/7929051.jpg" title="Penn State backup running back leaving the program" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Article/Penn-State-backup-running-back-leaving-the-program-111808629">Penn State backup running back leaving the program</a></h3>
-                                    <div> <span class="author">Mark Brennan</span> <span class="time"> <time> Dec 5, 2017 </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Article/PSU-offensive-snap-counts-at-Maryland-Stevens-sets-career-high-111140521" class="news-article__img"> <img alt="PSU offensive snap counts at Maryland: Stevens sets career high" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/JF7HvNchLdO9xn3Hf2PdE-gmoYg=/310x160/top/Uploads/Assets/147/892/7892147.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="PSU offensive snap counts at Maryland: Stevens sets career high" width="310" /><noscript><img alt="PSU offensive snap counts at Maryland: Stevens sets career high" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/JF7HvNchLdO9xn3Hf2PdE-gmoYg=/310x160/top/Uploads/Assets/147/892/7892147.jpg" title="PSU offensive snap counts at Maryland: Stevens sets career high" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Article/PSU-offensive-snap-counts-at-Maryland-Stevens-sets-career-high-111140521">PSU offensive snap counts at Maryland: Stevens sets career high</a></h3>
-                                    <div> <span class="author">Andrew Callahan</span> <span class="time"> <time> Nov 26, 2017 </time> </span> </div>
-                                </article>
-                                <article class="news-article"> <a href="//247sports.com/college/penn-state/Article/Penn-State-vs-Maryland-The-Brennan-game-breakdown-111038526" class="news-article__img"> <img alt="Penn State vs. Maryland: The Brennan game breakdown" class="news-article__img--horizontal jsonly" data-src="https://thumbor.247sports.com/JF7HvNchLdO9xn3Hf2PdE-gmoYg=/310x160/top/Uploads/Assets/147/892/7892147.jpg" height="160" src="https://assets.247sports.com/Content/Img/1x1.gif" title="Penn State vs. Maryland: The Brennan game breakdown" width="310" /><noscript><img alt="Penn State vs. Maryland: The Brennan game breakdown" class="news-article__img--horizontal" height="160" src="https://thumbor.247sports.com/JF7HvNchLdO9xn3Hf2PdE-gmoYg=/310x160/top/Uploads/Assets/147/892/7892147.jpg" title="Penn State vs. Maryland: The Brennan game breakdown" width="310" /></noscript> </a>
-                                    <h3><a href="//247sports.com/college/penn-state/Article/Penn-State-vs-Maryland-The-Brennan-game-breakdown-111038526">Penn State vs. Maryland: The Brennan game breakdown</a></h3>
-                                    <div> <span class="vip vip_new_icn">VIP</span> <span class="author">Mark Brennan</span> <span class="time"> <time> Nov 26, 2017 </time> </span> </div>
-                                </article>
-                                <div class="loadmore_blk">
-                                    <p><a href="/Player/Mark-Allen-22591/Headlines?View=Home&Page=2" data-js="loadmore">Load More Updates</a></p>
-                                </div>
-                            </section>
-                        </section>
-                    </div>
-                </section>
-            </section>
-        </div>
-        <link href="https://assets.247sports.com/Content/SkyNet/Styles/Shared/print.css?v=1" media="print" rel="stylesheet" type="text/css" /> </section>
-</section>
-<footer id="site-footer" class="site-footer" role="contentinfo">
-    <div class="logo-blk"> <a class="cbs-link" href="https://cbssports.com" title="CBS Sports Digital" target="_blank"> <img class="cbs-logo" src="https://s3media.247sports.com/Content/Img/cbsdigital-logo.png" alt="CBS Sports Digital"> </a> <a class="twofourseven-link" href="//247sports.com" title="247Sports"> <img class="twofourseven-logo" src="https://assets.247sports.com/Content/SkyNet/Img/247sports.png" alt="Twenty Four Seven Sports"> </a> </div>
-    <div class="info-blk">
-        <ul class="info-link-list">
-            <li><a href="//247sports.com/Article/About-CBT-Sports-LLC-dba-247Sports-116092" title="About">About</a></li>
-            <li><a href="//247sports.com/Article/Customer-Support-3619" title="Contact Us">Contact Us</a></li>
-            <li><a href="https://www.cbsinteractive.com/brands" title="Advertisers" target="_blank">Advertisers</a></li>
-            <li><a href="//247sports.com/Article/Member-Services-18985" title="Member Services">Member Services</a></li>
-            <li><a href="//247sports.com/howitworks" title="How It Works Marketing">How It Works</a></li>
-            <li><a href="https://www.cbsinteractive.com/careers" title="Careers" target="_blank">Careers</a></li>
-            <li><a href="mailto:support@247sports.com" title="Customer Service">Customer Service</a></li>
-            <li><a href="https://legalterms.cbsinteractive.com/privacy" title="Privacy Policy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://legalterms.cbsinteractive.com/terms-of-use" title="Terms of Service" target="_blank">Terms of Service</a></li>
-            <li><a href="/User/ToggleMobile" data-js="togglemedium" rel="nofollow">Toggle Full/Mobile</a></li>
-        </ul>
     </div>
-    <div class="bottom-blk">
-        <ul>
-            <li><a href="https://twitter.com/247Sports" target="_blank"><b class="grey icon-twitter" aria-label="Twitter"></b><span class="hidden">Facebook</span></a></li>
-            <li><a href="https://www.facebook.com/247Sports" target="_blank"><b class="grey icon-facebook" aria-label="Facebook"></b><span class="hidden">Twitter</span></a></a>
-            </li>
-            <li><a href="https://www.instagram.com/247sports/" target="_blank"><b class="grey icon-instagram" aria-label="Instagram"></b><span class="hidden">instagram</span></a></li>
-        </ul>
-        <p class="meta">&copy; 2005-2018 CBS INTERACTIVE ALL RIGHTS RESERVED. CBS Sports is a registered trademark of CBS Broadcasting Inc.</p> <span class="sportsradar">Sportsradar</span> </div>
-</footer>
-<div class="hidden" data-value="225" id="daol"></div>
-<div id="mobile_mpu_bottom" class="dfp_ad">
-    <script>
-            googletag.cmd.push(function() {
-                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['mobile_mpu_bottom']) {
-                    googletag.display("mobile_mpu_bottom");
-                }
-            });
-        </script>
+    <div class="commit-box" style="background-color: rgb(0, 36, 82);"> <img alt="Penn State" height="50" src="https://s3media.247sports.com/Uploads/Assets/533/827/1_7827533.png" title="Penn State" width="50" />
+        <h3>Penn State</h3> <span>Enrolled</span> <span>6/30/2014</span> </div>
 </div>
-<div id="leader_bottom" class="dfp_ad">
-    <script>
-            googletag.cmd.push(function() {
-                if (typeof index_headertag_lightspeed === 'undefined' && typeof(slots) != 'undefined' && slots['leader_bottom']) {
-                    googletag.display("leader_bottom");
-                }
-            });
-        </script>
-</div>
-<script src="https://assets.247sports.com/site/minify.js?type=javascript&amp;v=1576&amp;files=/scripts/skynet/shared/aws-sdk-2.176.0.min.js,/scripts/skynet/shared/jquery-1.7.2.min.js,/scripts/skynet/shared/jquery-ui-1.8.1.min.js,/scripts/skynet/shared/jquery.scroll.min.js,/scripts/skynet/shared/jquery.tweet.js,/scripts/skynet/shared/jquery.linkify.js,/scripts/skynet/shared/jquery.timer.js,/scripts/skynet/shared/jquery.form.js,/scripts/skynet/shared/jquery.file.js,/scripts/skynet/shared/jquery.fancybox.js,/scripts/skynet/shared/jquery.tokeninput.js,/scripts/skynet/shared/jquery.json.min.js,/scripts/skynet/shared/jquery.countdown.js,/scripts/skynet/shared/jquery.timepicker.js,/scripts/skynet/shared/twitter.widgets.js,/scripts/skynet/shared/modernizer.js,/scripts/skynet/shared/global.js,/scripts/skynet/shared/skybox.js,/scripts/skynet/shared/site.js,/scripts/skynet/user/register.js,/scripts/skynet/bundle/menu.bundle.js" type="text/javascript"></script>
-<script src="https://assets.247sports.com/site/minify.js?type=javascript&amp;v=1576&amp;files=/scripts/skynet/shared/clipboard.min.js,/scripts/skynet/shared/copy.js,/scripts/skynet/recruit/rankingcanvas.js,/scripts/skynet/video/mustwatchvideo.js,/scripts/skynet/bundle/newsfeed.bundle.js" type="text/javascript"></script>
-<script src="https://assets.247sports.com/scripts/skynet/bundle/player.bundle.js" type="text/javascript"></script>
+<script src="https://assets.247sports.com/site/minify.js?type=javascript&amp;v=1576&amp;files=/scripts/skynet/shared/aws-sdk-2.176.0.min.js,/scripts/skynet/shared/jquery-1.7.2.min.js,/scripts/skynet/shared/analytics.js" type="text/javascript"></script>
 <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -1477,72 +329,39 @@
             uid: "' + $tfs.User.Key + '"
         });
     </script>
-<script src="https://assets.247sports.com/Scripts/SkyNet/Shared/ads.js"></script>
-<script async src="https://apis.google.com/js/plusone.js"></script>
-<script async src="https://platform.twitter.com/widgets.js"></script>
-<script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
-<script async defer src="https://www.google.com/recaptcha/api.js"></script>
+<div class="hidden" data-value="56" id="daol"></div>
 <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/all.js#xfbml=1&status=0";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk')); //newsletter
-        var updateNewsletter = function() {
-            if ($tfs.Guest.EmailSubscriptions == null) {
-                $tfs.Guest.EmailSubscriptions = [];
+        window.addEventListener("load", function(event) {
+            parent.postMessage({
+                height: document.body.scrollHeight,
+                location: location.href
+            }, '*');
+        });
+
+        function getParentUrl() {
+            var isInIframe = (parent !== window),
+                parentUrl = null;
+            if (isInIframe) {
+                parentUrl = document.referrer.match(/:\/\/([^\/:]+)(:\d+)?\//)[1];
+                parentUrl = parentUrl.match(/.*?([^.]+)[.][^.]+$/)[1];
             }
-            if ($tfs.User.Status != "Guest") {
-                $tfs.Guest.EmailSubscriptions = $tfs.User.EmailSubscriptions;
-                $tfs.Guest.Newsletter = $tfs.User.Newsletter;
-            }
-            if ($tfs.Guest.Newsletter == "Unsubscribed") {
-                var hasSubscribed = false;
-                for (newsletter in $tfs.CurrentSite.EmailSubscriptions) {
-                    if ($tfs.Guest.EmailSubscriptions.indexOf($tfs.CurrentSite.EmailSubscriptions[newsletter]) > -1) {
-                        hasSubscribed = true;
-                        break;
-                    }
-                }
-                if (hasSubscribed) {
-                    $tfs.Guest.Newsletter = "Subscribed";
-                }
-            }
-            if ($(location).attr('pathname').toLowerCase() === '/distribution/signup') {
-                $tfs.Guest.Newsletter = "OptedOut";
-            }
-        };
-        if (window.location.search.toLowerCase().indexOf('showdiv=newsletter') > 0) {
-            document.body.setAttribute('data-div', "newsletter");
-        } else if (window.location.search.toLowerCase().indexOf('showdiv=subscribe') > 0) {
-            document.body.setAttribute('data-div', "subscribe");
-        } // Adblock check
-        if (window.canRunAds === undefined) {
-            $tfs.User.AdBlock = true;
+            return parentUrl;
         }
-    </script>
-<script>
-        if (document.cookie.indexOf('247_geo') == -1) {
-            var url = 'https://assets.247sports.com/user/getlocation';
-            $.ajax({
-                url: url,
-                dataType: 'json',
-                success: function(data) {
-                    var headers = data.Headers['CloudFront-Viewer-Country'];
-                    if (headers === 'US') {
-                        countryCode = 'US';
-                    } else {
-                        countryCode = 'not-US';
-                    }
-                    var date = new Date;
-                    date.setFullYear(date.getFullYear() + 1);
-                    $247Global.setCookie('247_geo', countryCode, date);
-                }
-            });
+        $('a').each(function() {
+            var href = $(this).attr('href');
+            href = href.replace('utm_source=Iframe', 'utm_source=' + getParentUrl());
+            $(this).attr('href', href);
+        });
+        if (getParentUrl() != null && getParentUrl().toLowerCase().indexOf('247sports') > -1) {
+            var embed = 'trackInternalEmbed';
+            var embedLocation = 'internal';
+        } else {
+            var embed = 'trackExternalEmbed';
+            var embedLocation = 'external';
         }
+        var parentUrl = getParentUrl() != null ? '' + getParentUrl() : 'null';
+        var tfsPageArena = 'other';
+        var tfsPageType = 'roster';
         if (typeof(tfsMobile) != 'undefined' && tfsMobile) {
             var device = 'mobile';
             var brand = 'mweb';
@@ -1559,43 +378,20 @@
                 brandPlatformId: '247sports_site_' + brand,
                 siteType: 'responsive web|||' + device,
                 siteHier: 'sports|' + tfsPageArena + '|' + tfsPageType,
-                siteSection: 'sports|' + tfsPageArena + '|||' + tfsPageType + '|' + (typeof tfsSubPageType != 'undefined' ? tfsSubPageType : ""),
+                siteSection: 'sports|' + tfsPageArena + '|||' + tfsPageType + '|',
                 pageTitle: '' + location.pathname,
                 pageType: '' + tfsPageType,
                 userStatus: ($tfs.User.Status.toLowerCase() == 'guest' ? 'anon' : $tfs.User.Status.replace(/\+/g, '_').toLowerCase()),
                 pageViewGuid: surround.vguid,
                 userType: 'anon',
-                userState: 'not authenticated'
+                userState: 'not authenticated',
+                trackImpression: 'impression',
+                _noViewTrack: true,
+                impressionValue: 'impressionsModule|247Sports|' + tfsPageArena + '|' + tfsPageType + '|' + embedLocation + '|' + parentUrl
             };
         } else {
             var utag_data = {};
         }
-        if ($247Global.readCookie('247_geo') != false) {
-            utag_data.siteEdition = $247Global.readCookie('247_geo');
-        }
-        if (typeof(tfsNoPageView) != 'undefined') {
-            utag_data._noViewTrack = true;
-        }
-        if (typeof($tfs.Content) != 'undefined') {
-            utag_data._articleTitle = $('.article-container.active') ? '' + $('.article-container.active').attr('data-headline') : '';
-            utag_data._authorList = '' + $tfs.Content.Author;
-            utag_data._authorPrimaryName = $('.article-container.active') ? '' + $('.article-container.active').find('[data-author]').text() : '';
-            utag_data.articlePubDate = $('.article-container.active') ? '' + $('.article-container.active').find('[data-published]').data('published') : '';
-            utag_data.contentOrigin = 'ugc';
-            utag_data._articleId = '' + $tfs.Content.Key;
-            utag_data._articleType = $('.article-container.active') ? '' + $('.article-container.active').find('[data-type]').data('type') : 'boardpost';
-            if (typeof(tags) != 'undefined' && tags.indexOf('AudienceDevelopment') > -1) {
-                utag_data.articleProducer = 'audience-acquisition';
-            }
-        }
-        if (typeof(tfsPageSite) != 'undefined') {
-            utag_data.teamName = '' + tfsPageSite;
-        }
-        if ($tfs.User.Status != 'Guest') {
-            utag_data.userId = '' + $tfs.User.Key;
-        }
-    </script>
-<script>
         var env = 'prod';
         (function(a, b, c, d) {
             a = '//tags.tiqcdn.com/utag/cbsi/247sportssite/' + env + '/utag.js';
@@ -1608,8 +404,82 @@
             a = b.getElementsByTagName(c)[0];
             a.parentNode.insertBefore(d, a);
         })();
+        var a;
+        wait(function() {
+            return a
+        }, function() {
+            om.trackImpression();
+        });
+        setTimeout(function() {
+            a = 1
+        }, 1000);
+
+        function wait(condition, callback) {
+            if (typeof om !== "undefined") {
+                callback();
+            } else {
+                setTimeout(function() {
+                    wait(condition, callback);
+                }, 0);
+            }
+        }
+        var expandLink = document.querySelector('.expand-box');
+        var closeLink = document.querySelector('.icon-close');
+        expandLink.onclick = function() {
+            getCorrectIframe();
+        };
+        closeLink.onclick = function() {
+            getCorrectIframe();
+        };
+
+        function toggleArrow() {
+            var arrow = document.querySelector('.expand-box b');
+            arrow.classList.toggle('icon-arrow-down');
+            arrow.classList.toggle('icon-arrow-up');
+        }
+
+        function toggleHidden() {
+            var evaluation = document.querySelector('.evaluation');
+            evaluation.classList.toggle('hidden');
+        }
+
+        function toggleHeight(frame) {
+            var originalHeight = formatNumber(frame.originalHeight);
+            var evaluationHeight = document.querySelector('.evaluation').offsetHeight;
+            var frameHeight = frame.offsetHeight;
+            var expandedHeight = evaluationHeight + originalHeight;
+            frameHeight === originalHeight ? setHeight(frame, expandedHeight) : setHeight(frame, originalHeight);
+        }
+
+        function setHeight(frame, height) {
+            frame.style.height = height + "px";
+        }
+
+        function setOriginalHeight(frame) {
+            if (!frame.originalHeight) {
+                frame.originalHeight = frame.style.height;
+            }
+            return frame;
+        }
+
+        function formatNumber(num) {
+            return parseInt(num.replace(/\D/g, ''));
+        }
+
+        function getCorrectIframe() {
+            var windowUrl = window.document.URL;
+            var iframes = window.parent.document.getElementsByClassName('twofourseven-embed');
+            for (var i = 0; i < iframes.length; i++) {
+                var currentFrame = iframes[i];
+                setOriginalHeight(currentFrame);
+                if (currentFrame.src === windowUrl) {
+                    toggleArrow();
+                    toggleHidden();
+                    toggleHeight(currentFrame);
+                }
+            }
+        }
     </script>
-<script type="text/javascript" async src="https://sportsfly.cbsistatic.com/bundles/sportsmediajs/js-build/common/iframe-embed-saag.js?v=1"></script>
 </body>
 
 </html>

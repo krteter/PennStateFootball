@@ -156,7 +156,7 @@ export default class RosterSectionList extends AbstractNavigableScreen {
 
             //  Stole this from a web example... enhance this
             //  for our needs???
-            <View style={{marginTop: (Platform.OS) == 'ios' ? 20 : 0}}>
+            <View style={{marginTop: (Platform.OS) == 'ios' ? 20 : 24}}>
 
                 <SectionList
 

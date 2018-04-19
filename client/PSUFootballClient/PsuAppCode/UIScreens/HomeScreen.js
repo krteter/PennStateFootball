@@ -25,6 +25,7 @@ let psuFootballApp_db = SQLite.openDatabase('PsuFootballApp.db');
 
 
 export default class HomeScreen extends AbstractNavigableScreen {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -107,7 +108,7 @@ export default class HomeScreen extends AbstractNavigableScreen {
 
 var styles = StyleSheet.create({
     topContainer: {
-        //marginTop: 24,
+        marginTop: 24,
         flex: 1,
         flexDirection: 'column'
     },

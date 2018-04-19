@@ -18,10 +18,8 @@ import TwitterScreen from "./PsuAppCode/UIScreens/TwitterFeedScreen/TwitterScree
 import TicketSearchScreen from "./PsuAppCode/UIScreens/GameDayInfoScreens/TicketSearchScreen";
 import GameScheduleTableViewScreen from "./PsuAppCode/UIScreens/ScheduleScreens/GameScheduleTableViewScreen";
 import SplashScreen from "./PsuAppCode/UIScreens/SplashScreen";
-
 import DatabaseDAO from "./PsuAppCode/DAO/DatabaseDAO";
 import {scrapeGameScheduleData} from "./PsuAppCode/DataScrapers/GameScheduleScraper";
-
 
 //
 //  Main React.Component Class for PSU App
@@ -116,6 +114,7 @@ const RootStack = StackNavigator(
             screen: GameScheduleTableViewScreen,
         },
     },
+    { headerMode: 'none' },
     {
         initialRouteName: 'Splash',
         navigationOptions: {

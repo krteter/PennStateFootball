@@ -1,24 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ImageBackground} from 'react-native';
+import {StyleSheet, Text, View, Image, ImageBackground, WebView, Platform} from 'react-native';
 import TeamPlayer from "./../../Domain/TeamPlayer";
-import Recruit from "./Test";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
 import MenuFab from "../../CustomComponents/MenuFab";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //
 //  Class for a UI to display a player's
@@ -52,7 +36,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
       if (this.state.loading) {
         return <Expo.AppLoading />;
       }
-
+      let sourceESPN = 'https://www.espn.com/college-football/game?gameId=400953407';
       let dbPulledPlayer = this.props.navigation.state.params.player;
       let player = new TeamPlayer(dbPulledPlayer.name, dbPulledPlayer.jerseyNum, dbPulledPlayer.position,
                                   dbPulledPlayer.imageUrl,
@@ -62,6 +46,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
 
         return (
             <View style={styles.pagecontainer}>
+
                 <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                  resizeMode='cover'
                                  style={styles.backdrop}>
@@ -92,16 +77,36 @@ export default class PlayerBio extends AbstractNavigableScreen {
                     <View style={styles.statscontainer}>
 
                     </View>
-                    <View style={styles.recruitingcontainer}>
+                    <View style={styles.recruitingcontainer} scrollEnabled={false}>
+                        <WebView
+                            source={{uri: 'https://247sports.com/PlayerSport/Mark-Allen-at-DeMatha-Catholic-44677/Embed'}}
+                            //scalesPageToFit= {false}
+                            style={{
+                                flex: 1,
+                                //alignSelf: 'center',
+                                marginTop: 10,
+                                left: (Platform.OS) == 'ios' ? 30 : 50,
+                                //right: 30,
+                                marginBottom: 10,
+                                width: (Platform.OS) == 'ios' ? '82%' : '75%',
+                                height: '80%',
+                            }}
+                            bounces={false}
+                            scrollEnabled={false}
 
+
+
+
+
+
+
+                        />
                     </View>
-
                     <MenuFab navigate={this.navigate} />
                 </ImageBackground>
             </View>
         );
     }
-
 
 }  //  end PlayerBio
 
@@ -111,12 +116,13 @@ const styles = StyleSheet.create({
     pagecontainer: {
         //flex: 1,
         backgroundColor: '#0f0b40',
+        marginTop: (Platform.OS) == 'ios' ? 20 : 24,
         //alignItems: 'flex-start',
         //justifyContent: 'center',
         height: '100%',
     },
     biocontainer: {
-        flex: .40,
+        flex: .30,
         //backgroundColor: '#0f0b40',
         justifyContent: 'flex-start',
         flexDirection: 'column',
@@ -138,7 +144,7 @@ const styles = StyleSheet.create({
     },
     biotextcontainer: {
         //flex: .30,
-        backgroundColor: '#0f0b40',
+        //backgroundColor: '#0f0b40',
         alignItems: 'flex-start',
         flexDirection: 'column',
         height: '100%',
@@ -146,16 +152,18 @@ const styles = StyleSheet.create({
     statscontainer: {
         flex: .30,
         backgroundColor: '#15ff00',
-        alignItems: 'flex-start',
+        //alignItems: 'flex-start',
         //justifyContent: 'center',
         height: '100%',
     },
     recruitingcontainer: {
-        flex: .3,
-        backgroundColor: '#ff0000',
-        alignItems: 'flex-start',
+        flex: .4,
+        //flexDirection: 'row',
+        //backgroundColor: '#ff0000',
+        //alignItems: 'center',
         //justifyContent: 'center',
-        height: '100%',
+        //height: '100%',
+        //width: '100%',
     },
     imagestyle: {
         marginTop: 10,
@@ -163,8 +171,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginRight: 10,
         //alignItems: 'flex-start',
-        width: 175,
-        height: 175,
+        width: 140,
+        height: 140,
+    },
+    webviewstyle: {
+        flex: 1,
     },
     nametext: {
         color: '#ffffff',

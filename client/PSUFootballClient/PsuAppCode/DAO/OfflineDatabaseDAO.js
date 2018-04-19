@@ -62,7 +62,7 @@ export default class TeamRosterDao {
 
     //Add a player to the Player_Table table. See scrapeTeamRosterData() and RosterScraper.js
     static addSinglePlayer(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) {
-        console.debug('DatabaseDAO.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
+        //console.debug('DatabaseDAO.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
         psuFootballApp_db.transaction(tx => {
             tx.executeSql(
                 'INSERT INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -134,7 +134,7 @@ export default class TeamRosterDao {
             }
         );
     }
-    
+
     //It does what it says it does
     static getSchedule(setResultsFunction) {
     console.debug('DatabaseDAO.getSchedule()');
