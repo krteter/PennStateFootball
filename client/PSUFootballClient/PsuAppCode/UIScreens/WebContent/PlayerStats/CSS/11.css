@@ -1,0 +1,54 @@
+body {
+  background: #EEE;
+  background-size: 100%;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333;
+  padding-top: 73px;
+  margin: 0;
+  padding: 0;
+}
+
+#main-content {
+  position: relative;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 145%;
+  width: 400px;
+  max-width: 684px;
+  float: left;
+  background:#ffffff;
+}
+
+#Content {
+    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+#total-stats-comp {
+    font-size: 12px;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.stats-m-footbl-rush td {
+    padding: 1px;
+    border: 1px;
+    font-size: 12px;
+    text-align: center;
+}

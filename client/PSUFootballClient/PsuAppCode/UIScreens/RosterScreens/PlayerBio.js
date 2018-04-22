@@ -44,7 +44,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
       let dbPulledPlayer = this.props.navigation.state.params.player;
       let player = new TeamPlayer(dbPulledPlayer.name, dbPulledPlayer.jerseyNum, dbPulledPlayer.position,
                                   dbPulledPlayer.imageUrl,
-                                  dbPulledPlayer.classyear, dbPulledPlayer.hometown, dbPulledPlayer.heightWeight, dbPulledPlayer.highschool, dbPulledPlayer.experience, dbPulledPlayer.major);
+                                  dbPulledPlayer.classyear, dbPulledPlayer.hometown, dbPulledPlayer.heightWeight, dbPulledPlayer.highschool, dbPulledPlayer.experience, dbPulledPlayer.major, dbPulledPlayer.recruitURL);
       //console.debug('PlayerBio.render()....    requestedPlayer is: ' + dbPulledPlayer.name);
 
 
@@ -84,6 +84,14 @@ export default class PlayerBio extends AbstractNavigableScreen {
 //                                :'./Mark  Allen.html'}}
                             source={LocalWebURL}
                             //scalesPageToFit= {false}
+
+
+
+
+
+
+
+
                             style={{
                                 //flex: 1,
                                 //alignSelf: 'center',
@@ -101,7 +109,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
 
                     <View style={styles.recruitingcontainer} scrollEnabled={false}>
                         <WebView
-                            source={{uri: 'https://247sports.com/PlayerSport/Mark-Allen-at-DeMatha-Catholic-44677/Embed'}}
+                            source={{uri: player.recruitURL}}
                             //scalesPageToFit= {false}
                             style={{
                                 flex: 1,
