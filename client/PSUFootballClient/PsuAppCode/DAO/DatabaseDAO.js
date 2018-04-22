@@ -2,6 +2,7 @@ import {SQLite} from "expo";
 import {AsyncStorage} from 'react-native';
 import {scrapeTeamRosterData} from "./../DataScrapers/RosterScraper";
 import {scrapeGameScheduleData} from "./../DataScrapers/GameScheduleScraper";
+import OfflineDatabaseDAO from "./OfflineDatabaseDAO";
 
 //Define the database
 let psuFootballApp_db = SQLite.openDatabase('PsuFootballApp.db');
@@ -25,6 +26,10 @@ export default class TeamRosterDao {
             //Populate or update the database
             this.createDatabase();
             //Scrape roster data
+
+            OfflineDatabaseDAO.populateOfflineDatabase();
+
+
             scrapeTeamRosterData();
             // Scrape game schedule data
             scrapeGameScheduleData();
@@ -116,7 +121,7 @@ export default class TeamRosterDao {
 
     //Get a single player when their name is clicked in RosterSectionList.js
     static getSinglePlayer(playerName, theResultFunction) {
-        console.debug('DatabaseDAO.getSinglePlayer()');
+        console.debug('DatabaseDAO.getSinglePlayer().... ' + playerName);
         psuFootballApp_db.transaction(tx => {
                 tx.executeSql('SELECT * FROM Player_Table WHERE name=?', [playerName], (_, {rows: {_array}}) => {
                     theResultFunction(_array[0])
