@@ -1,0 +1,100 @@
+#bio-wrap-col, #bio-wrap-col * {
+	 margin:0;
+	 padding:0;
+	 font-size:11px;
+}
+#bio-wrap-col{
+	width:268px;
+	height: 1%;
+	overflow:auto;
+	margin:0 0 10px 10px;
+	color:#999;
+	float:right;
+}
+
+
+#bio-wrap-col a:link{
+	text-decoration:none;
+}
+#bio-wrap-col .header{
+	width:268px;
+	height:24px;
+	display:block;
+	margin-bottom:8px !important;
+}
+#bio-latest-news, #bio-latest-videos{
+	padding-bottom:15px;
+}
+#bio-latest-news .header{
+	background: url('http://grfx.cstv.com/graphics/bio-11-hdr-news.gif') no-repeat;
+}
+#bio-latest-videos .header{
+	background: url('http://grfx.cstv.com/graphics/bio-11-hdr-multimedia.gif') no-repeat;
+}
+#bio-latest-photos .header{
+	background: url('http://grfx.cstv.com/graphics/bio-11-hdr-photos.gif') no-repeat;
+}
+
+.bio-col-content{
+	background:#fff url('http://grfx.cstv.com/graphics/bio-11-content-bg.gif') no-repeat;
+	background-position:bottom;
+	padding:0 5px !important;
+}
+
+#bio-wrap-col p.date{
+	font-weight:bold;
+}
+
+#bio-latest-videos p.date{
+	font-weight:bold;
+	padding-left:15px;
+}
+
+#bio-latest-videos h1{
+	font-weight:bold;
+	padding-left:15px;
+}
+
+#bio-latest-videos p.last{
+	border-width:0;
+	padding-bottom:2px;
+	padding-left:15px;
+}
+
+#bio-latest-videos  p.bio-content{
+	padding-bottom:3px;
+	margin-bottom:3px;
+	border:1px dotted #999;
+	border-width:0 0 1px 0;
+	padding-left:15px;
+}
+
+#bio-wrap-col p.bio-content{
+	padding-bottom:3px;
+	margin-bottom:3px;
+	border:1px dotted #999;
+	border-width:0 0 1px 0;
+}
+
+
+#bio-wrap-col p.last{
+	border-width:0;
+	padding-bottom:2px;
+}
+
+#total-stats-comp, .bio-clear{
+	clear:both;
+}
+
+.bio-video, .bio-audio{
+	width:15px;
+	height:12px;
+	float:left;
+}
+.bio-video{
+	background: url('http://grfx.cstv.com/graphics/bio-11-icon-video2.gif') no-repeat 0 2px;
+}
+
+.bio-audio{
+	background: url('http://grfx.cstv.com/graphics/bio-11-icon-audio2.gif') no-repeat 0 1px;
+}

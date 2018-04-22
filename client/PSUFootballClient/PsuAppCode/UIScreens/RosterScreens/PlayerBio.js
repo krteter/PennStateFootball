@@ -9,7 +9,7 @@ import MenuFab from "../../CustomComponents/MenuFab";
 //  biographical data.
 //
 
-const LocalWebURL = require('./../WebContent/PlayerStats/Mark  Allen.html');
+const LocalWebURL = require('./../WebContent/PlayerStats/MarkAllen.html');
 //const LocalWebURL = require('./../WebContent/PlayerStats/index3.html');
 
 export default class PlayerBio extends AbstractNavigableScreen {
@@ -20,14 +20,6 @@ export default class PlayerBio extends AbstractNavigableScreen {
         loading: true
       };
     }
-
-
-
-
-
-
-
-
 
     async componentWillMount() {
 
@@ -93,14 +85,14 @@ export default class PlayerBio extends AbstractNavigableScreen {
                             source={LocalWebURL}
                             //scalesPageToFit= {false}
                             style={{
-                                flex: 1,
+                                //flex: 1,
                                 //alignSelf: 'center',
                                 //marginTop: 10,
                                 //left: (Platform.OS) == 'ios' ? 30 : 50,
                                 //right: 30,
                                 //marginBottom: 10,
                                 //width: (Platform.OS) == 'ios' ? '82%' : '75%',
-                                height: '80%',
+                                //height: '80%',
                             }}
                             bounces={false}
                             scrollEnabled={false}
