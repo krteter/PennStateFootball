@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import HomeScreen from "./HomeScreen";
-
+import {Dimensions, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {NavigationActions} from 'react-navigation';
 
 
 export default class SplashScreen extends React.Component {
@@ -15,7 +13,7 @@ export default class SplashScreen extends React.Component {
 
         // This works from the top level... but it is a band aid for
         // a real "slashscreen"
-        setTimeout(() => this._navigateHome() , 4000);
+        setTimeout(() => this._navigateHome(), 4000);
 
 
     }  // end componentWillMount()
@@ -25,7 +23,7 @@ export default class SplashScreen extends React.Component {
     _navigateHome() {
         const resetAction = NavigationActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'Home' })],
+            actions: [NavigationActions.navigate({routeName: 'Home'})],
         });
         this.props.navigation.dispatch(resetAction);
     }
@@ -50,7 +48,7 @@ export default class SplashScreen extends React.Component {
                         }, {
                             height: '100%'
                         }
-                    ]} />
+                    ]}/>
             </TouchableOpacity>
         );
     }

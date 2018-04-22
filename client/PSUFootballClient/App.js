@@ -48,7 +48,7 @@ export default class App extends React.Component {
         var updateDatabase = false;
         try {
             //Use AsyncStorage to persist the key
-            const dateOfUpdate = await AsyncStorage.getItem('@PSUfootballDBupdateDate:key');
+            let dateOfUpdate = await AsyncStorage.getItem('@PSUfootballDBupdateDate:key');
             console.log('Database last updated: ' + dateOfUpdate);
             if (dateOfUpdate !== null){
                 //Key can only be stored as a String. Make it an Integer
