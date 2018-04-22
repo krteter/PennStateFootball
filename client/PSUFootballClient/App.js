@@ -60,6 +60,7 @@ export default class App extends React.Component {
                     updateDatabase = true;
                     console.log('Database is three or more days old. Updating...');
                 }
+
             }
             else if (dateOfUpdate == null){
                 console.log('Database has never been updated. Updating...');

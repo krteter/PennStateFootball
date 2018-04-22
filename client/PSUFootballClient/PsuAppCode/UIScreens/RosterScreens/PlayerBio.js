@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ImageBackground, WebView, Platform} from 'react-native';
+import {StyleSheet, Text, View, Image, ImageBackground, WebView, Platform, SectionList} from 'react-native';
 import TeamPlayer from "./../../Domain/TeamPlayer";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
 import MenuFab from "../../CustomComponents/MenuFab";
@@ -8,6 +8,10 @@ import MenuFab from "../../CustomComponents/MenuFab";
 //  Class for a UI to display a player's
 //  biographical data.
 //
+
+const LocalWebURL = require('./../WebContent/PlayerStats/Mark  Allen.html');
+//const LocalWebURL = require('./../WebContent/PlayerStats/index3.html');
+
 export default class PlayerBio extends AbstractNavigableScreen {
 
     constructor(props) {
@@ -16,6 +20,14 @@ export default class PlayerBio extends AbstractNavigableScreen {
         loading: true
       };
     }
+
+
+
+
+
+
+
+
 
     async componentWillMount() {
 
@@ -36,7 +48,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
       if (this.state.loading) {
         return <Expo.AppLoading />;
       }
-      let sourceESPN = 'https://www.espn.com/college-football/game?gameId=400953407';
+      //let sourceESPN = 'https://www.espn.com/college-football/game?gameId=400953407';
       let dbPulledPlayer = this.props.navigation.state.params.player;
       let player = new TeamPlayer(dbPulledPlayer.name, dbPulledPlayer.jerseyNum, dbPulledPlayer.position,
                                   dbPulledPlayer.imageUrl,
@@ -75,8 +87,26 @@ export default class PlayerBio extends AbstractNavigableScreen {
                         </View>
                     </View>
                     <View style={styles.statscontainer}>
-
+                        <WebView
+//                            source={{uri: isAndroid?'file:Mark  Allen.html'
+//                                :'./Mark  Allen.html'}}
+                            source={LocalWebURL}
+                            //scalesPageToFit= {false}
+                            style={{
+                                flex: 1,
+                                //alignSelf: 'center',
+                                //marginTop: 10,
+                                //left: (Platform.OS) == 'ios' ? 30 : 50,
+                                //right: 30,
+                                //marginBottom: 10,
+                                //width: (Platform.OS) == 'ios' ? '82%' : '75%',
+                                height: '80%',
+                            }}
+                            bounces={false}
+                            scrollEnabled={false}
+                        />
                     </View>
+
                     <View style={styles.recruitingcontainer} scrollEnabled={false}>
                         <WebView
                             source={{uri: 'https://247sports.com/PlayerSport/Mark-Allen-at-DeMatha-Catholic-44677/Embed'}}
