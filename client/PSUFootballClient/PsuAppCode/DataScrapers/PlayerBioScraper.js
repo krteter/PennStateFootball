@@ -49,13 +49,7 @@ export const getPlayerBioDataFromURL = (urlOfBioData) => {
                 let start = htmlText.indexOf(">");
                 let playerNumEnd = htmlText.indexOf("</div");
                 playerNum = htmlText.slice(start+1, playerNumEnd);
-                console.log(playerNum);
-
-
-
-
-                
-
+                //console.log(playerNum);
 
                 //  Do the same here but for the players name
                 //  its next in line in the html text.

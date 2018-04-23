@@ -54,7 +54,7 @@ export default class GameScheduleTable extends Component {
         );
 
         const ticketButton = (value, opponent) => (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {
+            <TouchableOpacity onPress={() => this.props.navigate('TicketSearch', {
                 startDateString: value,
                 description: 'PSU Nittany Lions vs. ' + opponent
             })}>
@@ -84,10 +84,10 @@ export default class GameScheduleTable extends Component {
             } else if (this.state.games[i].homeaway === 'Away') {
                 gameLocation = '@' + this.state.games[i].opponent
             }
-
             /////////////////////////////////////////////
 
             gameData.push(calendarButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent, gameLocation));
+            console.log('GameScheduleTable.render()....    building new ticketButton with parameters value: ' + this.state.games[i].gamedatezulu + 'and opponent: ' + this.state.games[i].opponent)
             gameData.push(ticketButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent));
             this.state.tableGameData.push(gameData);
 
