@@ -69,7 +69,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: value,
                 description: 'PSU Nittany Lions vs. ' + opponent})}>
                 <View style={styles.btn}>
-                    <Text style={styles.btnText}>Tickets</Text>
+                    <Text style={styles.btnText}>Tix</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -96,7 +96,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             this.state.tableIconCol.push(oppTeamIcon);
 
         }
-        
+
         return (
             <View style={styles.container}>
 
