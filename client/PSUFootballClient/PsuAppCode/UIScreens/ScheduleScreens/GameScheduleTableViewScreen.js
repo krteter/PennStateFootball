@@ -32,10 +32,6 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
 
     }
 
-    _alertIndex(index) {
-        Alert.alert(`This is row ${index + 1}`);
-    }
-
     getGamesFunction(rows) {
 
         //  Add the games to our state
@@ -100,18 +96,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             this.state.tableIconCol.push(oppTeamIcon);
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
+        
         return (
             <View style={styles.container}>
 
@@ -120,6 +105,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                     <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                      resizeMode='cover'
                                      style={styles.backdrop}>
+
                         <Text style={styles.schedtitle}>2018 Game Schedule</Text>
 
                         <Table borderStyle={{borderColor: 'transparent' }} style={{flexDirection: 'row'}}>
