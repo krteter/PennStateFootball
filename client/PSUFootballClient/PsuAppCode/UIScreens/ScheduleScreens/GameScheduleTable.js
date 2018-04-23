@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Col, Rows, Table, TableWrapper} from 'react-native-table-component';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View, Button} from 'react-native';
 
 
 export default class GameScheduleTable extends Component {
@@ -20,9 +20,7 @@ export default class GameScheduleTable extends Component {
         })
     }
 
-
     render() {
-
 
         const cLogoImage = (value) => (
             <Image
@@ -31,42 +29,47 @@ export default class GameScheduleTable extends Component {
             />
         );
 
-
         const calendarButton = (startdate, opponent, location) => (
-            // <TouchableOpacity onPress={() => this._alertIndex(value)}>
+            // Not working for our demo.  Inserting dummy button instead
+            // <TouchableOpacity onPress={() => this.navigation.navigate('CalendarEvent', {
+            //     startDateString: startdate,
+            //     location: location,
+            //     description: 'PSU Nittany Lions vs. ' + opponent,
+            //     notes: 'PSU Nittany Lions vs. ' + opponent
+            // })}>
             //     <View style={this.props.styles.btn}>
             //         <Text style={this.props.styles.btnText}>Cal</Text>
             //     </View>
             // </TouchableOpacity>
 
-            // let gameLocation = 'test';
-
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarEvent', {
-                startDateString: startdate,
-                location: location,
-                description: 'PSU Nittany Lions vs. ' + opponent,
-                notes: 'PSU Nittany Lions vs. ' + opponent
-            })}>
+            <TouchableOpacity onPress={this._onPressButton}>
                 <View style={this.props.styles.btn}>
                     <Text style={this.props.styles.btnText}>Cal</Text>
-                </View>
+                  </View>
             </TouchableOpacity>
         );
 
         const ticketButton = (value, opponent) => (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {
-                startDateString: value,
-                description: 'PSU Nittany Lions vs. ' + opponent
-            })}>
+            // Not working for our demo.  Inserting dummy button instead
+            // <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {
+            //     startDateString: value,
+            //     description: 'PSU Nittany Lions vs. ' + opponent
+            // })}>
+            //     <View style={this.props.styles.btn}>
+            //         <Text style={this.props.styles.btnText}>Tix</Text>
+            //     </View>
+            // </TouchableOpacity>
+
+            <TouchableOpacity onPress={this._onPressButton}>
                 <View style={this.props.styles.btn}>
                     <Text style={this.props.styles.btnText}>Tix</Text>
-                </View>
+                  </View>
             </TouchableOpacity>
         );
 
 
-//  Now loop thru the games and get the data to  be displayed on the TableView
-//  and put them in our table arrays to be displayed
+        //  Now loop thru the games and get the data to be displayed on the
+        //  TableView and put them in our table arrays to be displayed
         for (let i = 0; i < this.state.games.length; i++) {
 
             //  game data text
@@ -76,19 +79,20 @@ export default class GameScheduleTable extends Component {
             gameData.push(this.state.games[i].opponent);
             gameData.push(this.state.games[i].homeaway);
 
-            /////////////////////////////////////////////
-            // gameData.push(calendarButton(i));
+            // Home Game = @Beaver Stadium; Away = Set Location
             let gameLocation = '';
             if (this.state.games[i].homeaway === 'Home') {
                 gameLocation = '@Beaver Stadium'
             } else if (this.state.games[i].homeaway === 'Away') {
                 gameLocation = '@' + this.state.games[i].opponent
             }
-            /////////////////////////////////////////////
 
-            gameData.push(calendarButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent, gameLocation));
-            console.log('GameScheduleTable.render()....    building new ticketButton with parameters value: ' + this.state.games[i].gamedatezulu + 'and opponent: ' + this.state.games[i].opponent)
-            gameData.push(ticketButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent));
+            // Push button data to tableGameData
+            console.debug('Button Parameter GameDateZulu: ' + this.state.games[i].gamedatezulu);
+            console.debug('Button Parameter Opponent: ' + this.state.games[i].opponent);
+            console.debug('Button Parameter GameLocation: ' + gameLocation);
+            // gameData.push(calendarButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent, gameLocation));
+            // gameData.push(ticketButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent));
             this.state.tableGameData.push(gameData);
 
             //  Add our image icon source for display in schedule

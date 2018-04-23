@@ -4,7 +4,6 @@ import { Table, TableWrapper, Row, Col, Rows, Cell } from 'react-native-table-co
 import DatabaseDAO from '../../DAO/DatabaseDAO';
 import MenuFab from "../../CustomComponents/MenuFab";
 import AbstractNavigableScreen from "../AbstractNavigableScreen";
-import GameScheduleTable from "./GameScheduleTable";
 
 
 export default class GameScheduleTableViewScreen extends AbstractNavigableScreen {
@@ -42,7 +41,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
         }
     }
 
-    componentWillMount() {
+    componentWillMount () {
 
         // Get the Game Schedule from the database
         let that = this;
@@ -57,8 +56,11 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             />
         );
 
-        const calendarButton = (value) => (
-            <TouchableOpacity onPress={() => this._alertIndex(value)}>
+        const calendarButton = (startdate, opponent, location) => (
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: startdate,
+                location: location,
+                description: 'PSU Nittany Lions vs. ' + opponent,
+                notes: 'PSU Nittany Lions vs. ' + opponent} )}>
                 <View style={styles.btn}>
                     <Text style={styles.btnText}>Cal</Text>
                 </View>
@@ -85,16 +87,27 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
             gameData.push(this.state.games[i].gamedate + '\n' + 'TBD');
             gameData.push(this.state.games[i].opponent);
             gameData.push(this.state.games[i].homeaway);
-            gameData.push(calendarButton(i));
+
+            // Home Game = @Beaver Stadium; Away = Set Location
+            let gameLocation = '';
+            if (this.state.games[i].homeaway == 'Home') {
+              gameLocation = '@Beaver Stadium'
+            } else if (this.state.games[i].homeaway == 'Away') {
+              gameLocation = '@' + this.state.games[i].opponent
+            }
+
+            // Push button data to tableGameData
+            console.debug('Button Parameter GameDateZulu: ' + this.state.games[i].gamedatezulu);
+            console.debug('Button Parameter Opponent: ' + this.state.games[i].opponent);
+            console.debug('Button Parameter GameLocation: ' + gameLocation);
+            gameData.push(calendarButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent, gameLocation));
             gameData.push(ticketButton(this.state.games[i].gamedatezulu, this.state.games[i].opponent));
             this.state.tableGameData.push(gameData);
 
-            //  Add our image icon source for
-            //  display in schedule
+            //  Add our image icon source for display in schedule
             let oppTeamIcon = [];
             oppTeamIcon = [cLogoImage(this.state.games[i].imgsrc)];
             this.state.tableIconCol.push(oppTeamIcon);
-
         }
 
         return (
@@ -105,6 +118,19 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                     <ImageBackground source={require('./../../../Images/FieldBackground.png')}
                                      resizeMode='cover'
                                      style={styles.backdrop}>
+                        {/* <Button style={styles.button}
+                                title="Add To Calendar"
+                                // '2018-05-06T18:00:00.000Z'
+                                onPress={() => this.props.navigation.navigate('CalendarEvent', {startDateString: '2018-05-06T18:00:00.000Z',
+                                                                                                location: 'Beaver Stadium',
+                                                                                                description: 'PSU Nittany Lions vs. VaTech Hokies',
+                                                                                                notes: 'White-Out Game'} )}
+                        />
+                        <Button style={styles.button}
+                                title="Search For Ticket"
+                                onPress={() => this.props.navigation.navigate('TicketSearch', {startDateString: '2018-09-29T18:00:00.000Z',
+                                                                                               description: 'PSU Nittany Lions vs. Ohio State Buckeyes'} )}
+                        /> */}
 
                         <Text style={styles.schedtitle}>2018 Game Schedule</Text>
 
@@ -122,7 +148,7 @@ export default class GameScheduleTableViewScreen extends AbstractNavigableScreen
                             {/* Right Table */}
                             <Table  style={{flex: 1}}>
                                 <Rows data={this.state.tableGameData}
-                                      widthArr={[80, 95, 50, 70, 70]}
+                                      widthArr={[80, 85, 55, 55, 55]}
                                       heightArr={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
                                       textStyle={styles.rowstyle}/>
                             </Table>
@@ -211,4 +237,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-
