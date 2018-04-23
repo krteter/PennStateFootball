@@ -36,11 +36,16 @@ export default class HomeScreen extends AbstractNavigableScreen {
         };
         this.navigateWithProps = this.navigateWithProps.bind(this);
         this.getGamesFunction = this.getGamesFunction.bind(this);
+        this.navigate = this.navigate.bind(this);
     }
 
     navigateWithProps(location, props) {
         this.props.navigation.navigate(location, props);
     }
+
+    navigate(location, props) {
+            this.props.navigation.navigate(location, props);
+        }
 
     async componentWillMount() {
         // Native-base quirk. App will crash in Expo if these fonts are not loaded before render.

@@ -54,7 +54,7 @@ export default class GameScheduleTable extends Component {
         );
 
         const ticketButton = (value, opponent) => (
-            <TouchableOpacity onPress={() => this.props.navigate('TicketSearch', {
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('TicketSearch', {
                 startDateString: value,
                 description: 'PSU Nittany Lions vs. ' + opponent
             })}>
