@@ -46,7 +46,7 @@ export default class TeamRosterDao {
         psuFootballApp_db.transaction(tx => {
             //Create the player table
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS Player_Table (name TEXT PRIMARY KEY NOT NULL UNIQUE, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT, recruitURL TEXT);'
+                'CREATE TABLE IF NOT EXISTS Player_Table (name TEXT PRIMARY KEY NOT NULL UNIQUE, jerseyNum TEXT, position TEXT, imageUrl TEXT, classyear TEXT, hometown TEXT, heightWeight TEXT, highschool TEXT, experience TEXT, major TEXT, recruitURL TEXT, statsURL TEXT);'
             );
             //Create the schedule database
             tx.executeSql(
@@ -66,12 +66,12 @@ export default class TeamRosterDao {
     };
 
     //Add a player to the Player_Table table. See scrapeTeamRosterData() and RosterScraper.js
-    static addSinglePlayer(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL) {
+    static addSinglePlayer(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL, statsURL) {
         console.debug('DatabaseDAO.addSinglePlayer()....    ' + name + '  #' + jerseyNum);
         psuFootballApp_db.transaction(tx => {
             tx.executeSql(
-                'INSERT INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL],
+                'INSERT INTO Player_Table(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL, statsURL) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL, statsURL],
                 function(tx, results) {
                 console.debug('insertId: ' + results.insertId + '; rowsAffected: ' + results.rowsAffected);
                 }, function(e) {

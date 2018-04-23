@@ -45,6 +45,8 @@ export default class PlayerBio extends AbstractNavigableScreen {
       let player = new TeamPlayer(dbPulledPlayer.name, dbPulledPlayer.jerseyNum, dbPulledPlayer.position,
                                   dbPulledPlayer.imageUrl,
                                   dbPulledPlayer.classyear, dbPulledPlayer.hometown, dbPulledPlayer.heightWeight, dbPulledPlayer.highschool, dbPulledPlayer.experience, dbPulledPlayer.major, dbPulledPlayer.recruitURL);
+      let imageUrl = player.imageUrl;
+
       //console.debug('PlayerBio.render()....    requestedPlayer is: ' + dbPulledPlayer.name);
 
 
@@ -63,7 +65,7 @@ export default class PlayerBio extends AbstractNavigableScreen {
                         <View style={styles.biodetailscontainer}>
                             <Image
                                style={styles.imagestyle}
-                                source={{uri: player.imageUrl }}
+                               source={{uri: player.imageUrl}}
                             />
                             <View style={styles.biotextcontainer}>
 
@@ -79,18 +81,17 @@ export default class PlayerBio extends AbstractNavigableScreen {
                         </View>
                     </View>
                     <View style={styles.statscontainer}>
+                        <Text style={styles.titletext}>Statistics</Text>
                         <WebView
 //                            source={{uri: isAndroid?'file:Mark  Allen.html'
 //                                :'./Mark  Allen.html'}}
-                            source={LocalWebURL}
+                              source={LocalWebURL}
+//                            source={{
+//                                uri:LocalWebURL,
+//                                //uri: player.statsURL,
+////                                cache: 'force-cache',
+//                            }}
                             //scalesPageToFit= {false}
-
-
-
-
-
-
-
 
                             style={{
                                 //flex: 1,
@@ -108,8 +109,12 @@ export default class PlayerBio extends AbstractNavigableScreen {
                     </View>
 
                     <View style={styles.recruitingcontainer} scrollEnabled={false}>
+                        <Text style={styles.titletext}>Recruiting Profile</Text>
                         <WebView
-                            source={{uri: player.recruitURL}}
+                            source={{
+                                uri: player.recruitURL,
+                                cache: 'force-cache',
+                            }}
                             //scalesPageToFit= {false}
                             style={{
                                 flex: 1,
@@ -124,12 +129,6 @@ export default class PlayerBio extends AbstractNavigableScreen {
                             bounces={false}
                             scrollEnabled={false}
 
-
-
-
-
-
-
                         />
                     </View>
                     <MenuFab navigate={this.navigate} />
@@ -139,6 +138,13 @@ export default class PlayerBio extends AbstractNavigableScreen {
     }
 
 }  //  end PlayerBio
+
+
+
+
+
+
+
 
 
 
@@ -181,7 +187,7 @@ const styles = StyleSheet.create({
     },
     statscontainer: {
         flex: .30,
-        backgroundColor: '#15ff00',
+        //backgroundColor: '#15ff00',
         //alignItems: 'flex-start',
         //justifyContent: 'center',
         height: '100%',
@@ -201,8 +207,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginRight: 10,
         //alignItems: 'flex-start',
-        width: 140,
-        height: 140,
+        width: 120,
+        height: 120,
     },
     webviewstyle: {
         flex: 1,
@@ -210,6 +216,12 @@ const styles = StyleSheet.create({
     nametext: {
         color: '#ffffff',
         fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'left',
+    },
+    titletext: {
+        color: '#ffffff',
+        fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'left',
     },

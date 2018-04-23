@@ -5,7 +5,7 @@
 //
 export default class TeamPlayer {
 
-    constructor(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL) {
+    constructor(name, jerseyNum, position, imageUrl, classyear, hometown, heightWeight, highschool, experience, major, recruitURL, statsURL) {
 
         this.name = name;
         this.jerseyNum = jerseyNum;
@@ -18,6 +18,7 @@ export default class TeamPlayer {
         this.experience = experience;
         this.major = major;
         this.recruitURL = recruitURL;
+        this.statsURL = statsURL;
     }
 
 }  // end class TeamPlayer

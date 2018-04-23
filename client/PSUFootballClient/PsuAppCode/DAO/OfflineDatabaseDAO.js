@@ -204,12 +204,64 @@ export default class OfflineDatabaseDAO {
          'https://247sports.com/PlayerSport/Justin-Weller-at-Nazareth-Academy-71153/Embed', 'https://247sports.com/PlayerSport/Robert-Windsor-at-Fond-Du-Lac-144616/Embed',
          'https://247sports.com/PlayerSport/Chasz-Wright-at-Milford-Academy-66900/Embed', 'https://247sports.com/PlayerSport/Jake-Zembiec-at-Aquinas-Institute-55606/Embed']
 
+         let playerStatsArray = [,'./../WebContent/PlayerStats/MarkAllen.html', './../WebContent/PlayerStats/noStats.html',
+         './../WebContent/PlayerStats/noStats.html', './../WebContent/PlayerStats/noStats.html',
+         './../WebContent/PlayerStats/noStats.html', 'https://247sports.com/PlayerSport/Corey-Bolds-at-Paramus-Catholic-146598/Embed',
+         'https://247sports.com/PlayerSport/Nick-Bowers-at-Kittanning-72172/Embed', 'https://247sports.com/PlayerSport/Ellis-Brooks-at-Benedictine-145809/Embed',
+         'https://247sports.com/PlayerSport/Cameron-Brown-at-Paint-Branch-150490/Embed', 'https://247sports.com/PlayerSport/DJ-Brown-at-Creekside-151153/Embed',
+         'https://247sports.com/PlayerSport/Journey-Brown-at-Meadville-Area-187318/Embed', 'https://247sports.com/PlayerSport/Torrence-Brown-at-Tuscaloosa-Academy-51069/Embed',
+         'https://247sports.com/PlayerSport/Ryan-Buchholz-at-Great-Valley-66001/Embed', 'https://247sports.com/PlayerSport/Jabari-Butler-at-Penn-State-199095/Embed',
+         'https://247sports.com/PlayerSport/Joe-Calcagno-at-Fenwick-190896/Embed', 'https://247sports.com/PlayerSport/Tariq-Castro-Fields-at-Riverdale-Baptist-158245/Embed',
+         'https://247sports.com/PlayerSport/Max-Chizmar-at-Mars-Area-158223/Embedd', 'https://247sports.com/PlayerSport/Sean-Clifford-at-St-Xavier-143375/Embed',
+         'https://247sports.com/PlayerSport/Jake-Cooper-at-Archbishop-Wood-52924/Embed', './../WebContent/PlayerStats/MarkAllen.html',
+         'https://247sports.com/PlayerSport/Danny-Dalton-at-Marshfield-146463/Embed', 'https://247sports.com/PlayerSport/Daelun-Darien-at-Dunbar-150119/Embed',
+         'https://247sports.com/PlayerSport/Frank-Di-Leo-at-St-Ignatius-College-Prep-201785/Embed', './../WebContent/PlayerStats/MarkAllen.html',
+         './../WebContent/PlayerStats/MarkAllen.html', './../WebContent/PlayerStats/MarkAllen.html',
+         'https://247sports.com/PlayerSport/Brelin-Faison-Walden-at-Grimsley-148907/Embed', 'https://247sports.com/PlayerSport/Koa-Farmer-at-Notre-Dame-48807/Embed',
+         'https://247sports.com/PlayerSport/Brailyn-Franklin-at-Battlefield-181230/Embed', 'https://247sports.com/PlayerSport/Will-Fries-at-Cranford-Sr-144717/Embed',
+         'https://247sports.com/PlayerSport/Alex-Gellerstedt-at-Dublin-Coffman-147248/Embed', 'https://247sports.com/PlayerSport/Blake-Gillikin-at-Westminster-School-151215/Embed',
+         'https://247sports.com/PlayerSport/Kevin-Givens-at-Altoona-47210/Embed', 'https://247sports.com/PlayerSport/Steven-Gonzalez-at-Union-City-54719/Embed',
+         'https://247sports.com/PlayerSport/Trent-Gordon-at-Manvel-146532/Embed', 'https://247sports.com/PlayerSport/Yetur-Gross-Matos-at-Chancellor-128776/Embed',
+         'https://247sports.com/PlayerSport/Yetur-Gross-Matos-at-Chancellor-128776/Embed', 'https://247sports.com/PlayerSport/KJ-Hamler-at-IMG-Academy-133643/Embed',
+         'https://247sports.com/PlayerSport/Fred-Hansard-at-Hun-School--144701/Embed', 'https://247sports.com/PlayerSport/Drew-Hartlaub-at-South-Western-135011/Embed',
+         'https://247sports.com/PlayerSport/Mac-Hippenhammer-at-R-Nelson-Snider-149656/Embed', 'https://247sports.com/PlayerSport/Alex-Hoenstine-at-Central-187669/Embed',
+         'https://247sports.com/PlayerSport/Jonathan-Holland-at-The-Bullis-School-70520/Embed', 'https://247sports.com/PlayerSport/Desmond-Holmes-at-Cardinal-OHara-153433/Embed',
+         'https://247sports.com/PlayerSport/Isaiah-Humphries-at-Sachse-158318/Embed', './../WebContent/PlayerStats/MarkAllen.html',
+         'https://247sports.com/PlayerSport/Sterling-Jenkins-at-Baldwin-61916/Embed', 'https://247sports.com/PlayerSport/Donovan-Johnson-at-Cass-Technical-134765/Embed',
+         'https://247sports.com/PlayerSport/Jan-Johnson-at-Governor-Mifflin-54735/Embed', 'https://247sports.com/PlayerSport/Juwan-Johnson-at-Glassboro-61971/Embed',
+         'https://247sports.com/PlayerSport/Ellison-Jordan-at-Gilman-51120/Embed', 'https://247sports.com/PlayerSport/Daniel-Joseph-at-Lake-Forest-Academy-145316/Embed',
+         'https://247sports.com/PlayerSport/Hunter-Kelly-at-Neshaminy-176458/Embed', 'https://247sports.com/PlayerSport/Zack-Kuntz-at-Camp-Hill-148555/Embed',
+         './../WebContent/PlayerStats/MarkAllen.html', 'https://247sports.com/PlayerSport/Jesse-Luketa-at-Mercyhurst-Preparatory-School-160808/Embed',
+         'https://247sports.com/PlayerSport/Isaac-Lutz-at-Berks-Catholic-145842/Embed', 'https://247sports.com/PlayerSport/Robert-Martin-at-St-Joseph-Regional--152427/Embed',
+         'https://247sports.com/PlayerSport/Connor-McGovern-at-Lake-Lehman-144718/Embed', 'https://247sports.com/PlayerSport/Zechariah-McPhearson-at-Riverdale-Baptist-148218/Embed',
+         'https://247sports.com/PlayerSport/Trace-McSorley-at-Briar-Woods-44495/Embed', 'https://247sports.com/PlayerSport/Michal-Menet-at-Exeter-Township-64019/Embed',
+         'https://247sports.com/PlayerSport/Jarvis-Miller-at-Suffield-83643/Embed', 'https://247sports.com/PlayerSport/Shareef-Miller-at-George-Washington-144587/Embed',
+         'https://247sports.com/PlayerSport/Michael-Miranda-at-Stow-Munroe-Falls-158099/Embed', 'https://247sports.com/PlayerSport/Ayron-Monroe-at-St-Johns-College-HS-70414/Embed',
+         'https://247sports.com/PlayerSport/Justin-Neff-at-Central-Mountain-187338/Embed', 'https://247sports.com/PlayerSport/Amani-Oruwariye-at-Gaither-58873/Embed',
+         'https://247sports.com/PlayerSport/Micah-Parsons-at-Harrisburg-201091/Embed', 'https://247sports.com/PlayerSport/John-Petrishen-at-Central-Catholic-72862/Embed',
+         'https://247sports.com/PlayerSport/Brandon-Polk-at-Briar-Woods-59446/Embed', './../WebContent/PlayerStats/MarkAllen.html',
+         'https://247sports.com/PlayerSport/John-Reid-at-St-Josephs-41896/Embed', 'https://247sports.com/PlayerSport/Miles-Sanders-at-Woodland-Hills-53802/Embed',
+         'https://247sports.com/PlayerSport/Nick-Scott-at-Fairfax-49178/Embed', 'https://247sports.com/PlayerSport/Antonio-Shelton-at-Westerville-North-148344/Embed',
+         'https://247sports.com/PlayerSport/Tyler-Shoop-at-Father-Ryan-114137/Embed', 'https://247sports.com/PlayerSport/Charlie-Shuman-at-Pittsford-Sutherland-59917/Embed',
+         'https://247sports.com/PlayerSport/Michael-Shuster-at-Camp-Hill-63214/Embed', 'https://247sports.com/PlayerSport/Shane-Simmons-at-DeMatha-Catholic-44539/Embed',
+         'https://247sports.com/PlayerSport/Zach-Simpson-at-Hollidaysburg-Area-200362/Embed', 'https://247sports.com/PlayerSport/Tommy-Stevens-at-Decatur-Central-68628/Embed',
+         'https://247sports.com/PlayerSport/Chris-Stoll-at-St-Francis-De-Sales-196468/Embed', 'https://247sports.com/PlayerSport/Cameron-Sullivan-Brown-at-St-Vincent-Pallotti-151627/Embed',
+         'https://247sports.com/PlayerSport/Jonathan-Sutherland-at-Episcopal-147301/Embed', 'https://247sports.com/PlayerSport/Nick-Tarburton-at-Pennridge-187714/Embed',
+         'https://247sports.com/PlayerSport/Garrett-Taylor-at-St-Christophers-School-51715/Embed', 'https://247sports.com/PlayerSport/Johnathan-Thomas-at-St-Johns-Prep-55182/Embed',
+         'https://247sports.com/PlayerSport/DeAndre-Thompkins-at-Swansboro-49592/Embed', 'https://247sports.com/PlayerSport/CJ-Thorpe-at-Central-Catholic-145597/Embed',
+         'https://247sports.com/PlayerSport/Shaka-Toney-at-Imhotep-Institute-70632/Embed', './../WebContent/PlayerStats/MarkAllen.html',
+         'https://247sports.com/PlayerSport/Kyle-Vasey-at-Wallenpaupack-Area-109677/Embed', 'https://247sports.com/PlayerSport/Jason-Vranic-at-Erie-CC-171070/Embed',
+         'https://247sports.com/PlayerSport/Lamont-Wade-at-Clairton-117321/Embed', './../WebContent/PlayerStats/MarkAllen.html',
+         'https://247sports.com/PlayerSport/Justin-Weller-at-Nazareth-Academy-71153/Embed', 'https://247sports.com/PlayerSport/Robert-Windsor-at-Fond-Du-Lac-144616/Embed',
+         'https://247sports.com/PlayerSport/Chasz-Wright-at-Milford-Academy-66900/Embed', 'https://247sports.com/PlayerSport/Jake-Zembiec-at-Aquinas-Institute-55606/Embed']
+
+
         console.log("playerNameArray.length: " + playerNameArray.length);
         for (i = 1; i < playerNameArray.length; i++) {
             console.log('Adding a player....' + 'at array point: ' + i);
             DatabaseDAO.addSinglePlayer(playerNameArray[i], playerNumArray[i], playerPositionArray[i], playerImageUrlArray[i],
                                           playerClassYearArray[i], playerHometownArray[i], playerHeightWeightArray[i],
-                                          playerHighSchoolArray[i], playerExperienceArray[i], playerMajorArray[i], playerRecruitingArray[i]);
+                                          playerHighSchoolArray[i], playerExperienceArray[i], playerMajorArray[i], playerRecruitingArray[i], playerStatsArray[i]);
             console.log( "Add to DB: " + playerNameArray[i] + " " + playerNumArray[i] + " " + [i]  + "...." );
         }
 
